@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page import="com.semi.common.JDBCtemplate" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	인덱스 테스트
+	
+	<%@include file="views/common/menubar.jsp" %>
+	
+	
+	
+	
 </body>
 </html>
