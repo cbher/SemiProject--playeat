@@ -4,11 +4,19 @@
     
     
 <%
+   Review r= (Review)request.getAttribute("r");
 
-	//Member loginUser = (Member)session.getAttribute("loginUser");
-	// 로그인 시도 전 menubar.jsp 로딩시 : null
-	// 로그인 성공 후 menubar.jsp 로딩시 : 로그인을 성공한 회원의 정보가 담겨있는 Member객체
+	
 
+	Member loginUser = (Member) session.getAttribute("loginUser");
+	// Member를 만들어야 뭐 진행이 될 듯 일단 loginuser로 해두자
+	
+    if (loginUser == null) {
+    
+    	
+    //loginUser = new Member("뭐라 넣을지 생각좀 해보자");
+    session.setAttribute("loginUser", loginUser);
+}
 	String contextPath = request.getContextPath();
 
 	
@@ -298,7 +306,7 @@
                     <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
                 </div>
                 <div class="rvbox_2">
-                    <div>가게명</div>
+                    <div><%= r.getrTitle %></div>
                     <div>좋아요아이콘 <span>좋아요 개수</span></div>
                 </div>
                 <div class="rvbox_3">

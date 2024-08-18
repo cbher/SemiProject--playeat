@@ -1,4 +1,4 @@
-package semi.common;
+package com.common;
 
 
 import java.io.FileInputStream;
@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+
 
 public class JDBCtemplate {
 	// 1. JDBCTemlate.getConnection

@@ -3,9 +3,17 @@
 
 <properties>
 
-	<entry key="일단 비워두자">
+
+	<entry key="selectList">
+		  SELECT R.REVIEW_NO, R.R_TITLE, R.R_CONTENT, R.R_DATE, P.P_TITLE 
+			  FROM REVIEW R
+			   JOIN PLACE P ON R.PLAY_NO = P.P_NO
+			  WHERE R.USER_NO = ?
+			ORDER BY R.R_DATE DESC
+   	</entry>
 	
-	</entry>
+
+
 
 
 
