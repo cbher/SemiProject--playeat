@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectCookingList">
+		SELECT
+		       C.C_NO
+		     , C_TITLE
+		     , C.COUNT
+		     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+		  FROM COOK_BOARD C
+		  JOIN ATTECHMENT A ON (A.C_NO = C.C_NO)
+		 WHERE C.STATUS = 'Y'
+           AND FILE_LEVEL = 1
+		 ORDER
+		    BY C_DATE DESC
+	</entry>
+	<entry key="insertCookBoard">
+		INSERT
+		  INTO COOK_BOARD
+		  (
+		    C_NO
+		  , C_TITLE
+		  , C_CONTENTS
+		  , USER_NO
+		  , C_CATEGORY
+		  )
+		  VALUES
+		  (
+		    COOK_BOARD_SEQ.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+	
+	<entry key="insertAttachmentList">
+		INSERT
+		  INTO ATTECHMENT
+		  (
+		    FILE_NO
+		  , ORIGIN_NAME
+		  , CHANGE_NAME
+		  , FILE_PATH
+		  , FILE_LEVEL
+		  , BOARD_CATEGORY
+		  , C_NO
+		  )
+		  VALUES
+		  (
+		    SEQ_ATTACHMENT.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , COOK_BOARD_SEQ.CURRVAL
+		  )
+	</entry>
+</properties>
