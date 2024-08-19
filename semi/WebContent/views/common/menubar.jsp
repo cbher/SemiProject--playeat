@@ -339,32 +339,6 @@ header .menubar::before{
         </section>
         
     </header>
-<!--    -->  
-    <div class="badge">
-      <div class="text">최근 본 장소</div>
-      <a href="javascript:void(0)" class="place">
-        <img src="./resourse/음식.jpg" alt="">
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-      <a href="javascript:void(0)" class="place">
-        <img src="./resourse/음식2.jpg" alt="">
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-      <a href="javascript:void(0)" class="place">
-        <img src="./resourse/음식.jpg" alt="">
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-  </div>
-        
-
-
-
 
 
 

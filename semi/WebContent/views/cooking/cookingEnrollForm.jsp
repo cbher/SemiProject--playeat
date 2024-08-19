@@ -31,8 +31,7 @@
         }
 
         #enroll-form table{border: 1px solid white; width: 800px;}
-        #enroll-form table th{color: #8b7dbe;}
-
+        #enroll-form table th{color: #8b7dbe;}		
         #enroll-form input, #enroll-form textarea{
             width: 90%;
             box-sizing: border-box;
@@ -60,6 +59,7 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="../common/badge.jsp" %>
 	
 	<div class="outer">
         <div class="inner">

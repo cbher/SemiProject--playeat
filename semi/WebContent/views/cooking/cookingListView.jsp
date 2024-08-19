@@ -170,6 +170,7 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="../common/badge.jsp" %>
 	        <section class="main-slide">
             <div class="inner">
                 <div class="title">최신 음식</div>
