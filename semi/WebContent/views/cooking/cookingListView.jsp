@@ -153,6 +153,15 @@
     left: 0;
     border-radius: 25px;
 }
+.post .inner .cooking li a .title{
+    text-align: center;
+}
+
+.post .inner .cooking li a .createDate{
+    text-align: right;
+}
+
+
 </style>
 
 </head>
@@ -319,8 +328,8 @@
                     <li>
                         <a href="">
                             <img src="./resourse/덮밥.jpg" alt="">
-                            <div><b style="font-size: 30px;">고깃집</b></div>
-                            <span>서울시 역삼동</span>
+                            <div class="title"><b style="font-size: 18px;">복날엔 닭볶음탕이지</b></div>
+                            <div class="createDate">2024/7/21</div>
                         </a>
                     </li>
                     <li>
