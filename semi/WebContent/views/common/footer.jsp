@@ -16,7 +16,7 @@ footer .inner{
     height: 100px;
     font-size: 15px;
     padding: 20px 0 20px 0;
-    top: 2300px;
+    top: 1400px;
     background-color: #F6F5F0;
     width: 100%;
     height: 80px;
@@ -105,9 +105,12 @@ footer .inner .info .copyright{
         </div>
       </footer>
       
-      <button id="top-btn"> ▲ <br/> TOP </button>
 
-
+      <script>
+        // footer this-year (현재년도 표시)
+        const thisYear = document.querySelector("#this-year");
+        thisYear.textContent = new Date().getFullYear();
+      </script>
 
 </body>
 </html>

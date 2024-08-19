@@ -6,11 +6,10 @@
 <meta charset="UTF-8">
 <title>badge</title>
 
- <link rel="stylesheet" href="./badge.css">
-    <script defer src="./badge.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <style>
+   
 .badge {
     position:absolute;
     top: 0;
@@ -77,14 +76,13 @@
     text-align: center;
     line-height: 5;
     font-size: 20px;
-    /* margin-left: 9px; */
+    
     display: inline;
 }
 
 .place:hover .badge-title {
     opacity: 1;
   }
-
 
 
 </style>
