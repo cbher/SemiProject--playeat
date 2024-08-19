@@ -1,0 +1,148 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>badge</title>
+
+ <link rel="stylesheet" href="./badge.css">
+    <script defer src="./badge.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<style>
+.badge {
+    position:absolute;
+    top: 0;
+    left: 70%;
+    width: 180px;
+    height: 520px;
+    margin: 5% 0 0 320px;
+    background-color:#f6f5f0;
+    border: 2px solid #8B7DBE;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (max-width:870px) {
+    .badge {width:15%; left: auto; right:0; margin-left: 0;}
+    div.info {width:80%; margin: 100px 0;}
+}
+
+.badge .text{
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 1px solid #8B7DBE;
+    color: #8B7DBE;
+    background-color: #e4d4fa;
+    border-radius: 10px 10px 0px 0;
+    width: 100%;
+    height: 30px;
+    line-height: 1.5;
+}
+
+.badge a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #8B7DBE;
+    border-radius: 5px;
+    margin: auto;
+    width: 140px;
+    height: 130px;
+}
+
+.badge img{
+    width: 100%;
+    height: 100%;
+}
+
+.badge .place .badge-title{
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    border-radius: 5px;
+    margin: auto;
+    width: 140px;
+    height: 130px;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.badge .place .badge-title h2{
+    text-align: center;
+    line-height: 5;
+    font-size: 20px;
+    /* margin-left: 9px; */
+    display: inline;
+}
+
+.place:hover .badge-title {
+    opacity: 1;
+  }
+
+
+
+</style>
+
+</head>
+<body>
+
+ 
+    <div class="badge">
+        <div class="text">최근 본 장소</div>
+        <a href="javascript:void(0)" class="place">
+          <img src="./resourse/음식.jpg" alt="">
+          <div class="badge-title">
+            <h2>여긴어디야</h2>
+          </div>
+        </a>
+        <a href="javascript:void(0)" class="place">
+          <img src="./resourse/음식2.jpg" alt="">
+          <div class="badge-title">
+            <h2>여긴어디야</h2>
+          </div>
+        </a>
+        <a href="javascript:void(0)" class="place">
+          <img src="./resourse/음식2.jpg" alt="">
+          <div class="badge-title">
+            <h2>여긴어디야</h2>
+          </div>
+        </a>
+    </div>
+
+	<script>
+	let quickMenu = $('.badge');
+	const DURATION = 900; // 이동 애니메이션 시간
+
+	function positionQuickMenu() {
+	    let windowHeight = $(window).height();
+	    let quickMenuHeight = quickMenu.height();
+	    
+	    // 화면의 중앙 위치를 계산
+	    let point = ($(window).scrollTop() + (windowHeight / 2)) - (quickMenuHeight / 2);
+
+	    point -= 100;
+
+	    quickMenu.stop().animate({ top: point }, DURATION);
+	}
+
+	$(window).scroll(function() {
+	    positionQuickMenu(); // 스크롤할 때마다 중앙에 맞춰 이동
+	});
+
+	$(window).resize(function() {
+	    positionQuickMenu(); // 창 크기가 변경될 때도 중앙에 재배치
+	});
+
+	$(document).ready(function() {
+	    positionQuickMenu(); // 페이지 로드 시 중앙에 배치
+	});
+	</script>
+	
+</body>
+</html>
