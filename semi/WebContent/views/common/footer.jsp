@@ -17,7 +17,7 @@ footer .inner{
     font-size: 15px;
     padding: 20px 0 20px 0;
     top: 1400px;
-    background-color: #F6F5F0;
+   /* background-color: #F6F5F0; */
     width: 100%;
     height: 80px;
 }   
