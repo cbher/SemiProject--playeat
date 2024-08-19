@@ -295,7 +295,7 @@ header .menubar::before{
                     <li>
                         <a href="">공지문의</a>
                         <ul class="hide-menu">
-                            <li><a href="">공지사항</a></li>
+                            <li><a href="views/notice/NoticeMainView.jsp">공지사항</a></li>
                             <li><a href="">문의사항</a></li>
                             <li><a href="">자주묻는질문</a></li>
                         </ul>   
