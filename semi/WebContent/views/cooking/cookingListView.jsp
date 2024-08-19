@@ -248,7 +248,7 @@
                 <ul class="cooking">
                 	<% for(int i = 0; i < list.size(); i++){ %>
 	                    <li>
-	                        <a href="">
+	                        <a href="detail.co?bno=<%= list.get(i).getcBoardNo()%>">
 	                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
 	                            <div class="title"><b style="font-size: 18px;"><%= list.get(i).getcBoardTitle() %></b></div>
 	                            <div class="count">조회수 : <%= list.get(i).getCount() %></div>

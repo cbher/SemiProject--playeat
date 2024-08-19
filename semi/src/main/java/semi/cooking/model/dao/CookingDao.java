@@ -98,4 +98,30 @@ public class CookingDao {
 		return result;
 	}
 	
+	public CookingBoard selectCookBoardDetail(Connection conn, int cookBoardNo) {
+		CookingBoard cookBoard = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCookBoardDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cookBoardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				cookBoard = new CookingBoard(rset.getInt("c.c_no"),
+											 rset.getString("c_title"),
+											 rset.getString("c_contents"),
+											 rset.getDate("c_date"),
+											 rset.getString("user_id"),
+											 rset.getString("file_path"),
+											 rset.getString("change_name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

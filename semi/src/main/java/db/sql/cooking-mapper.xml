@@ -57,4 +57,19 @@
 		  , COOK_BOARD_SEQ.CURRVAL
 		  )
 	</entry>
+	<entry key="selectCookBoardDetail">
+		SELECT
+		       C.C_NO
+		     , C_TITLE
+		     , C_CONTENTS
+		     , C_DATE
+		     , USER_ID
+		     , FILE_PATH
+		     , CHANGE_NAME
+		  FROM COOK_BOARD C
+		  JOIN MEMBER USING (USER_NO)
+		  JOIN ATTECHMENT A ON (A.C_NO = C.C_NO)
+		 WHERE C.STATUS = 'Y'
+		   AND C.C_NO = ?
+	</entry>
 </properties>

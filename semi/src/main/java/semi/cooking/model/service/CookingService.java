@@ -36,4 +36,12 @@ public class CookingService {
 		return result1 * result2;
 		
 	}
+	
+	public CookingBoard selectCookBoardDetail(int cookBoardNo) {
+		Connection conn = getConnection();
+		CookingBoard cookBoard = new CookingDao().selectCookBoardDetail(conn, cookBoardNo);
+		close(conn);
+		return cookBoard;
+
+	}
 }
