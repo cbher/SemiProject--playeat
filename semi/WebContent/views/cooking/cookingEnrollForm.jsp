@@ -32,6 +32,12 @@
 
         #enroll-form table{border: 1px solid white; width: 800px;}
         #enroll-form table th{color: #8b7dbe;}		
+        #enroll-form #category{
+            position: relative;
+            top: -15px;
+            right: -850px;
+        }		
+
         #enroll-form input, #enroll-form textarea{
             width: 90%;
             box-sizing: border-box;
