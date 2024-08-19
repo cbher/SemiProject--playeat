@@ -36,7 +36,16 @@ public class Notice {
 		this.status = status;
 	}
 
+	
 
+	public Notice(int noticeNo, String noticeTitle, String noticeWriter, int count, Date createDate) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeWriter = noticeWriter;
+		this.count = count;
+		this.createDate = createDate;
+	}
 
 	public int getNoticeNo() {
 		return noticeNo;

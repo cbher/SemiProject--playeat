@@ -1,5 +1,12 @@
+<%@page import="semi.notice.model.vo.Notice"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+
+%>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,15 +36,22 @@
             <th width="120">작성일</th>
         </tr>
     </thead>
+    <%if(list.isEmpty()){ %>
         <tr>
-            <td>1</td>
-            <td>asdf1</td>
-            <td>asdf2</td>
-            <td>asdf3</td>
-            <td>2024/08/19</td>
+            <td colspan="5">게시글이 없습니다</td>
+            
         </tr>
-      
-
+     <%}else{ %>
+     	<%for(Notice n :list) {%>
+		<tr>
+            <td><%= n.getNoticeNo() %></td>
+            <td><%=n.getNoticeTitle() %></td>
+            <td><%= n.getNoticeWriter() %></td>
+            <td><%=n.getStatus() %></td>
+            <td><%=n.getCreateDate() %></td>
+        </tr>
+	  <%} %>
+	<%} %>
     </table>
 
 </div>
