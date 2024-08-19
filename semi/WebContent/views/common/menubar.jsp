@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -267,8 +270,8 @@ header .menubar::before{
      
     <header>
         <div class="inner">
-            <a href="" class="logo">
-                <img src="./resourse/play_eat-removebg-preview.png" alt="">
+            <a href="<%= contextPath %>" class="logo">
+                <img src="resources/backGroundImg/play_eat-removebg-preview.png" alt="">
             </a>
             <div class="search">
                 <form action="test.do">
