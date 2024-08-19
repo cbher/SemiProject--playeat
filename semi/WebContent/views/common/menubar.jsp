@@ -11,11 +11,11 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+   	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
 
 @font-face { 
@@ -72,7 +72,7 @@ header .inner a{
 }
 
 header .inner a img{
-    height: 150%;
+    height: 100%;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -284,7 +284,7 @@ header .menubar::before{
             <div class="login">
                 <ul>
                     <li><a href="">로그인</a></li>
-                    <li><a href="">회원가입</a></li>
+                    <li><a href="<%= contextPath %>/enrollForm.me">회원가입</a></li>
                 </ul>
             </div>
             
