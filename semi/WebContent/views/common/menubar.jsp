@@ -1,3 +1,5 @@
+<%@page import="semi.cooking.model.vo.CookingBoard"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -382,7 +384,7 @@ header .menubar::before{
                             <a href="">요리</a> 
                             <ul class="hide-menu">
                                 <li><a href="clist.co">레시피 찾기</a></li>
-                                <li><a href="">레시피 업로드</a></li>
+                                <li><a href="cookingEnrollForm.co">레시피 업로드</a></li>
                                 <li><a href="">이번달 명예의 전당</a></li>
                             </ul>  
                         </li>

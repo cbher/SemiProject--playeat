@@ -10,13 +10,15 @@ public class CookingBoard {
 	private String status;
 	private int score;
 	private int count;
-	private int userNo;
+	private String userNo;
 	private int cookCategory;
+	
+	private String titleImg;
 	
 	public CookingBoard() {}
 
 	public CookingBoard(int cBoardNo, String cBoardTitle, String cBoardContent, Date createDate, String status,
-			int score, int count, int userNo, int cookCategory) {
+			int score, int count, String userNo, int cookCategory) {
 		super();
 		this.cBoardNo = cBoardNo;
 		this.cBoardTitle = cBoardTitle;
@@ -27,6 +29,18 @@ public class CookingBoard {
 		this.count = count;
 		this.userNo = userNo;
 		this.cookCategory = cookCategory;
+	}
+	
+	
+	
+
+	
+	public CookingBoard(int cBoardNo, String cBoardTitle, int count, String titleImg) {
+		super();
+		this.cBoardNo = cBoardNo;
+		this.cBoardTitle = cBoardTitle;
+		this.count = count;
+		this.titleImg = titleImg;
 	}
 
 	public int getcBoardNo() {
@@ -85,11 +99,11 @@ public class CookingBoard {
 		this.count = count;
 	}
 
-	public int getUserNo() {
+	public String getUserNo() {
 		return userNo;
 	}
 
-	public void setUserNo(int userNo) {
+	public void setUserNo(String userNo) {
 		this.userNo = userNo;
 	}
 
@@ -100,6 +114,15 @@ public class CookingBoard {
 	public void setCookCategory(int cookCategory) {
 		this.cookCategory = cookCategory;
 	}
+	
+	public String getTitleImg() {
+		return titleImg;
+	}
+
+	public void setTitleImg(String titleImg) {
+		this.titleImg = titleImg;
+	}
+
 
 	@Override
 	public String toString() {

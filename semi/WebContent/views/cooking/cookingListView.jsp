@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<CookingBoard> list = (ArrayList<CookingBoard>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +147,7 @@
 }
 
 .post .inner .cooking li a{
-
+	color: #333;
 }
 
 .post .inner .cooking li a img{
@@ -157,7 +160,7 @@
     text-align: center;
 }
 
-.post .inner .cooking li a .createDate{
+.post .inner .cooking li a .count{
     text-align: right;
 }
 
@@ -184,102 +187,14 @@
                             </a>
                             <p>플레이잇2</p>
                         </div>
-                        <div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇3</p>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇4</p>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇5</p>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇6</p>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/덮밥.jpg" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                            </a>
-                            <p>플레이잇7</p>
-                        </div><div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/play&eat.png" alt="">
-                                <p>플레이잇7</p>
-                            </a>
-                        </div>
+                        <% for (int i = 0 ; i<list.size();i++){ %>
+	                         <div class="swiper-slide">
+	                            <a href="">
+	                                <img src="<%= list.get(i).getTitleImg() %>" alt="">
+	                            </a>
+	                            <p><%= list.get(i).getcBoardTitle() %></p>
+	                        </div>
+                        <% } %>
                     </div>
                 </div>
                 <div class="swiper-prev">
@@ -324,29 +239,19 @@
         <section class="post">
             <div class="inner">
                 <h2>요리게시판</h2>
+                <div>
+                	<button>작성하기</button>
+                </div>
                 <ul class="cooking">
-                    <li>
-                        <a href="">
-                            <img src="./resourse/덮밥.jpg" alt="">
-                            <div class="title"><b style="font-size: 18px;">복날엔 닭볶음탕이지</b></div>
-                            <div class="createDate">2024/7/21</div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="./resourse/덮밥.jpg" alt="">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="./resourse/덮밥.jpg" alt="">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="./resourse/덮밥.jpg" alt="">
-                        </a>
-                    </li>
+                	<% for(int i = 0; i < list.size(); i++){ %>
+	                    <li>
+	                        <a href="">
+	                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
+	                            <div class="title"><b style="font-size: 18px;"><%= list.get(i).getcBoardTitle() %></b></div>
+	                            <div class="count">조회수 : <%= list.get(i).getCount() %></div>
+	                        </a>
+	                    </li>
+	                <% } %>
                 </ul>
             </div>
         </section>

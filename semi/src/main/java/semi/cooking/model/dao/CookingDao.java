@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import static semi.common.JDBCtemplate.*;
+
+import semi.cooking.model.vo.Attachment;
 import semi.cooking.model.vo.CookingBoard;
 
 public class CookingDao {
@@ -32,9 +35,67 @@ public class CookingDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new CookingBoard(rset.getInt("c_no"),
+						                  rset.getString("c_title"),
+						                  rset.getInt("count"),
+						                  rset.getString("titleimg")));
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
+		return list;
+	}
+	
+	public int insertCookBoard(Connection conn, CookingBoard c) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertCookBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c.getcBoardTitle());
+			pstmt.setString(2, c.getcBoardContent());
+			pstmt.setInt(3, 1);
+			pstmt.setInt(4, c.getCookCategory());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertAttachmentList(Connection conn, ArrayList<Attachment> list) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachmentList");
+		
+		try {
+			for(Attachment at : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, at.getOriginName());
+				pstmt.setString(2, at.getChangeName());
+				pstmt.setString(3, at.getFilePath());
+				pstmt.setInt(4, at.getFileLevel());
+				pstmt.setInt(5, at.getBoardCategory());
+				
+				result = pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }
