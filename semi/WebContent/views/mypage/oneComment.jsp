@@ -1,51 +1,18 @@
-
-<%@page import = "com.member.model.vo.Member" %>
-<%@page import = "com.review.model.vo.Review" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-    
-    
-<%
-       
-
-	/*
-
-		Member loginUser = (Member) session.getAttribute("loginUser");
-	// Member를 만들어야 뭐 진행이 될 듯 일단 loginuser로 해두자
-		loginUser = new Member(1, "USER01", "PASS01");
-		 session.setAttribute("loginUser", loginUser); //임시, 로그인은 나중에 따로 받자
-    if (loginUser == null) {
-  		로그인 구문 일단 보류    
-    	*/
-    	
-     //고길동, 검성, ...
-   
-//}
-	String contextPath = request.getContextPath();
-
-	 Review r= (Review)request.getAttribute("r");
-	
-
-	String alertMsg = (String)session.getAttribute("alertMsg");
-	// 서비스 요청 전 : member.jsp 로딩시 : null
-	// 서비스 성공 후 : member.jsp 로딩시 : alert로 띄워줄 메시지 문구
-		
-%> 
 <!DOCTYPE html>
-
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이페이지_1</title>
-    <style>
-        body,h1,h2,h3, h4, h5, h6, p, ul,li, div, a {
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	
+	<style>
+         body,h1,h2,h3, h4, h5, h6, p, ul,li, div, a {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: Arial, sans-serif;
             background-color: #f6f5f0;
@@ -106,12 +73,12 @@
             justify-content: space-between;
         }
 
-        .menubar .menu .inner div {
+        .menubar .menu .inner li {
             list-style: none;
             position: relative;
         }
 
-        .menubar .menu .inner div a {
+        .menubar .menu .inner li a {
             font-size: 18px;
             font-weight: 700;
             color: #8b7dbe;
@@ -119,7 +86,7 @@
             display: block;
         }
 
-        .menubar .menu .inner div a:hover {
+        .menubar .menu .inner li a:hover {
             color: purple;
         }
 
@@ -244,36 +211,19 @@
             font-size: 12px;
             margin: 0 10px;
         }
-    </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sortButton = document.getElementById("sort_button");
-            const sortBox = document.getElementById("sort_box");
-
-            sortButton.addEventListener("click", function () {
-                sortBox.style.display = sortBox.style.display === "none" ? "block" : "none";
-            });
-        });
-    </script>
+    </style>	
+</style>
 </head>
-
 <body>
-    
-   
-    	
-    	<!-- 로그인 화면으로 이동시켜야 함 -->
-    
-    
-  
-    <header>
+<header>
         <div class="inner">
             <a href="" class="logo">
                 <img src="./resourse/play_eat-removebg-preview.png" alt="header_logo">
             </a>
             <div class="profile">
-                <a href="<%= contextPath%>/EditProfile.bo">
-                    프로필 사진이 위치할 예정, 클릭 시 프로필 수정 란으로 이동
-                </a>
+                <div id="picture">
+                    프로필 사진이 위치할 예정
+                </div>
             </div>
             <div class="login">
                 <ul>
@@ -285,11 +235,11 @@
         <section class="menubar">
             <div class="menu">
                 <ul class="inner">
-                    <div><a href="<%= contextPath%>">마이페이지</a></div>
-                    <div><a href="<%= contextPath%>/mylist.bo.1">찜 리스트</a></div>
-                    <div><a href="<%= contextPath%>/calender.bo">캘린더</a></div>
-                    <div><a href="<%= contextPath%>/editProfile.bo">프로필 수정</a></div>
-                    <div><a onclick="edit()">회원정보 수정</a></div>
+                    <li><a href="">마이페이지</a></li>
+                    <li><a href="">찜 리스트</a></li>
+                    <li><a href="">캘린더</a></li>
+                    <li><a href="">프로필 수정</a></li>
+                    <li><a href="">회원정보 수정</a></li>
                 </ul>
             </div>
         </section>
@@ -318,33 +268,21 @@
                     <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
                 </div>
                 <div class="rvbox_2">
-                    <div>가게 이름></div>
-                    <div>좋아요아이콘 <span>좋아요 개수</span></div>
+                    <div>가게명</div>
+                    <div>좋아요 <span>15</span></div>
                 </div>
                 <div class="rvbox_3">
                     날짜 년 월 일
                 </div>
             </div>
-          
+            <!-- 여러 리뷰 박스들이 추가될 수 있음 -->
             <div class="rvbox">
                 <div class="rvbox_1">
                     <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
                 </div>
                 <div class="rvbox_2">
                     <div>가게명</div>
-                    <div>좋아요아이콘 <span>좋아요 개수</span></div>
-                </div>
-                <div class="rvbox_3">
-                    날짜 년 월 일
-                </div>
-            </div>
-            <div class="rvbox">
-                <div class="rvbox_1">
-                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
-                </div>
-                <div class="rvbox_2">
-                    <div>가게명</div>
-                    <div>좋아요아이콘 <span>좋아요 개수</span></div>
+                    <div>좋아요 <span>15</span></div>
                 </div>
                 <div class="rvbox_3">
                     날짜 년 월 일
@@ -356,7 +294,19 @@
                 </div>
                 <div class="rvbox_2">
                     <div>가게명</div>
-                    <div>좋아요아이콘 <span>좋아요 개수</span></div>
+                    <div>좋아요 <span>15</span></div>
+                </div>
+                <div class="rvbox_3">
+                    날짜 년 월 일
+                </div>
+            </div>
+            <div class="rvbox">
+                <div class="rvbox_1">
+                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
+                </div>
+                <div class="rvbox_2">
+                    <div>가게명</div>
+                    <div>좋아요 <span>15</span></div>
                 </div>
                 <div class="rvbox_3">
                     날짜 년 월 일
@@ -387,21 +337,14 @@
             </div>
         </footer>
     </div>
-   
+
+
 </body>
 
 
 <script>
-  function edit(){
-	  
-	  location.href = "<%=contextPath %>/views/information/information.jsp";
-  }
-
 
 </script>
-
-
-
 
 
 </html>

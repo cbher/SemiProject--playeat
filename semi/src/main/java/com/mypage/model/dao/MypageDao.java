@@ -27,9 +27,9 @@ public class MypageDao {
 	}
 	
 	
-	public Review selectList(Connection conn, int userNo){
+	public ArrayList<Review> selectList(Connection conn, int userNo){
 		
-		Review r = null;
+		ArrayList<Review> r = null;
 		PreparedStatement pstmt=null;
 		ResultSet rset = null;
 		String sql= prop.getProperty("selectList");
@@ -40,31 +40,33 @@ public class MypageDao {
 			
 			rset=pstmt.executeQuery();
 			
-			if(rset.next()) {
-				r=new Review(rset.getInt("review_no"),
-						   rset.getString("r_title"),
-						   rset.getString("r_content"),
-						   rset.getDate("r_date"),
-						   rset.getInt("score"),
-						   rset.getInt("user_no"),
-						   rset.getString("status"),
-						   rset.getInt("play_no"));
 		
-			}
-			
-		} catch (SQLException e) {
+				while(rset.next()) {
+					r.add(new Review(rset.getInt("review_no"),
+							           rset.getString("r_title"),
+							           rset.getString("r_content"),
+									   rset.getDate("r_date"),
+									   rset.getInt("score"),
+									   rset.getInt("user_no"),
+									   rset.getString("status"),
+									   rset.getInt("play_no")));
+				} 
+		    }catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+			}finally {
 			close(rset);
 			close(pstmt);
 		}
 		return r;
 		
+	 
+	
 	}
 	
 	
 	
 	
+}	
 	
 	
 	
@@ -78,6 +80,4 @@ public class MypageDao {
 	
 	
 	
-	
-	
-}
+

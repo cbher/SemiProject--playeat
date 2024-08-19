@@ -19,10 +19,6 @@ public class MemberService {
     }
 
     
-    
-    
-    
-    
     public Member selectMember(int userNo) {
         Connection conn = getConnection();
         Member member = new MemberDao().selectMember(conn, userNo);
@@ -32,4 +28,8 @@ public class MemberService {
         
         return member;
     }
+    
+    
+    
+   
 }

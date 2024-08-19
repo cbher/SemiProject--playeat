@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.vo.Member;
 import com.mypage.model.service.MypageService;
 import com.review.model.vo.Review;
 
@@ -31,12 +32,23 @@ public class MypageReviewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
-        MypageService mypageService = new MypageService();
-        ArrayList<Review> reviewList = mypageService.selectList(userNo);
 		
-        request.setAttribute("reviewList", reviewList);
-        request.getRequestDispatcher("WEB-INF/views/myReview.jsp").forward(request, response);
+		
+		
+		//int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
+        int userNo = 1; //일단 임시로 로그인했다고 넣은 값
+		
+		if(userNo != 0) { //로그인 되있을 경우 
+		MypageService r = new MypageService();
+        ArrayList<Review> List = r.selectList(userNo);
+		//보내고,
+        
+        request.setAttribute("reviewList", List);
+        request.getRequestDispatcher("WebContent/views/mypage/myReview.jsp").forward(request, response);
+		}else { //로그인이 안된 경우. 로그인 페이지로 이동시켜야함
+			   //나중에 추가
+			
+		}
 	}
 
 	/**

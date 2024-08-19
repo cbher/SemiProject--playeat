@@ -36,14 +36,14 @@ public class MemberController extends HttpServlet {
 	        String userPwd = request.getParameter("userPwd");
 
 	        MemberService memberService = new MemberService();
-	        Member loginUser = memberService.loginMember(userId, userPwd);
+	        /*Member loginUser = memberService.loginMember(userId, userPwd);
 
 	        if (loginUser != null) {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("loginUser", loginUser);
 	            response.sendRedirect("mypage.jsp");
 	        } else {
-	            request.setAttribute("msg", "로그인 실패");
+	            request.setAttribute("msg", "로그인 실패");*/
 	            //request.getRequestDispatcher("WEB-INF/views/common/errorPage.jsp").forward(request, response);
 	            //에러페이지 만들어야함
 	}

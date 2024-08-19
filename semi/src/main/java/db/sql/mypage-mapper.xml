@@ -12,7 +12,14 @@
 			ORDER BY R.R_DATE DESC
    	</entry>
 	
+	
+	<entry key="oneComment">
+		SELECT com_no, com_content, score, create_date, user_no, status, one_no
+     		from ONE_COMMENT
+     		WHERE user_no = ?
 
+	</entry>
+	
 
 
 

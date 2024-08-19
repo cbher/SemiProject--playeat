@@ -10,10 +10,10 @@ import static com.common.JDBCtemplate.*;
 public class MypageService {
 
 	
-	public Review selectList(int userNo) {
+	public ArrayList<Review> selectList(int userNo) {
 		Connection conn= getConnection();
 		
-		Review r = new MypageDao().selectList(conn, userNo);
+		ArrayList<Review> r = new MypageDao().selectList(conn, userNo);
 		
 		close(conn);
 		

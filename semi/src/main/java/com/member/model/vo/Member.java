@@ -10,15 +10,23 @@ public class Member {
 	private String userName;
 	private String nickName;
 	private String phone;
-	private String eamil;
+	private String email;
 	private Date enrollDate;
 	private String status;
 	private String introduce;
 	private int reportCount;
 	
 	
+	public Member(int userNo, String userId, String userPwd) {
+		super();
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPwd = userPwd;
+	}
+
+	
 	public Member(int userNo, String userId, String userPwd, String userName, String nickName, String phone,
-			String eamil, Date enrollDate, String status, String introduce, int reportCount) {
+			String email, Date enrollDate, String status, String introduce, int reportCount) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -26,7 +34,7 @@ public class Member {
 		this.userName = userName;
 		this.nickName = nickName;
 		this.phone = phone;
-		this.eamil = eamil;
+		this.email = email;
 		this.enrollDate = enrollDate;
 		this.status = status;
 		this.introduce = introduce;
@@ -71,11 +79,11 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getEamil() {
-		return eamil;
+	public String getemail() {
+		return email;
 	}
-	public void setEamil(String eamil) {
-		this.eamil = eamil;
+	public void setemail(String email) {
+		this.email = email;
 	}
 	public Date getEnrollDate() {
 		return enrollDate;
@@ -106,7 +114,7 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
-				+ ", nickName=" + nickName + ", phone=" + phone + ", eamil=" + eamil + ", enrollDate=" + enrollDate
+				+ ", nickName=" + nickName + ", phone=" + phone + ", email=" + email + ", enrollDate=" + enrollDate
 				+ ", status=" + status + ", introduce=" + introduce + ", reportCount=" + reportCount + "]";
 	}
 	
