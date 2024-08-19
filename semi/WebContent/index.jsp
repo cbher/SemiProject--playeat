@@ -312,11 +312,11 @@
 
 </head>
 <body>
-	<%@ include file="views/common/menubar.jsp" %>
-	<%@ include file="views/common/badge.jsp" %>
-	
-	
-	
+   <%@ include file="views/common/menubar.jsp" %>
+   <%@ include file="views/common/badge.jsp" %>
+   
+   
+   
    <!--main-->
     <section class="main-slide">
       <div class="inner">
@@ -324,11 +324,11 @@
           <div class="swiper-container">
               <div class="swiper-wrapper">
                   <div class="swiper-slide">
-			          <a href="">
-			            <img src="./resourse/AdobeStock_600875580-1024x683.jpg" alt="">
-			          </a>
-			          <p>플레이잇1</p>
-		        </div>
+                   <a href="">
+                     <img src="./resourse/AdobeStock_600875580-1024x683.jpg" alt="">
+                   </a>
+                   <p>플레이잇1</p>
+              </div>
                   <div class="swiper-slide">
                       <a href="">
                           <img src="./resourse/shutterstock_2006673803-scaled.jpg" alt="">
@@ -623,10 +623,10 @@
           </div>
       </div>
   </section>
-	
-	
-	
-	 <!-- 명예의전당 -->
+   
+   
+   
+    <!-- 명예의전당 -->
  <div class="inner fame-area">
     <span id="title">명예의 전당</span>
     <div id="fame-1">
@@ -648,86 +648,86 @@
     <div class="fame-name" id="fame-2-name"><a href="">덮밥2</a></div>
     <div class="fame-name" id="fame-3-name"><a href="">덮밥3</a></div>
  </div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<script>
-	 document.addEventListener('DOMContentLoaded', function() {
-	 let playSwiper = new Swiper('.play-slide .swiper-container',{
-		    slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
-		    spaceBetween: 10, // 슬라이드 사이 여백
-		    // 1번 슬라이드가 가운데 보이기
-		    loop:true,
-		    // autoplay: {
-		    //     delay : 5000,
-		    // },
-		    pagination:{
-		        el : '.play-slide .swiper-pagination', // 페이지 번호 요소 선택자
-		        clickable : true, // 사용자의 페이지 번호 요소 제어 가능 여부
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    let playSwiper = new Swiper('.play-slide .swiper-container',{
+          slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
+          spaceBetween: 10, // 슬라이드 사이 여백
+          // 1번 슬라이드가 가운데 보이기
+          loop:true,
+          // autoplay: {
+          //     delay : 5000,
+          // },
+          pagination:{
+              el : '.play-slide .swiper-pagination', // 페이지 번호 요소 선택자
+              clickable : true, // 사용자의 페이지 번호 요소 제어 가능 여부
 
-		    },
-		    navigation : {
-		        prevEl : '.play-slide .swiper-prev',
-		        nextEl : '.play-slide .swiper-next',
-		    }
+          },
+          navigation : {
+              prevEl : '.play-slide .swiper-prev',
+              nextEl : '.play-slide .swiper-next',
+          }
 
-		  });
+        });
 
-		  let foodSwiper = new Swiper('.food-slide .swiper-container',{
-		    slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
-		    spaceBetween: 10, // 슬라이드 사이 여백
-		    // 1번 슬라이드가 가운데 보이기
-		    loop:true,
-		    // autoplay: {
-		    //     delay : 5000,
-		    // },
-		    pagination:{
-		        el : '.food-slide .swiper-pagination', // 페이지 번호 요소 선택자
-		        clickable : true, // 사용자의 페이지 번호 요소 제어 가능 여부
+        let foodSwiper = new Swiper('.food-slide .swiper-container',{
+          slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
+          spaceBetween: 10, // 슬라이드 사이 여백
+          // 1번 슬라이드가 가운데 보이기
+          loop:true,
+          // autoplay: {
+          //     delay : 5000,
+          // },
+          pagination:{
+              el : '.food-slide .swiper-pagination', // 페이지 번호 요소 선택자
+              clickable : true, // 사용자의 페이지 번호 요소 제어 가능 여부
 
-		    },
-		    navigation : {
-		        prevEl : '.food-slide .swiper-prev',
-		        nextEl : '.food-slide .swiper-next',
-		    }
+          },
+          navigation : {
+              prevEl : '.food-slide .swiper-prev',
+              nextEl : '.food-slide .swiper-next',
+          }
 
-		  });
+        });
 
-		  let mainSwiper = new Swiper('.main-slide .swiper-container',{
-		    slidesPerView: 1, // 한번에 보여줄 슬라이드 개수
-		    spaceBetween: 10, // 슬라이드 사이 여백
-		    centeredSlides: true,
-		    // 1번 슬라이드가 가운데 보이기
-		    loop:true,
-		    autoplay: {
-		        delay: 4000,             // 슬라이드가 3초마다 자동 전환
-		        disableOnInteraction: false, // 사용자 상호작용 후에도 자동 전환 유지
-		      },
-		    // pagination:{
-		    //     el : '.main-slide .swiper-pagination', // 페이지 번호 요소 선택자
-		    //     clickable : true, // 사용자의 페이지 번호 요소 제어 가능 여부
+        let mainSwiper = new Swiper('.main-slide .swiper-container',{
+          slidesPerView: 1, // 한번에 보여줄 슬라이드 개수
+          spaceBetween: 10, // 슬라이드 사이 여백
+          centeredSlides: true,
+          // 1번 슬라이드가 가운데 보이기
+          loop:true,
+          autoplay: {
+              delay: 4000,             // 슬라이드가 3초마다 자동 전환
+              disableOnInteraction: false, // 사용자 상호작용 후에도 자동 전환 유지
+            },
+          // pagination:{
+          //     el : '.main-slide .swiper-pagination', // 페이지 번호 요소 선택자
+          //     clickable : true, // 사용자의 페이지 번호 요소 제어 가능 여부
 
-		    // },
-		    scrollbar: {
-		      el: '.main-slide .swiper-scrollbar',
-		      draggable: true,
-		      },
-		  });
+          // },
+          scrollbar: {
+            el: '.main-slide .swiper-scrollbar',
+            draggable: true,
+            },
+        });
 
-		});
-	
-	</script>
-	
-	
-	
-	<%@ include file="views/common/footer.jsp" %>
-	<%@ include file="views/common/top.jsp" %>
+      });
+   
+   </script>
+   
+   
+   
+   <%@ include file="views/common/footer.jsp" %>
+   <%@ include file="views/common/top.jsp" %>
 </body>
 </html>
