@@ -21,6 +21,11 @@ public class NoticeService {
 		}
 		return list;
 	}
+
+	public int insertNotice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 
