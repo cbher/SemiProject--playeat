@@ -57,19 +57,33 @@
 		  , COOK_BOARD_SEQ.CURRVAL
 		  )
 	</entry>
-	<entry key="selectCookBoardDetail">
+	<entry key="increaseCount">
+		UPDATE COOK_BOARD
+		   SET COUNT = COUNT + 1
+		 WHERE C_NO = ?
+		   AND STATUS = 'Y'
+	</entry>
+	<entry key="selectCookBoard">
 		SELECT
 		       C.C_NO
 		     , C_TITLE
 		     , C_CONTENTS
 		     , C_DATE
 		     , USER_ID
-		     , FILE_PATH
-		     , CHANGE_NAME
+		     , C_CATEGORY
 		  FROM COOK_BOARD C
 		  JOIN MEMBER USING (USER_NO)
-		  JOIN ATTECHMENT A ON (A.C_NO = C.C_NO)
 		 WHERE C.STATUS = 'Y'
 		   AND C.C_NO = ?
+	</entry>
+	<entry key="selectAttachment">
+	 	SELECT 
+		       FILE_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , FILE_PATH
+		  FROM ATTACHMENT
+		 WHERE C_NO = ?
+		   AND STATUS = 'Y'
 	</entry>
 </properties>

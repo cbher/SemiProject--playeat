@@ -37,11 +37,32 @@ public class CookingService {
 		
 	}
 	
-	public CookingBoard selectCookBoardDetail(int cookBoardNo) {
+	public int increaseCount(int cBoardNo) {
 		Connection conn = getConnection();
-		CookingBoard cookBoard = new CookingDao().selectCookBoardDetail(conn, cookBoardNo);
+		int result = new CookingDao().increaseCount(conn, cBoardNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	
+	public CookingBoard selectCookBoard(int cookBoardNo) {
+		Connection conn = getConnection();
+		CookingBoard cookBoard = new CookingDao().selectCookBoard(conn, cookBoardNo);
 		close(conn);
 		return cookBoard;
 
+	}
+	
+	public ArrayList<Attachment> selectAttachmentList(int cookBoardNo){
+		Connection conn = getConnection();
+		ArrayList<Attachment> list = new CookingDao().selectAttachmentList(conn, cookBoardNo);
+		close(conn);
+		return list;
 	}
 }

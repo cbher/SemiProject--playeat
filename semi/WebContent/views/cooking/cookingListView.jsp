@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<CookingBoard> list = (ArrayList<CookingBoard>)request.getAttribute("list");
+	// 글번호, 글 제목, 글 내용, 대표이미지
 %>
 <!DOCTYPE html>
 <html>
