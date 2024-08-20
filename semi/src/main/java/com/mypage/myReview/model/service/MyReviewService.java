@@ -1,19 +1,19 @@
-package com.mypage.model.service;
+package com.mypage.myReview.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.mypage.model.dao.MypageDao;
-import com.review.model.vo.Review;
+import com.mypage.myReview.model.dao.MyReviewDao;
+import com.mypage.myReview.model.vo.Review;
 import static com.common.JDBCtemplate.*;
 
-public class MypageService {
+public class MyReviewService {
 
 	
 	public ArrayList<Review> selectList(int userNo) {
 		Connection conn= getConnection();
 		
-		ArrayList<Review> r = new MypageDao().selectList(conn, userNo);
+		ArrayList<Review> r = new MyReviewDao().selectList(conn, userNo);
 		
 		close(conn);
 		

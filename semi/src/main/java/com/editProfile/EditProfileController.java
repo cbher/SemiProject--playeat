@@ -1,4 +1,4 @@
-package com.review.controller;
+package com.editProfile;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReviewController
+ * Servlet implementation class EditProfileController
  */
-@WebServlet("/mypage.review")
-public class ReviewController extends HttpServlet {
+@WebServlet("/EditProfile.bo")
+public class EditProfileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewController() {
+    public EditProfileController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,6 +26,11 @@ public class ReviewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
+		
+		
 		
 	}
 

@@ -1,4 +1,4 @@
-package com.mypage.controller;
+package com.mypage.myReview.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,13 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.vo.Member;
-import com.mypage.model.service.MypageService;
-import com.review.model.vo.Review;
+import com.mypage.myReview.model.service.MyReviewService;
+import com.mypage.myReview.model.vo.Review;
 
 /**
  * Servlet implementation class MypageReviewController
  */
-@WebServlet("/review.bo")
+@WebServlet("/mypage.myreview")
 public class MypageReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,12 +39,12 @@ public class MypageReviewController extends HttpServlet {
         int userNo = 1; //일단 임시로 로그인했다고 넣은 값
 		
 		if(userNo != 0) { //로그인 되있을 경우 
-		MypageService r = new MypageService();
-        ArrayList<Review> List = r.selectList(userNo);
-		//보내고,
+			MyReviewService r = new MyReviewService();
+			ArrayList<Review> List = r.selectList(userNo);
+			//보내고,
         
         request.setAttribute("reviewList", List);
-        request.getRequestDispatcher("WebContent/views/mypage/myReview.jsp").forward(request, response);
+        request.getRequestDispatcher("./views/mypage/myReview.jsp").forward(request, response);
 		}else { //로그인이 안된 경우. 로그인 페이지로 이동시켜야함
 			   //나중에 추가
 			

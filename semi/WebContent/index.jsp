@@ -10,7 +10,7 @@
 	
 
 
-	<% response.sendRedirect("review.bo");%>
+	<% response.sendRedirect("mypage.myreview");%>
 
 
 

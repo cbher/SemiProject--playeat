@@ -3,8 +3,8 @@
 
 <properties>
 
-
-	<entry key="selectList">
+	<!--마이페이지-나의리뷰(첫페이지) -->
+	<entry key="selectList"> 
 		  SELECT R.REVIEW_NO, R.R_TITLE, R.R_CONTENT, R.R_DATE, P.P_TITLE 
 			  FROM REVIEW R
 			   JOIN PLACE P ON R.PLAY_NO = P.P_NO
@@ -12,15 +12,23 @@
 			ORDER BY R.R_DATE DESC
    	</entry>
 	
-	
-	<entry key="oneComment">
+	<!--마이페이지-한줄평 아직 미구현-->
+	<entry key="oneComment"> <!--  -->
 		SELECT com_no, com_content, score, create_date, user_no, status, one_no
      		from ONE_COMMENT
      		WHERE user_no = ?
 
 	</entry>
 	
-
+	<!--마이페이지-내 문의사항 -->
+	<entry key="inquireList"> 
+		SELECT INQUIRE_NO,INQUIRE_TITLE,USER_NAME,CREATE_DATE,I.STATUS
+	        FROM INQUIRE I
+	        JOIN MEMBER  ON USER_NO = INQUIRE_WRITER
+	        WHERE USER_NO = ?
+	        ORDER BY CREATE_DATE
+	
+	</entry>
 
 
 

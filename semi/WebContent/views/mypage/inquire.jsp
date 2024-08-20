@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import = "com.member.model.vo.Member" %>
+<%@page import = "com.mypage.myInquire.model.vo.Inquire" %>
+
+<% 
+	ArrayList<Inquire> list = (ArrayList<Inquire>)request.getAttribute("inquireList");
+	String contextPath = request.getContextPath();
+	String alertMsg = (String)session.getAttribute("alertMsg");
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,7 +189,13 @@
             width: 20px;
             height: 20px;
         }
+        
+		.inquire-list{
+            border: 1px solid black;
+            text-align: center;
 
+        }
+        
         footer {
             background-color: #f6f5f0;
             padding: 20px 0;
@@ -262,15 +277,41 @@
                     <button>댓글 순</button>
                 </div>
             </div>
-            <div class="rvbox">
-               
-                문의내역1
-                <br>문의내역2
-
-            </div>
-
             
-        </div>
+            
+            
+             <table class="inquire-list">
+            <thead>
+                <tr>
+                    <th width="70">번호</th>
+                    <th width="80">제목</th>
+                    <th width="100">작성자</th>
+                    <th width="50">작성일</th>
+                    <th width="100">답변여부</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <!--
+                <tr>
+                    <td colspan="5">조회된 게시글이 없습니다.</td>
+                </tr>
+                -->
+				
+				<% for(Inquire i : list)  {%>
+                <tr>
+                    <td><%=i.getInquireNo()%></td>
+                    <td><%=i.getInquireTitle()%></td>
+                    <td><%=i.getInquireWriter() %></td>
+                    <td><%=i.getCreateDate() %></td> 
+                    <td><%=i.getStatus() %></td>
+
+                </tr>
+                <% }%>
+            </tbody>
+        </table>
+            
+        
 
         <footer>
             <div class="inner">

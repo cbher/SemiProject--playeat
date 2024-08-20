@@ -1,4 +1,4 @@
-package com.mypage.model.dao;
+package com.mypage.myReview.model.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -10,17 +10,19 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.member.model.vo.Member;
-import com.review.model.vo.Review;
+import com.mypage.myReview.model.vo.Review;
 
 import static com.common.JDBCtemplate.*;
+import static com.common.JDBCtemplate.*;
 
-public class MypageDao {
+
+public class MyReviewDao {
 
 	private Properties prop = new Properties();
 	
-	public MypageDao() {
+	public MyReviewDao() {
 		try {
-			prop.loadFromXML(new FileInputStream(MypageDao.class.getResource("/db/sql/mypage-mapper.xml").getPath()));
+			prop.loadFromXML(new FileInputStream(MyReviewDao.class.getResource("/db/sql/mypage-mapper.xml").getPath()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -29,7 +31,7 @@ public class MypageDao {
 	
 	public ArrayList<Review> selectList(Connection conn, int userNo){
 		
-		ArrayList<Review> r = null;
+		ArrayList<Review> r = new ArrayList<Review>();
 		PreparedStatement pstmt=null;
 		ResultSet rset = null;
 		String sql= prop.getProperty("selectList");
@@ -46,10 +48,7 @@ public class MypageDao {
 							           rset.getString("r_title"),
 							           rset.getString("r_content"),
 									   rset.getDate("r_date"),
-									   rset.getInt("score"),
-									   rset.getInt("user_no"),
-									   rset.getString("status"),
-									   rset.getInt("play_no")));
+									   rset.getString("p_title")));
 				} 
 		    }catch (SQLException e) {
 			e.printStackTrace();

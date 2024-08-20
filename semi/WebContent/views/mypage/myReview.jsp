@@ -1,6 +1,7 @@
 
+<%@page import="java.util.ArrayList"%>
 <%@page import = "com.member.model.vo.Member" %>
-<%@page import = "com.review.model.vo.Review" %> 
+<%@page import = "com.mypage.myReview.model.vo.Review" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -8,7 +9,7 @@
     
 <%
        
-
+    ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("reviewList");
 	/*
 
 		Member loginUser = (Member) session.getAttribute("loginUser");
@@ -24,10 +25,10 @@
 //}
 	String contextPath = request.getContextPath();
 
-	 Review r= (Review)request.getAttribute("r");
+	
 	
 
-	String alertMsg = (String)session.getAttribute("alertMsg");
+	//String alertMsg = (String)session.getAttribute("alertMsg");
 	// 서비스 요청 전 : member.jsp 로딩시 : null
 	// 서비스 성공 후 : member.jsp 로딩시 : alert로 띄워줄 메시지 문구
 		
@@ -126,7 +127,7 @@
         /* Content */
         #wrap {
             width: 1100px;
-            margin: 150px auto 0;
+            margin: 30px auto 0;
             background-color: #f6f5f0;
             padding-bottom: 50px;
         }
@@ -137,6 +138,7 @@
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
+            height: 1000px;
         }
 
         #content_title {
@@ -289,7 +291,7 @@
                     <div><a href="<%= contextPath%>/mylist.bo.1">찜 리스트</a></div>
                     <div><a href="<%= contextPath%>/calender.bo">캘린더</a></div>
                     <div><a href="<%= contextPath%>/editProfile.bo">프로필 수정</a></div>
-                    <div><a onclick="edit()">회원정보 수정</a></div>
+                    <div><a href="<%= contextPath%>/information.edit">회원정보 수정</a></div>
                 </ul>
             </div>
         </section>
@@ -298,9 +300,9 @@
     <div id="wrap">
         <div id="content">
             <div id="content_title">
-                <a href="#">나의 리뷰</a>
-                <a href="#">한줄평</a>
-                <a href="#">내 문의내역</a>
+                <a href="<%=contextPath%>">나의 리뷰</a>
+                <a href="<%=contextPath %>/onecomment.1">한줄평</a>
+                <a href="<%=contextPath%>/myinquire.1">내 문의사항</a>
             </div>
             <div id="sort">
                 <button id="sort_button">
@@ -313,55 +315,30 @@
                     <button>댓글 순</button>
                 </div>
             </div>
+                     
+            <% for(Review r : list){ %>
             <div class="rvbox">
                 <div class="rvbox_1">
-                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
+                    <a href=""><img src="가게 이미지" alt=""></a>
                 </div>
                 <div class="rvbox_2">
-                    <div>가게 이름></div>
-                    <div>좋아요아이콘 <span>좋아요 개수</span></div>
+                    <div><%=r.getTitle() %></div> 
                 </div>
                 <div class="rvbox_3">
-                    날짜 년 월 일
+                     <%= r.getrDate() %>
                 </div>
+                <div class="rvbox_4">
+                     <%= r.getrContent() %>
+                </div>
+                <div class="rvbox_5">
+                     <%= r.getScore() %> 점수
+                </div>
+                
             </div>
-          
-            <div class="rvbox">
-                <div class="rvbox_1">
-                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
-                </div>
-                <div class="rvbox_2">
-                    <div>가게명</div>
-                    <div>좋아요아이콘 <span>좋아요 개수</span></div>
-                </div>
-                <div class="rvbox_3">
-                    날짜 년 월 일
-                </div>
-            </div>
-            <div class="rvbox">
-                <div class="rvbox_1">
-                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
-                </div>
-                <div class="rvbox_2">
-                    <div>가게명</div>
-                    <div>좋아요아이콘 <span>좋아요 개수</span></div>
-                </div>
-                <div class="rvbox_3">
-                    날짜 년 월 일
-                </div>
-            </div>
-            <div class="rvbox">
-                <div class="rvbox_1">
-                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
-                </div>
-                <div class="rvbox_2">
-                    <div>가게명</div>
-                    <div>좋아요아이콘 <span>좋아요 개수</span></div>
-                </div>
-                <div class="rvbox_3">
-                    날짜 년 월 일
-                </div>
-            </div>
+          	<% }%>
+            
+            
+            
 
             <div id="pgnum">
                 1 2 3 4 ... 30
@@ -392,11 +369,7 @@
 
 
 <script>
-  function edit(){
-	  
-	  location.href = "<%=contextPath %>/views/information/information.jsp";
-  }
-
+ 
 
 </script>
 
