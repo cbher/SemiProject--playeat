@@ -137,6 +137,25 @@
     top: 600px;
     padding-left: 20px;
 }
+.post .inner .button{
+    position: absolute;
+    top: 620px;
+    right: 0;
+    background-color: #e4d4fa;
+    cursor: pointer;
+    border: 1px solid #8b7dbe;
+    width: 100px;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 700;
+}
+
+.post .inner .button:hover{
+    background-color: #8b7dbe;
+}
+
+
 
 .post .inner .cooking{
     position: absolute;
@@ -241,7 +260,7 @@
             <div class="inner">
                 <h2>요리게시판</h2>
                 <div>
-                	<button>작성하기</button>
+                	<button class="button" onclick="enrollForm()">작성하기</button>
                 </div>
                 <ul class="cooking">
                 	<% for(int i = 0; i < list.size(); i++){ %>
@@ -256,6 +275,11 @@
                 </ul>
             </div>
         </section>
+        <script>
+            function enrollForm(){
+                location.href = "<%= contextPath %>/cookingEnrollForm.co";
+            }
+        </script>
     </div>
 </body>
 </html>
