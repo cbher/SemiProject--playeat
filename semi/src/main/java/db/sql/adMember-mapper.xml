@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+<entry key="adMemberList">
+
+select 
+	user_no, 
+	user_id, 
+	 user_pwd,
+	user_name, 
+	nickname,
+	phone, 
+	email, 
+	enrolle_date, 
+	status, 
+	introduce, 
+	report_count
+from member
+order by user_no
+
+</entry>
+<entry key="adMemberDateList">
+
+select 
+	user_no, 
+	user_id, 
+	 user_pwd,
+	user_name, 
+	nickname,
+	phone, 
+	email, 
+	enrolle_date, 
+	status, 
+	introduce, 
+	report_count
+from member
+order by enrolle_date , user_no
+
+</entry>
+
+
+<entry key="adMemberReportList">
+
+select 
+	user_no, 
+	user_id, 
+	 user_pwd,
+	user_name, 
+	nickname,
+	phone, 
+	email, 
+	enrolle_date, 
+	status, 
+	introduce, 
+	report_count
+from member
+order by report_count desc ,  user_no
+
+</entry>
+
+
+<entry key="adMemberDetail">
+
+	select 
+		user_no, 
+		user_id,
+		user_pwd, 
+		user_name, 
+		nickname, 
+		phone, 
+		email, 
+		enrolle_date, 
+		status, 
+		introduce,
+		report_count
+	from 
+		member
+	where 
+		user_no = ?
+		
+</entry>
+
+
+
+</properties>
