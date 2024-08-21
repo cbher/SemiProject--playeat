@@ -40,7 +40,6 @@ public class CookingDetailController extends HttpServlet {
 		if(result > 0) {
 			CookingBoard cookBoard = cService.selectCookBoard(cookBoardNo);
 			ArrayList<Attachment> list = cService.selectAttachmentList(cookBoardNo); 
-			
 			request.setAttribute("cBoard", cookBoard);
 			request.setAttribute("list", list);
 			

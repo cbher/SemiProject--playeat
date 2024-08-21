@@ -65,7 +65,7 @@
 	</entry>
 	<entry key="selectCookBoard">
 		SELECT
-		       C.C_NO
+		       C_NO
 		     , C_TITLE
 		     , C_CONTENTS
 		     , C_DATE
@@ -82,8 +82,7 @@
 		     , ORIGIN_NAME
 		     , CHANGE_NAME
 		     , FILE_PATH
-		  FROM ATTACHMENT
+		  FROM ATTECHMENT
 		 WHERE C_NO = ?
-		   AND STATUS = 'Y'
 	</entry>
 </properties>

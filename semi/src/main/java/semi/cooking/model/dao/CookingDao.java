@@ -130,7 +130,7 @@ public class CookingDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				cookBoard = new CookingBoard(rset.getInt("c.c_no"),
+				cookBoard = new CookingBoard(rset.getInt("c_no"),
 											 rset.getString("c_title"),
 											 rset.getString("c_contents"),
 											 rset.getDate("c_date"),
@@ -151,11 +151,9 @@ public class CookingDao {
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("selectAttachment");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cookBoardNo);
-			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

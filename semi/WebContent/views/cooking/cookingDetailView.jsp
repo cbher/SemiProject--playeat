@@ -93,7 +93,6 @@ div{
     border: none;
     background-color: #fff;
     outline: none;
-    text-align: left;
     resize: none;
 }
 
@@ -132,13 +131,15 @@ button:hover{
                     <% }else{ %>
                     	<td width="100">명예의 전당</td>
                     <% } %>	
-                    <% if(loginUser.equals(cBoard.getUserNo())){ %>
-	                    <td width="100"><button>수정</button></td>
-	                    <td width="100"><button>삭제</button></td>
-	                <% } %>
+                    <% if(loginUser != null){ %>
+	                    <% if(loginUser.equals(cBoard.getUserNo())){ %>
+		                    <td width="100"><button>수정</button></td>
+		                    <td width="100"><button>삭제</button></td>
+		                <% } %>
+		            <% } %>
                 </tr>
             </table>
-            <br><br>
+            <br>
             <div class="content">
                 <br>
                 <% for(Attachment at : list){ %>

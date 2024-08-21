@@ -11,6 +11,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 	.main-slide{
 
@@ -185,12 +188,6 @@
                             </a>
                             <p>플레이잇1</p>
                         </div>
-                        <div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/shutterstock_2006673803-scaled.jpg" alt="">
-                            </a>
-                            <p>플레이잇2</p>
-                        </div>
                         <% for (int i = 0 ; i<list.size();i++){ %>
 	                         <div class="swiper-slide">
 	                            <a href="">
@@ -209,6 +206,14 @@
                 </div>
             </div>
         </section>
+                
+                <div class="swiper-prev">
+                    <div class="material-icons">arrow_back</div>
+                </div>
+                <div class="swiper-next">
+                    <div class="material-icons">arrow_forward</div>
+                </div>
+            </div>
 			<script defer>
 				new Swiper('.main-slide .swiper-container',{
 				    slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
@@ -230,14 +235,6 @@
 				
 				});
 			</script>
-                
-                <div class="swiper-prev">
-                    <div class="material-icons">arrow_back</div>
-                </div>
-                <div class="swiper-next">
-                    <div class="material-icons">arrow_forward</div>
-                </div>
-            </div>
         </section>
 
         <section class="post">
