@@ -85,4 +85,18 @@
 		  FROM ATTECHMENT
 		 WHERE C_NO = ?
 	</entry>
+	<entry key="updateCookBoard">
+		UPDATE COOK_BOARD
+		   SET 
+		       C_TITLE = ?
+		     , C_CONTENTS = ?
+		     , C_CATEGORY = ?
+		 WHERE C_NO = ?	
+	</entry>
+	<entry key="deleteCookBoard">
+		UPDATE COOK_BOARD
+		   SET STATUS = 'N'
+		 WHERE C_NO = ?
+	</entry>
+	
 </properties>

@@ -158,6 +158,8 @@ public class CookingDao {
 			
 			while(rset.next()) {
 				Attachment at = new Attachment();
+				at.setFileNo(rset.getInt("file_no"));
+				at.setOriginName(rset.getString("origin_name"));
 				at.setChangeName(rset.getString("change_name"));
 				at.setFilePath(rset.getString("file_path"));
 				
@@ -171,6 +173,46 @@ public class CookingDao {
 		}
 		return list;
 		
+	}
+	
+	public int updateCookBoard(Connection conn, CookingBoard cBoard) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateCookBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cBoard.getcBoardTitle());
+			pstmt.setString(2, cBoard.getcBoardContent());
+			pstmt.setInt(3, cBoard.getCookCategory());
+			pstmt.setInt(4, cBoard.getcBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteCookBoard(Connection conn, int cBoardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCookBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cBoardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

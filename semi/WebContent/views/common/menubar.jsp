@@ -3,9 +3,11 @@
     pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
-
+	
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	// 유저번호, 아이디, 비번, 이름,닉네임,폰,이메일,가입일,스테이터스,자기소개,리폿횟수
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -26,6 +28,12 @@
 </head>
 <body>
      
+     <% if(alertMsg != null) { %>
+     	<script>
+     		alert('<%=alertMsg%>');
+     	</script>	
+     	<% session.removeAttribute("alertMsg"); %>
+     <% } %>
     <header>
         <div class="inner">
             <a href="<%= contextPath %>" class="logo">

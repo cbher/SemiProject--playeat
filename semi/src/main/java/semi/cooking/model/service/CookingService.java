@@ -32,7 +32,7 @@ public class CookingService {
 		}else {
 			rollback(conn);
 		}
-		
+		close(conn);
 		return result1 * result2;
 		
 	}
@@ -64,5 +64,32 @@ public class CookingService {
 		ArrayList<Attachment> list = new CookingDao().selectAttachmentList(conn, cookBoardNo);
 		close(conn);
 		return list;
+	}
+	
+	public int updateCookBoard(CookingBoard cBoard) {
+		Connection conn = getConnection();
+		int result = new CookingDao().updateCookBoard(conn, cBoard);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+	
+	public int deleteCookBoard(int cBoardNo) {
+		Connection conn = getConnection();
+		int result = new CookingDao().deleteCookBoard(conn, cBoardNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 }

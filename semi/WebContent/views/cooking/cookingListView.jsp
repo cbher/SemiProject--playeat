@@ -171,6 +171,12 @@
     margin: 20px;
 }
 
+.post .inner .cooking li:hover {
+    transform: scale(1.1);
+    transition: all .4s;
+}
+
+
 .post .inner .cooking li a{
 	color: #333;
 }
@@ -198,7 +204,7 @@
 	<%@ include file="../common/badge.jsp" %>
 	        <section class="main-slide">
             <div class="inner">
-                <div class="title">최신 음식</div>
+                <div class="title">최신 게시글</div>
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
@@ -265,7 +271,7 @@
                 <ul class="cooking">
                 	<% for(int i = 0; i < list.size(); i++){ %>
 	                    <li>
-	                        <a href="detail.co?bno=<%= list.get(i).getcBoardNo()%>">
+	                        <a href="<%= contextPath %>/detail.co?bno=<%= list.get(i).getcBoardNo()%>">
 	                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
 	                            <div class="title"><b style="font-size: 18px;"><%= list.get(i).getcBoardTitle() %></b></div>
 	                            <div class="count">조회수 : <%= list.get(i).getCount() %></div>
