@@ -1,7 +1,10 @@
+<%@page import="semi.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
    String contextPath = request.getContextPath();
+   Member loginUser = (Member)session.getAttribute("loginUser");
+   String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -262,6 +265,11 @@ header .menubar::before{
     transform: translateX(45px);  
 }
 
+.login2{
+    margin-top: 10px;
+    font-size: 13px;
+}
+
 
 </style>
 
@@ -282,12 +290,21 @@ header .menubar::before{
                 </form>
             </div>
             <div class="login">
+            <% if(loginUser == null) {%>
                 <ul>
-                    <li><a href="">로그인</a></li>
+                    <li><a href="<%= contextPath %>/login.me">로그인</a></li>
                     <li><a href="<%= contextPath %>/enrollForm.me">회원가입</a></li>
                 </ul>
+            <% }else { %>
+            <div class="login2">
+            <br>
+            <b><%= loginUser.getUserName() %>님</b>의 방문을 환영합니다. <br><br>
+                <a href="<%= contextPath %>/myPage.me">마이페이지</a>
+                <a href="<%= contextPath %>/logout.me">로그아웃</a>
             </div>
-            
+        </div>
+		<% } %>
+            </div>
         </div>
         <section class="menubar">
             <div class="menu">

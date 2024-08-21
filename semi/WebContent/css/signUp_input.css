@@ -370,3 +370,11 @@ a{
     display: flex;
     align-items: center;
 }
+
+.hide {
+    display: none;
+}
+
+.success-message, .failure-message, .failure-message2, .strongPassword-message, .mismatch-message{
+    margin-left: 138px;
+}

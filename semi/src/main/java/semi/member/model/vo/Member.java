@@ -15,7 +15,7 @@ public class Member {
 	private String introduce;
 	private int reportCount;
 	
-	public Member() {}
+	public Member() {}	
 
 	public Member(int userNo, String userId, String userPwd, String userName, String nickName, String phone,
 			String email, Date enrollDate, String status, String introduce, int reportCount) {
@@ -33,6 +33,20 @@ public class Member {
 		this.reportCount = reportCount;
 	}
 
+
+
+
+
+	public Member(String userId, String userPwd, String userName, String nickName, String phone, String email) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.nickName = nickName;
+		this.phone = phone;
+		this.email = email;
+	}
+	
 	public int getUserNo() {
 		return userNo;
 	}
@@ -120,7 +134,7 @@ public class Member {
 	public void setReportCount(int reportCount) {
 		this.reportCount = reportCount;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName

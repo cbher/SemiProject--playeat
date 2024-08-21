@@ -28,5 +28,22 @@ public class MemberService {
 		close(conn);
 		return count;
 	}
+	
+	public int nickNameCheck(String checkNickname) {
+		Connection conn = getConnection();
+		int count = new MemberDao().nickNameCheck(conn, checkNickname);
+		close(conn);
+		return count;
+	}
+	
+	public Member loginMember(String userId, String userPwd) {
+		
+		Connection conn = getConnection();
+		Member m = new MemberDao().loginMember(conn, userId, userPwd);
+		close(conn);
+		return m;
+		
+	}
+
 
 }
