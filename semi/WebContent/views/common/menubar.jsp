@@ -96,9 +96,9 @@
                         </ul>   
                     </li>
                     <li>
-                        <a href="clist.co">요리</a> 
+                        <a href="clist.co?cpage=1">요리</a> 
                         <ul class="hide-menu">
-                            <li><a href="clist.co">레시피 찾기</a></li>
+                            <li><a href="clist.co?cpage=1">레시피 찾기</a></li>
                             <li><a href="cookingEnrollForm.co">레시피 업로드</a></li>
                             <li><a href="">이번달 명예의 전당</a></li>
                         </ul>  

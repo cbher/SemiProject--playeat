@@ -5,20 +5,28 @@ import java.util.ArrayList;
 
 import static semi.common.JDBCtemplate.*;
 
+import semi.common.PageInfo;
 import semi.cooking.model.dao.CookingDao;
 import semi.cooking.model.vo.Attachment;
 import semi.cooking.model.vo.CookingBoard;
 
 public class CookingService {
 	
-	public ArrayList<CookingBoard> selectCookingList(){
+	public ArrayList<CookingBoard> selectCookingList(PageInfo pi){
 		
 		Connection conn = getConnection();
-		ArrayList<CookingBoard> list = new CookingDao().selectCookingList(conn);
+		ArrayList<CookingBoard> list = new CookingDao().selectCookingList(conn, pi);
 		close(conn);
 		return list;
 		
 		
+	}
+	
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new CookingDao().selectListCount(conn);
+		close(conn);
+		return listCount;
 	}
 	
 	public int insertCookingBoard(CookingBoard c , ArrayList<Attachment> list) {

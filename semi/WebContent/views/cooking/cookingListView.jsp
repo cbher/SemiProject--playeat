@@ -1,10 +1,18 @@
+<%@page import="semi.common.PageInfo"%>
 <%@page import="semi.cooking.model.vo.CookingBoard"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<CookingBoard> list = (ArrayList<CookingBoard>)request.getAttribute("list");
-	// 글번호, 글 제목, 글 내용, 대표이미지
+	// 글번호, 글 제목, 글 내용, 대표이미지 (파일 경로 + 수정명)
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -129,17 +137,15 @@
 }
 
 .post .inner{
-
+	top:600px
 }
 
 .post h2{
-    position: absolute;
-    top: 600px;
     padding-left: 20px;
 }
 .post .inner .button{
-    position: absolute;
-    top: 620px;
+	position:absolute;
+	top:0;
     right: 0;
     background-color: #e4d4fa;
     cursor: pointer;
@@ -158,8 +164,6 @@
 
 
 .post .inner .cooking{
-    position: absolute;
-    top: 650px;
     padding-left: 0;
     display: flex;
     flex-wrap: wrap;
@@ -195,6 +199,9 @@
     text-align: right;
 }
 
+.post .inner .paging-area{
+	margin-top:50px;
+}
 
 </style>
 
@@ -279,6 +286,22 @@
 	                    </li>
 	                <% } %>
                 </ul>
+                <div class="paging-area" align="center">
+                	<% if(currentPage != 1){ %>
+            			<button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= currentPage - 1 %>'">&lt;</button>
+            		<%} %>
+            		<% for(int p = startPage; p<=endPage;p++){ %>
+            			<% if(p == currentPage){ %>
+            				<button disabled><%= p %></button>
+            			<% } else{ %>
+            				<button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= p %>'"><%= p %></button>
+            		<% } %>
+				<% } %>
+            
+            <% if(currentPage != maxPage) {%>
+            	<button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= currentPage + 1 %>'">&gt;</button>
+        	<% } %>
+                </div>
             </div>
         </section>
         <script>
@@ -287,5 +310,6 @@
             }
         </script>
     </div>
+    <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
