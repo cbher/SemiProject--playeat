@@ -194,6 +194,10 @@
 
 </head>
 <body>
+
+    <%@ include file="../common/mypageMenubar.jsp" %>
+    <%@ include file="/views/common/footer.jsp" %>
+
 <header>
         <div class="inner">
             <a href="#" class="logo">

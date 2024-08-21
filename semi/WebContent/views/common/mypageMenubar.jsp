@@ -1,20 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
 <%@page import="java.util.ArrayList"%>
 <%@page import = "semi.member.model.vo.Member" %>
-<%@page import = "semi.mypage.myInquire.model.vo.Inquire" %>
+<%@page import = "semi.mypage.myReview.model.vo.Review" %> 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 
-<% 
-	ArrayList<Inquire> list = (ArrayList<Inquire>)request.getAttribute("inquireList");
+    
+    
+<%
+       
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	
+    session.setAttribute("loginUser", loginUser); //임시, 로그인은 나중에 따로 받자	 
+
 	String contextPath = request.getContextPath();
+
+	
+	
+
 	String alertMsg = (String)session.getAttribute("alertMsg");
-%>	
+	// 서비스 요청 전 : member.jsp 로딩시 : null
+	// 서비스 성공 후 : member.jsp 로딩시 : alert로 띄워줄 메시지 문구
+		
+%> 
 <!DOCTYPE html>
-<html>
+
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지_1</title>
+    <style>
         body,h1,h2,h3, h4, h5, h6, p, ul,li, div, a {
             margin: 0;
             padding: 0;
@@ -81,12 +97,12 @@
             justify-content: space-between;
         }
 
-        .menubar .menu .inner li {
+        .menubar .menu .inner div {
             list-style: none;
             position: relative;
         }
 
-        .menubar .menu .inner li a {
+        .menubar .menu .inner div a {
             font-size: 18px;
             font-weight: 700;
             color: #8b7dbe;
@@ -94,14 +110,14 @@
             display: block;
         }
 
-        .menubar .menu .inner li a:hover {
+        .menubar .menu .inner div a:hover {
             color: purple;
         }
 
         /* Content */
         #wrap {
             width: 1100px;
-            margin: 150px auto 0;
+            margin: 30px auto 0;
             background-color: #f6f5f0;
             padding-bottom: 50px;
         }
@@ -112,6 +128,7 @@
             border-radius: 10px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
+            height: 1000px;
         }
 
         #content_title {
@@ -189,13 +206,7 @@
             width: 20px;
             height: 20px;
         }
-        
-		.inquire-list{
-            border: 1px solid black;
-            text-align: center;
 
-        }
-        
         footer {
             background-color: #f6f5f0;
             padding: 20px 0;
@@ -226,126 +237,78 @@
             margin: 0 10px;
         }
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sortButton = document.getElementById("sort_button");
+            const sortBox = document.getElementById("sort_box");
 
+            sortButton.addEventListener("click", function () {
+                sortBox.style.display = sortBox.style.display === "none" ? "block" : "none";
+            });
+        });
+    </script>
 </head>
+
 <body>
-	<header>
+    
+	
+    	
+    	<!-- 로그인 화면으로 이동시켜야 함 -->
+     <%  if (loginUser == null) { //로그인이 안되있을 경우 
+  		    
+  		    response.sendRedirect("/login.me");
+    	
+    	
+     }%>
+    	
+   
+    
+  
+    <header>
         <div class="inner">
             <a href="" class="logo">
                 <img src="./resourse/play_eat-removebg-preview.png" alt="header_logo">
             </a>
             <div class="profile">
-                <div id="picture">
-                    프로필 사진이 위치할 예정
-                </div>
+                <a href="<%= contextPath%>/EditProfile.bo">
+                    프로필 사진이 위치할 예정, 클릭 시 프로필 수정 란으로 이동
+                </a>
             </div>
             <div class="login">
                 <ul>
+                    <%if(loginUser!=null){%>
+                    <li><a href="">로그아웃</a></li>
+                    <%}else{%>
+                    
                     <li><a href="">로그인</a></li>
                     <li><a href="">회원가입</a></li>
+                    <%}%>
                 </ul>
             </div>
         </div>
+
+
         <section class="menubar">
             <div class="menu">
                 <ul class="inner">
-                    <li><a href="">마이페이지</a></li>
-                    <li><a href="">찜 리스트</a></li>
-                    <li><a href="">캘린더</a></li>
-                    <li><a href="">프로필 수정</a></li>
-                    <li><a href="">회원정보 수정</a></li>
+                    <div><a href="<%= contextPath%>">마이페이지</a></div>
+                    <div><a href="<%= contextPath%>/mylist.bo.1">찜 리스트</a></div>
+                    <div><a href="<%= contextPath%>/calender.bo">캘린더</a></div>
+                    <div><a href="<%= contextPath%>/editProfile.bo">프로필 수정</a></div>
+                    <div><a href="<%= contextPath%>/information.edit">회원정보 수정</a></div>
                 </ul>
             </div>
         </section>
     </header>
 
-    <div id="wrap">
-        <div id="content">
-            <div id="content_title">
-                <a href="#">내 문의내역</a>
-               
 
-            </div>
-            <div id="sort">
-                <button id="sort_button">
-                    <img src="/마이페이지/resource/프로젝트 로고.png" alt="정렬 버튼">
-                </button>
-                <div id="sort_box">
-                    <button>정렬 기준</button><br>
-                    <button>날짜 순</button><br>
-                    <button>좋아요 순</button><br>
-                    <button>댓글 순</button>
-                </div>
-            </div>
-            
-            
-            
-             <table class="inquire-list">
-            <thead>
-                <tr>
-                    <th width="70">번호</th>
-                    <th width="80">제목</th>
-                    <th width="100">작성자</th>
-                    <th width="50">작성일</th>
-                    <th width="100">답변여부</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <!--
-                <tr>
-                    <td colspan="5">조회된 게시글이 없습니다.</td>
-                </tr>
-                -->
-				
-				<% for(Inquire i : list)  {%>
-                <tr>
-                    <td><%=i.getInquireNo()%></td>
-                    <td><%=i.getInquireTitle()%></td>
-                    <td><%=i.getInquireWriter() %></td>
-                    <td><%=i.getCreateDate() %></td> 
-                    <td><%=i.getStatus() %></td>
-
-                </tr>
-                <% }%>
-            </tbody>
-        </table>
-            
-        
-
-        <footer>
-            <div class="inner">
-                <ul class="menu">
-                    <li><a href="">개인정보처리방침</a></li>
-                    <li><a href="">이용약관</a></li>
-                    <li><a href="">위치정보이용약관</a></li>
-                    <li><a href="">원클래스약관</a></li>
-                </ul>
-                <div class="info">
-                    <span>kh H반 4조</span>
-                    <span>semi4jyo@gmail.com</span>
-                    <span>개인정보 책임자 4조</span>
-                </div>
-                <p class="copyright">
-                    &copy; <span id="this-year"></span> kh정보교육원 H반 4조 세미프로젝트
-                </p>
-            </div>
-        </footer>
-    </div>
+    
+   
+   
 </body>
 
 
-<!--스크립트들--------------------------->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const sortButton = document.getElementById("sort_button");
-        const sortBox = document.getElementById("sort_box");
 
-        sortButton.addEventListener("click", function () {
-            sortBox.style.display = sortBox.style.display === "none" ? "block" : "none";
-        });
-    });
-</script>
-	
-</body>
+
+
 </html>
