@@ -29,43 +29,53 @@
 
 
 <div class="notice-area">
-	<h2>공지사항</h2>
+	<h2 align="center">공지사항</h2>
 	 <br>
 	 <%if(loginUser != null && loginUser.getUserId().equals("admin")) {%>
-    <div class="button" onclick="<%=contextPath %>/insert.no">작성하기</div>
+    <a  class="button" href="<%=contextPath %>/createIN.no">작성하기</a>
     <br>
     <%} %>
     <table class="notice-view" align="center" >
         <thead>
         <tr align="center">
-            <th>글번호</th>
+            <th width="100">글번호</th>
             <th width="500"> 글 제목</th>
             <th width="100">작성자</th>
             <th width="60px">조회수</th>
             <th width="120">작성일</th>
         </tr>
     </thead>
+    <tbody>
     <%if(list.isEmpty()){ %>
         <tr>
             <td colspan="5">게시글이 없습니다</td>
             
         </tr>
-     <%}else{ %>
-     	<%for(Notice n :list) {%>
+    <%}else {%>
+     	<%for(Notice n :list){%>
 		<tr>
             <td><%= n.getNoticeNo() %></td>
-            <td><%= n.getNoticeTitle() %></td>
+            <td class="content"><%= n.getNoticeTitle() %></td>
             <td><%= n.getNoticeWriter() %></td>
             <td><%= n.getCount() %></td>
             <td><%= n.getCreateDate() %></td>
         </tr>
 	  <%} %>
 	<%} %>
+	</tbody>
     </table>
 
 </div>
 
-
+<script type="text/javascript">
+$(function(){
+	$(".notice-view>tbody>tr").click(function(){
+		const num = $(this).children().eq(0).text();
+		location.href='<%=contextPath%>/detail.no?num='+num;
+	})
+})
+	
+</script>
 
 
  
