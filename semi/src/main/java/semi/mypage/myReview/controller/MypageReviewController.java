@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import semi.member.model.service.MemberService;
 import semi.member.model.vo.Member;
@@ -35,37 +36,28 @@ public class MypageReviewController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
-		
-		System.out.println(userId);
-		
-	
-		
-		Member loginUser = new MemberService().loginMember(userId, userPwd); 
-		
-		 request.setAttribute("loginUser", loginUser);
-		 
-		 int userNo = ((Member) request.getSession().getAttribute("loginUser")).getUserNo();
-		 
-		
-		
-		
-		if(userNo != 0) { //로그인 되있을 경우 
-			MyReviewService r = new MyReviewService();
-			ArrayList<Review> List = r.selectList(userNo);
-			//보내고,
-        
-        request.setAttribute("reviewList", List);
-        request.getRequestDispatcher("./views/mypage/myReview.jsp").forward(request, response);
-		}else { 
-			request.setAttribute("errorMsg", "로그인해야 사용할 수 있음");
-			RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
-				view.forward(request, response);
-			
-		}
-	}
+	     
+        HttpSession session = request.getSession();  //사용자 정보를 가져옴
+        Member loginUser = (Member) session.getAttribute("loginUser");
+
+        if (loginUser == null) { // 로그인이 되어 있지 않은 경우
+           
+            response.sendRedirect("views/member/login.jsp");
+            return; // 이후 코드를 실행하지 않음
+        }
+
+        // 로그인이 되어 있는 경우
+        int userNo = loginUser.getUserNo(); // 로그인된 사용자의 userNo를 가져옴
+
+        // 리뷰 리스트를 가져옴
+        MyReviewService reviewService = new MyReviewService();
+        ArrayList<Review> reviewList = reviewService.selectList(userNo);
+
+       
+        request.setAttribute("reviewList", reviewList);  // 리뷰 리스트를 요청에 설정하고 My Review 페이지로 포워드
+        RequestDispatcher view = request.getRequestDispatcher("./views/mypage/myReview.jsp");
+        view.forward(request, response);
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
