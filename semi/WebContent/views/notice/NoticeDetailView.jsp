@@ -48,7 +48,7 @@ Notice n = (Notice)request.getAttribute("notice");
         </table>
         <a class="btn btn-outline-success" href="<%=contextPath %>/noticeList.no">목록가기</a>
         <%if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
-        <a class="btn btn-outline-warning" href="<%=contextPath %>/updateform.no?num="<%=n.getNoticeNo()%>>수정하기</a>
+        <a class="btn btn-outline-warning" href="<%=contextPath %>/updateform.no?num=<%=n.getNoticeNo()%>">수정하기</a>
         <a class="btn btn-outline-danger" href="<%=contextPath %>/delete.no">삭제하기</a>
 		<%} %>
     </div>

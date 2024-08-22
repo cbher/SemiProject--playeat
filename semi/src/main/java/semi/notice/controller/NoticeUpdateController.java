@@ -1,25 +1,26 @@
-package semi.member.controller;
+package semi.notice.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.notice.model.service.NoticeService;
+import semi.notice.model.vo.Notice;
+
 /**
- * Servlet implementation class EnterLoginpage
+ * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/enterLogin.me")
-public class EnterLoginpage extends HttpServlet {
+@WebServlet("/updateNotice.no")
+public class NoticeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EnterLoginpage() {
+    public NoticeUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,10 +29,23 @@ public class EnterLoginpage extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		
-		RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
-		view.forward(request, response);
-
+		int noticeNo = Integer.parseInt(request.getParameter("num"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		Notice n = new Notice(noticeNo, title, content);
+		
+		int result = new NoticeService().updateNotice(n);
+	
+		if(result > 0) {
+			request.setAttribute("alertMsg", "공지사항 수정완료!");
+			response.sendRedirect(request.getContextPath()+"/detail.no?num="+noticeNo);
+			
+		}else {
+		
+		}
 	}
 
 	/**

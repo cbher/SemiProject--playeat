@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
-Notice n = (Notice)request.getAttribute("notice");
+Notice n = (Notice)request.getAttribute("n");
 
 %>    
 
@@ -11,6 +11,9 @@ Notice n = (Notice)request.getAttribute("notice");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+ <link rel="stylesheet" href="/semi/resources/css/noticeUpdateForm.css">
+
 </head>
 <body>
 
@@ -20,7 +23,7 @@ Notice n = (Notice)request.getAttribute("notice");
 
 <div class="update-area" align="center">
 	<h3 align="center">공지글 작성하기</h3>
-    <form action="<%=contextPath %>/update.no" method="post">
+    <form action="<%=contextPath %>/updateNotice.no" method="post">
     <input type="hidden" name="num" value="<%=n.getNoticeNo() %>">
         <table align="center" id="insertTable">
             <thead>

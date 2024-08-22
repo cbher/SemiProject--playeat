@@ -51,6 +51,19 @@ INSERT
 	 WHERE NOTICE_NO = ?
 </entry>
 
+<entry key="noticeSelect">
+	SELECT 
+	       NOTICE_NO
+	     , NOTICE_TITLE
+	     , NOTICE_CONTENT
+	     , USER_ID
+	     , CREATE_DATE
+	  FROM NOTICE
+	  JOIN MEMBER ON (NOTICE_WRITER = USER_NO)
+	 WHERE NOTICE_NO = ?
+</entry>
+
+
 <entry key="updateNotice">
 	UPDATE NOTICE
 	   SET NOTICE_TITLE = ?
