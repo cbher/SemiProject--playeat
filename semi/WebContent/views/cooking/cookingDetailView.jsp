@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 <%
 	CookingBoard cBoard = (CookingBoard)request.getAttribute("cBoard");
-	// 글번호, 글제목, 글내용, 작성일, 로그인한 회원아이디, 카테고리 번호
+	// 글번호, 글제목, 글내용, 작성일, 로그인한 회원아이디, 카테고리 번호, 추천수
 	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
 	// 파일번호, 원본명, 수정명, 파일경로
 	
@@ -66,7 +66,24 @@ div{
     padding-top: 20px;
     font-size: 45px;
     color: #8b7dbe;
+    display: inline-block;
 }
+
+.material-icons{
+    position: absolute;
+    right: 96px;
+    top: 83px;
+    font-size: 50px;
+    color: #e4d4fa;
+    cursor: pointer;
+}
+
+.material-icons:hover{
+    color: #8b7dbe;
+}
+
+
+
 
 .introduce .inner .content{
     border-top: 1px solid #c8c8c8;
@@ -126,10 +143,17 @@ button:hover{
             <div class="title">
                 레시피
             </div>
-            <table align="center">
+            <% if(loginUser != null){ %>
+            	<input id="userNo" type="hidden" value="<%= loginUser.getUserNo()%>">
+                <div class="material-icons like" onclick="selectLikeCount();">
+                    thumb_up
+                </div>
+            <% }%>
+            <table class="infomation" align="center">
                 <tr>
                     <td width="200"><%= cBoard.getUserNo() %></td>
                     <td width="400"><%= cBoard.getCreateDate() %></td>
+                    <td width="100">추천수 : <%= cBoard.getScore()%></td>
                     <% if(cBoard.getCookCategory() == 1){ %>
                     	<td width="100">일반게시판</td>
                     <% }else{ %>
@@ -173,6 +197,48 @@ button:hover{
                 location.href = "<%= contextPath %>/delete.co?bno=<%= cBoard.getcBoardNo()%>";
             }
     	}
+				
+	    		$(function(){
+	    			
+	    				likeStatus();
+	    			
+	    		})
+			
+        
+	        function selectLikeCount(){
+	            $.ajax({
+	                url : "increaseLike.il",
+	                data:{bno:<%= cBoard.getcBoardNo() %>,
+	                	  userNo : $("#userNo").val()},
+	                success:function(result){
+	                	$(".inner .infomation tr td").eq(2).text("추천수 : " + result.score); 
+						$(".like").css("color","#8b7dbe");
+						likeStatus();
+	                },
+	                error:function(){
+	                	console.log("통신 실패");
+	                },
+	            })
+	        }
+	        
+	        function likeStatus(){
+	        	$.ajax({
+	        		url:"like.li",
+	        		data:{
+	        			userNo : $("#userNo").val(),
+	        			bno : <%= cBoard.getcBoardNo() %>,
+	        		},
+	        		success : function(result){
+	        			if(result > 0){
+	        				$(".like").css("color", "#8b7dbe");
+	        			}else{
+	        				$(".like").css("color", "#e4d4fa");
+	        				
+	        			}
+	        		},
+	        	})
+	        };
+       
     </script>
 </body>
 </html>

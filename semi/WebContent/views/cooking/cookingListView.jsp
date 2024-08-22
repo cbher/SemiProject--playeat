@@ -6,7 +6,7 @@
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<CookingBoard> list = (ArrayList<CookingBoard>)request.getAttribute("list");
-	// 글번호, 글 제목, 글 내용, 대표이미지 (파일 경로 + 수정명)
+	// 글번호, 글 제목, 글 내용, 대표이미지 (파일 경로 + 수정명), 추천수
 	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -281,24 +281,25 @@
 	                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
 	                            <div class="title"><b style="font-size: 18px;"><%= list.get(i).getcBoardTitle() %></b></div>
 	                            <div class="count">조회수 : <%= list.get(i).getCount() %></div>
+	                            <div class="score" style="color:#8d7bde">추천수 : <%= list.get(i).getScore() %></div>
 	                        </a>
 	                    </li>
 	                <% } %>
                 </ul>
                 <div class="paging-area" align="center">
                 	<% if(currentPage != 1){ %>
-            			<button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= currentPage - 1 %>'">&lt;</button>
+            			<button onclick="location.href='<%= contextPath %>/clist.co?cpage=<%= currentPage - 1 %>'">&lt;</button>
             		<%} %>
             		<% for(int p = startPage; p<=endPage;p++){ %>
             			<% if(p == currentPage){ %>
             				<button disabled><%= p %></button>
             			<% } else{ %>
-            				<button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= p %>'"><%= p %></button>
+            				<button onclick="location.href='<%= contextPath %>/clist.co?cpage=<%= p %>'"><%= p %></button>
             		<% } %>
 				<% } %>
             
             <% if(currentPage != maxPage) {%>
-            	<button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= currentPage + 1 %>'">&gt;</button>
+            	<button onclick="location.href='<%= contextPath %>/clist.co?cpage=<%= currentPage + 1 %>'">&gt;</button>
         	<% } %>
                 </div>
             </div>

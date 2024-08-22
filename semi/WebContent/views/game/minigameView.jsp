@@ -14,15 +14,28 @@
 		height: 800px;
 		margin: auto;
 	}
+	.buttons{
+		position: absolute;
+		top: 1200px;
+		
+		left: 45%;
+	}
 </style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-
-	<div class="outer">
+	
+	<div class="outer">	
 
 	</div>
 
-	<%@ include file="../common/footer.jsp" %>
+	<div class="buttons">
+		<button>사다리타기</button>
+		<button>랜덤뽑기</button>
+		<button>제비뽑기</button>
+		<button>룰렛돌리기</button>
+
+	</div>
+
 </body>	
 </html>

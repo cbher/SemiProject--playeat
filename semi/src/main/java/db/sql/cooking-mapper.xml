@@ -11,6 +11,7 @@
 		             , C_TITLE
 		             , COUNT
 		             , FILE_PATH || CHANGE_NAME "TITLEIMG"
+		             , C_STAR
 		          FROM COOK_BOARD C
 		          JOIN ATTECHMENT A ON (C.C_NO = A.C_NO)
 		         WHERE C.STATUS = 'Y'
@@ -84,6 +85,7 @@
 		     , C_DATE
 		     , USER_ID
 		     , C_CATEGORY
+		     , C_STAR
 		  FROM COOK_BOARD C
 		  JOIN MEMBER USING (USER_NO)
 		 WHERE C.STATUS = 'Y'
@@ -111,5 +113,42 @@
 		   SET STATUS = 'N'
 		 WHERE C_NO = ?
 	</entry>
-	
+	<entry key="increaseLike">
+		UPDATE COOK_BOARD
+		   SET C_STAR = C_STAR + 1
+		 WHERE C_NO = ?
+	</entry>
+	<entry key="insertLikeList">
+		INSERT
+		  INTO	LIKE_LIST
+		  (
+		    LIKE_NO
+		  , USER_NO
+		  , C_NO 
+		  )
+		  VALUES
+		  (
+		    LIKE_LIST_SEQ.NEXTVAL
+		  , ?
+		  , ?
+		  )
+	</entry>
+	<entry key="selectLikeList">
+		SELECT
+		       COUNT(*) "COUNT"
+		  FROM LIKE_LIST
+		 WHERE USER_NO = ?
+		   AND C_NO = ?
+	</entry>
+	<entry key="decreaseLike">
+		UPDATE COOK_BOARD
+		   SET C_STAR = C_STAR - 1
+		 WHERE C_NO = ?
+	</entry>
+	<entry key="deleteLikeList">
+		DELETE
+		  FROM LIKE_LIST
+		 WHERE USER_NO = ?
+		   AND C_NO = ?
+	</entry>
 </properties>
