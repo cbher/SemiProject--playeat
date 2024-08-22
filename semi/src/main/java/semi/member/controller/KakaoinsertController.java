@@ -1,29 +1,26 @@
 package semi.member.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import semi.member.model.service.MemberService;
 import semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginComplete
+ * Servlet implementation class KakaoinsertController
  */
-@WebServlet("/LoginComplete.me")
-public class LoginComplete extends HttpServlet {
+@WebServlet("/kakaoInsert.me")
+public class KakaoinsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginComplete() {
+    public KakaoinsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +29,30 @@ public class LoginComplete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		
-		String userId = request.getParameter("userName");
-		String userPwd = request.getParameter("userPassword");
+		String memId = request.getParameter("userId");
+		String memPwd = null;
+		String memName = request.getParameter("userName");
+		String nickname = request.getParameter("nickname");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");;
 		
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
+		Member m = new Member(memId, memPwd, memName, nickname, phone, email);
 		
-		if(loginUser == null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "아이디나 비밀번호를 확인해주세요.");
-			response.sendRedirect(request.getContextPath()+"/login.me");
+		int result = new MemberService().insertKakaoMember(m);
+		
+		if(result > 0) {
+			Member loginUser = new MemberService().kakaoLoginMember(memId);
 			
-		}else {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect(request.getContextPath());
+			if(loginUser == null) {
+				request.getSession().setAttribute("alertMsg", "카카오 로그인 실패");
+				response.sendRedirect(request.getContextPath());
+				
+			} else {
+				request.getSession().setAttribute("loginUser", loginUser);
+				response.sendRedirect(request.getContextPath());
+			}
 		}
 	}
 

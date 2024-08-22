@@ -327,8 +327,7 @@ header .menubar::before{
                     <li>
                         <a href="">놀거리</a>
                         <ul class="hide-menu">
-                            <li><a href="">테마별</a></li>
-                            <li><a href="">지역별</a></li>
+                            <li><a href="<%= contextPath %>/searchMain.sc">놀거리 찾기</a></li>
                             <li><a href="">원데이클래스</a></li>
                         </ul>   
                     </li>
@@ -337,15 +336,13 @@ header .menubar::before{
                         <ul class="hide-menu">
                             <li><a href="clist.co">레시피 찾기</a></li>
                             <li><a href="cookingEnrollForm.co">레시피 업로드</a></li>
-                            <li><a href="">이번달 명예의 전당</a></li>
+                            <li><a href="<%= contextPath %>/ranking.rk">이번달 명예의 전당</a></li>
                         </ul>  
                     </li>
                     <li>
-                        <a href="">맛집찾기</a>
+                        <a href="">맛집</a>
                         <ul class="hide-menu">
-                            <li><a href="">맛집검색</a></li>
-                            <li><a href="">지역별 맛집</a></li>
-                            <li><a href="">가격별 맛집</a></li>
+                            <li><a href="<%= contextPath %>/searchMain.sc">맛집찾기</a></li>
                             <li><a href="">랜덤 메뉴 추천</a></li>
     
                         </ul>   

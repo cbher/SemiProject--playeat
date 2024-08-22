@@ -1,8 +1,6 @@
 package semi.member.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +12,16 @@ import semi.member.model.service.MemberService;
 import semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginComplete
+ * Servlet implementation class KakaoLoginComplete
  */
-@WebServlet("/LoginComplete.me")
-public class LoginComplete extends HttpServlet {
+@WebServlet("/kakaoComplete.me")
+public class KakaoLoginComplete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginComplete() {
+    public KakaoLoginComplete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +30,6 @@ public class LoginComplete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String userId = request.getParameter("userName");
 		String userPwd = request.getParameter("userPassword");
 		

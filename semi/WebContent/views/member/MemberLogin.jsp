@@ -5,11 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-    <link rel="stylesheet" href="/semi/resources/css/login.css">
+    <link rel="stylesheet" href="/semi/resources/css/login.css?after">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
@@ -86,7 +87,7 @@
         <div class="api">
           <div id="naverIdLogin"></div>
           </form>
-          카카오api 들어갈 자리
+          <a href="javascript:kakaoLogin()" id="kakao-login-btn">Login with Kakao</a>
         </div>
         
     </div>
@@ -114,8 +115,7 @@
             });
         });
 
-        // 한줄평 MODAL
-
+       
     document.addEventListener("DOMContentLoaded", function () {
         // elements
         var modalBtn = document.getElementById("modalBtn");
@@ -165,9 +165,85 @@
 
 
 
-    // 네이버API
+    // 카카오API
 
+	Kakao.init('d13c220127f473864f322330bb5e784e');
+	
+	console.log(Kakao.isInitialized());
+	
+	function kakaoLogin() {
+        Kakao.Auth.login({
+            success: function (response) {
+                Kakao.API.request({
+                    url: '/v2/user/me',
+                    success: function (response) {
+						$.ajax({
+							url: 'idCheck.me',
+							data: {checkId: response.id},
+							success: function(result) {
+								if(result == "NNNNN") {
+									// 카카오로그인
+									loginKakaoUser(response.id);
+								} else {
+									// 카카오 회원가입
+									insertKakaoUser(response.id, response.kakao_account.email, response.kakao_account.name);
+								}
+							},
+							error: function() {
+								console.log("카카오 로그인/회원가입용 ajax 통신 실패");
+							}
+						});
 
+                    },
+                    fail: function (error) {
+                        alert(JSON.stringify(error));
+                    },
+                })
+            },
+            fail: function (error) {
+                alert(JSON.stringify(error));
+            },
+        })
+    }
+
+	function loginKakaoUser(id) {
+		$.ajax({
+			url: "kakaoLogin.me",
+			type: "post",
+			data: {userId: id},
+			success: function() {
+				location.href="<%= contextPath %>";
+			},
+			error: function() {
+				console.log("kakao user login ajax 실패");
+			}
+		});
+	}
+
+	function insertKakaoUser(id, email, name, nickname) {
+	    $.ajax({
+	        url: "kakaoInsert.me",
+	        type: "post",
+	        data: {
+	            userId: id,
+	            email: email,
+	            userName: name,
+	            nickname: nickname
+	        },
+	        success: function() {
+	            if (nickname == null || nickname === "") {
+	                alert(name + "님, 회원가입이 완료되었습니다.");
+	            } else {
+	                alert(nickname + "님, 회원가입이 완료되었습니다.");
+	            }
+	            // Redirect to the context path after success
+	            location.href = "<%= contextPath %>/LoginComplete.me";
+	        },
+	        error: function() {
+	            console.error("Kakao user insert AJAX call failed");
+	        }
+	    });
+	}
 
     </script>
 

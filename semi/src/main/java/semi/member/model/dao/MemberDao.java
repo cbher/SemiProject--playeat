@@ -149,4 +149,73 @@ private Properties prop = new Properties();
 		return m;
 	}
 
+	public Member kakaoLoginMember(Connection conn, String userId) {
+Member m = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("kakaoLoginMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("user_no"),
+					       rset.getString("user_id"),
+					       rset.getString("user_pwd"),
+					       rset.getString("user_name"),
+					       rset.getString("nickname"),
+					       rset.getString("phone"),
+					       rset.getString("email"),
+					       rset.getDate("enrolle_date"),
+					       rset.getString("status"),
+					       rset.getString("introduce"),
+					       rset.getInt("report_count"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+
+	public int insertKakaoMember(Connection conn, Member m) {
+int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPwd());
+			pstmt.setString(3, m.getUserName());
+			pstmt.setString(4, m.getNickName());
+			pstmt.setString(5, m.getPhone());
+			pstmt.setString(6, m.getEmail());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

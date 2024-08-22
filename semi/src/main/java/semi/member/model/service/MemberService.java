@@ -45,5 +45,31 @@ public class MemberService {
 		
 	}
 
+	public Member kakaoLoginMember(String userId) {
+Connection conn = getConnection();
+		
+		Member m = new MemberDao().kakaoLoginMember(conn, userId);
+		
+		close(conn);
+		
+		return m;
+	}
+
+	public int insertKakaoMember(Member m) {
+Connection conn = getConnection();
+		
+		int result = new MemberDao().insertKakaoMember(conn, m);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 
 }

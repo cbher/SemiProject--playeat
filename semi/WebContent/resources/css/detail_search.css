@@ -1,0 +1,498 @@
+@font-face { 
+    font-family: 'TTLaundryGothicB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body *{
+    font-family: 'TTLaundryGothicB';
+}
+
+a{
+    text-decoration: none;
+}
+body{
+    /* background-color: #f6f5f0; */
+    position: relative;
+}
+
+.inner{
+    width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+header{
+    width: 100%;
+    top: 0;
+    z-index: 9;
+    /* position: fixed; */
+    /* background-color: #f6f5f0 */
+}
+
+
+header > .inner{
+    height: 120px;
+}
+
+
+
+header .inner a{
+    color: #656565;
+}
+
+header .inner a img{
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    margin: auto;
+    background-size: cover;
+    overflow: hidden;
+}
+
+header .inner > .search{
+    position: absolute;
+    right: 0;
+    left: 0;
+    height: 100%;
+    width: 500px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    
+}
+
+header .inner .search input{
+    width: 400px;
+    height: 50px;
+    border-radius: 40px;
+    box-sizing: border-box;
+    border-color: #e4d4fa;
+    font-size: 17px;
+    position: absolute;
+    top: 30px; 
+    left: 45px;
+    padding: 20px;
+    padding-right: 50px;
+}
+
+header .inner .search button{
+    position: absolute;
+    
+    top: 33px;
+    right: 55px;
+    font-size: 43px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    color: #e4d4fa;
+}
+
+
+header .inner .search input:focus{
+    outline: none;
+}
+
+
+header .inner .login{
+    position: absolute;
+    right: 0;
+}
+header .inner .login ul{
+    display: flex;
+
+}
+header .inner .login ul li{
+    text-align: center;
+    list-style: none;
+    margin-right: 15px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #656565;
+    position: relative;
+}
+
+header .inner .login ul li::before{
+    content: "";
+    width: 1px;
+    height: 10px;
+    background-color: #656565;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -7px;
+    margin: auto;
+}
+
+header .inner .login ul li:first-child:before{display: none;}
+
+.badge {
+    position:absolute;
+    top: 0;
+    left: 70%;
+    width: 180px;
+    height: 520px;
+    margin: 5% 0 0 320px;
+    background-color:#f6f5f0;
+    border: 2px solid #8B7DBE;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (max-width:870px) {
+    .badge {width:15%; left: auto; right:0; margin-left: 0;}
+    div.info {width:80%; margin: 100px 0;}
+}
+
+.badge .text{
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 1px solid #8B7DBE;
+    color: #8B7DBE;
+    background-color: #e4d4fa;
+    border-radius: 10px 10px 0px 0;
+    width: 100%;
+    height: 30px;
+    line-height: 1.5;
+}
+
+.badge a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #8B7DBE;
+    border-radius: 5px;
+    margin: auto;
+    width: 140px;
+    height: 130px;
+}
+
+.badge img{
+    width: 100%;
+    height: 100%;
+}
+
+.badge .place .badge-title{
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    border-radius: 5px;
+    margin: auto;
+    width: 140px;
+    height: 130px;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.badge .place .badge-title h2{
+    text-align: center;
+    line-height: 5;
+    font-size: 20px;
+    display: inline;
+}
+
+.place:hover .badge-title {
+    opacity: 1;
+  }
+
+.main-content{
+    display: flex;
+}
+
+.search-area{
+    display: block;
+    width:800px;
+    height: auto;
+    margin: 80px auto;
+    margin-bottom: 50px;
+    margin-left: 100px;
+    border-radius: 10px;
+    background-color: #f6f5f0;
+}
+
+.search-area .map img{
+    margin-top: 50px;
+}
+
+.search-list{
+    width: 700px;
+    height: 200px;
+    margin: auto;
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    display: none;
+}
+
+.search-list table *{
+    /* border: 1px solid black; */
+}
+
+.search-list table{
+    margin: auto;
+    width: 90%;
+    height: 90%;
+}
+
+.search-list img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.search-list #search-title h2{
+    border: none;
+    font-size: 1.25rem;
+}
+
+/* 더보기 버튼 */
+.search-area .add-list{
+    cursor: pointer;
+    width: 300px;
+    height: 45px;
+    margin: auto;
+    margin-bottom: 30px;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid #8B7DBE;
+    background-color: #e4d4fa;
+    color: white;
+}
+
+.category{
+    display: flex;
+    flex-direction: column;
+    background-color: #f6f5f0;
+    width: 300px;
+    height: 800px;
+    margin: 80px 60px auto 70px;
+    border-radius: 10px;
+}
+
+.category hr{
+    width: 230px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-image: initial;
+    border-bottom: 1px solid #e4d4fa;
+}
+
+/* 테마별 */
+.category .subject{
+    display: flex;
+    flex-direction: column;
+}
+
+.category .subject .category-title{
+    font-size: 25px;
+    width: 100%;
+}
+
+.category .subject .category-title h4{
+    margin: 20px auto 20px 20px;
+}
+
+.category .subject-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.category .subject-list li{
+    width: 115px;
+    list-style: none;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+/* 원데이 클래스 */
+.category .oneday{
+    display: flex;
+    flex-direction: column;
+}
+
+.category .oneday .oneday-title{
+    font-size: 25px;
+    width: 100%;
+}
+
+.category .oneday .oneday-title h4{
+    margin: 20px auto 20px 20px;
+}
+
+.category .oneday-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.category .oneday-list li{
+    width: 115px;
+    list-style: none;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+/* 식당 카테고리 */
+.category .r-category{
+    display: flex;
+    flex-direction: column;
+}
+
+.category .r-category .r-category-title{
+    font-size: 25px;
+    width: 100%;
+}
+
+.category .r-category .r-category-title h4{
+    margin: 20px auto 20px 20px;
+}
+
+.category .r-category-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+.category .r-category-list li{
+    width: 115px;
+    list-style: none;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+
+
+/* 지역별 */
+.category .location{
+    display: flex;
+    flex-direction: column;
+}
+
+.category .location .location-title{
+    font-size: 25px;
+    width: 100%;
+}
+
+.category .location .location-title h4{
+    margin: 20px auto 20px 20px;
+}
+
+.category .location-list{
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    padding-right: 40%;
+}
+
+.category .location-list li{
+    width: 115px;
+    list-style: none;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.category .location-list li select{
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+#top-btn { 
+    display: none; 
+    position: fixed;
+    bottom: 40px;
+    right: 20%;
+    z-index: 999;
+    background-color: white;
+    border: 2px solid #dbdbdb;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.footer .inner{
+    display: block;
+    color: #8b7dbe;
+    height: 100px;
+    font-size: 15px;
+    padding: 20px 0 20px 0;
+    /* top: 1400px; */
+    /* background-color: #F6F5F0; */
+    width: 100%;
+    height: 80px;
+}   
+
+
+.footer .menu{
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+}
+
+.footer .menu li{
+    position: relative;
+}
+
+.footer .menu li::before{
+    content: "";
+    width: 3px;
+    height: 3px;
+    background-color: #555;
+    position: absolute; /*position의 값을 부여하면 block요소가 됨.*/
+    top: 0;
+    bottom: 0;
+    right: -1px;
+    margin: auto;
+}
+.footer .menu li:last-child::before{
+    display: none;
+}
+
+.footer .menu li a{
+    font-size: 12px;
+    padding: 5px 15px; 
+    display: block;
+}
+
+
+.footer .inner .info3{
+    list-style-type: none;
+    padding: 0;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer .info3 span{
+    margin-right: 20px;
+    font-size: 12px;
+}
+
+.footer .info3 span:last-child{
+    margin-right: 0;
+}
+
+.footer .inner .info3 .copyright{
+    display: flex;
+    align-items: center;
+}
