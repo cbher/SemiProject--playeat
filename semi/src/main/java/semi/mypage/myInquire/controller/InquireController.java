@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import semi.member.model.vo.Member;
 import semi.mypage.myInquire.model.service.InquireService;
 import semi.mypage.myInquire.model.vo.Inquire;
 
@@ -31,26 +33,32 @@ public class InquireController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 HttpSession session = request.getSession();  //사용자 정보를 가져옴
+	        Member loginUser = (Member) session.getAttribute("loginUser");
+
+	        if (loginUser == null) { // 로그인이 되어 있지 않은 경우
+	           
+	            response.sendRedirect("views/member/MemberLogin.jsp");
+	            return; // 이후 코드를 실행하지 않음
+	        }
+
+	        // 로그인이 되어 있는 경우
+	        
+	        else {
+	        	
+	        
+		        int userNo = loginUser.getUserNo(); // 로그인된 사용자의 userNo를 가져옴
+		        
 		
-		int userNo = 5; //일단 임시로 로그인했다고 넣은 값
-		
-		if(userNo != 0) { //로그인 되있을 경우 
-			//MypageService r = new MypageService();
-			//ArrayList<Review> List = r.selectList(userNo);
-			//보내고,
         
-			InquireService i = new InquireService();
-			ArrayList<Inquire> list= i.inquireList(userNo);
+		        ArrayList<Inquire> list= new InquireService().inquireList(userNo);
 			
 			
-        request.setAttribute("inquireList", list);
-        request.getRequestDispatcher("./views/mypage/inquire.jsp").forward(request, response);
-		}else { //로그인이 안된 경우. 로그인 페이지로 이동시켜야함
-			   //나중에 추가
-			
-		}
+		        request.setAttribute("inquireList", list);
+		        request.getRequestDispatcher("./views/mypage/inquire.jsp").forward(request, response);
+		
 	
-	
+	        }
 	}
 
 	/**

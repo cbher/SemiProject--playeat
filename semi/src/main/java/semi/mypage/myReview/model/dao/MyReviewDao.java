@@ -31,7 +31,7 @@ public class MyReviewDao {
 	
 	public ArrayList<Review> selectList(Connection conn, int userNo){
 		
-		ArrayList<Review> r = new ArrayList<Review>();
+		ArrayList<Review> list = new ArrayList<Review>();
 		PreparedStatement pstmt=null;
 		ResultSet rset = null;
 		String sql= prop.getProperty("selectList");
@@ -44,7 +44,7 @@ public class MyReviewDao {
 			
 		
 				while(rset.next()) {
-					r.add(new Review(rset.getInt("review_no"),
+					list.add(new Review(rset.getInt("review_no"),
 							           rset.getString("r_title"),
 							           rset.getString("r_content"),
 									   rset.getDate("r_date"),
@@ -56,7 +56,7 @@ public class MyReviewDao {
 			close(rset);
 			close(pstmt);
 		}
-		return r;
+		return list;
 		
 	 
 	

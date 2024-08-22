@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import semi.member.model.vo.Member;
 import semi.mypage.myReview.model.service.MyReviewService;
 import semi.mypage.myReview.model.vo.Review;
 
@@ -32,22 +34,28 @@ public class InformationEditController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 int userNo = 1; //일단 임시로 로그인했다고 넣은 값
-			
-			if(userNo != 0) { //로그인 되있을 경우 
-				//MypageService r = new MypageService();
-				//ArrayList<Review> List = r.selectList(userNo);
-				//보내고,
+		
+		 HttpSession session = request.getSession();  //사용자 정보를 가져옴
+	        Member loginUser = (Member) session.getAttribute("loginUser");
+
+	        if (loginUser == null) { // 로그인이 되어 있지 않은 경우
+	           
+	            response.sendRedirect("views/member/MemberLogin.jsp");
+	            return; // 이후 코드를 실행하지 않음
+	        }
+
+	        // 로그인이 되어 있는 경우
 	        
+	        else {
+	        	
+	        
+		        int userNo = loginUser.getUserNo(); // 로그인된 사용자의 userNo를 가져옴
+		        
+    
 	        //request.setAttribute("reviewList", List);
 	        request.getRequestDispatcher("./views/information/information.jsp").forward(request, response);
-			}else { //로그인이 안된 경우. 로그인 페이지로 이동시켜야함
-				   //나중에 추가
-				
-			}
 		
-		
-		
+	        	}
 	}
 
 	/**

@@ -75,13 +75,13 @@
             height: 80px;
         }
 
-        header .inner .login ul {
+        header .inner .logout ul {
             display: flex;
             gap: 15px;
             list-style: none;
         }
 
-        header .inner .login ul li {
+        header .inner .logout ul li {
             font-size: 11px;
             font-weight: 700;
         }
@@ -250,39 +250,37 @@
 </head>
 
 <body>
-    
-	
-    	
+   	
     	<!-- 로그인 화면으로 이동시켜야 함 -->
      <%  if (loginUser == null) { //로그인이 안되있을 경우 
   		    
-  		    response.sendRedirect("/login.me");
-    	
-    	
+    	 	//alert("로그인을 해야 사용 가능");
+  		    response.sendRedirect("/login.me"); 	
      }%>
     	
-   
-    
   
     <header>
         <div class="inner">
             <a href="" class="logo">
-                <img src="./resourse/play_eat-removebg-preview.png" alt="header_logo">
+                <img src="로고 이미지 위치" alt="header_logo">
             </a>
             <div class="profile">
-                <a href="<%= contextPath%>/EditProfile.bo">
-                    프로필 사진이 위치할 예정, 클릭 시 프로필 수정 란으로 이동
+                <a href="<%= contextPath%>/editProfile.bo">
+                   
+                   <img src="" alt="프로필사진">
+                	
+                	<img src="" alt="프로필사진">
+                	
                 </a>
             </div>
-            <div class="login">
-                <ul>
-                    <%if(loginUser!=null){%>
-                    <li><a href="">로그아웃</a></li>
-                    <%}else{%>
-                    
-                    <li><a href="">로그인</a></li>
-                    <li><a href="">회원가입</a></li>
-                    <%}%>
+            <div class="logout">
+                <ul>  
+                	<%if(loginUser.getNickName()!=null){ %>
+                	<li><a><%= loginUser.getNickName() %> 님, 반갑습니다!</a></li>
+                    <% }else{ %>
+                    <li><a><%= loginUser.getUserName() %>님, 반갑습니다!</a></li>
+                    <%} %>
+                    <li><a href="<%=contextPath%>/logout.me">로그아웃</a></li>   
                 </ul>
             </div>
         </div>
@@ -300,15 +298,7 @@
             </div>
         </section>
     </header>
-
-
-    
-   
-   
 </body>
-
-
-
 
 
 </html>

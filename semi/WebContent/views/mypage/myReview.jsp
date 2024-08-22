@@ -4,12 +4,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-    
+<%
+       
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+
+	// 서비스 요청 전 : member.jsp 로딩시 : null
+	// 서비스 성공 후 : member.jsp 로딩시 : alert로 띄워줄 메시지 문구
+		
+%>     
     
  
 <!DOCTYPE html>
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -153,22 +158,17 @@
 </head>
 
 <body>
-    
    
         <%@ include file="../common/mypageMenubar.jsp" %>
+         <%@ include file="../common/footer.jsp" %>
         
-   
-    	
-    	<!-- 로그인 화면으로 이동시켜야 함 -->
-    
-
-
     <div id="wrap">
         <div id="content">
             <div id="content_title">
                 <a href="<%=contextPath%>">나의 리뷰</a>
                 <a href="<%=contextPath %>/onecomment.1">한줄평</a>
                 <a href="<%=contextPath%>/myinquire.1">내 문의사항</a>
+               
             </div>
             <div id="sort">
                 <button id="sort_button">
@@ -181,7 +181,12 @@
                     <button>댓글 순</button>
                 </div>
             </div>
-                     
+             
+             <% if(list.isEmpty()){ %>
+             		
+             		비었다
+             	
+              <%} else{%>
             <% for(Review r : list){ %>
             <div class="rvbox">
                 <div class="rvbox_1">
@@ -199,10 +204,14 @@
                 <div class="rvbox_5">
                      <%= r.getScore() %> 점수
                 </div>
+                <div>
+                	 <a href="<%=contextPath%>/ReviewDelete.bo">삭제</a>
+                </div>
                 
             </div>
           	<% }%>
-            
+          	
+           <%} %>
             
             
 
@@ -217,10 +226,6 @@
 </body>
 
 
-<script>
- 
-
-</script>
 
 
 

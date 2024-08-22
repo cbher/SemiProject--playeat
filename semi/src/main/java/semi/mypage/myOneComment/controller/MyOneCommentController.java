@@ -9,20 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.mypage.myInquire.model.service.InquireService;
-import semi.mypage.myInquire.model.vo.Inquire;
 
 /**
  * Servlet implementation class myOneCommentController
  */
 @WebServlet("/onecomment.1")
-public class myOneCommentController extends HttpServlet {
+public class MyOneCommentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public myOneCommentController() {
+    public MyOneCommentController() {
         super();
         // TODO Auto-generated constructor stub
     }

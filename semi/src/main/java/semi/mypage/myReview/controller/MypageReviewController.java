@@ -42,21 +42,26 @@ public class MypageReviewController extends HttpServlet {
 
         if (loginUser == null) { // 로그인이 되어 있지 않은 경우
            
-            response.sendRedirect("views/member/login.jsp");
+            response.sendRedirect("views/member/MemberLogin.jsp");
             return; // 이후 코드를 실행하지 않음
         }
 
         // 로그인이 되어 있는 경우
-        int userNo = loginUser.getUserNo(); // 로그인된 사용자의 userNo를 가져옴
-
-        // 리뷰 리스트를 가져옴
-        MyReviewService reviewService = new MyReviewService();
-        ArrayList<Review> reviewList = reviewService.selectList(userNo);
-
-       
-        request.setAttribute("reviewList", reviewList);  // 리뷰 리스트를 요청에 설정하고 My Review 페이지로 포워드
-        RequestDispatcher view = request.getRequestDispatcher("./views/mypage/myReview.jsp");
-        view.forward(request, response);
+        
+        else {
+        	
+        
+	        int userNo = loginUser.getUserNo(); // 로그인된 사용자의 userNo를 가져옴
+	        
+	        
+	        
+	        // 리뷰 리스트를 가져옴
+	        ArrayList<Review> list = new MyReviewService().selectList(userNo);
+	        
+	 
+	        request.setAttribute("list", list);  // 리뷰 리스트를 요청에 설정하고 My Review 페이지로 포워드
+	        request.getRequestDispatcher("./views/mypage/myReview.jsp").forward(request, response);
+        }
     }
 
 	/**

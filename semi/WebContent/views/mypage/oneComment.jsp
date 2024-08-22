@@ -1,5 +1,15 @@
+<%@page import="semi.mypage.myOneComment.model.vo.OneComment"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+ <%
+	ArrayList<OneComment> list = (ArrayList<OneComment>)request.getAttribute("");
+
+%>
+
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,61 +44,7 @@
         }
 
         /* --------------------------헤더 부분 ----------*/
-        header {
-            width: 100%;
-            background-color: #f6f5f0;
-            padding-bottom: 20px;
-        }
-
-        header>.inner {
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        header .inner a img {
-            height: 80px;
-        }
-
-        header .inner .login ul {
-            display: flex;
-            gap: 15px;
-            list-style: none;
-        }
-
-        header .inner .login ul li {
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        /* Menubar */
-        .menubar {
-            background-color: #f6f5f0;
-            padding: 10px 0;
-        }
-
-        .menubar .menu .inner {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .menubar .menu .inner li {
-            list-style: none;
-            position: relative;
-        }
-
-        .menubar .menu .inner li a {
-            font-size: 18px;
-            font-weight: 700;
-            color: #8b7dbe;
-            padding: 15px 20px;
-            display: block;
-        }
-
-        .menubar .menu .inner li a:hover {
-            color: purple;
-        }
+       
 
         /* Content */
         #wrap {
@@ -181,76 +137,22 @@
             width: 20px;
             height: 20px;
         }
-
-        footer {
-            background-color: #f6f5f0;
-            padding: 20px 0;
-            text-align: center;
-            border-top: 1px solid #ddd;
-        }
-
-        footer .inner {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        footer .menu {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        footer .menu li a {
-            font-size: 12px;
-        }
-
-        footer .info span {
-            font-size: 12px;
-            margin: 0 10px;
-        }
+ 
     </style>	
 </style>
 </head>
 <body>
-<header>
-        <div class="inner">
-            <a href="" class="logo">
-                <img src="./resourse/play_eat-removebg-preview.png" alt="header_logo">
-            </a>
-            <div class="profile">
-                <div id="picture">
-                    프로필 사진이 위치할 예정
-                </div>
-            </div>
-            <div class="login">
-                <ul>
-                    <li><a href="">로그인</a></li>
-                    <li><a href="">회원가입</a></li>
-                </ul>
-            </div>
-        </div>
-        <section class="menubar">
-            <div class="menu">
-                <ul class="inner">
-                    <li><a href="">마이페이지</a></li>
-                    <li><a href="">찜 리스트</a></li>
-                    <li><a href="">캘린더</a></li>
-                    <li><a href="">프로필 수정</a></li>
-                    <li><a href="">회원정보 수정</a></li>
-                </ul>
-            </div>
-        </section>
-    </header>
+
+ 		<%@ include file="../common/mypageMenubar.jsp" %>
+         <%@ include file="../common/footer.jsp" %>
+
 
     <div id="wrap">
         <div id="content">
             <div id="content_title">
-                <a href="#">나의 리뷰</a>
-                <a href="#">한줄평</a>
-                <a href="#">내 문의내역</a>
+                <a href="<%=contextPath%>">나의 리뷰</a>
+                <a href="<%=contextPath %>/onecomment.1">한줄평</a>
+                <a href="<%=contextPath%>/myinquire.1">내 문의사항</a>
             </div>
             <div id="sort">
                 <button id="sort_button">
@@ -263,79 +165,34 @@
                     <button>댓글 순</button>
                 </div>
             </div>
-            <div class="rvbox">
-                <div class="rvbox_1">
-                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
-                </div>
-                <div class="rvbox_2">
-                    <div>가게명</div>
-                    <div>좋아요 <span>15</span></div>
-                </div>
-                <div class="rvbox_3">
-                    날짜 년 월 일
-                </div>
-            </div>
-            <!-- 여러 리뷰 박스들이 추가될 수 있음 -->
-            <div class="rvbox">
-                <div class="rvbox_1">
-                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
-                </div>
-                <div class="rvbox_2">
-                    <div>가게명</div>
-                    <div>좋아요 <span>15</span></div>
-                </div>
-                <div class="rvbox_3">
-                    날짜 년 월 일
-                </div>
-            </div>
-            <div class="rvbox">
-                <div class="rvbox_1">
-                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
-                </div>
-                <div class="rvbox_2">
-                    <div>가게명</div>
-                    <div>좋아요 <span>15</span></div>
-                </div>
-                <div class="rvbox_3">
-                    날짜 년 월 일
-                </div>
-            </div>
-            <div class="rvbox">
-                <div class="rvbox_1">
-                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
-                </div>
-                <div class="rvbox_2">
-                    <div>가게명</div>
-                    <div>좋아요 <span>15</span></div>
-                </div>
-                <div class="rvbox_3">
-                    날짜 년 월 일
-                </div>
-            </div>
+            
+            
+            <% for(OneComment o  : list){ %>
+	           
+	            <div class="rvbox">
+	                <div class="rvbox_1">
+	                    <a href=""><img src="/마이페이지/resource/프로젝트 로고.png" alt=""></a>
+	                </div>
+	                <div class="rvbox_2">
+	                    <div><%=o.getComNo() %>가게명 들어가야함</div>
+	                    <div><%=o.getComContext()%></div>
+	                    <div>아이콘(좋아요) <span><%=o.getScore() %></span></div>
+	                    <div><%=o.getCreateDate() %></div>
+	                  	<div><a href="">수정</a><span>/</span><a href="">삭제</a></div>
+	                </div>
+	                <div class="rvbox_3">
+	                    날짜 년 월 일
+	                </div>
+	            </div>
+            <% }%>
+           
 
             <div id="pgnum">
                 1 2 3 4 ... 30
             </div>
         </div>
 
-        <footer>
-            <div class="inner">
-                <ul class="menu">
-                    <li><a href="">개인정보처리방침</a></li>
-                    <li><a href="">이용약관</a></li>
-                    <li><a href="">위치정보이용약관</a></li>
-                    <li><a href="">원클래스약관</a></li>
-                </ul>
-                <div class="info">
-                    <span>kh H반 4조</span>
-                    <span>semi4jyo@gmail.com</span>
-                    <span>개인정보 책임자 4조</span>
-                </div>
-                <p class="copyright">
-                    &copy; <span id="this-year"></span> kh정보교육원 H반 4조 세미프로젝트
-                </p>
-            </div>
-        </footer>
+       
     </div>
 
 

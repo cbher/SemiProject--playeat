@@ -1,5 +1,6 @@
 package semi.mypage.myReview.model.service;
 
+import java.io.Console;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -13,11 +14,12 @@ public class MyReviewService {
 	public ArrayList<Review> selectList(int userNo) {
 		Connection conn= getConnection();
 		
-		ArrayList<Review> r = new MyReviewDao().selectList(conn, userNo);
+		ArrayList<Review> list = new MyReviewDao().selectList(conn, userNo);
+		
 		
 		close(conn);
 		
-		return r;
+		return list;
 		
 
 		
