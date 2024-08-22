@@ -41,6 +41,7 @@ public class LoginComplete extends HttpServlet {
 		if(loginUser == null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("alertMsg", "로그인 실패");
+			response.sendRedirect(request.getContextPath()+"/login.me");
 			
 		}else {
 			HttpSession session = request.getSession();

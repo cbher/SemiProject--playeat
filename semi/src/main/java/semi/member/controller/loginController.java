@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.member.model.service.MemberService;
-import semi.member.model.vo.Member;
-
 /**
- * Servlet implementation class loginController
+ * Servlet implementation class LoginController
  */
 @WebServlet("/login.me")
-public class loginController extends HttpServlet {
+public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public loginController() {
+    public LoginController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,28 +28,8 @@ public class loginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
-		
-//		System.out.println(userId);
-//		System.out.println(userPwd);
-		
-		Member loginUser = new MemberService().loginMember(userId, userPwd); 
-	
-		if(loginUser == null) {
-			// 실패
-			request.setAttribute("errorMsg", "로그인에 실패했습니다");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorMsg.jsp");
-				view.forward(request, response);
-			
-		}else {
-			// 성공
-			request.getSession().setAttribute("loginUser", loginUser);
-			response.sendRedirect(request.getContextPath());
-		}
-		
-	
+		RequestDispatcher view = request.getRequestDispatcher("views/member/MemberLogin.jsp");
+		view.forward(request, response);
 	}
 
 	/**
