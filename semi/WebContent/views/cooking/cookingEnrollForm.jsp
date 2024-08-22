@@ -67,6 +67,11 @@
 	<%@ include file="../common/menubar.jsp" %>
 	<%@ include file="../common/badge.jsp" %>
 	
+	<% if(loginUser == null){ %>
+		<script>
+			alert("로그인 후 이용가능합니다.");
+		</script>
+	<% } %>
 	<div class="outer">
         <div class="inner">
             <br>

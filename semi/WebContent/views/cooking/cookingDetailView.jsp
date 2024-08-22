@@ -135,12 +135,12 @@ button:hover{
                     <% }else{ %>
                     	<td width="100">명예의 전당</td>
                     <% } %>	
-                    <% //if(loginUser != null){ %>
-	                    <% //if(loginUser.equals(cBoard.getUserNo())){ %>
+                    <% if(loginUser != null){ %>
+	                    <% if(loginUser.getUserId().equals(cBoard.getUserNo())){ %>
 		                    <td width="100"><button onclick="update();">수정</button></td>
 		                    <td width="100"><button onclick="deleteBoard();">삭제</button></td>
-		                <% //} %>
-		            <% //} %>
+		                <% } %>
+		            <% } %>
                 </tr>
             </table>
             <br>

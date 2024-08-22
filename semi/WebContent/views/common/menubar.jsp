@@ -120,12 +120,13 @@ header .inner .search button{
     position: absolute;
     
     top: 33px;
-    right: 55px;
+    right: 65px;
     font-size: 43px;
     border-radius: 20px;
     box-sizing: border-box;
     background-color: transparent;
     border: 0;
+    width: 50px;
     cursor: pointer;
     color: #e4d4fa;
 }
