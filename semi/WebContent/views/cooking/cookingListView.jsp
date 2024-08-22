@@ -167,7 +167,8 @@
     padding-left: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    margin:40px;
 }
 
 .post .inner .cooking li{
@@ -193,6 +194,7 @@
 }
 .post .inner .cooking li a .title{
     text-align: center;
+    marging-top:10px;
 }
 
 .post .inner .cooking li a .count{
@@ -203,6 +205,9 @@
 	margin-top:50px;
 }
 
+.footer .inner{
+	top:1000px;
+}
 </style>
 
 </head>
@@ -214,15 +219,9 @@
                 <div class="title">최신 게시글</div>
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/AdobeStock_600875580-1024x683.jpg" alt="">
-                            </a>
-                            <p>플레이잇1</p>
-                        </div>
                         <% for (int i = 0 ; i<list.size();i++){ %>
 	                         <div class="swiper-slide">
-	                            <a href="">
+	                            <a href="<%= contextPath %>/detail.co?bno=<%= list.get(i).getcBoardNo()%>">
 	                                <img src="<%= list.get(i).getTitleImg() %>" alt="">
 	                            </a>
 	                            <p><%= list.get(i).getcBoardTitle() %></p>
