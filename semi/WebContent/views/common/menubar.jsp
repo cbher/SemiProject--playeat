@@ -349,15 +349,15 @@ header .menubar::before{
                         </ul>   
                     </li>
                     <li>
-                        <a href="clist.co?cpage=1">요리</a> 
+                        <a href="<%= contextPath %>/clist.co?cpage=1">요리</a> 
                         <ul class="hide-menu">
-                            <li><a href="clist.co?cpage=1">레시피 찾기</a></li>
-                            <li><a href="cookingEnrollForm.co">레시피 업로드</a></li>
+                            <li><a href="<%= contextPath %>/clist.co?cpage=1">레시피 찾기</a></li>
+                            <li><a href="<%= contextPath %>/cookingEnrollForm.co">레시피 업로드</a></li>
                             <li><a href="">이번달 명예의 전당</a></li>
                         </ul>  
                     </li>
                     <li>
-                        <a href="">맛집찾기</a>
+                        <a href="<%= contextPath %>/restaurantMain.pl">맛집찾기</a>
                         <ul class="hide-menu">
                             <li><a href="">맛집검색</a></li>
                             <li><a href="">지역별 맛집</a></li>
