@@ -7,19 +7,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import semi.cooking.model.service.CookingService;
+import semi.cooking.model.vo.CookingBoard;
 
 /**
- * Servlet implementation class CookDeleteController
+ * Servlet implementation class AjaxCookingLikeController
  */
-@WebServlet("/delete.co")
-public class CookDeleteController extends HttpServlet {
+@WebServlet("/increaseLike.il")
+public class AjaxCookingLikeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CookDeleteController() {
+    public AjaxCookingLikeController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,17 +31,25 @@ public class CookDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int cBoardNo = Integer.parseInt(request.getParameter("bno"));
-		int result = new CookingService().deleteCookBoard(cBoardNo);
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int likeCount = new CookingService().selectLikeList(cBoardNo, userNo);
 		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "게시물이 성공적으로 삭제되었습니다.");
+		if(likeCount == 0) {
+			
+			int result = new CookingService().increaseLike(cBoardNo);
+			int insertResult = new CookingService().insertLikeList(cBoardNo, userNo);
+			
+			
 		}else {
-			request.getSession().setAttribute("alertMsg", "게시물 삭제에 실패하였습니다.");			
+			
+			int result = new CookingService().decreaseLike(cBoardNo);
+			int deleteResult = new CookingService().deleteLikeList(cBoardNo, userNo);
 		}
-		response.sendRedirect(request.getContextPath() + "/clist.co?cpage=1");
 		
+		CookingBoard cBoard = new CookingService().selectCookBoard(cBoardNo); 
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(cBoard,response.getWriter());
 	}
 
 	/**

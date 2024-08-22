@@ -100,4 +100,62 @@ public class CookingService {
 		close(conn);
 		return result;
 	}
+	
+	public int increaseLike(int cBoardNo) {
+		Connection conn = getConnection();
+		int result = new CookingDao().increaseLike(conn, cBoardNo);
+		if(result > 0) {
+			commit(conn);
+			
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int insertLikeList(int bno, int userNo) {
+		Connection conn = getConnection();
+		int insertResult = new CookingDao().insertLikeList(conn, bno, userNo);
+		
+		if(insertResult > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return insertResult;
+	}
+	
+	public int selectLikeList(int bno, int userNo) {
+		Connection conn = getConnection();
+		int likeCount = new CookingDao().selectLikeList(conn, bno, userNo);
+		close(conn);
+		return likeCount;
+	}
+	
+	public int decreaseLike(int bno) {
+		Connection conn = getConnection();
+		int result = new CookingDao().decreaseLike(conn, bno);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
+	public int deleteLikeList(int bno, int userNo) {
+		Connection conn = getConnection();
+		int result = new CookingDao().deleteLikeList(conn, bno, userNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }

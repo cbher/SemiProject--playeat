@@ -48,7 +48,8 @@ public class CookingDao {
 				list.add(new CookingBoard(rset.getInt("c_no"),
 						                  rset.getString("c_title"),
 						                  rset.getInt("count"),
-						                  rset.getString("titleimg")));
+						                  rset.getString("titleimg"),
+						                  rset.getInt("c_star")));
 			}
 			
 		} catch (SQLException e) {
@@ -167,7 +168,8 @@ public class CookingDao {
 											 rset.getString("c_contents"),
 											 rset.getDate("c_date"),
 											 rset.getString("user_id"),
-											 rset.getInt("c_category"));
+											 rset.getInt("c_category"),
+											 rset.getInt("c_star"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -237,6 +239,106 @@ public class CookingDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cBoardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int increaseLike(Connection conn, int cBoardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseLike");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cBoardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertLikeList(Connection conn, int bno, int userNo) {
+		int insertResult = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertLikeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, bno);
+			
+			insertResult = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return insertResult;
+		
+	}
+	
+	public int selectLikeList(Connection conn, int bno, int userNo) {
+		int likeCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLikeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, bno);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				likeCount = rset.getInt("count");				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return likeCount;
+	}
+	
+	public int decreaseLike(Connection conn, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("decreaseLike");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteLikeList(Connection conn , int bno, int userNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteLikeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, bno);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

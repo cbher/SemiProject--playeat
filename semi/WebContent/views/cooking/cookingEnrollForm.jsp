@@ -67,6 +67,13 @@
 	<%@ include file="../common/menubar.jsp" %>
 	<%@ include file="../common/badge.jsp" %>
 	
+	<% if(loginUser == null){ %>
+		<script>
+			alert("로그인 후 이용가능합니다.");
+		</script>
+	<% } %>
+	
+	<% if(loginUser != null){ %>
 	<div class="outer">
         <div class="inner">
             <br>
@@ -191,5 +198,15 @@
             </form>
         </div>
     </div>
+    <% }else{ %>
+    	<div class="outer">
+    		<div class="inner" style="text-align:center">
+    			<br><br><br>
+    			 <h1 align="center" style="color: #8b7dbe;">요리게시판 작성하기</h1>
+    			 <br>
+	    		로그인 후 이용가능합니다.
+    		</div>
+    	</div>
+    <% } %>
 </body>
 </html>

@@ -35,18 +35,19 @@ public class CookingBoard {
 	
 
 	
-	public CookingBoard(int cBoardNo, String cBoardTitle, int count, String titleImg) {
+	public CookingBoard(int cBoardNo, String cBoardTitle, int count, String titleImg, int score) {
 		super();
 		this.cBoardNo = cBoardNo;
 		this.cBoardTitle = cBoardTitle;
 		this.count = count;
 		this.titleImg = titleImg;
+		this.score = score;
 	}
 	
 	
 
 	public CookingBoard(int cBoardNo, String cBoardTitle, String cBoardContent, Date createDate, String userNo,
-			int cookCategory) {
+			int cookCategory, int score) {
 		super();
 		this.cBoardNo = cBoardNo;
 		this.cBoardTitle = cBoardTitle;
@@ -54,6 +55,7 @@ public class CookingBoard {
 		this.createDate = createDate;
 		this.userNo = userNo;
 		this.cookCategory = cookCategory;
+		this.score = score;
 	}
 
 	public int getcBoardNo() {
