@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="./css/signUp_input.css">
+<link rel="stylesheet" href="/semi/resources/css/signUp_input.css">
 
 </head>
 <body>
@@ -16,11 +16,10 @@
         <br>
         <form id="enroll-form" action="<%= contextPath %>/insert.me" method="post">
         <div class="member">
-
             <div class="field">
                 <b>아이디</b>
                 <input type="text" id="userId" name="userId" maxlength="15" placeholder="5글자 ~ 15글자 (영문포함 특문제외)" required>
-                <input type="button" value="중복확인" class="btn" onclick="idCheck();">
+                <input type="button" value="중복확인" class="btn" id="idCheckBtn" onclick="idCheck();" disabled>
             </div>
             <div class="success-message hide">사용할 수 있는 아이디입니다</div>
             <div class="failure-message hide">아이디는 5~15글자이어야 합니다</div>
@@ -43,7 +42,7 @@
             <div class="field">
                 <b>닉네임<small>(선택)</small></b>
                 <input type="text" name="nickname" placeholder="선택입력">
-                <input type="button" value="중복확인" class="btn" onclick="nickNameCheck();">
+                <input type="button" value="중복확인" class="btn" id="nickNameCheckBtn" onclick="nickNameCheck();" disabled>
             </div>
 
             <div class="field tel-number">
@@ -71,6 +70,28 @@
     </div>
     
     <script>
+	    const $idInput = $("#enroll-form input[name=userId]");
+	    const $nickNameInput = $("#enroll-form input[name=nickname]");
+	    const $idCheckBtn = $("#idCheckBtn");
+	    const $nickNameCheckBtn = $("#nickNameCheckBtn");
+	
+	    // 아이디와 닉네임 입력 시 버튼 활성화/비활성화 처리
+	    $idInput.on("input", function () {
+	        if ($idInput.val().trim() !== "") {
+	            $idCheckBtn.removeAttr("disabled");
+	        } else {
+	            $idCheckBtn.attr("disabled", true);
+	        }
+	    });
+	
+	    $nickNameInput.on("input", function () {
+	        if ($nickNameInput.val().trim() !== "") {
+	            $nickNameCheckBtn.removeAttr("disabled");
+	        } else {
+	            $nickNameCheckBtn.attr("disabled", true);
+	        }
+	    });
+    
     	function idCheck(){
     		// 중복확인 버튼 클릭시 사용자가 입력한 아이디값을 넘겨서 조회요청(존재하는지 안하는지) => 응답데이터 돌려받기
     		// 1) 사용불가능일 경우 => alert로 메시지 출력, 다시 입력할 수 있도록 유도
@@ -141,6 +162,6 @@
     	
     	
     </script>
-<script src="./js/signUp_input.js"></script>
+<script src="/semi/resources/js/signUp_input.js"></script>
 </body>
 </html>

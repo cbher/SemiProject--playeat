@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 
-<link rel="stylesheet" href="./css/sign_up.css">
+<link rel="stylesheet" href="/semi/resources/css/sign_up.css">
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
