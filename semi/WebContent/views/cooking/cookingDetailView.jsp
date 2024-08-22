@@ -112,6 +112,10 @@ button:hover{
     background-color: #8b7dbe;
 }
 
+.back a{
+	color:#8b7dbe;
+}
+
 </style>
 </head>
 <body>
@@ -131,12 +135,12 @@ button:hover{
                     <% }else{ %>
                     	<td width="100">명예의 전당</td>
                     <% } %>	
-                    <% if(loginUser != null){ %>
-	                    <% if(loginUser.equals(cBoard.getUserNo())){ %>
-		                    <td width="100"><button>수정</button></td>
-		                    <td width="100"><button>삭제</button></td>
-		                <% } %>
-		            <% } %>
+                    <% //if(loginUser != null){ %>
+	                    <% //if(loginUser.equals(cBoard.getUserNo())){ %>
+		                    <td width="100"><button onclick="update();">수정</button></td>
+		                    <td width="100"><button onclick="deleteBoard();">삭제</button></td>
+		                <% //} %>
+		            <% //} %>
                 </tr>
             </table>
             <br>
@@ -151,8 +155,24 @@ button:hover{
                    <%= cBoard.getcBoardContent() %>
                 </textarea>
                 
+                <div class="back" align="center"><a  href="<%= contextPath %>/clist.co?cpage=1">목록으로</a></div>
             </div>
         </div>
     </div>
+    
+    <script>
+    	function update(){
+            if(confirm("게시물을 수정하시겠습니까?")){
+                location.href = "<%= contextPath %>/updateEnrollForm.co?bno=<%= cBoard.getcBoardNo()%>";
+            }
+    	}
+    	
+    	function deleteBoard(){
+            if(confirm("정말로 삭제하시겠습니까?")){
+
+                location.href = "<%= contextPath %>/delete.co?bno=<%= cBoard.getcBoardNo()%>";
+            }
+    	}
+    </script>
 </body>
 </html>

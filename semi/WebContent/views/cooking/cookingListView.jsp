@@ -1,10 +1,18 @@
+<%@page import="semi.common.PageInfo"%>
 <%@page import="semi.cooking.model.vo.CookingBoard"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<CookingBoard> list = (ArrayList<CookingBoard>)request.getAttribute("list");
-	// 글번호, 글 제목, 글 내용, 대표이미지
+	// 글번호, 글 제목, 글 내용, 대표이미지 (파일 경로 + 수정명)
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -129,28 +137,50 @@
 }
 
 .post .inner{
-
+	top:600px
 }
 
 .post h2{
-    position: absolute;
-    top: 600px;
     padding-left: 20px;
 }
+.post .inner .button{
+	position:absolute;
+	top:0;
+    right: 0;
+    background-color: #e4d4fa;
+    cursor: pointer;
+    border: 1px solid #8b7dbe;
+    width: 100px;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #333;
+    font-weight: 700;
+}
+
+.post .inner .button:hover{
+    background-color: #8b7dbe;
+}
+
+
 
 .post .inner .cooking{
-    position: absolute;
-    top: 650px;
     padding-left: 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    margin:40px;
 }
 
 .post .inner .cooking li{
     list-style: none;
     margin: 20px;
 }
+
+.post .inner .cooking li:hover {
+    transform: scale(1.1);
+    transition: all .4s;
+}
+
 
 .post .inner .cooking li a{
 	color: #333;
@@ -164,13 +194,20 @@
 }
 .post .inner .cooking li a .title{
     text-align: center;
+    marging-top:10px;
 }
 
 .post .inner .cooking li a .count{
     text-align: right;
 }
 
+.post .inner .paging-area{
+	margin-top:50px;
+}
 
+.footer .inner{
+	top:1000px;
+}
 </style>
 
 </head>
@@ -179,18 +216,12 @@
 	<%@ include file="../common/badge.jsp" %>
 	        <section class="main-slide">
             <div class="inner">
-                <div class="title">최신 음식</div>
+                <div class="title">최신 게시글</div>
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <a href="">
-                                <img src="./resourse/AdobeStock_600875580-1024x683.jpg" alt="">
-                            </a>
-                            <p>플레이잇1</p>
-                        </div>
                         <% for (int i = 0 ; i<list.size();i++){ %>
 	                         <div class="swiper-slide">
-	                            <a href="">
+	                            <a href="<%= contextPath %>/detail.co?bno=<%= list.get(i).getcBoardNo()%>">
 	                                <img src="<%= list.get(i).getTitleImg() %>" alt="">
 	                            </a>
 	                            <p><%= list.get(i).getcBoardTitle() %></p>
@@ -241,12 +272,12 @@
             <div class="inner">
                 <h2>요리게시판</h2>
                 <div>
-                	<button>작성하기</button>
+                	<button class="button" onclick="enrollForm()">작성하기</button>
                 </div>
                 <ul class="cooking">
                 	<% for(int i = 0; i < list.size(); i++){ %>
 	                    <li>
-	                        <a href="detail.co?bno=<%= list.get(i).getcBoardNo()%>">
+	                        <a href="<%= contextPath %>/detail.co?bno=<%= list.get(i).getcBoardNo()%>">
 	                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
 	                            <div class="title"><b style="font-size: 18px;"><%= list.get(i).getcBoardTitle() %></b></div>
 	                            <div class="count">조회수 : <%= list.get(i).getCount() %></div>
@@ -254,8 +285,30 @@
 	                    </li>
 	                <% } %>
                 </ul>
+                <div class="paging-area" align="center">
+                	<% if(currentPage != 1){ %>
+            			<button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= currentPage - 1 %>'">&lt;</button>
+            		<%} %>
+            		<% for(int p = startPage; p<=endPage;p++){ %>
+            			<% if(p == currentPage){ %>
+            				<button disabled><%= p %></button>
+            			<% } else{ %>
+            				<button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= p %>'"><%= p %></button>
+            		<% } %>
+				<% } %>
+            
+            <% if(currentPage != maxPage) {%>
+            	<button onclick="location.href='<%= contextPath %>/list.bo?cpage=<%= currentPage + 1 %>'">&gt;</button>
+        	<% } %>
+                </div>
             </div>
         </section>
+        <script>
+            function enrollForm(){
+                location.href = "<%= contextPath %>/cookingEnrollForm.co";
+            }
+        </script>
     </div>
+    <%@ include file="../common/footer.jsp" %>
 </body>
 </html>

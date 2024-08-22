@@ -23,6 +23,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    z-index: 8;
 }
 
 @media (max-width:870px) {
