@@ -1,4 +1,4 @@
-package semi.notice.controller;
+package semi.inquire.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.common.PageInfo;
-import semi.notice.model.service.NoticeService;
-import semi.notice.model.vo.Notice;
+import semi.inquire.model.service.InquireService;
+import semi.inquire.model.vo.Inquire;
+
 
 /**
- * Servlet implementation class NoticeListView
+ * Servlet implementation class EnrollIquirePage
  */
-@WebServlet("/noticeList.no")
-public class NoticeListView extends HttpServlet {
+@WebServlet("/iqList.ip")
+public class EnrollIquirePage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListView() {
+    public EnrollIquirePage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +33,6 @@ public class NoticeListView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		int listCount;
 		int currentPage;
 		int pageLimit;
@@ -41,7 +41,7 @@ public class NoticeListView extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		listCount = new NoticeService().selectListCount();
+		listCount = new InquireService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("cpage")); //connot parse null string
 		pageLimit = 10;
 		boardLimit = 10;
@@ -60,11 +60,11 @@ public class NoticeListView extends HttpServlet {
 		
 		
 		
-		ArrayList<Notice> list = new NoticeService().noticeSelectList(pi);
+		ArrayList<Inquire> list = new InquireService().inquireSelectList(pi);
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
 	
-		request.getRequestDispatcher("views/notice/NoticeMainView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/inquire/InquireEnrollPage.jsp").forward(request, response);
 	
 	}
 

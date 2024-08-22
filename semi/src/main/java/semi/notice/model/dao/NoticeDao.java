@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static semi.common.JDBCtemplate.*;
+
+import semi.common.PageInfo;
 import semi.notice.model.vo.Notice;
 
 public class NoticeDao {
@@ -25,7 +27,34 @@ public class NoticeDao {
 		}
 	}
 	
-	public ArrayList<Notice> noticeSelectList(Connection conn) {
+	public int selectListCount(Connection conn) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset =pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount=rset.getInt("count");
+			}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
+	
+	
+	public ArrayList<Notice> noticeSelectList(Connection conn, PageInfo pi) {
 		
 		ArrayList<Notice> list = new ArrayList<Notice>();
 		PreparedStatement pstmt = null;
@@ -35,6 +64,12 @@ public class NoticeDao {
 	
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1)* pi.getBoardLimit()+1;
+			int endRow = startRow + pi.getBoardLimit() -1;
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -187,6 +222,28 @@ public class NoticeDao {
 		}
 		return n;
 	}
+
+	public int noticeDelete(Connection conn, int noticeNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("noticeDelete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}	
+		return result;
+	}
+
+
 
 
 	

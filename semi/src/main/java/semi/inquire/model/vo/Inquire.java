@@ -105,6 +105,15 @@ public class Inquire {
 		this.status = status;
 		this.answer = answer;
 	}
+	
+	
+	public Inquire(int inquireNo, String inquireTitle, String inquireWriter, Date createDate) {
+		super();
+		this.inquireNo = inquireNo;
+		this.inquireTitle = inquireTitle;
+		this.inquireWriter = inquireWriter;
+		this.createDate = createDate;
+	}
 
 
 	@Override

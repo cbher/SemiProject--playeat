@@ -1,12 +1,20 @@
+<%@page import="semi.common.PageInfo"%>
 <%@page import="semi.notice.model.vo.Notice"%>
 
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
 	// 공지번호, 공지제목, userId(1번), 조회수, 생성일
 
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
 %>    
 
 <!DOCTYPE html>
@@ -64,18 +72,42 @@
 	<%} %>
 	</tbody>
     </table>
-
+    
+    
+    <script type="text/javascript">
+		$(function(){
+			$(".notice-view>tbody>tr").click(function(){
+				const num = $(this).children().eq(0).text();
+				location.href='<%=contextPath%>/detail.no?num='+num;
+			})
+		})	
+	</script>
+    
+    <br>
+	<br>
+		 <div class="paging-area" align="center">
+		 
+		 	<%if(currentPage != 1){ %>
+		 	<button onclick="location.href='<%=contextPath%>/noticeList.no?cpage=<%= currentPage -1%>'">&lt;</button>
+		 	<%} %>
+		 	<%for(int p =startPage; p <= endPage; p++) {%>
+		 			<%if(p == currentPage) {%>
+		 			<button disabled><%=p %></button>
+		 		<%}else{ %>
+				 	<button onclick="location.href='<%=contextPath %>/noticeList.no?cpage=<%= p %>'"><%= p %></button>
+				<%} %>	
+		 	<%} %>
+		 	<% if(currentPage != maxPage){ %>
+		 		<button onclick="location.href='<%=contextPath%>/noticeList.no?cpage=<%= currentPage + 1%>'">&gt;</button>
+		 	<%} %>
+		 	
+		 </div>
+	
 </div>
 
-<script type="text/javascript">
-$(function(){
-	$(".notice-view>tbody>tr").click(function(){
-		const num = $(this).children().eq(0).text();
-		location.href='<%=contextPath%>/detail.no?num='+num;
-	})
-})
-	
-</script>
+
+
+
 
 
  

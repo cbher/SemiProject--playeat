@@ -1,30 +1,26 @@
 package semi.notice.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
 
-import semi.member.model.vo.Member;
 import semi.notice.model.service.NoticeService;
 import semi.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeInsertControll
+ * Servlet implementation class NoticeUpdateController
  */
-@WebServlet("/insert.no")
-public class NoticeInsertControll extends HttpServlet {
+@WebServlet("/updateNotice.no")
+public class NoticeUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeInsertControll() {
+    public NoticeUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,31 +29,26 @@ public class NoticeInsertControll extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+			request.setCharacterEncoding("utf-8");
 		
+
+		int noticeNo = Integer.parseInt(request.getParameter("num"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-	    int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-	    System.out.println(userNo);
-	    
-	    
-		Notice n = new Notice();
-		n.setNoticeTitle(title);
-		n.setNoticeContent(content);
-		n.setNoticeWriter(String.valueOf(userNo));
+		Notice n = new Notice(noticeNo, title, content);
 		
-		int result = new NoticeService().insertNotice(n);
-		
+		int result = new NoticeService().updateNotice(n);
+	
 		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "공지사항 작성성공");
-			response.sendRedirect(request.getContextPath()+"/noticeList.no?cpage=1");
+			request.setAttribute("alertMsg", "공지사항 수정완료!");
+			response.sendRedirect(request.getContextPath()+"/detail.no?num="+noticeNo);
 			
 		}else {
-			// 실패 
-			request.getSession().setAttribute("alertMsg", "작성실패");
-			response.sendRedirect(request.getContextPath()+"/noticeList.no?cpage=1");
+		
 		}
+	
+	
 	}
 
 	/**

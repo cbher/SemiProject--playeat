@@ -5,29 +5,29 @@
 <entry key="selectListCount">
 	SELECT
 	       COUNT(*) COUNT
-	  FROM NOTICE
+	  FROM INQUIRE
 	 WHERE STATUS = 'Y'
 </entry>
 
 
-<entry key="noticeSelectList">
+
+<entry key="inquireSelectList">
 SELECT *
   FROM (  
         SELECT ROWNUM"RNUM" , A.*
-          FROM (
-               SELECT 
-                       NOTICE_NO
-                     , NOTICE_TITLE
-                     , USER_ID
-                     , COUNT
-                     , CREATE_DATE
-                  FROM NOTICE "N"
-                  JOIN MEMBER ON (USER_NO = NOTICE_WRITER)
-                 WHERE N.STATUS = 'Y'
-                 ORDER 
-                    BY NOTICE_NO DESC
-              ) A
-        )
+		  FROM (
+		        SELECT 
+		               INQUIRE_NO
+		             , INQUIRE_TITLE
+		             , USER_ID
+		             , CREATE_DATE
+		          FROM INQUIRE "I"
+		          JOIN MEMBER ON (USER_NO = INQUIRE_WRITER)
+		         WHERE I.STATUS = 'Y'
+		         ORDER 
+		            BY INQUIRE_NO DESC
+           		 ) A
+         )
  WHERE RNUM BETWEEN ? AND ?
 </entry>
 

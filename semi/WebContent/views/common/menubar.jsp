@@ -285,13 +285,6 @@ header .menubar::before{
 
 </head>
 <body>
-		<%if(alertMsg != null){ %>
-		<script>
-			alert("<%=alertMsg %>");
-		</script>
-		<% session.removeAttribute("alertMsg"); %>
-	<% } %>
-     
      <% if(alertMsg != null) { %>
      	<script>
      		alert('<%=alertMsg%>');
@@ -334,8 +327,8 @@ header .menubar::before{
                     <li>
                         <a href="">공지문의</a>
                         <ul class="hide-menu">
-                            <li><a href="<%= contextPath %>/noticeList.no">공지사항</a></li>
-                            <li><a href="">문의사항</a></li>
+                            <li><a href="<%= contextPath %>/noticeList.no?cpage=1">공지사항</a></li>
+                            <li><a href="<%=contextPath%>/iqList.ip?cpage=1">문의사항</a></li>
                             <li><a href="">자주묻는질문</a></li>
                         </ul>   
                     </li>
