@@ -15,26 +15,65 @@ SELECT
     BY NOTICE_NO DESC
 </entry>
 
-<entry key="">
- INSERT 
-   INTO NOTICE
-	  (
-	    NOTICE_NO
-	  , NOTICE_TITLE
-	  , NOTICE_CONTETNT
-	  , NOTICE_WRITER
-	  , CREATE_DATE
-	  )
- VALUES
-	  (
-	    NOTICE_SEQ.NEXTVAL
-	  , ?
-	  , ?
-	  , ?
-	  , ?
-	  , SYSDATE
-	  )
+<entry key="insertNotice">
+INSERT 
+  INTO NOTICE
+	 (
+	   NOTICE_NO
+	 , NOTICE_TITLE
+	 , NOTICE_CONTENT
+	 , NOTICE_WRITER
+	 )
+	 VALUES
+	 (
+	   NOTICE_SEQ.NEXTVAL
+	 , ?
+	 , ?
+	 , ?
+	 )
 </entry>
+
+<entry key="increaseCount">
+	UPDATE NOTICE
+	   SET COUNT = COUNT + 1
+	 WHERE NOTICE_NO = ?
+	   AND STATUS = 'Y'
+</entry>
+
+<entry key="noticeDetailView">
+	SELECT NOTICE_NO
+	     , NOTICE_TITLE
+	     , NOTICE_CONTENT
+	     , USER_ID
+	     , CREATE_DATE
+	  FROM NOTICE
+	  JOIN MEMBER ON(NOTICE_WRITER = USER_NO)
+	 WHERE NOTICE_NO = ?
+</entry>
+
+<entry key="noticeSelect">
+	SELECT 
+	       NOTICE_NO
+	     , NOTICE_TITLE
+	     , NOTICE_CONTENT
+	     , USER_ID
+	     , CREATE_DATE
+	  FROM NOTICE
+	  JOIN MEMBER ON (NOTICE_WRITER = USER_NO)
+	 WHERE NOTICE_NO = ?
+</entry>
+
+
+<entry key="updateNotice">
+	UPDATE NOTICE
+	   SET NOTICE_TITLE = ?
+	     , NOTICE_CONTENT = ?
+	 WHERE NOTICE_NO =?
+	   AND STATUS = 'Y'
+</entry>
+
+
+
 
 
 </properties>

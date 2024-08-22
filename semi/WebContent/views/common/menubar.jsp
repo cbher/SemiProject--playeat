@@ -2,10 +2,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+<<<<<<< HEAD
    String contextPath = request.getContextPath();
    Member loginUser = (Member)session.getAttribute("loginUser");
    String alertMsg = (String)session.getAttribute("alertMsg");
+=======
+	String contextPath = request.getContextPath();
+
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	// 유저번호, 아이디, 비번, 이름,닉네임,폰,이메일,가입일,스테이터스,자기소개,리폿횟수
+	String alertMsg = (String)session.getAttribute("alertMsg");
+
+>>>>>>> entance3
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +27,13 @@
    	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
+	<!-- bootstrap 버튼 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    -->
+   
    
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
@@ -275,6 +292,12 @@ header .menubar::before{
 
 </head>
 <body>
+		<%if(alertMsg != null){ %>
+		<script>
+			alert("<%=alertMsg %>");
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
      
      <% if(alertMsg != null) { %>
      	<script>

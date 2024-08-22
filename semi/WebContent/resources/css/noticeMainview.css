@@ -14,22 +14,30 @@
     width: 100%;
     height:400px;
 	margin:auto;
-    margin-top:240px;
-   
+    margin-top:240px; 
 }
 
 
 .notice-area .notice-view{
     border: 1px solid #e4d4fa;   
     text-align: center;
+    background-color: #f6f5f0;
+    border-radius: 10px;
 }
+
+.notice-area .notice-view thead>th{
+	border: 1ps solid #e4d4fa;
+}
+
 .notice-area .notice-view th,
 .notice-area .notice-view td{
-	border-bottom: 1px solid #e4d4fa;
+	padding: 15px;
+	border-radius: 15px;
+ 
 }
 
 .notice-area h2{
-    border: 1px solid #e4d4fa;
+   
     align-items: center;
     text-align: center;
     width: 600px;
@@ -52,7 +60,12 @@
 	cursor: pointer;
 }
 
-
+.notice-area .notice-view .content:hover{
+    background-color: #e4d4fa;
+    color: #8b7dbe;
+    border-bottom: 1px solid  #8b7dbe;
+    cursor: pointer;
+}
 
 
 

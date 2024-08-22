@@ -1,29 +1,26 @@
-package semi.member.controller;
+package semi.notice.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import semi.member.model.service.MemberService;
-import semi.member.model.vo.Member;
+import semi.notice.model.service.NoticeService;
+import semi.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class LoginComplete
+ * Servlet implementation class NoticeDetailView
  */
-@WebServlet("/LoginComplete.me")
-public class LoginComplete extends HttpServlet {
+@WebServlet("/detail.no")
+public class NoticeDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginComplete() {
+    public NoticeDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +29,21 @@ public class LoginComplete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int noticeNo = Integer.parseInt(request.getParameter("num"));
 		
-		String userId = request.getParameter("userName");
-		String userPwd = request.getParameter("userPassword");
+		int result = new NoticeService().increaseCount(noticeNo);
 		
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		
-		if(loginUser == null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "로그인 실패");
-			response.sendRedirect(request.getContextPath()+"/login.me");
+		if(result > 0) {
+			Notice n = new NoticeService().noticeDetailView(noticeNo);
+			request.setAttribute("notice", n);
+			request.getRequestDispatcher("views/notice/NoticeDetailView.jsp").forward(request, response);
 			
-		}else {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect(request.getContextPath());
+		} else {
+			request.setAttribute("alertMsg", "상세페이지 접속실패");
+			request.getRequestDispatcher("views/notice/NoticeMainView.jsp").forward(request, response);
 		}
+		
+	
 	}
 
 	/**
