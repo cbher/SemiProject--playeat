@@ -42,6 +42,19 @@ public class CookingBoard {
 		this.count = count;
 		this.titleImg = titleImg;
 	}
+	
+	
+
+	public CookingBoard(int cBoardNo, String cBoardTitle, String cBoardContent, Date createDate, String userNo,
+			int cookCategory) {
+		super();
+		this.cBoardNo = cBoardNo;
+		this.cBoardTitle = cBoardTitle;
+		this.cBoardContent = cBoardContent;
+		this.createDate = createDate;
+		this.userNo = userNo;
+		this.cookCategory = cookCategory;
+	}
 
 	public int getcBoardNo() {
 		return cBoardNo;

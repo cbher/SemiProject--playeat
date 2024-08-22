@@ -9,25 +9,39 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import static semi.common.JDBCtemplate.*;
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 import semi.member.model.vo.Member;
 
 public class MemberDao {
 	
+<<<<<<< HEAD
 private Properties prop = new Properties();
 	
 	public MemberDao() {
 		
+=======
+	private Properties prop = new Properties();
+	
+	public MemberDao() {
+>>>>>>> main
 		String filePath = MemberDao.class.getResource("/db/sql/member-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
 		} catch (IOException e) {
+<<<<<<< HEAD
+=======
+			// TODO Auto-generated catch block
+>>>>>>> main
 			e.printStackTrace();
 		}
 		
 	}
 
+<<<<<<< HEAD
 	public int insertMember(Connection conn, Member m) {
 				int result = 0;
 				
@@ -149,6 +163,48 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		
+=======
+	public Member loginMember(String userId, String userPwd, Connection conn) {
+		
+		PreparedStatement pstmt = null;
+		Member m = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("loginMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPwd);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("user_no")
+							 , rset.getString("user_id")
+							 , rset.getString("user_pwd")
+							 , rset.getString("user_name")
+							 , rset.getString("nickname")
+							 , rset.getString("phone")
+							 , rset.getString("email")
+							 , rset.getDate("ENROLLE_DATE")
+							 , rset.getString("STATUS")
+							 , rset.getString("introduce")
+							 , rset.getInt("report_count"));
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+			
+>>>>>>> main
 		return m;
 	}
 

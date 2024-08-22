@@ -98,4 +98,79 @@ public class CookingDao {
 		return result;
 	}
 	
+	public int increaseCount(Connection conn, int cBoardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("increaseCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cBoardNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	
+	public CookingBoard selectCookBoard(Connection conn, int cookBoardNo) {
+		CookingBoard cookBoard = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCookBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cookBoardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				cookBoard = new CookingBoard(rset.getInt("c_no"),
+											 rset.getString("c_title"),
+											 rset.getString("c_contents"),
+											 rset.getDate("c_date"),
+											 rset.getString("user_id"),
+											 rset.getInt("c_category"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return cookBoard;
+	}
+	
+	public ArrayList<Attachment> selectAttachmentList(Connection conn, int cookBoardNo){
+		ArrayList<Attachment> list = new ArrayList<Attachment>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectAttachment");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cookBoardNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Attachment at = new Attachment();
+				at.setChangeName(rset.getString("change_name"));
+				at.setFilePath(rset.getString("file_path"));
+				
+				list.add(at);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+		
+	}
+	
 }
