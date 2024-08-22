@@ -3,19 +3,6 @@ package semi.member.model.vo;
 import java.sql.Date;
 
 public class Member {
-//	USER_NO
-//	USER_ID
-//	USER_PWD
-//	USER_NAME
-//	NICKNAME
-//	PHONE
-//	EMAIL
-//	ENROLLE_DATE
-//	STATUS
-//	INTRODUCE
-//	REPORT_COUNT
-//	순서 똑같이 만들음
-	
 	private int userNo;
 	private String userId;
 	private String userPwd;
@@ -23,16 +10,15 @@ public class Member {
 	private String nickName;
 	private String phone;
 	private String email;
-	private Date enrolleDate;
+	private Date enrollDate;
 	private String status;
 	private String introduce;
 	private int reportCount;
 	
-	
-	public Member() {}
-	
+	public Member() {}	
+
 	public Member(int userNo, String userId, String userPwd, String userName, String nickName, String phone,
-			String email, Date enrolleDate, String status, String introduce, int reportCount) {
+			String email, Date enrollDate, String status, String introduce, int reportCount) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -41,10 +27,24 @@ public class Member {
 		this.nickName = nickName;
 		this.phone = phone;
 		this.email = email;
-		this.enrolleDate = enrolleDate;
+		this.enrollDate = enrollDate;
 		this.status = status;
 		this.introduce = introduce;
 		this.reportCount = reportCount;
+	}
+
+
+
+
+
+	public Member(String userId, String userPwd, String userName, String nickName, String phone, String email) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+		this.userName = userName;
+		this.nickName = nickName;
+		this.phone = phone;
+		this.email = email;
 	}
 	
 	public int getUserNo() {
@@ -103,12 +103,12 @@ public class Member {
 		this.email = email;
 	}
 
-	public Date getEnrolleDate() {
-		return enrolleDate;
+	public Date getEnrollDate() {
+		return enrollDate;
 	}
 
-	public void setEnrolleDate(Date enrolleDate) {
-		this.enrolleDate = enrolleDate;
+	public void setEnrollDate(Date enrollDate) {
+		this.enrollDate = enrollDate;
 	}
 
 	public String getStatus() {
@@ -134,14 +134,13 @@ public class Member {
 	public void setReportCount(int reportCount) {
 		this.reportCount = reportCount;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
-				+ ", nickName=" + nickName + ", phone=" + phone + ", email=" + email + ", enrolleDate=" + enrolleDate
+				+ ", nickName=" + nickName + ", phone=" + phone + ", email=" + email + ", enrollDate=" + enrollDate
 				+ ", status=" + status + ", introduce=" + introduce + ", reportCount=" + reportCount + "]";
-	}
-	
+	};
 	
 	
 }

@@ -1,26 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<entry key="loginMember">
-	SELECT
-	         USER_NO
-	       , USER_ID
-	       , USER_PWD
-	       , USER_NAME
-	       , NICKNAME
-	       , PHONE
-	       , EMAIL
-	       , ENROLLE_DATE
-	       , STATUS
-	       , INTRODUCE
-	       , REPORT_COUNT
-	  FROM MEMBER
-	 WHERE USER_ID = ?
-	   AND USER_PWD = ?
-	   AND STATUS = 'Y'
-
-</entry>
-
-
+	<entry key="insertMember">
+	INSERT
+	  INTO MEMBER
+	  (
+	    USER_NO
+	  , USER_ID
+	  , USER_PWD
+	  , USER_NAME
+	  , NICKNAME
+	  , PHONE
+	  , EMAIL
+	  )
+	  VALUES
+	  (
+	    MEMBER_SEQ.NEXTVAL
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  , ?
+	  )	
+	</entry>
+	
+	<entry key="idCheck">
+		SELECT
+		       COUNT(*) "COUNT"
+		  FROM MEMBER
+		 WHERE USER_ID = ?
+	</entry>
+	
+	<entry key="nickNameCheck">
+		SELECT
+		       COUNT(*) "COUNT"
+		  FROM MEMBER
+		 WHERE NICKNAME = ?
+	</entry>
+	
+	<entry key="loginMember">
+		SELECT 
+		       USER_NO
+		     , USER_ID
+		     , USER_PWD
+		     , USER_NAME
+		     , NICKNAME
+		     , PHONE
+		     , EMAIL
+		     , ENROLLE_DATE
+		     , STATUS
+		     , INTRODUCE
+		     , REPORT_COUNT
+		  FROM MEMBER
+		 WHERE USER_ID = ?
+		   AND USER_PWD = ?
+		   AND STATUS = 'Y'
+	</entry>
 
 </properties>

@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.member.model.service.MemberService;
+
 /**
- * Servlet implementation class LogoutControll
+ * Servlet implementation class AjaxIdCheckController
  */
-@WebServlet("/logout.me")
-public class LogoutControll extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class AjaxIdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutControll() {
+    public AjaxIdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,10 +28,17 @@ public class LogoutControll extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getSession().invalidate();
-		response.sendRedirect(request.getContextPath());
-	
+		
+		String checkId = request.getParameter("checkId");
+		
+		int count = new MemberService().idCheck(checkId);
+		
+		if(count > 0) { // 존재하는 아이디가 있을 경우 => 사용불가능 => "NNNNN"
+			response.getWriter().print("NNNNN");
+		}else { // 존재하는 아이디가 없을 경우 => 사용가능 => "NNNNY"
+			response.getWriter().print("NNNNY");
+		}
+		
 	}
 
 	/**
