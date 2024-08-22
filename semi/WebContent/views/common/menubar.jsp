@@ -114,7 +114,7 @@
                         </ul>   
                     </li>
                     <li>
-                        <a href="">미니게임</a>
+                        <a href="<%= contextPath %>/minigame.mg">미니게임</a>
                         <ul class="hide-menu">
                             <li><a href="">랜덤뽑기</a></li>
                             <li><a href="">사다리타기</a></li>
