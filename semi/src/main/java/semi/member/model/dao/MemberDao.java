@@ -218,4 +218,110 @@ int result = 0;
 		return result;
 	}
 
+	public Member searchId(Connection conn, String name, String email) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchId");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("user_no"),
+					       rset.getString("user_id"),
+					       rset.getString("user_pwd"),
+					       rset.getString("user_name"),
+					       rset.getString("nickname"),
+					       rset.getString("phone"),
+					       rset.getString("email"),
+					       rset.getDate("enrolle_date"),
+					       rset.getString("status"),
+					       rset.getString("introduce"),
+					       rset.getInt("report_count"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);		
+			close(pstmt);
+		}
+		return m;
+	}
+
+	public Member searchPwd(Connection conn, String userId, String name, String email) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchPwd");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			pstmt.setString(2, name);
+			pstmt.setString(3, email);
+         
+         rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("user_no"),
+					       rset.getString("user_id"),
+					       rset.getString("user_pwd"),
+					       rset.getString("user_name"),
+					       rset.getString("nickname"),
+					       rset.getString("phone"),
+					       rset.getString("email"),
+					       rset.getDate("enrolle_date"),
+					       rset.getString("status"),
+					       rset.getString("introduce"),
+					       rset.getInt("report_count"));
+			}
+			
+			//System.out.println(m);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);		
+			close(pstmt);
+		}
+		return m;
+	}
+
+	public int changePwd(Connection conn, String userId, String userPwd) {
+		//System.out.println(userPwd);
+		//System.out.println(userId);
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("changePwd");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userPwd);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

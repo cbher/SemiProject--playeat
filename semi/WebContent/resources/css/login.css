@@ -315,10 +315,17 @@ header .menubar::before{
     color: #e4d4fa;
 }
 
-.login-wrapper .api{
-    text-align: center;
-    margin-top: 40px;
+.login-wrapper .api #kakao-login-btn{
+    margin-top: 20px;
+    margin-left: 60px;
+    display: block;
+    width: 100px;
+    height: 50px;
+}
 
+.login-wrapper .api #kakao-login-btn img{
+    width: 200px;
+    height: 50px;
 }
 
 .comment-modal {
