@@ -45,5 +45,61 @@ public class MemberService {
 		
 	}
 
+	public Member kakaoLoginMember(String userId) {
+		Connection conn = getConnection();
+		
+		Member m = new MemberDao().kakaoLoginMember(conn, userId);
+		
+		close(conn);
+		
+		return m;
+	}
+
+	public int insertKakaoMember(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().insertKakaoMember(conn, m);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public Member searchId(String name, String email) {
+		Connection conn = getConnection();
+
+		Member resultMember = new MemberDao().searchId(conn, name, email);
+		close(conn);
+		return resultMember;
+	}
+
+	public Member searchPwd(String userId, String name, String email) {
+		Connection conn = getConnection();
+
+		Member resultMember = new MemberDao().searchPwd(conn, userId, name, email);
+		close(conn);
+		return resultMember;
+	}
+
+	public int changePwd(String userId, String userPwd) {
+		Connection conn = getConnection();
+		int result = new MemberDao().changePwd(conn, userId, userPwd);
+
+	    if (result > 0) {
+	      commit(conn);
+	    } else {
+	      rollback(conn);
+	    }
+
+	    close(conn);
+	    return result;
+	}
+
 
 }

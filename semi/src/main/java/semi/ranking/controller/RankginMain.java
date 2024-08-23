@@ -1,4 +1,4 @@
-package semi.member.controller;
+package semi.ranking.controller;
 
 import java.io.IOException;
 
@@ -8,22 +8,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import semi.member.model.service.MemberService;
-import semi.member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginComplete
+ * Servlet implementation class RankginMain
  */
-@WebServlet("/LoginComplete.me")
-public class LoginComplete extends HttpServlet {
+@WebServlet("/ranking.rk")
+public class RankginMain extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginComplete() {
+    public RankginMain() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +28,8 @@ public class LoginComplete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String userId = request.getParameter("userName");
-		String userPwd = request.getParameter("userPassword");
-		
-		Member loginUser = new MemberService().loginMember(userId, userPwd);
-		
-		if(loginUser == null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "아이디나 비밀번호를 확인해주세요.");
-			response.sendRedirect(request.getContextPath()+"/login.me");
-			
-		}else {
-			HttpSession session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			
-			response.sendRedirect(request.getContextPath());
-		}
+		RequestDispatcher view = request.getRequestDispatcher("views/ranking/RankingMain.jsp");
+		view.forward(request, response);
 	}
 
 	/**
