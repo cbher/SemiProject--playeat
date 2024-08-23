@@ -21,7 +21,7 @@
 
 <div class="insertNo-area" align="center">
 	<h3 align="center">공지글 작성하기</h3>
-    <form action="<%=contextPath %>/insert.no" method="post">
+    <form action="<%=contextPath %>/insert.no" method="post" enctype="multipart/form-data">
         <table align="center" id="insertTable">
             <thead>
                 <tr>
@@ -33,7 +33,6 @@
             <tbody>
             <tr>
             	<th colspan="2" align="center">내용</th>
-            	
             </tr>
                 <tr>
                     <td colspan="2">

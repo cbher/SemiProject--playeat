@@ -23,7 +23,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js" integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="/semi/resources/css/inquListView.css">
 
 </head>
@@ -33,8 +33,8 @@
 	<div class="inquire-area">
 		<h2 align="center">문의사항</h2>
 		 <br>
-		 <%if(loginUser != null && loginUser.getUserId().equals("admin")) {%>
-		<a  class="button" href="<%=contextPath %>/createIN.no">작성하기</a>
+		 <%if(loginUser != null) {%>
+		<a  class="button" href="<%=contextPath %>/inquireEnterPage.inq">작성하기</a>
 		<br>
 		<%} %>
 		<table class="inquire-view" align="center" >
@@ -44,6 +44,7 @@
 				<th width="500"> 글 제목</th>
 				<th width="100">작성자</th>
 				<th width="120">작성일</th>
+				<th width="120">답변여부</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,6 +60,11 @@
 				<td class="content"><%=i.getInquireTitle()%></td>
 				<td><%= i.getInquireWriter()%></td>
 				<td><%= i.getCreateDate() %></td>
+				<%if(i.getStatus().equals("Y")) {%>
+				<th width="120" style="color:red; font-weight: 700;">X</th>
+				<%}else{ %>
+				<th width="120" style="color:green; font-weight: 700;">Y</th>
+				<%} %>	
 			</tr>
 		  <%} %>
 		<%} %>
@@ -70,7 +76,7 @@
 			$(function(){
 				$(".inquire-view>tbody>tr").click(function(){
 					const num = $(this).children().eq(0).text();
-					location.href='<%=contextPath%>/iqdetail.no?num='+num;
+					location.href='<%=contextPath%>/iqdetail.inq?num='+num;
 				})
 			})	
 		</script>

@@ -21,9 +21,9 @@ SELECT *
 		             , INQUIRE_TITLE
 		             , USER_ID
 		             , CREATE_DATE
+		             , I.STATUS
 		          FROM INQUIRE "I"
 		          JOIN MEMBER ON (USER_NO = INQUIRE_WRITER)
-		         WHERE I.STATUS = 'Y'
 		         ORDER 
 		            BY INQUIRE_NO DESC
            		 ) A
@@ -31,70 +31,49 @@ SELECT *
  WHERE RNUM BETWEEN ? AND ?
 </entry>
 
-<entry key="insertNotice">
-INSERT 
-  INTO NOTICE
-	 (
-	   NOTICE_NO
-	 , NOTICE_TITLE
-	 , NOTICE_CONTENT
-	 , NOTICE_WRITER
-	 )
-	 VALUES
-	 (
-	   NOTICE_SEQ.NEXTVAL
-	 , ?
-	 , ?
-	 , ?
-	 )
-</entry>
-
-<entry key="increaseCount">
-	UPDATE NOTICE
-	   SET COUNT = COUNT + 1
-	 WHERE NOTICE_NO = ?
-	   AND STATUS = 'Y'
-</entry>
-
-<entry key="noticeDetailView">
-	SELECT NOTICE_NO
-	     , NOTICE_TITLE
-	     , NOTICE_CONTENT
-	     , USER_ID
-	     , CREATE_DATE
-	  FROM NOTICE
-	  JOIN MEMBER ON(NOTICE_WRITER = USER_NO)
-	 WHERE NOTICE_NO = ?
-</entry>
-
-<entry key="noticeSelect">
-	SELECT 
-	       NOTICE_NO
-	     , NOTICE_TITLE
-	     , NOTICE_CONTENT
-	     , USER_ID
-	     , CREATE_DATE
-	  FROM NOTICE
-	  JOIN MEMBER ON (NOTICE_WRITER = USER_NO)
-	 WHERE NOTICE_NO = ?
+<entry key="insertInquire">
+	INSERT 
+	  INTO INQUIRE 
+	     ( 
+	       INQUIRE_NO
+	     , INQUIRE_TITLE
+	     , INQUIRE_CONTENT
+	     , INQUIRE_WRITER
+	     )
+	VALUES 
+	     (
+	       INQUIRE_SEQ.NEXTVAL
+	     , ?
+	     , ?
+	     , ?
+	     )
 </entry>
 
 
-<entry key="updateNotice">
-	UPDATE NOTICE
-	   SET NOTICE_TITLE = ?
-	     , NOTICE_CONTENT = ?
-	 WHERE NOTICE_NO =?
-	   AND STATUS = 'Y'
+
+<entry key="detailViewInq">
+   SELECT 
+	      INQUIRE_NO
+	    , INQUIRE_TITLE
+	    , INQUIRE_CONTENT
+	    , USER_ID
+	    , CREATE_DATE
+	    , I.STATUS
+	    , ANSWER
+	 FROM INQUIRE I
+	 JOIN MEMBER ON (INQUIRE_WRITER = USER_NO)
+	WHERE INQUIRE_NO = ?
 </entry>
 
-<entry key="noticeDelete">
-	UPDATE NOTICE
-	   SET STATUS = 'N'
-	 WHERE NOTICE_NO = ?
+<entry key="deleteInquire">
+	DElETE
+	  FROM INQUIRE
+	 WHERE INQUIRE_NO = ?
 </entry>
 
-
+<entry key="">
+	
+</entry>
 
 
 

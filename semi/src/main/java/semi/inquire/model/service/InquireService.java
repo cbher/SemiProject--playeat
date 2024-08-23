@@ -37,6 +37,43 @@ public class InquireService {
 	
 	}
 
+	public int insertInquire(Inquire inq) {
+		Connection conn = getConnection();
+		int result = new InquireDao().insertInquire(conn, inq);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public Inquire detailViewInq(int inquireNo) {
+		
+		Connection conn = getConnection();
+		
+		Inquire inq = new InquireDao().detailViewInq(conn, inquireNo);
+		
+		close(conn);
+		return inq;
+	}
+
+	public int deleteInquire(int inquireNo) {
+		Connection conn = getConnection();
+		int result = new InquireDao().deleteInquire(conn, inquireNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	
 	
 
 	

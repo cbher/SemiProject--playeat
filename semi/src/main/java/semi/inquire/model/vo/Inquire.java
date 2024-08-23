@@ -114,6 +114,26 @@ public class Inquire {
 		this.inquireWriter = inquireWriter;
 		this.createDate = createDate;
 	}
+	
+	public Inquire(int inquireNo, String inquireTitle, String inquireContent, String inquireWriter, Date createDate) {
+		super();
+		this.inquireNo = inquireNo;
+		this.inquireTitle = inquireTitle;
+		this.inquireContent = inquireContent;
+		this.inquireWriter = inquireWriter;
+		this.createDate = createDate;
+	}
+
+	
+
+	public Inquire(int inquireNo, String inquireTitle, String inquireWriter, Date createDate, String status) {
+		super();
+		this.inquireNo = inquireNo;
+		this.inquireTitle = inquireTitle;
+		this.inquireWriter = inquireWriter;
+		this.createDate = createDate;
+		this.status = status;
+	}
 
 
 	@Override

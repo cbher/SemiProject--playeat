@@ -57,6 +57,7 @@ public class InquireDao {
 	}
 	
 	public ArrayList<Inquire> inquireSelectList(Connection conn, PageInfo pi) {
+		
 		ArrayList<Inquire> list = new ArrayList<Inquire>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -76,10 +77,11 @@ public class InquireDao {
 				list.add(new Inquire(rset.getInt("INQUIRE_NO")
 						            , rset.getString("INQUIRE_TITLE")
 						            , rset.getString("USER_ID")
-						            , rset.getDate("CREATE_DATE")));
+						            , rset.getDate("CREATE_DATE")
+						            , rset.getString("STATUS")));
 						           
 			}
-			System.out.println(list);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,6 +91,81 @@ public class InquireDao {
 		}
 		
 		return list;
+	}
+
+	public int insertInquire(Connection conn, Inquire inq) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertInquire");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, inq.getInquireTitle());
+			pstmt.setString(2, inq.getInquireContent());
+			pstmt.setString(3, inq.getInquireWriter());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public Inquire detailViewInq(Connection conn, int inquireNo) {
+		Inquire inq = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("detailViewInq");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inquireNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				inq = new Inquire(rset.getInt("INQUIRE_NO")
+						        , rset.getString("INQUIRE_TITLE")
+						        , rset.getString("INQUIRE_CONTENT")
+						        , rset.getString("USER_ID")
+						        , rset.getDate("CREATE_DATE")
+						        , rset.getString("STATUS")
+						        , rset.getString("ANSWER"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return inq;
+	}
+
+	public int deleteInquire(Connection conn, int inquireNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteInquire");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inquireNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

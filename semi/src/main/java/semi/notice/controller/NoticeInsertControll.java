@@ -39,8 +39,6 @@ public class NoticeInsertControll extends HttpServlet {
 		String content = request.getParameter("content");
 	    int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-	    System.out.println(userNo);
-	    
 	    
 		Notice n = new Notice();
 		n.setNoticeTitle(title);
