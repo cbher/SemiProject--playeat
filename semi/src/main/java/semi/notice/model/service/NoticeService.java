@@ -5,20 +5,22 @@ import java.util.ArrayList;
 
 import static semi.common.JDBCtemplate.*;
 
+import semi.common.PageInfo;
 import semi.notice.model.dao.NoticeDao;
 import semi.notice.model.vo.Notice;
 
 public class NoticeService {
 
-	public ArrayList<Notice> noticeSelectList() {
+	public ArrayList<Notice> noticeSelectList(PageInfo pi) {
 		Connection conn = getConnection();
-		ArrayList<Notice> list = new NoticeDao().noticeSelectList(conn);
+		ArrayList<Notice> list = new NoticeDao().noticeSelectList(conn, pi);
 		
 		if(!list.isEmpty()) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
+		close(conn);
 		return list;
 	}
 
@@ -81,9 +83,29 @@ public class NoticeService {
 		Notice n = new NoticeDao().noticeSelect(conn,noticeNo);
 		
 		close(conn);
-		
-		
 		return n;
+	}
+
+	public int noticeDelete(int noticeNo) {
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().noticeDelete(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new NoticeDao().selectListCount(conn);
+		
+		close(conn);
+		return listCount;
 	}
 
 	

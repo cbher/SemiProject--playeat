@@ -39,8 +39,6 @@ public class NoticeInsertControll extends HttpServlet {
 		String content = request.getParameter("content");
 	    int userNo = ((Member)request.getSession().getAttribute("loginUser")).getUserNo();
 		
-	    System.out.println(userNo);
-	    
 	    
 		Notice n = new Notice();
 		n.setNoticeTitle(title);
@@ -51,12 +49,12 @@ public class NoticeInsertControll extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "공지사항 작성성공");
-			response.sendRedirect(request.getContextPath()+"/noticeList.no");
+			response.sendRedirect(request.getContextPath()+"/noticeList.no?cpage=1");
 			
 		}else {
 			// 실패 
 			request.getSession().setAttribute("alertMsg", "작성실패");
-			response.sendRedirect(request.getContextPath()+"/noticeList.no");
+			response.sendRedirect(request.getContextPath()+"/noticeList.no?cpage=1");
 		}
 	}
 
