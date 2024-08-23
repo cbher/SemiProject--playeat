@@ -82,12 +82,12 @@
                 <h4>테마별</h4>
             </div>
             <ul class="subject-list">
-                <li><input type="radio" name="subject-list">전체</li>
-                <li><input type="radio" name="subject-list">카페</li>
-                <li><input type="radio" name="subject-list">데이트</li>
-                <li><input type="radio" name="subject-list">전시/관람</li>
-                <li><input type="radio" name="subject-list">액티비티</li>
-                <li><input type="radio" name="subject-list">음식점</li>
+                <li><input type="radio" name="subject-list" value="1">전체</li>
+                <li><input type="radio" name="subject-list" value="2">카페</li>
+                <li><input type="radio" name="subject-list" value="3">데이트</li>
+                <li><input type="radio" name="subject-list" value="4">전시/관람</li>
+                <li><input type="radio" name="subject-list" value="5">액티비티</li>
+                <li><input type="radio" name="subject-list" value="6">음식점</li>
             </ul>
         </div>
 
@@ -98,14 +98,14 @@
                 <h4>원데이 클래스</h4>
             </div>
             <ul class="oneday-list">
-                <li><input type="radio" name="oneday-list">전체</li>
-                <li><input type="radio" name="oneday-list">스포츠</li>
-                <li><input type="radio" name="oneday-list">드로잉</li>
-                <li><input type="radio" name="oneday-list">쿠킹</li>
-                <li><input type="radio" name="oneday-list">핸드메이드</li>
-                <li><input type="radio" name="oneday-list">음악</li>
-                <li><input type="radio" name="oneday-list">반려동물</li>
-                <li><input type="radio" name="oneday-list">플라워</li>
+                <li><input type="radio" name="oneday-list" value="1">전체</li>
+                <li><input type="radio" name="oneday-list" value="2">스포츠</li>
+                <li><input type="radio" name="oneday-list" value="3">드로잉</li>
+                <li><input type="radio" name="oneday-list" value="4">쿠킹</li>
+                <li><input type="radio" name="oneday-list" value="5">핸드메이드</li>
+                <li><input type="radio" name="oneday-list" value="6">음악</li>
+                <li><input type="radio" name="oneday-list" value="7">반려동물</li>
+                <li><input type="radio" name="oneday-list" value="8">플라워</li>
             </ul>
         </div>
 
@@ -116,18 +116,18 @@
                 <h4>식당 카테고리</h4>
             </div>
             <ul class="r-category-list">
-                <li><input type="radio" name="r-category-list">전체</li>
-                <li><input type="radio" name="r-category-list">밥집</li>
-                <li><input type="radio" name="r-category-list">고깃집</li>
-                <li><input type="radio" name="r-category-list">술집</li>
-                <li><input type="radio" name="r-category-list">한식</li>
-                <li><input type="radio" name="r-category-list">일식</li>
-                <li><input type="radio" name="r-category-list">양식</li>
-                <li><input type="radio" name="r-category-list">중식</li>
-                <li><input type="radio" name="r-category-list">브런치</li>
-                <li><input type="radio" name="r-category-list">패스트푸드</li>
-                <li><input type="radio" name="r-category-list">뷔페</li>
-                <li><input type="radio" name="r-category-list">분식</li>
+                <li><input type="radio" name="r-category-list" value="1">전체</li>
+                <li><input type="radio" name="r-category-list" value="2">밥집</li>
+                <li><input type="radio" name="r-category-list" value="3">고깃집</li>
+                <li><input type="radio" name="r-category-list" value="4">술집</li>
+                <li><input type="radio" name="r-category-list" value="5">한식</li>
+                <li><input type="radio" name="r-category-list" value="6">일식</li>
+                <li><input type="radio" name="r-category-list" value="7">양식</li>
+                <li><input type="radio" name="r-category-list" value="8">중식</li>
+                <li><input type="radio" name="r-category-list" value="9">브런치</li>
+                <li><input type="radio" name="r-category-list" value="10">패스트푸드</li>
+                <li><input type="radio" name="r-category-list" value="11">뷔페</li>
+                <li><input type="radio" name="r-category-list" value="12">분식</li>
             </ul>
         </div>
 
