@@ -119,6 +119,7 @@ header .inner .search input{
     left: 45px;
     padding: 20px;
     padding-right: 50px;
+    font-family:'TTLaundryGothicB';
 }
 
 header .inner .search input:hover{
@@ -337,7 +338,7 @@ header .menubar::before{
                         <a href="">놀거리</a>
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/searchMain.sc">놀거리 찾기</a></li>
-                            <li><a href="">원데이클래스</a></li>
+                            <li><a href="<%= contextPath %>/onedayMain.on">원데이클래스</a></li>
                         </ul>   
                     </li>
                     <li>

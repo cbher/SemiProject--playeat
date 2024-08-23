@@ -111,6 +111,9 @@ div{
     background-color: #fff;
     outline: none;
     resize: none;
+    background-color: #f6f5f0;
+    font-family:'TTLaundryGothicB';
+    border: 1px solid #8b7dbe;
 }
 
 button{
