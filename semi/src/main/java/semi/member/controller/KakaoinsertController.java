@@ -38,6 +38,9 @@ public class KakaoinsertController extends HttpServlet {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");;
 		
+		System.out.println("nickname: " + nickname);
+		System.out.println("phone: " + phone);
+		
 		Member m = new Member(memId, memPwd, memName, nickname, phone, email);
 		
 		int result = new MemberService().insertKakaoMember(m);

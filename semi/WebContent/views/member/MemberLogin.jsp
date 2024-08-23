@@ -201,16 +201,23 @@
                 Kakao.API.request({
                     url: '/v2/user/me',
                     success: function (response) {
+                    	 const kakaoAccount = response.kakao_account;
+                         
+                         const id = response.id;
+                         const email = kakaoAccount.email;
+                         const name = kakaoAccount.profile.nickname;
+                         const phoneNumber = kakaoAccount.phone_number;
 						$.ajax({
 							url: 'idCheck.me',
 							data: {checkId: response.id},
 							success: function(result) {
+                    			//alert(response.id);	
 								if(result == "NNNNN") {
 									// 카카오로그인
 									loginKakaoUser(response.id);
 								} else {
 									// 카카오 회원가입
-									insertKakaoUser(response.id, response.kakao_account.email, response.kakao_account.name);
+									insertKakaoUser(response.id, response.kakao_account.email, response.kakao_account.name, response.kakao_account.nickname, response.kakao_account.phone_number);
 								}
 							},
 							error: function() {
@@ -244,7 +251,13 @@
 		});
 	}
 
-	function insertKakaoUser(id, email, name, nickname) {
+	function insertKakaoUser(id, email, name, nickname, phone) {
+		console.log("userId: " + id);
+	    console.log("email: " + email);
+	    console.log("name: " + name);
+	    console.log("nickname: " + nickname);  // 닉네임 확인
+	    console.log("phone: " + phone);
+	    
 	    $.ajax({
 	        url: "kakaoInsert.me",
 	        type: "post",
@@ -252,7 +265,8 @@
 	            userId: id,
 	            email: email,
 	            userName: name,
-	            nickname: nickname
+	            nickname: nickname,
+	            phone: phone
 	        },
 	        success: function() {
 	            if (nickname == null || nickname === "") {
@@ -268,6 +282,8 @@
 	        }
 	    });
 	}
+	
+	
 	
 	// 아이디 찾기
 	function btnFindId() {
