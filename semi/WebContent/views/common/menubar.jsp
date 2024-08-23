@@ -293,12 +293,6 @@ header .menubar::before{
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
      
-     <% if(alertMsg != null) { %>
-     	<script>
-     		alert('<%=alertMsg%>');
-     	</script>	
-     	<% session.removeAttribute("alertMsg"); %>
-     <% } %>
     <header>
         <div class="inner">
             <a href="<%= contextPath %>" class="logo">
