@@ -45,7 +45,7 @@ public class CookingUpdateController extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "게시물 수정이 완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/clist.co");
+			response.sendRedirect(request.getContextPath() + "/detail.co?bno=" + cBoardNo);
 		}
 	}
 
