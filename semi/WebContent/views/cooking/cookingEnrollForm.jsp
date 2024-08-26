@@ -84,7 +84,7 @@
                     <option value="1">요리게시판</option>
                     <option value="2">명예의 전당</option>
                 </select>
-                <input type="hidden" name="userNo" value="">
+                <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
                 <table align="center">
                     <tr>
                         <th width="100" height="30">제목</th>
