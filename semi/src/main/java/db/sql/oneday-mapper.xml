@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="selectOnedayList">
-		SELECT 
+	<entry key="selectListCount">
+		SELECT COUNT(*) "COUNT"
+		  FROM ONEDAYCLASS
+		 WHERE ONE_STATUS = 'Y'
+	</entry>
+	<entry key="selectOnedayList">		 
+		SELECT *
+		  FROM(
+		    SELECT ROWNUM RNUM, D.*
+		      FROM (
+		        SELECT
+				       ONE_NO
+				     , ONE_TITLE
+				     , ONE_PLACE
+				     , ENT_PEOPLE
+				     , SCORE
+				     , PRICE
+				     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+		          FROM ONEDAYCLASS O
+		          LEFT JOIN ATTECHMENT A USING(ONE_NO)
+		         WHERE ONE_STATUS = 'Y'
+		         ORDER
+		            BY ONE_NO DESC
+		            )D
+		     )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectPopularList">
+		SELECT
 		       ONE_NO
 		     , ONE_TITLE
-		     , ONE_PLACE
-		     , ENT_PEOPLE
 		     , SCORE
 		     , PRICE
-		     , FILE_PATH || CHANGE_NAME
-		  FROM ONEDAYCLASS 
-		  LEFT JOIN ATTECHMENT USING (ONE_NO)
-		 WHERE STATUS = 'Y'
-		   AND FILE_LEVEL = 1
+		     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+          FROM ONEDAYCLASS O
+          LEFT JOIN ATTECHMENT A USING(ONE_NO)
+         WHERE ONE_STATUS = 'Y'
+                 <![CDATA[AND ROWNUM <= 15]]>
+               ORDER
+                  BY SCORE DESC, 4
 	</entry>
 </properties>

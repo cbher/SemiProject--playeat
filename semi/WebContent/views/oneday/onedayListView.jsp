@@ -1,5 +1,19 @@
+<%@page import="semi.common.PageInfo"%>
+<%@page import="semi.oneday.model.vo.Oneday"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	ArrayList<Oneday> list = (ArrayList<Oneday>)request.getAttribute("list");
+	// 글번호, 글제목, 주소, 참여정원, 별점, 가격, 대표이미지경로
+	ArrayList<Oneday> popularList = (ArrayList<Oneday>)request.getAttribute("popularList");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>  
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,7 +115,11 @@
     font-weight: 700;
     padding-left: 20px;
     color: #333;
-    
+    width: 250px;
+    text-overflow: ellipsis;
+    height: 17.5px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 
@@ -184,13 +202,25 @@ select{
     left: 0;
     border-radius: 25px;
 }
-.post .inner .cooking li a .title{
-    text-align: center;
-    marging-top:10px;
-}
+
 
 .post .inner .cooking li a .count{
     text-align: right;
+}
+
+.post .inner .cooking li a .title{
+	width: 300px;
+    text-overflow: ellipsis;
+    height: 21px;
+    overflow: hidden;
+    white-space: nowrap;	
+    margin-top:10px;
+}
+
+.post .inner .cooking li a .material-icons{
+	color:#e4d4fa;
+	font-size:20px;
+	padding-top: 10px;
 }
 
 .post .inner .paging-area{
@@ -212,114 +242,15 @@ select{
             <div class="title">인기있는 클래스</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/AdobeStock_600875580-1024x683.jpg" alt="">
-                        </a>
-                        <p>플레이잇1</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/shutterstock_2006673803-scaled.jpg" alt="">
-                        </a>
-                        <p>플레이잇2</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇3</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇4</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇5</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇6</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/덮밥.jpg" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                        </a>
-                        <p>플레이잇7</p>
-                    </div><div class="swiper-slide">
-                        <a href="">
-                            <img src="./resourse/play&eat.png" alt="">
-                            <p>플레이잇7</p>
-                        </a>
-                    </div>
+                	<% for(Oneday o : popularList){ %>
+	                    <div class="swiper-slide">
+	                        <a href="">
+	                            <img src="<%= o.getTitleImg() %>" alt="">
+	                        </a>
+	                        <p><%= o.getOneTitle() %></p>
+	                        
+	                    </div>
+                    <% } %>
                 </div>
             </div>
 	
@@ -337,7 +268,7 @@ select{
 				    slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
 				    spaceBetween: 10, // 슬라이드 사이 여백
 				     // 1번 슬라이드가 가운데 보이기
-				    loop:true,
+				    loop:false,
 				    // autoplay: {
 				    //     delay : 5000,
 				    // },
@@ -357,29 +288,33 @@ select{
         <div class="inner">
             <h2>원데이 클래스</h2>
             <ul class="cooking">
-                <li>
-                    <a href="">
-                        <img src="./resourse/덮밥.jpg" alt="">
-                        <div><b style="font-size: 18px;">오늘은 내가 짜파게티 요리사</b></div>
-                        <span>2024/07/22</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="./resourse/덮밥.jpg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="./resourse/덮밥.jpg" alt="">
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img src="./resourse/덮밥.jpg" alt="">
-                    </a>
-                </li>
+            	<% for(Oneday o : list){ %>
+	                <li>
+	                    <a href="">
+	                        <img src="<%= o.getTitleImg() %>" alt="">
+	                        <div class="title"><b style="font-size: 18px;"><%= o.getOneTitle() %></b></div>
+	                        <span><div class="material-icons">star</div> <%= o.getScore() %></span>
+	                    </a>
+	                </li>
+	            <% } %>
             </ul>
+                            <div class="paging-area" align="center">
+                	<% if(currentPage != 1){ %>
+            			<button onclick="location.href='<%= contextPath %>/onedayMain.on?cpage=<%= currentPage - 1 %>'">&lt;</button>
+            		<%} %>
+            		<% for(int p = startPage; p<=endPage;p++){ %>
+            			<% if(p == currentPage){ %>
+            				<button disabled><%= p %></button>
+            			<% } else{ %>
+            				<button onclick="location.href='<%= contextPath %>/onedayMain.on?cpage=<%= p %>'"><%= p %></button>
+            		<% } %>
+				<% } %>
+            
+            <% if(currentPage != maxPage) {%>
+            	<button onclick="location.href='<%= contextPath %>/onedayMain.on?cpage=<%= currentPage + 1 %>'">&gt;</button>
+        	<% } %>
+                </div>
+            
         </div>
     </section>
 </div>

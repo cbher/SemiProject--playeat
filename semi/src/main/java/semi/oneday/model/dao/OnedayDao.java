@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static semi.common.JDBCtemplate.*;
+
+import semi.common.PageInfo;
 import semi.oneday.model.vo.Oneday;
 
 public class OnedayDao {
@@ -23,7 +25,30 @@ public class OnedayDao {
 		}
 	}
 	
-	public ArrayList<Oneday> selectOnedayList(Connection conn){
+	public int selectListCount(Connection conn) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+		
+	}
+	
+	public ArrayList<Oneday> selectOnedayList(PageInfo pi, Connection conn){
 		ArrayList<Oneday> list = new ArrayList<Oneday>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -31,7 +56,11 @@ public class OnedayDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
 			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -40,7 +69,8 @@ public class OnedayDao {
 									rset.getString("one_place"),
 									rset.getInt("ent_people"),
 									rset.getDouble("score"),
-									rset.getInt("price")));
+									rset.getInt("price"),
+									rset.getString("titleimg")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -48,6 +78,34 @@ public class OnedayDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public ArrayList<Oneday> selectPopularList(Connection conn){
+		ArrayList<Oneday> popularList = new ArrayList<Oneday>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPopularList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				popularList.add(new Oneday(rset.getInt("one_no"),
+									rset.getString("one_title"),
+									rset.getDouble("score"),
+									rset.getInt("price"),
+									rset.getString("titleimg")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return popularList;
 	}
 	
 }

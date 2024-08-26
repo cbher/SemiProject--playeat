@@ -338,7 +338,7 @@ header .menubar::before{
                         <a href="">놀거리</a>
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/searchMain.sc">놀거리 찾기</a></li>
-                            <li><a href="<%= contextPath %>/onedayMain.on">원데이클래스</a></li>
+                            <li><a href="<%= contextPath %>/onedayMain.on?cpage=1">원데이클래스</a></li>
                         </ul>   
                     </li>
                     <li>

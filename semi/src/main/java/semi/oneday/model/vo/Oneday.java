@@ -18,6 +18,8 @@ public class Oneday {
 	private Date startTime;
 	private Date endTime;
 	
+	private String titleImg;
+	
 	public Oneday() {}
 
 	public Oneday(int oneNo, String oneTitle, String phone, String address, String status, int locationNo,
@@ -41,7 +43,7 @@ public class Oneday {
 	
 	
 
-	public Oneday(int oneNo, String oneTitle, String address, int entPeople, double score, int price) {
+	public Oneday(int oneNo, String oneTitle, String address, int entPeople, double score, int price, String titleImg) {
 		super();
 		this.oneNo = oneNo;
 		this.oneTitle = oneTitle;
@@ -49,6 +51,18 @@ public class Oneday {
 		this.entPeople = entPeople;
 		this.score = score;
 		this.price = price;
+		this.titleImg = titleImg;
+	}
+	
+	
+
+	public Oneday(int oneNo, String oneTitle, double score, int price, String titleImg) {
+		super();
+		this.oneNo = oneNo;
+		this.oneTitle = oneTitle;
+		this.score = score;
+		this.price = price;
+		this.titleImg = titleImg;
 	}
 
 	public int getOneNo() {
@@ -153,6 +167,14 @@ public class Oneday {
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+	
+	public String getTitleImg() {
+		return titleImg;
+	}
+
+	public void setTitleImg(String titleImg) {
+		this.titleImg = titleImg;
 	}
 
 	@Override
