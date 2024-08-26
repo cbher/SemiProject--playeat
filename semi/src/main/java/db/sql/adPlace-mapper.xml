@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+<entry key="adPlaceList"> 
+
+select
+	 p_no,
+	 p_title,
+	 address,
+	 p_call,
+	 p_status,
+	 tem_cate_no,
+	 p_score,
+	 location_no,
+	 p_select_num,
+	 rcategory_no
+from place
+</entry>
+
+
+<entry key="adPlaceRestList"> 
+
+select
+	 p_no,
+	 p_title,
+	 address,
+	 p_call,
+	 p_status,
+	 tem_cate_no,
+	 p_score,
+	 location_no,
+	 p_select_num,
+	 rcategory_no
+from place
+where p_select_num = 100
+</entry>
+
+
+<entry key="adPlacePlayList"> 
+
+select
+	 p_no,
+	 p_title,
+	 address,
+	 p_call,
+	 p_status,
+	 tem_cate_no,
+	 p_score,
+	 location_no,
+	 p_select_num,
+	 rcategory_no
+from place
+where p_select_num = 200
+</entry>
+
+</properties>
