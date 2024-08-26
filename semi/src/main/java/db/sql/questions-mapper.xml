@@ -7,6 +7,7 @@ select
 inquire_no,inquire_title,inquire_content,USER_ID,create_date,a.status
 from inquire a
 join MEMBER on (inquire_Writer  = user_no)
+order by 1 desc
 
 
 </entry>
@@ -16,6 +17,7 @@ inquire_no,inquire_title,inquire_content,USER_ID,create_date,a.status
 from inquire a
 join MEMBER on (inquire_Writer  = user_no)
 where a.status = 'Y'
+order by 1 desc
 
 </entry>
 <entry key="QuestionsClearList"> 
@@ -24,6 +26,7 @@ inquire_no,inquire_title,inquire_content,USER_ID,create_date,a.status
 from inquire a
 join MEMBER on (inquire_Writer  = user_no)
 where a.status = 'N'
+order by 1 desc
 </entry>
 <entry key="QuestionDetail"> 
 select

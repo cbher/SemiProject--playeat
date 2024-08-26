@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import db.com.semi.adminMember.model.dao.AdMemberDao;
 import db.com.semi.adminMember.model.vo.AdMember;
+import db.com.semi.adminMember.model.vo.AdReport;
 
 public class AdMemberService {
 	
@@ -35,6 +36,64 @@ public class AdMemberService {
 	 close(conn);
 	 return list;
 	}
+	
+	public ArrayList<AdReport> adReportList() {
+		Connection conn = getConnection();
+		ArrayList<AdReport> list = new AdMemberDao().adReportList(conn);
+		
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<AdReport> adReportReadyList() {
+		Connection conn = getConnection();
+		ArrayList<AdReport> list = new AdMemberDao().adReportReadyList(conn);
+		
+		close(conn);
+		return list;
+	}
+
+	
+	public ArrayList<AdReport> adReportClearList() {
+		Connection conn = getConnection();
+		ArrayList<AdReport> list = new AdMemberDao().adReportClearList(conn);
+		
+		close(conn);
+		return list;
+	}
+	public int adMemberbeen(int userNo) {
+		Connection conn = getConnection();
+		int result = new AdMemberDao().adMemberbeen( userNo, conn);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}return result;
+		
+	}
+	
+	
+	public int adMemberbeenOff(int userNo) {
+		Connection conn = getConnection();
+		int result = new AdMemberDao().adMemberbeenOff( userNo, conn);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}return result;
+		
+	}
+	public AdReport adReportDetail(int Rno){
+		 Connection conn = getConnection();
+		 AdReport list = new AdMemberDao().adReportDetail( Rno, conn);
+		 
+		 close(conn);
+		 return list;
+	}
+
+	
 	
 
 }

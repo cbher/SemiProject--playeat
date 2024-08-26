@@ -9,6 +9,10 @@
   int adMemberlistCount = 0;
   if(session.getAttribute("adMemberlistCount") != null){
 		  adMemberlistCount = (int)session.getAttribute("adMemberlistCount");}
+  int reportlistcount = 0;
+  if(session.getAttribute("reportlistcount") != null){
+	  reportlistcount = (int)session.getAttribute("reportlistcount");
+  }
     %>
 <!DOCTYPE html>
 <html>
@@ -81,7 +85,7 @@
 		<tr>
 			<th>	
 				<div class="maintitle">신규 신고</div>
-				<div class="count" id="count3">123</div>
+				<div class="count" id="count3"><%= reportlistcount %></div>
 			</th>
 			<th>	
 				<div class="maintitle">총 회원수</div>

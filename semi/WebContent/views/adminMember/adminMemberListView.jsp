@@ -86,7 +86,7 @@ table td{text-align: center;}
         <th width="120">회원명</th>
         <th width="150">닉네임</th>
         <th  width="110" >가입일</th>
-        <th  width="90" >탈퇴여부</th>
+        <th  width="90" >정지여부</th>
         <th  width="90" >누적신고수</th>
 
         </tr>	

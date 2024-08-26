@@ -82,6 +82,126 @@ order by report_count desc ,  user_no
 		
 </entry>
 
+<entry key="adReportList">
+	select 
+		REPORT_NO,
+		REPORT_CONTENT, 
+		REPORT_STATUS, 
+		REVIEW_NO, 
+		P_NO, 
+		PCOM_NO, 
+		ONE_NO, 
+		OCOM_NO, 
+		C_NO, 
+		a.USER_NO, 
+		m.USER_NAME,
+		create_report
+	from report a
+	join member m on (a.user_no = m.user_no)
+
+
+</entry>
+
+
+<entry key="adReportReadyList">
+	select 
+		REPORT_NO,
+		REPORT_CONTENT, 
+		REPORT_STATUS, 
+		REVIEW_NO, 
+		P_NO, 
+		PCOM_NO, 
+		ONE_NO, 
+		OCOM_NO, 
+		C_NO, 
+		a.USER_NO, 
+		m.USER_NAME,
+		create_report
+	from report a
+	join member m on (a.user_no = m.user_no)
+	where report_status = 'Y'
+
+</entry>
+
+
+<entry key="adReportClearList">
+	select 
+		REPORT_NO,
+		REPORT_CONTENT, 
+		REPORT_STATUS, 
+		REVIEW_NO, 
+		P_NO, 
+		PCOM_NO, 
+		ONE_NO, 
+		OCOM_NO, 
+		C_NO, 
+		a.USER_NO, 
+		m.USER_NAME,
+		create_report
+	from report a
+	join member m on (a.user_no = m.user_no)
+	where report_status = 'N'
+
+
+</entry>
+
+
+
+<entry key="adMemberbeen">
+
+	update 
+		member 
+	set 
+		status = 'N'
+	where 
+		user_no = ? 
+
+
+</entry>
+
+
+<entry key="adMemberbeenOff">
+
+	update 
+		member 
+	set 
+		status = 'Y'
+	where 
+		user_no = ? 
+
+
+</entry>
+
+
+
+
+
+<entry key="adReportDetail">
+
+	select 
+		REPORT_NO,
+		REPORT_CONTENT, 
+		REPORT_STATUS, 
+		REVIEW_NO, 
+		P_NO, 
+		PCOM_NO, 
+		ONE_NO, 
+		OCOM_NO, 
+		C_NO, 
+		a.USER_NO, 
+		m.USER_NAME,
+		create_report
+	from report a
+	join member m on (a.user_no = m.user_no)
+	where report_no = ?
+
+
+</entry>
+
+
+
+
+
 
 
 </properties>

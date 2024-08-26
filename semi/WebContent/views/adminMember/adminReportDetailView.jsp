@@ -1,10 +1,11 @@
+<%@page import="db.com.semi.adminMember.model.vo.AdReport"%>
 <%@page import="javax.print.attribute.UnmodifiableSetException"%>
 <%@page import="db.com.semi.adminMember.model.vo.AdMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <% AdMember list = (AdMember)request.getAttribute("list");  
-    String mno = request.getParameter("Mno");
+    <% AdReport list = (AdReport)request.getAttribute("list");  
+    String Rno = request.getParameter("Rno");
     %>
 <!DOCTYPE html>
 <html>
@@ -88,18 +89,18 @@ table *{
     <div class="penaltyjon" style="background-color: white; width: 700px; height: 300px;">
 	
 	<br>
-	<h2 align = "center"> 회원 제제 </h2>
+	<h2 align = "center"> 회원제제 </h2>
 	<br>
-    <form action="adpenaltytime.ap" method="post">
+    <form action="adReportList.dl" method="post">
 	<table align = "center">
         <tr>
             <th>정지시간</th>
             <td><input type="number" max="24" min="0" style="width: 96.5%;" name="penaltytime" class="penaltytime"></td>
         </tr>
-        <input type="hidden" name="Mno" value="<%= mno %>">
+        <input type="hidden" name="Rno" value="<%= Rno %>">
         <input type="hidden" name="userNo" value="<%= list.getUserNo() %>">
         <input type="hidden" name="userName" value="<%= list.getUserName() %>">
-        <input type="hidden" name="userId" value="<%= list.getUserId() %>">
+ 
         <tr>
             <th>정지일</th>
             <td><input type="number" name="penaltyday" class="penaltyday" value="0" min="0"></td>
@@ -133,46 +134,45 @@ table *{
 
    <div class="mainlist">
    <br>  
-   <h2 align = "center"> 회원 상세 보기</h2>
+   <h2 align = "center"> 신고 상세 보기</h2>
    <br>
    <table align="center">
     <thead></thead>
     <tbody>
         <tr>
-            <th width="100" height="30">회원번호</th>
-            <td width="250">&nbsp; <%=list.getUserNo() %></td>
-            <th width ="100">아이디</th>
-            <td width ="450" >&nbsp; <%=list.getUserId() %></td>
+            <th width="140" height="30">신고번호</th>
+            <td width="250">&nbsp; <%=list.getReportNo() %></td>
+            <th width ="140">신고 제제 상황</th>
+            <td width ="450" >&nbsp; <%if(list.getReprotStatus().equals("Y")){ %>제제완료<%}else{ %>대기중<%} %></td>
         </tr>
         <tr>
-            <th  height="30">회원명</th>
+            <th  height="30">게시판명</th>
+            <td>&nbsp; <%if( list.getReview_no() == 1){%>리뷰 게시판
+            			<%}else if(list.getpNo()==1){%> 장소 게시판
+            			<%}else if(list.getpComNo()==1){ %>장소 한줄평 게시판
+            			<%}else if(list.getOneNo()==1){%> 원클래스 게시판
+            			<%}else if(list.getoComNo()==1){%> 장소 게시판
+            			<%}else if(list.getcNo()==1){%> 요리 게시판
+            			<%}else{ %>오류!
+            			<%} %>
+            			
+            			
+            			</td>
+            <th>신고일자</th>
+            <td>&nbsp; <%=list.getCreateReport() %></td>
+        </tr>
+        <tr>
+            <th  height="30">피신고자 번호</th>
+            <td >&nbsp; <%=list.getUserNo() %></td>
+            <th>피신고자 명</th>
             <td>&nbsp; <%=list.getUserName() %></td>
-            <th>비밀번호</th>
-            <td>&nbsp; <%=list.getUserPwd() %></td>
         </tr>
         <tr>
-            <th  height="30">닉네임</th>
-            <td >&nbsp; <%=list.getNickname() %></td>
-            <th>전화번호</th>
-            <td>&nbsp; <%=list.getPhone() %></td>
-        </tr>
-        <tr>
-            <th height="30">가입일자</th>
-            <td>&nbsp; <%=list.getEnrollDate() %></td>
-            <th>누적신고수</th>
-            <td>&nbsp; <%=list.getReportCount() %></td>
-        </tr>
-        <tr>
-            <th  height="50">이메일</th>
-            <td>&nbsp; <%=list.getEmail()%></td>
-            <th rowspan="2"  height="100">자기소개</th>
-            <td rowspan="2"><%=list.getIntroduce() %></td>
-        </tr>
-        <tr>
-            <th  height="50">탈퇴여부</th>
-            <td>&nbsp; <%if(list.getStatus().equals("Y")){%>회원 <%}else{ %>탈퇴 <%} %></td>
+            <th height="30">신고내역</th>
+            <td colspan="3">&nbsp; <%=list.getReprotContent() %></td>
          
         </tr>
+
 
 
 
@@ -181,7 +181,7 @@ table *{
    <br><br>
    <div align="center" class="adlistbutton">
    <button onclick="penalty();" class="toggleButton" >회원제제</button>
-    <a href="adMemberlist.ml"> <button >목록으로</button></a>
+    <a href="adReportList.rl"> <button >목록으로</button></a>
 
     <script>
         function penalty(){

@@ -1,4 +1,4 @@
-package db.com.semi.adminMember.controller;
+package db.com.semi.adBoard.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import db.com.semi.adminMember.model.service.AdMemberService;
-import db.com.semi.adminMember.model.vo.AdMember;
+import db.com.semi.adBoard.model.service.AdBoardService;
+import db.com.semi.adBoard.model.vo.AdBoard;
 import db.com.semi.common.model.vo.PageInfo;
 
 /**
- * Servlet implementation class MemberlistSort
+ * Servlet implementation class AdBoardListController
  */
-@WebServlet("/adMemberlist.ml")
-public class adMemberlistcontroller extends HttpServlet {
+@WebServlet("/adBoard.bl")
+public class AdBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adMemberlistcontroller() {
+    public AdBoardListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,34 +33,32 @@ public class adMemberlistcontroller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	String select = request.getParameter("select");
-	//list 담아둘 arraylist 미리만들어두기
-	ArrayList<AdMember> list = null;
+		request.setCharacterEncoding("utf-8");
+		 ArrayList<AdBoard> list = null;
+		 String select = null;
+		 if(request.getParameter("select")== null) {
 	
-
-	
-	
-	
-	//기본은 값이 입력 안되어있으니 기본값으로 sortNo로 정렬되게 해두기
-		if(select == null) {
-			select = "sortNo";
-		}
-		//스위치문으로 ~~일때 나올 문장들
-		switch(select) {
-		//번호순정렬이면?
-		case "sortNo" : 
-			list = new AdMemberService().adMemberList();
+			select = "all";
+		 }else {
+			 switch(request.getParameter("select")) {
+			 case "all" :
+				 select = "all";
 			
-			break;
-		//가입일자순 정렬이면?
-		case "sortDate" :
-			list = new AdMemberService().adMemberDateList();
-			break;
-			//신고 누적순 정렬이면?
-		case "sortReport" : 
-			list = new AdMemberService().adMemberReportList();
-			break;
-		}
+				 break;
+			 case "cook" :
+				 select = "cook";
+			
+				 break;
+			 case "honor" :
+				 select = "honor";
+				 break;
+			 }
+		 }
+		
+		 list =  new AdBoardService().AdBoardList(select);
+		
+		
+
 		
 		//페이징 처리용
 		int listCount = list.size(); 		 // 현재 총 게시글의 개수
@@ -95,15 +93,15 @@ public class adMemberlistcontroller extends HttpServlet {
 		 PageInfo pi = null;
 		 //만들어진 애들 페이징바 처리
 		 pi =  new PageInfo(listCount, currentPage, pageLimit, boardLimit,maxPage, startPage,endPage);
-	
-		HttpSession session = request.getSession();
-		session.setAttribute("Memberpi", pi);
-		session.setAttribute("select", select);
-		session.setAttribute("adMemberlistCount", list.size());
+		
+		
+		
+		 HttpSession session = request.getSession();
+		 session.setAttribute("AdNoticepi", pi);
+		 session.setAttribute("adBoardlistView", select);
+		 
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/adminMember/adminMemberListView.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("views/adminBoard/adminBoardListView.jsp").forward(request, response);;
 	}
 
 	/**

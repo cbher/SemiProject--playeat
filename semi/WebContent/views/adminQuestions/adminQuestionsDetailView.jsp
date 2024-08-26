@@ -72,8 +72,7 @@ button:hover{
         <tr>
             <th height="300">답변내용</th>
             <td height="300px" colspan="5" >
-                <textarea name="answer" required style="width: 100%; height: 300px; resize: none;"> <%=view.getAnswer() %></textarea>
-              
+<textarea name="answer" required style="width: 100%; height: 300px; resize: none;"><% if (view.getAnswer() != null) { %><%= view.getAnswer() %><% } %></textarea>
 
             </td>
         </tr>

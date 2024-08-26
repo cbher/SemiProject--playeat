@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%
     String contextPath = request.getContextPath();
+    String alertMsg = (String)session.getAttribute("adAlertMsg");
     %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,7 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 img{
     display: block;
@@ -242,7 +244,12 @@ header .inner .search button:hover{
 </style>
 </head>
 <body>
-  
+  <% if(alertMsg != null){ %>
+<script >
+	alert("<%=alertMsg%>");
+</script>
+	<% session.removeAttribute("adAlertMsg"); %>
+  <%} %>
     <header>
         <div class="inner">
             <a href="" class="logo">
@@ -273,15 +280,12 @@ header .inner .search button:hover{
                    
                     </li>
                     <li>
-                        <a href="adPlace.pl">놀거리관리</a>
+                        <a href="adPlace.pl">장소관리</a>
                       
                     </li>
+           
                     <li>
-                        <a href="">식당관리</a> 
-                   
-                    </li>
-                    <li>
-                        <a href="">게시판관리</a>
+                        <a href="adBoard.bl">게시판관리</a>
                   
                     </li>
                          <li>
@@ -292,7 +296,7 @@ header .inner .search button:hover{
                         <a href="javascript:0">회원</a>
                         <ul class="hide-menu">
                             <li><a href="adMemberlist.ml?cpage=1">회원관리</a></li>
-                            <li><a href="">신고관리</a></li>                 
+                            <li><a href="adReportList.rl?cpage=1">신고관리</a></li>                 
                         </ul>   
                     </li>
                    
