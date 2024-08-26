@@ -94,7 +94,69 @@ INSERT
 	 WHERE NOTICE_NO = ?
 </entry>
 
+<entry key="selectAttechment">
+	SELECT
+	       FILE_NO
+	     , ORIGIN_NAME
+	     , CHANGE_NAME
+	     , FILE_PATH
+	  FROM ATTECHMENT
+	 WHERE NOTICE_NO = ?
+	   AND STATUS = 'Y'
+</entry>
 
+<entry key="insertAttechment">
+ INSERT
+   INTO ATTECHMENT
+      (
+        FILE_NO
+      , NOTICE_NO
+      , ORIGIN_NAME
+      , CHANGE_NAME
+      , FILE_PATH
+      , FILE_LEVEL
+
+      )
+      VALUES
+      (
+        SEQ_ATTACHMENT.NEXTVAL
+      , NOTICE_SEQ.CURRVAL
+      , ?
+      , ?
+      , ?
+      , ?
+
+      )
+</entry>
+
+<entry key="updateAttechment">
+UPDATE ATTECHMENT
+   SET ORIGIN_NAME = ?
+     , CHANGE_NAME = ?
+     , FILE_PATH = ?
+ WHERE FILE_NO = ?
+
+</entry>
+
+<entry key="insertNewAttachment">
+		INSERT
+		  INTO ATTECHMENT
+			 (
+			   FILE_NO
+			 , NOTICE_NO
+			 , ORIGIN_NAME
+			 , CHANGE_NAME
+			 , FILE_PATH
+			 ) 
+		VALUES
+			 (
+			   SEQ_FNO.NEXTVAL
+			 , ?
+		     , ?
+		     , ?
+			 , ?
+			 )
+	</entry>
 
 
 

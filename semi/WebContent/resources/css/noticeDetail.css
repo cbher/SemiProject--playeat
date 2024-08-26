@@ -24,3 +24,8 @@
     margin-top: 20px;
     margin: auto;
 }
+
+.detail img{
+	width: 300px;
+	height: 400px;
+}
