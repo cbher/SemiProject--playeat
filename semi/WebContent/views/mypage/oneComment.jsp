@@ -1,3 +1,4 @@
+<%@page import="semi.common.PageInfo"%>
 <%@page import="semi.mypage.myOneComment.model.vo.OneComment"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -5,8 +6,13 @@
     
     
  <%
-	ArrayList<OneComment> list = (ArrayList<OneComment>)request.getAttribute("");
-
+ 	PageInfo pi = (PageInfo)request.getAttribute("pi");   
+	ArrayList<OneComment> list = (ArrayList<OneComment>)request.getAttribute("list");
+	
+	int currentPage = pi.getCurrentPage();
+ 	int startPage = pi.getStartPage();
+ 	int endPage = pi.getEndPage();
+ 	int maxPage = pi.getMaxPage();
 %>
 
  
@@ -175,13 +181,13 @@
 	                </div>
 	                <div class="rvbox_2">
 	                    <div><%=o.getComNo() %>가게명 들어가야함</div>
-	                    <div><%=o.getComContext()%></div>
+	                    <div><%=o.getComContent()%></div>
 	                    <div>아이콘(좋아요) <span><%=o.getScore() %></span></div>
 	                    <div><%=o.getCreateDate() %></div>
 	                  	<div><a href="">수정</a><span>/</span><a href="">삭제</a></div>
 	                </div>
 	                <div class="rvbox_3">
-	                    날짜 년 월 일
+	                    <%=o.getCreateDate() %>
 	                </div>
 	            </div>
             <% }%>

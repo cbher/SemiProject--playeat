@@ -1,13 +1,21 @@
+<%@page import="semi.common.PageInfo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import = "semi.member.model.vo.Member" %>
 <%@page import = "semi.mypage.myReview.model.vo.Review" %> 
+<%@page import= "semi.mypage.myOneComment.model.vo.OneComment" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%
-       
+    PageInfo pi = (PageInfo)request.getAttribute("pi");   
 	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
 
+	int currentPage = pi.getCurrentPage();
+ 	int startPage = pi.getStartPage();
+ 	int endPage = pi.getEndPage();
+ 	int maxPage = pi.getMaxPage();
+
+ 	
 	// 서비스 요청 전 : member.jsp 로딩시 : null
 	// 서비스 성공 후 : member.jsp 로딩시 : alert로 띄워줄 메시지 문구
 		
@@ -63,13 +71,14 @@
             margin-bottom: 20px;
             padding: 15px;
             display: flex;
+            align-items: flex-start;
             border: 1px solid #ddd;
             border-radius: 10px;
         }
 
         .rvbox_1 img {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             border-radius: 10px;
             margin-right: 20px;
         }
@@ -78,13 +87,43 @@
             flex-grow: 1;
         }
 
-        .rvbox_2 div {
+        .rvbox_2 .rvbox_header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 5px;
         }
 
+        .rvbox_2 .rvbox_header div {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
         .rvbox_3 {
-            text-align: right;
-            color: #777;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .rvbox_4 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .rvbox_4 .rvbox_score {
+            margin-right: 20px;
+        }
+
+        .rvbox_4 .rvbox_delete a {
+            color: #d9534f;
+            text-decoration: none;
+        }
+
+        .rvbox_4 .rvbox_delete a:hover {
+            text-decoration: underline;
         }
 
         #pgnum {
@@ -166,13 +205,13 @@
         <div id="content">
             <div id="content_title">
                 <a href="<%=contextPath%>">나의 리뷰</a>
-                <a href="<%=contextPath %>/onecomment.1">한줄평</a>
+                <a href="<%=contextPath %>/onecomment.myonecomment">한줄평</a> <!-- ?cpage=o -->
                 <a href="<%=contextPath%>/myinquire.1">내 문의사항</a>
                
             </div>
             <div id="sort">
                 <button id="sort_button">
-                    <img src="/마이페이지/resource/프로젝트 로고.png" alt="정렬 버튼">
+                    <img src="" alt="정렬 버튼">
                 </button>
                 <div id="sort_box">
                     <button>정렬 기준</button><br>
@@ -188,27 +227,24 @@
              	
               <%} else{%>
             <% for(Review r : list){ %>
-            <div class="rvbox">
-                <div class="rvbox_1">
-                    <a href=""><img src="가게 이미지" alt=""></a>
-                </div>
-                <div class="rvbox_2">
-                    <div><%=r.getTitle() %></div> 
-                </div>
-                <div class="rvbox_3">
-                     <%= r.getrDate() %>
-                </div>
-                <div class="rvbox_4">
-                     <%= r.getrContent() %>
-                </div>
-                <div class="rvbox_5">
-                     <%= r.getScore() %> 점수
-                </div>
-                <div>
-                	 <a href="<%=contextPath%>/ReviewDelete.bo">삭제</a>
-                </div>
-                
-            </div>
+                <div class="rvbox">
+                    <div class="rvbox_1">
+                        <a href=""><img src="<%= r.getTitleimg()%><%=r.getChangeName() %>" alt="가게 이미지"></a>
+                    </div>
+                    <div class="rvbox_2">
+                        <div class="rvbox_header">
+                            <div><%=r.getTitle() %></div>  <!-- 가게 이름 -->
+                            <div><%= r.getrDate() %></div>  <!-- 날짜 -->
+                        </div>
+                        <div class="rvbox_3"><%=r.getrContent()%><%=r.getChangeName()%></div>  <!-- 리뷰 내용 -->
+                        <div class="rvbox_4">
+                            <div class="rvbox_score">평점: <%= r.getScore() %> 점수</div>  <!-- 점수 -->
+                            <div class="rvbox_delete"><a href="<%=contextPath%>/ReviewDelete.bo?num=<%=r.getReviewNo()%>">삭제</a></div>  <!-- 삭제 버튼 -->
+                        </div>
+                    </div>
+                </div>  
+
+           
           	<% }%>
           	
            <%} %>
@@ -216,7 +252,23 @@
             
 
             <div id="pgnum">
-                1 2 3 4 ... 30
+                <% if(currentPage != 1){ %>
+		        <button onclick="location.href='<%=contextPath %>/mypage.myreview?cpage=<%= currentPage -1%>'">&lt;</button>
+		        <%} %>
+		        
+		        <% for(int p=startPage; p<= endPage; p++){%>
+		        	<% if (p == currentPage){ %>
+		        <button disabled><%=p %></button>
+		        	<% }else{ %>
+		        <button onclick="location.href='<%=contextPath %>/mypage.myreview?cpage=<%=p %>'"><%=p %></button>
+		  			<%} %>
+		  		<%} %>
+		  
+		  
+		  
+		 		<% if(currentPage !=maxPage){ %> 
+		        <button onclick="location.href='<%=contextPath %>/mypage.myreview?cpage=<%=currentPage +1%>'">&gt;</button>
+		   		<%} %>
             </div>
         </div>
 

@@ -118,7 +118,6 @@
         #wrap {
             width: 1100px;
             margin: 30px auto 0;
-            background-color: #f6f5f0;
             padding-bottom: 50px;
         }
 
@@ -262,7 +261,7 @@
     <header>
         <div class="inner">
             <a href="" class="logo">
-                <img src="로고 이미지 위치" alt="header_logo">
+                <img src="resources/backGroundImg/play_eat-removebg-preview" alt="header_logo">
             </a>
             <div class="profile">
                 <a href="<%= contextPath%>/editProfile.bo">

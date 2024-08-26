@@ -13,12 +13,24 @@ public class Review {
 	private String status;
 	private int playNo;
 	private String title;
+	private String titleimg;
+	private String changeName;
 	
 	public Review() {}
 
-	
+	public Review(int reviewNo, String rTitle, String rContent, Date rDate, String title, String titleimg, String changeName) {
+		super();
+		this.reviewNo = reviewNo;
+		this.rTitle = rTitle;
+		this.rContent = rContent;
+		this.rDate = rDate;
+		this.title = title;
+		this.titleimg=titleimg;
+		
+	}
+
 	public Review(int reviewNo, String rTitle, String rContent, Date rDate, int score, int userNo, String status,
-			int playNo, String title) {
+			int playNo, String title, String titleimg, String changeName) {
 		super();
 		this.reviewNo = reviewNo;
 		this.rTitle = rTitle;
@@ -29,20 +41,11 @@ public class Review {
 		this.status = status;
 		this.playNo = playNo;
 		this.title = title;
+		this.titleimg = titleimg;
+		this.changeName = changeName;
 	}
 	
 	
-	
-	public Review(int reviewNo, String rTitle, String rContent, Date rDate, String title) {
-		super();
-		this.reviewNo = reviewNo;
-		this.rTitle = rTitle;
-		this.rContent = rContent;
-		this.rDate = rDate;
-		this.title = title;
-	}
-
-
 	public int getReviewNo() {
 		return reviewNo;
 	}
@@ -115,20 +118,34 @@ public class Review {
 		this.title = title;
 	}
 
+	public String getTitleimg() {
+		return titleimg;
+	}
+
+	public void setTitleimg(String titleimg) {
+		this.titleimg = titleimg;
+	}
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
 
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", rTitle=" + rTitle + ", rContent=" + rContent + ", rDate=" + rDate
 				+ ", score=" + score + ", userNo=" + userNo + ", status=" + status + ", playNo=" + playNo + ", title="
-				+ title + "]";
+				+ title + ", titleimg=" + titleimg + ", changeName=" + changeName + "]";
 	}
-
-	
-	
-	
 	
 	
 	
 	
 	
 }
+
+	
+	

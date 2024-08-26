@@ -1,3 +1,4 @@
+<%@page import="semi.common.PageInfo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
@@ -6,7 +7,13 @@
 
 <% 
 	ArrayList<Inquire> list = (ArrayList<Inquire>)request.getAttribute("inquireList");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");   
+	
 
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 	
 %>	
 <!DOCTYPE html>
@@ -137,8 +144,14 @@
 		.inquire-list{
             border: 1px solid black;
             text-align: center;
-
+            justify-content: center;  /* 중앙 정렬 */
+            margin: 0 auto;
         }
+        #pgnum {
+            text-align: center;
+            padding: 20px 0;
+        }
+        
         
        
     </style>
@@ -175,7 +188,7 @@
              <table class="inquire-list">
             <thead>
                 <tr>
-                    <th width="70">번호</th>
+                    <th width="70" height="40">번호</th>
                     <th width="400">제목</th>
                     <th width="100">작성일</th>
                     <th width="80">답변여부</th>
@@ -204,7 +217,26 @@
             </tbody>
         </table>
             
+        <div id="pgnum">
+        	<% if(currentPage != 1){ %>
+		        <button onclick="location.href='<%=contextPath %>/list.bo?cpage=<%= currentPage -1%>'">&lt;</button>
+		        <%} %>
+		        
+		        <% for(int p=startPage; p<= endPage; p++){%>
+		        	<% if (p == currentPage){ %>
+		        <button disabled><%=p %></button>
+		        	<% }else{ %>
+		        <button onclick="location.href='<%=contextPath %>/list.bo?cpage=<%=p %>'"><%=p %></button>
+		  			<%} %>
+		  		<%} %>
+		  
+		  
+		  
+		 		<% if(currentPage !=maxPage){ %> 
+		        <button onclick="location.href='<%=contextPath %>/list.bo?cpage=<%=currentPage +1%>'">&gt;</button>
+		   		<%} %>
         
+        </div>
 
        
     </div>

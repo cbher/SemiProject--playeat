@@ -9,11 +9,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import semi.common.PageInfo;
 import semi.member.model.vo.Member;
 import semi.mypage.myReview.model.vo.Review;
 
 import static semi.common.JDBCtemplate.*;
-import static semi.common.JDBCtemplate.*;
+
 
 
 public class MyReviewDao {
@@ -29,7 +30,7 @@ public class MyReviewDao {
 	}
 	
 	
-	public ArrayList<Review> selectList(Connection conn, int userNo){
+	public ArrayList<Review> selectList(Connection conn,PageInfo pi, int userNo){
 		
 		ArrayList<Review> list = new ArrayList<Review>();
 		PreparedStatement pstmt=null;
@@ -38,7 +39,15 @@ public class MyReviewDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, userNo);
+			
+			pstmt.setInt(1, userNo);  
+			  
+			
+			int startRow = (pi.getCurrentPage() - 1)* pi.getBoardLimit()+1;
+			int endRow = startRow + pi.getBoardLimit()-1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset=pstmt.executeQuery();
 			
@@ -48,7 +57,10 @@ public class MyReviewDao {
 							           rset.getString("r_title"),
 							           rset.getString("r_content"),
 									   rset.getDate("r_date"),
-									   rset.getString("p_title")));
+									   rset.getString("p_title"),
+									   rset.getString("file_path"),
+									   rset.getString("change_name")));
+										
 				} 
 		    }catch (SQLException e) {
 			e.printStackTrace();
@@ -63,7 +75,51 @@ public class MyReviewDao {
 	}
 	
 	
-	
+	public int getListCount(Connection conn, int userNo) {
+        int listCount = 0;
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+        String sql = prop.getProperty("getListCount");
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userNo);
+            rset = pstmt.executeQuery();
+
+            if (rset.next()) {
+                listCount = rset.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(pstmt);
+        }
+
+        return listCount;
+    }
+	public int deleteMyReview(Connection conn, int reviewNo) {
+		
+		int result =0;
+		PreparedStatement pstmt=null;
+		
+		
+		String sql=prop.getProperty("deleteMyReview");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+
+	}
 	
 }	
 	

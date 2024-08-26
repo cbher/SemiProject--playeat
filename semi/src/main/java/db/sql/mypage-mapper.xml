@@ -2,21 +2,51 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 
 <properties>
+	
+	<entry key="getListCount">
+		       SELECT COUNT(*) 
+   				 FROM REVIEW 
+    			WHERE USER_NO = ? AND STATUS = 'Y'
+	</entry>
+	
 
 	<!--마이페이지-나의리뷰(첫페이지) -->
 	<entry key="selectList"> 
-		  SELECT R.REVIEW_NO, R.R_TITLE, R.R_CONTENT, R.R_DATE, P.P_TITLE 
+		 SELECT R.REVIEW_NO, R.R_TITLE, R.R_CONTENT, R.R_DATE, P.P_TITLE, A.FILE_PATH, A.CHANGE_NAME 
 			  FROM REVIEW R
 			   JOIN PLACE P ON R.PLAY_NO = P.P_NO
-			  WHERE R.USER_NO = ? AND STATUS ='Y'
+			   JOIN ATTECHMENT A ON (A.C_NO = R.PLAY_NO)
+			  WHERE R.USER_NO = ? AND R.STATUS ='Y'
 			ORDER BY R.R_DATE DESC
    	</entry>
+   	
+   	<entry key="deleleMyReview">
+   	 	 UPDATE ONE_COMMENT
+            SET STATUS ='N'
+            WHERE COM_NO = ?;
+   	</entry>
+   	
+   	
+   	<entry key="getInquireCount">
+		       SELECT COUNT(*) 
+   				 FROM INQUIRE
+    			WHERE USER_NO = ? AND STATUS = 'Y'
+	</entry>
+	
 	
 	<!--마이페이지-한줄평 아직 미구현-->
-	<entry key="oneComment"> <!--  -->
-		SELECT COM_NO, COM_CONTENT, SCORE, CREATE_DATE, STATUS, ONE_NO
-			FROM ONE_COMMENT
-			WHERE USER_NO = ? AND STATUS ='Y'
+	<entry key="oneCommentList"> <!--  -->
+		SELECT COM_NO, COM_CONTENT, SCORE, CREATE_DATE, STATUS, P_TITLE
+			FROM PLAY_COMMENT
+			JOIN PLACE ON P_NO=PLACE_NO
+
+			UNION ALL
+
+			SELECT COM_NO, COM_CONTENT, O.SCORE, CREATE_DATE, STATUS, ONE_TITLE
+			FROM ONE_COMMENT O
+			JOIN ONEDAYCLASS USING (ONE_NO)
+			WHERE USER_NO = ?
+			ORDER BY COM_NO
 
 	</entry>
 	
@@ -29,6 +59,7 @@
 	        ORDER BY CREATE_DATE, INQUIRE_NO
 	
 	</entry>
+	
 	
 	<!-- 마이페이지 - 찜리스트 -->
 	<entry key="myList">

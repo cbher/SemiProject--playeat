@@ -101,8 +101,12 @@
             flex-grow: 1;
             
         }
+        #nickname_section button{
+                width:120px;
+                height:40px;
+        }
         button {
-            padding: 10px 20px;
+            
             background-color: #ff7f50;
             border: none;
             color: white;
@@ -113,7 +117,10 @@
         button:hover {
             background-color: #e67350;
         }
-
+        
+        #changebtn{
+            width:150px;
+        }
        
     </style>
 
@@ -149,7 +156,7 @@
                     <textarea id="intro" maxlength="35"></textarea>
                 </div>
 
-                <button type="submit">변경 내용 저장</button>
+                <button id ="changebtn"type="submit">변경 내용 저장</button>
             </form>
         </div>
 
