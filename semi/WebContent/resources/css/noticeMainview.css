@@ -1,0 +1,77 @@
+
+
+@font-face { 
+    font-family: 'TTLaundryGothicB';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
+.notice-area{
+    font-family: 'TTLaundryGothicB';
+    top: 220px;
+    width: 100%;
+    height:400px;
+	margin:auto;
+    margin-top:240px; 
+}
+
+
+.notice-area .notice-view{
+    border: 1px solid #e4d4fa;   
+    text-align: center;
+    background-color: #f6f5f0;
+    border-radius: 10px;
+}
+
+.notice-area .notice-view thead>th{
+	border: 1ps solid #e4d4fa;
+}
+
+.notice-area .notice-view th,
+.notice-area .notice-view td{
+	padding: 15px;
+	border-radius: 15px;
+ 
+}
+
+.notice-area h2{
+   
+    align-items: center;
+    text-align: center;
+    width: 600px;
+    margin:auto;
+}
+
+.notice-area .button{
+	width: 70px;
+	height: 20px;
+	border: 1px solid #e4d4fa;
+    text-align: center;
+  	margin-left: 80%;
+    
+}
+
+.notice-area .button:hover{
+	background-color: #e4d4fa;
+	border: 2px solid #8b7dbe;
+	color: #8b7dbe;
+	cursor: pointer;
+}
+
+.notice-area .notice-view .content:hover{
+    background-color: #e4d4fa;
+    color: #8b7dbe;
+    border-bottom: 1px solid  #8b7dbe;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
