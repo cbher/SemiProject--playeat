@@ -8,8 +8,6 @@
 </head>
 
 <style>
-
-
 footer .inner{
     display: block;
     color: #8b7dbe;
@@ -78,9 +76,6 @@ footer .inner .info .copyright{
     display: flex;
     align-items: center;
 }
-
-
-
 </style>
 <body>
     <footer>

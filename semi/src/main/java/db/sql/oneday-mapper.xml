@@ -42,4 +42,29 @@
                ORDER
                   BY SCORE DESC, 4
 	</entry>
+	
+	<entry key="detailOneday">
+		SELECT ONE_NO
+		     , ONE_TITLE
+		     , ONE_PHONE
+		     , ONE_PLACE
+		     , SCORE
+		     , PRICE
+		     , START_TIME
+		     , END_TIME
+		  FROM ONEDAYCLASS
+		 WHERE ONE_NO = ? 
+	</entry>
+	
+	<entry key="selectAttachment">
+		 SELECT
+		        FILE_NO
+		      , ORIGIN_NAME
+		      , CHANGE_NAME
+		      , FILE_PATH
+		    FROM ONEDAYCLASS O
+            LEFT JOIN ATTECHMENT A USING(ONE_NO)
+		  WHERE ONE_NO = ?
+		    AND STATUS = 'Y'
+	</entry>
 </properties>

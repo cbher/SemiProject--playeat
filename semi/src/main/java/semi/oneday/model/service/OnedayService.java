@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import static semi.common.JDBCtemplate.*;
 
 import semi.common.PageInfo;
+import semi.cooking.model.vo.Attachment;
 import semi.oneday.model.dao.OnedayDao;
 import semi.oneday.model.vo.Oneday;
 
@@ -31,5 +32,22 @@ public class OnedayService {
 		close(conn);
 		return popularList;
 	}
+
+	public Oneday detailOneday(int oneNo) {
+		Connection conn = getConnection();
+		Oneday b = new OnedayDao().detailOneday(conn, oneNo);
+		
+		close(conn);
+		return b;
+	}
+
+	public ArrayList<Attachment> DetailAttachmentList(int oneNo) {
+		Connection conn = getConnection();
+		ArrayList<Attachment> list = new OnedayDao().DetailAttachmentList(conn, oneNo);
+				
+		close(conn);
+		return list;
+	}
+	
 	
 }

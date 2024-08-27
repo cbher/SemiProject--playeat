@@ -1,6 +1,5 @@
 package semi.oneday.model.vo;
 
-import java.util.Date;
 
 public class Oneday {
 	
@@ -15,16 +14,16 @@ public class Oneday {
 	private String onedayCategory;
 	private double score;
 	private int price;
-	private Date startTime;
-	private Date endTime;
+	private String startTime;
+	private String endTime;
 	
 	private String titleImg;
 	
 	public Oneday() {}
 
 	public Oneday(int oneNo, String oneTitle, String phone, String address, String status, int locationNo,
-			int entPeople, String temaCategory, String onedayCategory, double score, int price, Date startTime,
-			Date endTime) {
+			int entPeople, String temaCategory, String onedayCategory, double score, int price, String startTime,
+			String endTime) {
 		super();
 		this.oneNo = oneNo;
 		this.oneTitle = oneTitle;
@@ -63,6 +62,21 @@ public class Oneday {
 		this.score = score;
 		this.price = price;
 		this.titleImg = titleImg;
+	}
+	
+	
+
+	public Oneday(int oneNo, String oneTitle, String phone, String address, double score, int price, String startTime,
+			String endTime) {
+		super();
+		this.oneNo = oneNo;
+		this.oneTitle = oneTitle;
+		this.phone = phone;
+		this.address = address;
+		this.score = score;
+		this.price = price;
+		this.startTime = startTime;
+		this.endTime = endTime;
 	}
 
 	public int getOneNo() {
@@ -153,19 +167,19 @@ public class Oneday {
 		this.price = price;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 	

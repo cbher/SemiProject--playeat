@@ -12,6 +12,7 @@ import java.util.Properties;
 import static semi.common.JDBCtemplate.*;
 
 import semi.common.PageInfo;
+import semi.cooking.model.vo.Attachment;
 import semi.oneday.model.vo.Oneday;
 
 public class OnedayDao {
@@ -106,6 +107,69 @@ public class OnedayDao {
 			close(pstmt);
 		}
 		return popularList;
+	}
+
+	public Oneday detailOneday(Connection conn, int oneNo) {
+		Oneday o= null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("detailOneday");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oneNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				o = new Oneday(rset.getInt("one_no"),
+							  rset.getString("one_title"),
+							  rset.getString("one_phone"),
+							  rset.getString("one_place"),
+							  rset.getDouble("score"),
+							  rset.getInt("price"),
+							  rset.getString("start_time"),
+							  rset.getString("end_time"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return o;
+	}
+
+	public ArrayList<Attachment> DetailAttachmentList(Connection conn, int oneNo) {
+		ArrayList<Attachment> list = new ArrayList<Attachment>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oneNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Attachment at = new Attachment();
+				at.setChangeName(rset.getString("change_name"));
+				at.setFilePath(rset.getString("file_path"));
+				
+				list.add(at);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 	
 }

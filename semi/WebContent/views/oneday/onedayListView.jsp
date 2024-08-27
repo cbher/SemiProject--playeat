@@ -244,7 +244,7 @@ select{
                 <div class="swiper-wrapper">
                 	<% for(Oneday o : popularList){ %>
 	                    <div class="swiper-slide">
-	                        <a href="">
+	                        <a href="<%= contextPath %>/onedayDetail.on?oneNo=<%= o.getOneNo() %>">
 	                            <img src="<%= o.getTitleImg() %>" alt="">
 	                        </a>
 	                        <p><%= o.getOneTitle() %></p>
@@ -290,7 +290,7 @@ select{
             <ul class="cooking">
             	<% for(Oneday o : list){ %>
 	                <li>
-	                    <a href="">
+	                    <a href="<%= contextPath %>/onedayDetail.on?oneNo=<%= o.getOneNo() %>">
 	                        <img src="<%= o.getTitleImg() %>" alt="">
 	                        <div class="title"><b style="font-size: 18px;"><%= o.getOneTitle() %></b></div>
 	                        <span><div class="material-icons">star</div> <%= o.getScore() %></span>
