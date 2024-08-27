@@ -1,30 +1,20 @@
-<%@page import="semi.restaurant.model.vo.Restaurant"%>
+<%@page import="semi.play.model.vo.Play"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<ArrayList> list = (ArrayList<ArrayList>)request.getAttribute("list");
-	
-	ArrayList<Restaurant> listSeoul = list.get(0);
-	// 글번호, 글제목, 주소, 전화번호, 별점, 대표이미지경로
-	ArrayList<Restaurant> listGyunggi = list.get(1);
-	ArrayList<Restaurant> listIncheon = list.get(2);
-	ArrayList<Restaurant> listKangwon = list.get(3);
-	ArrayList<Restaurant> listChoongchung = list.get(4);
-	ArrayList<Restaurant> listJulla = list.get(5);
-	ArrayList<Restaurant> listGyungsang = list.get(6);
-	ArrayList<Restaurant> listJeju = list.get(7);
-
+	ArrayList<Play> list = (ArrayList<Play>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	    <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" />
+	<link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <style>
+    
+<style>
     	
 /* random slot */
 
@@ -479,15 +469,12 @@ footer .inner .info .copyright{
     display: flex;
     align-items: center;
 }
-
     	
-    </style>
+</style>
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	<%@ include file="../common/badge.jsp" %>
-	<%@ include file="../common/top.jsp" %>
-	    <section class="random">
+		    <section class="random">
         <div class="inner">
             <div class="title">
                 <h1 align="center">오늘 뭐먹지?</h1>
@@ -507,15 +494,15 @@ footer .inner .info .copyright{
 
     <section class="main-slide seoul">
         <div class="inner">
-            <div class="title">서울 음식</div>
+            <div class="title">서울 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                <% for(int i = 0; i<listSeoul.size();i++){ %>
+                <% for(Play p : list){ %>
                     <div class="swiper-slide">
-                        <a href="">
-                            <img src="<%= listSeoul.get(i).getTitleImg() %>" alt="">
+                        <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
+                            <img src="<%= p.getTitleImg() %>" alt="">
                         </a>
-                        <p><%= listSeoul.get(i).getPlaceTitle() %></p>
+                        <p><%= p.getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -531,17 +518,18 @@ footer .inner .info .copyright{
         </div>
     </section>
     
+ 
     <section class="sub-slide gyunggi">
         <div class="inner">
-            <div class="title">경기도 음식</div>
+            <div class="title">경기도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                <% for(int i = 0; i < listGyunggi.size();i++ ){ %>
+                <% for(int i = 0; i < list.size();i++ ){ %>
                     <div class="swiper-slide">
                         <a href="">
-                            <img src="<%= listGyunggi.get(i).getTitleImg() %>" alt="">
+                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
                         </a>
-                        <p><%= listGyunggi.get(i).getPlaceTitle() %></p>
+                        <p><%= list.get(i).getPlaceTitle() %></p>
                     </div>
                 <% } %>
                     
@@ -560,15 +548,15 @@ footer .inner .info .copyright{
 
     <section class="sub-slide incheon">
         <div class="inner">
-            <div class="title">인천 음식</div>
+            <div class="title">인천 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <% for(int i = 0; i < listIncheon.size();i++ ){ %>
+                <% for(int i = 0; i < list.size();i++ ){ %>
                     <div class="swiper-slide">
                         <a href="">
-                            <img src="<%= listIncheon.get(i).getTitleImg() %>" alt="">
+                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
                         </a>
-                        <p><%= listIncheon.get(i).getPlaceTitle() %></p>
+                        <p><%= list.get(i).getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -585,15 +573,15 @@ footer .inner .info .copyright{
     </section>
     <section class="sub-slide kangwon">
         <div class="inner">
-            <div class="title">강원도 음식</div>
+            <div class="title">강원도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <% for(int i = 0; i < listKangwon.size();i++ ){ %>
+                <% for(int i = 0; i < list.size();i++ ){ %>
                     <div class="swiper-slide">
                         <a href="">
-                            <img src="<%= listKangwon.get(i).getTitleImg() %>" alt="">
+                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
                         </a>
-                        <p><%= listKangwon.get(i).getPlaceTitle() %></p>
+                        <p><%= list.get(i).getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -610,15 +598,15 @@ footer .inner .info .copyright{
     </section>
     <section class="sub-slide choongchung">
         <div class="inner">
-            <div class="title">충청도 음식</div>
+            <div class="title">충청도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <% for(int i = 0; i < listChoongchung.size();i++ ){ %>
+                <% for(int i = 0; i < list.size();i++ ){ %>
                     <div class="swiper-slide">
                         <a href="">
-                            <img src="<%= listChoongchung.get(i).getTitleImg() %>" alt="">
+                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
                         </a>
-                        <p><%= listChoongchung.get(i).getPlaceTitle() %></p>
+                        <p><%= list.get(i).getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -635,15 +623,15 @@ footer .inner .info .copyright{
     </section>
     <section class="sub-slide julla">
         <div class="inner">
-            <div class="title">전라도 음식</div>
+            <div class="title">전라도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <% for(int i = 0; i < listJulla.size();i++ ){ %>
+                <% for(int i = 0; i < list.size();i++ ){ %>
                     <div class="swiper-slide">
                         <a href="">
-                            <img src="<%= listJulla.get(i).getTitleImg() %>" alt="">
+                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
                         </a>
-                        <p><%= listJulla.get(i).getPlaceTitle() %></p>
+                        <p><%= list.get(i).getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -660,15 +648,15 @@ footer .inner .info .copyright{
     </section>
     <section class="sub-slide gyungsang">
         <div class="inner">
-            <div class="title">경상도 음식</div>
+            <div class="title">경상도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <% for(int i = 0; i < listGyungsang.size();i++ ){ %>
+                <% for(int i = 0; i < list.size();i++ ){ %>
                     <div class="swiper-slide">
                         <a href="">
-                            <img src="<%= listGyungsang.get(i).getTitleImg() %>" alt="">
+                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
                         </a>
-                        <p><%= listGyungsang.get(i).getPlaceTitle() %></p>
+                        <p><%= list.get(i).getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -685,21 +673,21 @@ footer .inner .info .copyright{
     </section>
     <section class="sub-slide jeju">
         <div class="inner">
-            <div class="title">제주도 음식</div>
+            <div class="title">제주도 놀거리</div>
             <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <% for(int i = 0; i < listJeju.size();i++ ){ %>
+               <div class="swiper-wrapper">
+                <% for(int i = 0; i < list.size();i++ ){ %>
                     <div class="swiper-slide">
                         <a href="">
-                            <img src="<%= listJeju.get(i).getTitleImg() %>" alt="">
+                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
                         </a>
-                        <p><%= listJeju.get(i).getPlaceTitle() %></p>
+                        <p><%= list.get(i).getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
             </div>
 
-            
+           
             <div class="swiper-prev">
                 <div class="material-icons">arrow_back</div>
             </div>
@@ -914,23 +902,23 @@ footer .inner .info .copyright{
     document.addEventListener('DOMContentLoaded', function() {
         // 메뉴 데이터
         const menus = [
-            { name: "덮밥", image: "resources/randomMenuImg/덮밥.jfif" },
-            { name: "삼겹살", image: "resources/randomMenuImg/삼겹살.jfif" },
-            { name: "짜장면", image: "resources/randomMenuImg/짜장면.jpg" },
-            { name: "불고기", image: "resources/randomMenuImg/불고기.jpg" },
-            { name: "제육", image: "resources/randomMenuImg/제육.jpg" },
-            { name: "돈가스", image: "resources/randomMenuImg/돈가스.jpg" },
-            { name: "라멘", image: "resources/randomMenuImg/라멘.jpg" },
-            { name: "김치찌개", image:"resources/randomMenuImg/김치찌개.jfif"},
-            { name: "국밥", image: "resources/randomMenuImg/국밥.jfif"},
-            { name: "돼지고기 김치찜", image:"resources/randomMenuImg/돼지고기김치찜.jfif"},
-            { name: "냉면", image:"resources/randomMenuImg/냉면.jfif"},
-            { name: "떡볶이", image:"resources/randomMenuImg/떡볶이.jfif"},
-            { name: "햄버거", image:"resources/randomMenuImg/햄버거.jfif"},
-            { name: "찜닭", image:"resources/randomMenuImg/찜닭.jfif"},
-            { name: "칼국수", image:"resources/randomMenuImg/칼국수.jfif"},
-            { name: "스파게티", image:"resources/randomMenuImg/스파게티.jfif"},
-            { name: "백반", image:"resources/randomMenuImg/백반.jfif"},
+            { name: "", image: "resources/randomMenuImg/" },
+            { name: "", image: "resources/randomMenuImg/" },
+            { name: "", image: "resources/randomMenuImg/" },
+            { name: "", image: "resources/randomMenuImg/" },
+            { name: "", image: "resources/randomMenuImg/" },
+            { name: "", image: "resources/randomMenuImg/" },
+            { name: "", image: "resources/randomMenuImg/" },
+            { name: "", image:"resources/randomMenuImg/"},
+            { name: "", image: "resources/randomMenuImg/"},
+            { name: "", image:"resources/randomMenuImg/"},
+            { name: "", image:"resources/randomMenuImg/"},
+            { name: "", image:"resources/randomMenuImg/"},
+            { name: "", image:"resources/randomMenuImg/"},
+            { name: "", image:"resources/randomMenuImg/"},
+            { name: "", image:"resources/randomMenuImg/"},
+            { name: "", image:"resources/randomMenuImg/"},
+            { name: "", image:"resources/randomMenuImg/"},
         ];
 
         const menuImage = document.getElementById('menu-image');
@@ -980,7 +968,7 @@ footer .inner .info .copyright{
 
 
     </script>
-    
+	
+	
 </body>
 </html>
-	
