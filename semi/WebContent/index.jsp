@@ -1,9 +1,23 @@
+<%@page import="semi.ranking.model.service.RankingService"%>
+<%@page import="semi.ranking.model.vo.Ranking"%>
+<%@page import="semi.restaurant.model.dao.RestaurantDao"%>
+<%@page import="semi.restaurant.model.service.RestaurantService"%>
+<%@page import="semi.restaurant.model.vo.Restaurant"%>
 <%@page import="semi.cooking.model.vo.CookingBoard"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
+
+RestaurantService restService = new RestaurantService();
+ArrayList<Restaurant> list = restService.mainPageSelectRestaurnt();
+
+RankingService ranService = new RankingService();
+ArrayList<Ranking> rankList = ranService.selectTop3();
+Ranking rank1 = rankList.get(0); // 첫 번째 항목
+Ranking rank2 = rankList.get(1); // 두 번째 항목
+Ranking rank3 = rankList.get(2); // 세 번째 항목
 
 
 %>
@@ -70,7 +84,7 @@
     margin: auto;
     width: 720px;
     height: 600px;
-    max-width: 60%;            이미지가 슬라이드 안에서 넘치지 않도록 */
+    max-width: 60%;          /*  이미지가 슬라이드 안에서 넘치지 않도록 */
     max-height: 100%;
     border-radius: 25px;         /* 이미지에 둥근 모서리 적용 */
   }
@@ -531,124 +545,26 @@
           <div class="title" align="center">먹거리</div>
           <div class="swiper-container">
               <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/AdobeStock_600875580-1024x683.jpg" alt="">
-                      </a>
-                      <p>플레이잇1</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/shutterstock_2006673803-scaled.jpg" alt="">
-                      </a>
-                      <p>플레이잇2</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇3</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇4</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇5</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇6</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/덮밥.jpg" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                          <p>플레이잇7</p>
-                      </a>
-                  </div>
+              <% for(Restaurant restaurant : list) { %>
+				    <div class="swiper-slide">
+				        <a href="">
+				            <img src="<%= restaurant.getTitleImg()%>" alt="">
+				        </a>
+				        <p><%= restaurant.getPlaceTitle()%></p>
+				    </div>
+				<% } %>
+                 
               </div>
           </div>
 
           
-          <div class="swiper-prev">
-              <div class="material-icons">arrow_back</div>
-          </div>
-          <div class="swiper-next">
-              <div class="material-icons">arrow_forward</div>
-          </div>
+	          <div class="swiper-prev">
+	              <div class="material-icons">arrow_back</div>
+	          </div>
+	          <div class="swiper-next">
+	              <div class="material-icons">arrow_forward</div>
+	          </div>
+           
       </div>
   </section>
    
@@ -657,24 +573,52 @@
     <!-- 명예의전당 -->
  <div class="inner fame-area">
     <span id="title">명예의 전당</span>
+   
     <div id="fame-1">
-        <a href="">
-            <img src="./resourse/덮밥.jpg" alt="">
+       	<a href="<%= contextPath %>/detail.co?bno=<%= rankList.get(0).getcNO() %>">
+            <img src="<%= rankList.get(0).getTitleImg() %>" alt="">
         </a>
     </div>
     <div id="fame-2">
-        <a href="">
-            <img src="./resourse/덮밥.jpg" alt="">
+       	<a href="<%= contextPath %>/detail.co?bno=<%= rankList.get(1).getcNO() %>">
+            <img src="<%= rankList.get(1).getTitleImg() %>" alt="">
         </a>
     </div>
     <div id="fame-3">
-        <a href="">
-            <img src="./resourse/덮밥.jpg" alt="">
+        <a href="<%= contextPath %>/detail.co?bno=<%= rankList.get(2).getcNO() %>">
+            <img src="<%= rankList.get(2).getTitleImg() %>" alt="">
         </a>
     </div>
-    <div class="fame-name" id="fame-1-name"><a href="">덮밥1</a></div>
-    <div class="fame-name" id="fame-2-name"><a href="">덮밥2</a></div>
-    <div class="fame-name" id="fame-3-name"><a href="">덮밥3</a></div>
+    <%if(rankList.get(0).getNickName() != null) {%>
+    <div class="fame-name" id="fame-1-name">
+    	<a href="<%= contextPath %>/detail.co?bno=<%= rankList.get(0).getcNO() %>"><%= rankList.get(0).getNickName() %></a>
+    </div>
+    <%}else{ %>
+    <div class="fame-name" id="fame-1-name">
+    	<a href="<%= contextPath %>/detail.co?bno=<%= rankList.get(0).getcNO() %>"><%= rankList.get(0).getUserName() %></a>
+    </div>
+    	
+    <%} %>
+  	<%if(rankList.get(1).getNickName() != null) {%>
+    <div class="fame-name" id="fame-2-name">
+    	<a href="<%= contextPath %>/detail.co?bno=<%= rankList.get(1).getcNO() %>"><%= rankList.get(1).getNickName() %></a>
+    </div>
+    <%}else{ %>
+    <div class="fame-name" id="fame-2-name">
+    	<a href="<%= contextPath %>/detail.co?bno=<%= rankList.get(1).getcNO() %>"><%= rankList.get(1).getUserName() %></a>
+    </div>
+    	
+    <%} %>
+   <%if(rankList.get(2).getNickName() != null) {%>
+    <div class="fame-name" id="fame-3-name">
+    	<a href="<%= contextPath %>/detail.co?bno=<%= rankList.get(2).getcNO() %>"><%= rankList.get(2).getNickName() %></a>
+    </div>
+    <%}else{ %>
+    <div class="fame-name" id="fame-3-name">
+    	<a href="<%= contextPath %>/detail.co?bno=<%= rankList.get(2).getcNO() %>"><%= rankList.get(2).getUserName() %></a>
+    </div>
+    	
+    <%} %>
  </div>
    
    
