@@ -151,4 +151,5 @@
 		 WHERE USER_NO = ?
 		   AND C_NO = ?
 	</entry>
+	
 </properties>

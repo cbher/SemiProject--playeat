@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>플레잇</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -345,7 +345,7 @@ header .menubar::before{
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/clist.co?cpage=1">레시피 찾기</a></li>
                             <li><a href="<%= contextPath %>/cookingEnrollForm.co">레시피 업로드</a></li>
-                            <li><a href="<%= contextPath %>/ranking.rk">이번달 명예의 전당</a></li>
+                            <li><a href="<%= contextPath %>/rankingSelect.rk">이번달 명예의 전당</a></li>
                         </ul>  
                     </li>
                     <li>

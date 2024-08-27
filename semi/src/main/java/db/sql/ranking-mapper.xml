@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectTop3">
+		SELECT * 
+		  FROM (
+        SELECT C.*, FILE_PATH || CHANGE_NAME "TITLEIMG", M.NICKNAME 
+          FROM COOK_BOARD C 
+          JOIN MEMBER M ON C.USER_NO = M.USER_NO
+          JOIN ATTECHMENT A ON C.C_NO = A.C_NO
+         WHERE C.C_CATEGORY = 2
+           AND C.STATUS = 'Y'
+           AND FILE_LEVEL = 1
+         ORDER BY C.C_STAR DESC
+			 )
+		 WHERE ROWNUM &lt;= 99
+	</entry>
+	
+
+</properties>
