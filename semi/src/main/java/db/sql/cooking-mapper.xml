@@ -57,13 +57,11 @@
 		  , CHANGE_NAME
 		  , FILE_PATH
 		  , FILE_LEVEL
-		  , BOARD_CATEGORY
 		  , C_NO
 		  )
 		  VALUES
 		  (
 		    SEQ_ATTACHMENT.NEXTVAL
-		  , ?
 		  , ?
 		  , ?
 		  , ?

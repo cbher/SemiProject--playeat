@@ -50,6 +50,7 @@ public RankingDao() {
 										  rset.getInt("user_no"),
 										  rset.getInt("c_category"),
 										  rset.getString("titleimg"),
+										  rset.getString("user_name"),
 										  rset.getString("nickname")));
 			}
 			

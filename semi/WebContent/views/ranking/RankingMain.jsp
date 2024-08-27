@@ -2,10 +2,11 @@
 import="semi.cooking.model.vo.Attachment"%> <%@page
 import="java.util.ArrayList"%> <%@page
 import="semi.cooking.model.vo.CookingBoard"%> <%@ page language="java"
-contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%
-ArrayList<Ranking>
-  list = (ArrayList<Ranking
-    >)request.getAttribute("list"); %>
+contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> 
+<%
+ArrayList<Ranking>list = (ArrayList<Ranking>)request.getAttribute("list"); 
+
+%>
     <!DOCTYPE html>
     <html>
       <head>
@@ -54,6 +55,19 @@ ArrayList<Ranking>
             </select>
           </div>
           <div class="ranking-top">
+          <% if(list.get(0).getUserName() != null && list.get(0).getNickName() != null){ %>
+            <div class="gold">
+              <img src="/semi/resources/backGroundImg/gold.png" alt="" />
+              <a
+                href="<%= contextPath %>/detail.co?bno=<%= list.get(0).getcNO() %>"
+                ><img
+                  src="<%= list.get(0).getTitleImg() %>"
+                  class="rank-img"
+                  alt=""
+              /></a>
+              <div class="nickname"><%= list.get(0).getUserName() %></div>
+            </div>
+            <% }else{ %>
             <div class="gold">
               <img src="/semi/resources/backGroundImg/gold.png" alt="" />
               <a
@@ -65,6 +79,21 @@ ArrayList<Ranking>
               /></a>
               <div class="nickname"><%= list.get(0).getNickName() %></div>
             </div>
+            <% } %>
+            
+            <% if(list.get(2).getUserName() != null && list.get(2).getNickName() != null){ %>
+            <div class="bronze">
+              <img src="/semi/resources/backGroundImg/bronze.png" alt="" />
+              <a
+                href="<%= contextPath %>/detail.co?bno=<%= list.get(2).getcNO() %>"
+                ><img
+                  src="<%= list.get(2).getTitleImg() %>"
+                  class="rank-img"
+                  alt=""
+              /></a>
+              <div class="nickname"><%= list.get(2).getUserName() %></div>
+            </div>
+            <% }else{ %>
             <div class="bronze">
               <img src="/semi/resources/backGroundImg/bronze.png" alt="" />
               <a
@@ -76,6 +105,22 @@ ArrayList<Ranking>
               /></a>
               <div class="nickname"><%= list.get(2).getNickName() %></div>
             </div>
+            <% } %>
+            
+            <% if(list.get(1).getUserName() != null && list.get(1).getNickName() != null){ %>
+            <div class="silver">
+              <img src="/semi/resources/backGroundImg/silver.png" alt="" />
+              <a
+                href="<%= contextPath %>/detail.co?bno=<%= list.get(1).getcNO() %>"
+                ><img
+                  src="<%= list.get(1).getTitleImg() %>"
+                  class="rank-img"
+                  alt=""
+              /></a>
+              <div class="nickname"><%= list.get(1).getUserName() %></div>
+            </div>
+          </div>
+          <% }else{ %>
             <div class="silver">
               <img src="/semi/resources/backGroundImg/silver.png" alt="" />
               <a
@@ -87,6 +132,7 @@ ArrayList<Ranking>
               /></a>
               <div class="nickname"><%= list.get(1).getNickName() %></div>
             </div>
+            <% } %>
           </div>
         </div>
 
@@ -110,9 +156,15 @@ ArrayList<Ranking>
                 <td style="height: 50px" id="cook-title">
                   <span><%= ranking.getcTitle() %></span>
                 </td>
+                <% if(ranking.getNickName() != null && ranking.getUserName() != null){ %>
+                <td id="cook-nickname">
+                  <span><%= ranking.getUserName() %></span>
+                </td>
+                <% }else{ %>
                 <td id="cook-nickname">
                   <span><%= ranking.getNickName() %></span>
                 </td>
+                <% } %>
               </tr>
               <tr>
                 <td colspan="2" id="cook-content">

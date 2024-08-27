@@ -119,7 +119,6 @@ public class CookingDao {
 				pstmt.setString(2, at.getChangeName());
 				pstmt.setString(3, at.getFilePath());
 				pstmt.setInt(4, at.getFileLevel());
-				pstmt.setInt(5, at.getBoardCategory());
 				
 				result = pstmt.executeUpdate();
 			}

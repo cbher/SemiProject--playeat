@@ -14,9 +14,10 @@ public class Ranking {
 	private int cCategory;
 	private String titleImg;
 	private String nickName;
+	private String userName;
 	
 	public Ranking(int cNO, String cTitle, String cContents, Date date, String status, int cStar, int count, int userNo,
-			int cCategory, String titleImg, String nickName) {
+			int cCategory, String titleImg, String nickName, String userName) {
 		super();
 		this.cNO = cNO;
 		this.cTitle = cTitle;
@@ -29,6 +30,7 @@ public class Ranking {
 		this.cCategory = cCategory;
 		this.titleImg = titleImg;
 		this.nickName = nickName;
+		this.userName = userName;
 	}
 
 	public int getcNO() {
@@ -118,13 +120,22 @@ public class Ranking {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	@Override
 	public String toString() {
 		return "Ranking [cNO=" + cNO + ", cTitle=" + cTitle + ", cContents=" + cContents + ", date=" + date
 				+ ", status=" + status + ", cStar=" + cStar + ", count=" + count + ", userNo=" + userNo + ", cCategory="
-				+ cCategory + ", titleImg=" + titleImg + ", nickName=" + nickName + "]";
+				+ cCategory + ", titleImg=" + titleImg + ", nickName=" + nickName + ", userName=" + userName + "]";
 	}
+
 	
 	
 		

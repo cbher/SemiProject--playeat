@@ -4,7 +4,7 @@
 	<entry key="selectTop3">
 		SELECT * 
 		  FROM (
-        SELECT C.*, FILE_PATH || CHANGE_NAME "TITLEIMG", M.NICKNAME 
+        SELECT C.*, FILE_PATH || CHANGE_NAME "TITLEIMG", M.NICKNAME, M.USER_NAME  
           FROM COOK_BOARD C 
           JOIN MEMBER M ON C.USER_NO = M.USER_NO
           JOIN ATTECHMENT A ON C.C_NO = A.C_NO
