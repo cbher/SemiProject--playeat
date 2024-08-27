@@ -13,6 +13,7 @@ import static semi.common.JDBCtemplate.*;
 
 import semi.cooking.model.vo.Attachment;
 import semi.play.model.vo.Play;
+import semi.play.model.vo.PlayReply;
 
 public class PlayDao {
 	
@@ -140,5 +141,54 @@ public class PlayDao {
 			close(pstmt);
 		}
 		return list;
+	}
+	
+	public ArrayList<PlayReply> selectPlayReply(Connection conn, int placeNo){
+		ArrayList<PlayReply> list = new ArrayList<PlayReply>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPlayReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, placeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new PlayReply(rset.getInt("com_no"),
+									   rset.getString("com_content"),
+									   rset.getInt("score"),
+									   rset.getDate("create_date"),
+									   rset.getString("user_id")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	public int insertReply(Connection conn, PlayReply pr) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReply");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pr.getComment());
+			pstmt.setInt(2, pr.getScore());
+			pstmt.setString(3, pr.getUserId());
+			pstmt.setInt(4, pr.getPlaceNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 }

@@ -1,3 +1,4 @@
+<%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="semi.play.model.vo.Play"%>
@@ -9,6 +10,7 @@
 	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
 	// 파일번호, 원본명, 수정명, 파일경로
 	ArrayList<Play> sList = (ArrayList<Play>)request.getAttribute("sList");
+	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
 %>
 <!DOCTYPE html>
 <html>
@@ -395,7 +397,6 @@
 .comment{
     /* display: block; */
     width:1100px;
-    height:700px;
     margin: 50px auto;
     border-radius: 20px;
     background-color: #f6f5f0;
@@ -416,6 +417,14 @@
     padding-left: 50px;
     text-align: left;
     line-height: 3;
+}
+
+.comment .load{
+	position:absolute;
+	bottom:30px;
+	left:450px;
+	width:200px;
+	height:50px;
 }
 
 .comment #modalBtn{
@@ -470,7 +479,7 @@
 }
 
 .comment .text-area{
-    background-color: #f6f5f0;
+    background-color: #fff;
     width: 800px;
     height: 50px;
     margin: auto;
@@ -563,6 +572,10 @@
     display: inline;
 }
 
+.score{
+	color:yellow;
+}
+
 #modalBtn{
     background-color: #e4d4fa;
     border: 1px solid #8B7DBE;
@@ -571,7 +584,11 @@
     height: 25px;
     cursor: pointer;
 }
-
+.comment .waste{
+    height: 100px;
+    background-color: #f6f5f0;
+    border-radius: 10px;
+}
 
 footer .inner{
     display: block;
@@ -727,7 +744,10 @@ footer .inner .info .copyright{
   
         <!-- 모달 들어갈곳 -->
         <!-- 모달 버튼 -->
-        <button id="modalBtn">작성하기</button>
+        <% if(loginUser != null){ %> 
+        	<button id="modalBtn">작성하기</button>
+        	<input type="hidden" value="<%= loginUser.getUserNo() %>">
+        <% } %>
         </div>  
         <!-- 모달 창 -->
         <div id="myModal" class="comment-modal">
@@ -741,38 +761,89 @@ footer .inner .info .copyright{
               4<input type="radio" name="score" value="4">
               5<input type="radio" name="score" value="5">
             </p>
-            <input type="button" value="등록" class="star-btn" onclick="test()">
+            	<input type="button" value="등록" class="star-btn" onclick="insertReply()">
             <br>
             <textarea name="replyContent" id="" class="star-content" style="resize: none;" placeholder="입력하세요." required></textarea>
           </div>
         </div>
   
-  
-        <div class="comment-area">
-          <div class="profile">
-            <div id="nickname">닉네임들어갈곳</div>
-            <div id="date">작성날짜들어갈곳</div>
-            <div id="edit">
-              <a href="">수정</a> / 
-              <a href="">삭제</a>
-            </div>
-            <div id="score">별점들어갈곳</div>
-          </div>
-        <div class="text-area">
-          <div id="review">한줄평 들어갈곳</div>
-        </div>
-        </div>
+  		<div class="replys">
         
-      </div>
+        </div>
+	     <div class="waste"></div>
+	     </div>
 
             <script>
             
-            function test(){
+            $(function(){
+            	selectReply();
+            })
+            
+            $(function(){
+                $(".comment .comment-area").slice(0,3).show();
+                $(".load").click(function(e){
+                    e.preventDefault();
+                    $(".comment .comment-area:hidden").slice(0,3).show();
+                    if($(".comment .comment-area:hidden").length == 0){
+                        $(".load").hide();
+                    }
+                })
+            })
+	           
+	            
+            function selectReply(){
             	$.ajax({
             		url:"ajaxReply.ar",
-            		data:{}
+            		data:{
+            			placeNo : "<%= p.getPlaceNo() %>",
+            		},
+            		success:function(result){
+            			let value = "";
+            			for(let i = 0; i<result.length;i++){
+            				value += "<div class='comment-area'><div class='profile'><div id='nickname'>"
+            				+  result[i].userId + 
+            				"</div><div id='date'>" 
+            				+  result[i].createDate +
+            				"</div><div id='edit'><a href=''>수정</a> / <a href=''>삭제</a></div><div id='score'><div class='material-icons score'>star</div>" 
+            				+ result[i].score + 
+            				"</div></div><div class='text-area'><div id='review'>" 
+            				+ result[i].comment + 
+            				"</div></div></div>";
+            			}
+            			$(".replys").html(value);
+            		},
+            		error:function(){
+            			console.log("통신 실패");
+            		}
             	})
             }
+	            
+	            
+	            function insertReply(){           	
+	            	$.ajax({
+	            		url:"insertReply.ar",
+	            		data:{
+	            			userNo:$("input[type=hidden]").val(),
+	            			star:$("input[type=radio]:checked").val(),
+	            			content: $(".star-content").val(),
+	            			placeNo: "<%= p.getPlaceNo() %>"
+	            		},
+	            		success:function(result){
+	            			if(result > 0){
+	            				var modal = document.getElementById("myModal");
+	            				selectReply();
+	            				alert("댓글 등록이 완료되었습니다.");
+	            				modal.classList.toggle("show");
+	            				$(".star-content").val("");
+	            			}
+	            		},
+	            		error:function(){
+	            			console.log("통신 실패")
+	            		},
+	            	})
+	            }
+            
+        
             
             document.addEventListener("DOMContentLoaded", function () {
             	  // elements

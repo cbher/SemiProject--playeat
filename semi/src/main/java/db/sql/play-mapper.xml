@@ -48,4 +48,36 @@
 		   AND TEM_CATE_NO = ?
 		   AND P_NO != ?
 	</entry>
+	<entry key="selectPlayReply">
+		SELECT
+			   COM_NO
+			 , COM_CONTENT
+			 , SCORE
+			 , CREATE_DATE
+			 , USER_ID
+		  FROM PLAY_COMMENT
+		  JOIN MEMBER USING (USER_NO)
+		 WHERE PLACE_NO = ?
+		 ORDER 
+		    BY COM_NO DESC
+ 	</entry>
+ 	<entry key="insertReply">
+ 		INSERT
+ 		  INTO PLAY_COMMENT
+ 		  (
+ 		    COM_NO
+ 		  , COM_CONTENT
+ 		  , SCORE
+ 		  , USER_NO
+ 		  , PLACE_NO
+ 		  )
+ 		  VALUES
+ 		  (
+ 		  	SEQ_PCOMMENT.NEXTVAL
+ 		  , ?
+ 		  , ?
+ 		  , ?
+ 		  , ?
+ 		  )
+ 	</entry>
 </properties>
