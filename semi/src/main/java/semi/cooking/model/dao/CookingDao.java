@@ -95,7 +95,7 @@ public class CookingDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, c.getcBoardTitle());
 			pstmt.setString(2, c.getcBoardContent());
-			pstmt.setInt(3, 1);
+			pstmt.setString(3, c.getUserNo());
 			pstmt.setInt(4, c.getCookCategory());
 			
 			result = pstmt.executeUpdate();
