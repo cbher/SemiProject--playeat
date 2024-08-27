@@ -1,9 +1,12 @@
+<%@page import="semi.notice.model.vo.Attechment"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="semi.notice.model.vo.Notice"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <% 
 Notice n = (Notice)request.getAttribute("notice");
+ArrayList<Attechment> list = (ArrayList<Attechment>)request.getAttribute("list");
 
 %>
 <!DOCTYPE html>
@@ -41,17 +44,36 @@ Notice n = (Notice)request.getAttribute("notice");
                 </tr>
                 <tr>
                     <th align="center">내용</th>
-                    <td width="800" colspan="5">
+                    <td width="800" colspan="6">
                         <p style="height: 150px;"><%=n.getNoticeContent() %></p>
                     </td>
                 </tr>
+                 <!-- 메인 타이틀 -->
+                 <%if(!list.isEmpty()) {%>
+                  <tr>
+                	<td width="800" colspan="6">
+                		<img alt="" src="<%=contextPath%>/<%=list.get(0).getFilePath()+list.get(0).getChangeName()%>" width="100%">
+                	</td>
+                </tr>
+                <tr>
+                	<td colspan="6">
+                	<%for(int i = 1; i<list.size(); i++){ %>
+                		<img src="<%=contextPath %>/<%=list.get(i).getFilePath()+list.get(i).getChangeName() %>" width="100%">
+                		<%} %>
+                	</td>
+                </tr>
+                <%} %>
+              
         </table>
         <a class="btn btn-outline-success" href="<%=contextPath %>/noticeList.no?cpage=1">목록가기</a>
         <%if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
         <a class="btn btn-outline-warning" href="<%=contextPath %>/updateform.no?num=<%=n.getNoticeNo()%>">수정하기</a>
         <a class="btn btn-outline-danger" href="<%=contextPath %>/delete.no?num=<%=n.getNoticeNo()%>">삭제하기</a>
 		<%} %>
+		
     </div>
+    
+ 
 
 
 <%@include file="../common/footer.jsp" %>

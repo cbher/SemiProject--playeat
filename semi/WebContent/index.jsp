@@ -1,8 +1,10 @@
+<%@page import="semi.cooking.model.vo.CookingBoard"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
-	
+
 
 %>
 
@@ -12,6 +14,8 @@
 <meta charset="UTF-8">
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   
@@ -27,6 +31,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+
 <!-- gsap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -34,13 +39,16 @@
 
 
 <style>
+
+
+
 .main-slide{
-    margin-top: 180px;
-    border: 1px solid #e4d4fa;
+    margin-top: 220px;
+    
 }
 .main-slide .swiper-container {
     width: 60%;                 /* 전체 화면 너비 */
-    height: 600px;               /* 원하는 높이 설정 */
+    height: 100%;               /* 원하는 높이 설정 */
     display: flex;
     justify-content: center;     /* 중앙 정렬 */
     align-items: center;         /* 중앙 정렬 */
@@ -51,22 +59,37 @@
     justify-content: center;
     align-items: center;
     width: auto;                 /* 슬라이드 너비 자동 설정 */
-    height: 100%;                /* 컨테이너 높이에 맞춤 */
+    height: 70%;                /* 컨테이너 높이에 맞춤 */
+    
   }
   
 .main-slide .swiper-slide img {
-    max-width: 100%;             /* 이미지가 슬라이드 안에서 넘치지 않도록 */
+	/* position: absolute; */
+	justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 720px;
+    height: 600px;
+    max-width: 60%;            이미지가 슬라이드 안에서 넘치지 않도록 */
     max-height: 100%;
     border-radius: 25px;         /* 이미지에 둥근 모서리 적용 */
   }
-  
+
+.main-slide .swiper-slide p{
+	text-align: center;
+}
+
+.main-slide .swiper-slide a{
+  color: inherit;  /* 링크의 색상 제거 */
+
+}
 
 
 .play-slide{
     display: block;
     /* margin: 100px; */
     position: absolute;
-    top: 720px;
+    top: 760px;
     left: 0;
     right: 0;
     box-sizing: border-box;
@@ -329,35 +352,35 @@
           <div class="swiper-container">
               <div class="swiper-wrapper">
                   <div class="swiper-slide">
-                   <a href="">
-                     <img src="./resourse/AdobeStock_600875580-1024x683.jpg" alt="">
+                   <a target="_blank" href="https://korean.visitkorea.or.kr/kfes/detail/fstvlDetail.do?cmsCntntsId=2755115" >
+                     <img src="./resources/main_upfiles/19cc361a-c05f-4763-bdde-4158eba088e2_3.jpg" alt="">
+                   	 <p>고양시 축제</p>
                    </a>
-                   <p>플레이잇1</p>
-              </div>
+                   </div>
                   <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/shutterstock_2006673803-scaled.jpg" alt="">
+                      <a target="_blank" href="https://www.accf.or.kr/main/event/musicsociety2024">
+                          <img src="./resources/main_upfiles/motion_poster.gif" alt="">
+                       <p>월드뮤직페스티벌 2024</p>
                       </a>
-                      <p>플레이잇2</p>
+                    </div>
+                  <div class="swiper-slide">
+                      <a target="_blank" href="https://www.sejongpac.or.kr/portal/bbs/B0000057/view.do?nttId=48114&bbsId=B0000057&menuNo=200502">
+                          <img src="./resources/main_upfiles/8be85dd0-3223-4e21-9cf8-57b3b429db66_3.jpg" alt="">
+                     	 <p>세종썸머페스티벌</p>
+                      </a>
                   </div>
                   <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
+                      <a target="_blank" href="https://blog.naver.com/981jeju/223249501930">
+                          <img src="./resources/main_upfiles/220371a8-ec85-46b7-8bb0-30afa9a93a19_3.png" alt="">
+                           <p>구팔일댕댕이라이딩</p>
                       </a>
-                      <p>플레이잇3</p>
                   </div>
                   <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
+                      <a target="_blank" href="https://ges.seoul.kr/">
+                          <img src="./resources/main_upfiles/7dda978f-bd69-46f6-b31c-6e1e318249f5_3.jpg" alt="">
+                           <p>서울 E-sport 축제</p>
                       </a>
-                      <p>플레이잇4</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇5</p>
-                  </div>
+                 </div>
                   
               </div>
               <!-- If we need pagination -->
@@ -377,7 +400,7 @@
 
     <section class="play-slide">
       <div class="inner">
-          <div class="title">놀곳</div>
+          <div class="title" align="center">놀거리</div>
           <div class="swiper-container">
               <div class="swiper-wrapper">
                   <div class="swiper-slide">
@@ -505,7 +528,7 @@
     <!--food-->
     <section class="food-slide">
       <div class="inner">
-          <div class="title">최신 음식</div>
+          <div class="title" align="center">먹거리</div>
           <div class="swiper-container">
               <div class="swiper-wrapper">
                   <div class="swiper-slide">
@@ -663,7 +686,9 @@
    
    
    
+   
    <script>
+   
     document.addEventListener('DOMContentLoaded', function() {
     let playSwiper = new Swiper('.play-slide .swiper-container',{
           slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
@@ -707,7 +732,7 @@
 
         let mainSwiper = new Swiper('.main-slide .swiper-container',{
           slidesPerView: 1, // 한번에 보여줄 슬라이드 개수
-          spaceBetween: 10, // 슬라이드 사이 여백
+          spaceBetween: 20, // 슬라이드 사이 여백
           centeredSlides: true,
           // 1번 슬라이드가 가운데 보이기
           loop:true,
@@ -729,6 +754,12 @@
       });
    
    </script>
+   
+
+<script>
+  
+</script>
+   
    
    
    
