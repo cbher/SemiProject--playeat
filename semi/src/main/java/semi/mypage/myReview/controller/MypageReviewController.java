@@ -31,7 +31,7 @@ public class MypageReviewController extends HttpServlet {
 		// ----------------- 페이징 처리 -----------------
 		int listCount;    
 		int currentPage;  // 기본값으로 현재 페이지를 1로 설정
-		int pageLimit = 5;   // 페이징 바의 페이지 갯수
+		int pageLimit=10;  // 페이징 바의 페이지 갯수
 		int boardLimit = 5;  // 게시글 최대 개수(단위)  		
 		int maxPage;          // 가장 마지막 페이지(총 페이지 수)
 		int startPage;	      // 페이징 바의 시작 수
@@ -60,7 +60,9 @@ public class MypageReviewController extends HttpServlet {
 
 		// listCount : 총 게시글 개수 
 		listCount = new MyReviewService().selectListCount(userNo);  // 총 게시글 수 가져오기
-
+		System.out.println("listcount"+listCount);
+		System.out.println(listCount);
+		
 		// maxPage : 총 페이지 수 계산
 		maxPage = (int)Math.ceil((double)listCount / boardLimit);
 

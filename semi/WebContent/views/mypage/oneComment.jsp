@@ -157,8 +157,8 @@
         <div id="content">
             <div id="content_title">
                 <a href="<%=contextPath%>">나의 리뷰</a>
-                <a href="<%=contextPath %>/onecomment.1">한줄평</a>
-                <a href="<%=contextPath%>/myinquire.1">내 문의사항</a>
+                <a href="<%=contextPath%>/myonecomment">한줄평</a> <!-- ?cpage=o -->
+                <a href="<%=contextPath%>/myinquire?cpage=1">내 문의사항</a>
             </div>
             <div id="sort">
                 <button id="sort_button">
@@ -193,8 +193,24 @@
             <% }%>
            
 
-            <div id="pgnum">
-                1 2 3 4 ... 30
+             <div id="pgnum">
+                <% if(currentPage != 1){ %>
+		        <button onclick="location.href='<%=contextPath %>/mypage.myreview?cpage=<%= currentPage -1%>'">&lt;</button>
+		        <%} %>
+		        
+		        <% for(int p=startPage; p<= endPage; p++){%>
+		        	<% if (p == currentPage){ %>
+		        <button disabled><%=p %></button>
+		        	<% }else{ %>
+		        <button onclick="location.href='<%=contextPath %>/mypage.myreview?cpage=<%=p %>'"><%=p %></button>
+		  			<%} %>
+		  		<%} %>
+		  
+		  
+		  
+		 		<% if(currentPage !=maxPage){ %> 
+		        <button onclick="location.href='<%=contextPath %>/mypage.myreview?cpage=<%=currentPage +1%>'">&gt;</button>
+		   		<%} %>
             </div>
         </div>
 

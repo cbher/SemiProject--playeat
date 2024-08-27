@@ -21,7 +21,7 @@ import semi.mypage.myReview.model.vo.Review;
 /**
  * Servlet implementation class myOneCommentController
  */
-@WebServlet("/onecomment.myonecomment")
+@WebServlet("/myonecomment")
 public class MyOneCommentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

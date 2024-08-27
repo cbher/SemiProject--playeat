@@ -35,8 +35,12 @@ public class MyOneCommentDao {
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
-		
+			int startRow = (pi.getCurrentPage() - 1)* pi.getBoardLimit()+1;
+			int endRow = startRow + pi.getBoardLimit()-1;
+			
 			pstmt.setInt(1, userNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset=pstmt.executeQuery();
 			

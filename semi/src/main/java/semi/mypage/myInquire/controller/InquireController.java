@@ -20,7 +20,7 @@ import semi.mypage.myReview.model.vo.Review;
 /**
  * Servlet implementation class InquireEditController
  */
-@WebServlet("/myinquire.1")
+@WebServlet("/myinquire")
 public class InquireController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,14 +37,19 @@ public class InquireController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				int listCount;    
-				int currentPage = 1;  
+				int currentPage;  
 				int pageLimit = 10;   
-				int boardLimit = 20; 
+				int boardLimit=20;
 				int maxPage;          
 				int startPage;	     
 				int endPage;	      
 		
-				
+				String cpage = request.getParameter("cpage");
+				if (cpage == null) {
+					 currentPage = 1; 
+				} else {
+					 currentPage = Integer.parseInt(cpage);
+				}
 				
 				HttpSession session = request.getSession();  
 		        Member loginUser = (Member) session.getAttribute("loginUser");

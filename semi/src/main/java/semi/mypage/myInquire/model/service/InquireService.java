@@ -16,7 +16,7 @@ public class InquireService {
 	public ArrayList<Inquire> inquireList(PageInfo pi, int userNo){
 		Connection conn =getConnection();
 		
-		ArrayList<Inquire> list = new InquireDao().inquireList(conn, userNo);
+		ArrayList<Inquire> list = new InquireDao().inquireList(conn, pi, userNo);
 		
 		
 		close(conn);

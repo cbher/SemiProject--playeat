@@ -18,15 +18,16 @@ public class Review {
 	
 	public Review() {}
 
-	public Review(int reviewNo, String rTitle, String rContent, Date rDate, String title, String titleimg, String changeName) {
+	public Review(int reviewNo, String rTitle, String rContent, Date rDate, String title, int score, String titleimg, String changeName) {
 		super();
 		this.reviewNo = reviewNo;
 		this.rTitle = rTitle;
 		this.rContent = rContent;
 		this.rDate = rDate;
 		this.title = title;
+		this.score = score;
 		this.titleimg=titleimg;
-		
+		this.changeName=changeName;
 	}
 
 	public Review(int reviewNo, String rTitle, String rContent, Date rDate, int score, int userNo, String status,

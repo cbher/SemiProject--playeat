@@ -205,8 +205,8 @@
         <div id="content">
             <div id="content_title">
                 <a href="<%=contextPath%>">나의 리뷰</a>
-                <a href="<%=contextPath %>/onecomment.myonecomment">한줄평</a> <!-- ?cpage=o -->
-                <a href="<%=contextPath%>/myinquire.1">내 문의사항</a>
+                <a href="<%=contextPath%>/myonecomment">한줄평</a> <!-- ?cpage=o -->
+                <a href="<%=contextPath%>/myinquire?cpage=1">내 문의사항</a>
                
             </div>
             <div id="sort">
@@ -229,7 +229,7 @@
             <% for(Review r : list){ %>
                 <div class="rvbox">
                     <div class="rvbox_1">
-                        <a href=""><img src="<%= r.getTitleimg()%><%=r.getChangeName() %>" alt="가게 이미지"></a>
+                        <a href=""><img src="../../<%= r.getTitleimg()%><%=r.getChangeName() %>" alt="가게 이미지"><%= r.getTitleimg()%><%=r.getChangeName() %></a>
                     </div>
                     <div class="rvbox_2">
                         <div class="rvbox_header">
@@ -237,7 +237,7 @@
                             <div><%= r.getrDate() %></div>  <!-- 날짜 -->
                         </div>
                         <div class="rvbox_3"><%=r.getrContent()%><%=r.getChangeName()%></div>  <!-- 리뷰 내용 -->
-                        <div class="rvbox_4">
+                        <div class="rvbox_4"> 
                             <div class="rvbox_score">평점: <%= r.getScore() %> 점수</div>  <!-- 점수 -->
                             <div class="rvbox_delete"><a href="<%=contextPath%>/ReviewDelete.bo?num=<%=r.getReviewNo()%>">삭제</a></div>  <!-- 삭제 버튼 -->
                         </div>

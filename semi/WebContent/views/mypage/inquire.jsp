@@ -166,8 +166,8 @@
         <div id="content">
             <div id="content_title">
                 <a href="<%=contextPath%>">나의 리뷰</a>
-                <a href="<%=contextPath %>/onecomment.1">한줄평</a>
-                <a href="<%=contextPath%>/myinquire.1">내 문의사항</a>
+                <a href="<%=contextPath%>/myonecomment">한줄평</a> <!-- ?cpage=o -->
+                <a href="<%=contextPath%>/myinquire?cpage=1">내 문의사항</a>
                
 
             </div>
@@ -208,9 +208,9 @@
                     <td><%=i.getInquireTitle()%></td>
                     <td><%=i.getCreateDate() %></td> 
                     <%if(i.getStatus()=="Y"){ %>
-                    <td><img src="Y이미지 위치"></td>
+                    <td class="yes">Y</td>
 					<%}else{ %>
-					<td><img src="N이미지 위치"></td>	
+					<td class="no">X</td>	
 					<%} %>
                 </tr>
                 <% }%>
