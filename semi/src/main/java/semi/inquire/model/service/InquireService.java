@@ -89,6 +89,15 @@ public class InquireService {
 		return at;
 	}
 
+	public Inquire checkEmail(int inquireNo) {
+		Connection conn = getConnection();
+		Inquire inq = new InquireDao().checkEmail(conn, inquireNo);
+		
+		close(conn);
+		
+		return inq;
+	}
+
 	
 	
 

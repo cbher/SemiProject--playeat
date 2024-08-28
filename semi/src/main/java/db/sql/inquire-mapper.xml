@@ -103,6 +103,17 @@ SELECT *
 	   AND STATUS = 'Y'
 </entry>
 
+<entry key="checkEmail">
+	
+	SELECT 
+		   EMAIL
+		 , INQUIRE_NO
+	  FROM INQUIRE
+	  JOIN MEMBER ON (INQUIRE_WRITER = USER_NO)
+	 WHERE INQUIRE_NO = ?
+	
+</entry>
+
 
 
 </properties>

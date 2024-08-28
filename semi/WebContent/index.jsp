@@ -13,6 +13,8 @@
 RestaurantService restService = new RestaurantService();
 ArrayList<Restaurant> list = restService.mainPageSelectRestaurnt();
 
+
+
 RankingService ranService = new RankingService();
 ArrayList<Ranking> rankList = ranService.selectTop3();
 Ranking rank1 = rankList.get(0); // 첫 번째 항목

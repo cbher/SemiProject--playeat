@@ -70,7 +70,7 @@ div{
 header{
     width: 100%;
     top: 0;
-    z-index: 30;
+    z-index: 15;
     position: fixed;
     background-color: #f6f5f0
 }
