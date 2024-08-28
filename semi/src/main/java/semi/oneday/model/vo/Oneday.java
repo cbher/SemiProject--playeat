@@ -66,10 +66,11 @@ public class Oneday {
 	
 	
 
-	public Oneday(int oneNo, String oneTitle, String phone, String address, double score, int price, String startTime,
+	public Oneday(int oneNo, String titleImg, String oneTitle, String phone, String address, double score, int price, String startTime,
 			String endTime) {
 		super();
 		this.oneNo = oneNo;
+		this.titleImg = titleImg;
 		this.oneTitle = oneTitle;
 		this.phone = phone;
 		this.address = address;

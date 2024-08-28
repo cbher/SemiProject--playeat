@@ -2,12 +2,15 @@ package semi.oneday.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static semi.common.JDBCtemplate.*;
 
 import semi.common.PageInfo;
 import semi.cooking.model.vo.Attachment;
 import semi.oneday.model.dao.OnedayDao;
+import semi.oneday.model.vo.Comment;
 import semi.oneday.model.vo.Oneday;
 
 public class OnedayService {
@@ -48,6 +51,13 @@ public class OnedayService {
 		close(conn);
 		return list;
 	}
-	
+
+	public ArrayList<Comment> getCommentsByOneNo(int oneNo) {
+	    Connection conn = getConnection();
+	    ArrayList<Comment> commentList = new OnedayDao().selectCommentsByOneNo(conn, oneNo);
+	    close(conn);
+	    return commentList;
+	}
+
 	
 }

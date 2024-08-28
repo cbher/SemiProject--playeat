@@ -7,12 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import static semi.common.JDBCtemplate.*;
 
 import semi.common.PageInfo;
 import semi.cooking.model.vo.Attachment;
+import semi.oneday.model.vo.Comment;
 import semi.oneday.model.vo.Oneday;
 
 public class OnedayDao {
@@ -86,12 +90,10 @@ public class OnedayDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectPopularList");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			rset = pstmt.executeQuery();
-			
 			while(rset.next()) {
 				popularList.add(new Oneday(rset.getInt("one_no"),
 									rset.getString("one_title"),
@@ -99,7 +101,6 @@ public class OnedayDao {
 									rset.getInt("price"),
 									rset.getString("titleimg")));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -123,6 +124,7 @@ public class OnedayDao {
 			
 			if(rset.next()) {
 				o = new Oneday(rset.getInt("one_no"),
+							  rset.getString("titleimg"),
 							  rset.getString("one_title"),
 							  rset.getString("one_phone"),
 							  rset.getString("one_place"),
@@ -156,8 +158,8 @@ public class OnedayDao {
 			
 			while(rset.next()) {
 				Attachment at = new Attachment();
-				at.setChangeName(rset.getString("change_name"));
 				at.setFilePath(rset.getString("file_path"));
+				at.setOriginName(rset.getString("origin_name"));
 				
 				list.add(at);
 			}
@@ -171,5 +173,37 @@ public class OnedayDao {
 		
 		return list;
 	}
+
+	public ArrayList<Comment> selectCommentsByOneNo(Connection conn, int oneNo) {
+	    ArrayList<Comment> commentList = new ArrayList<>();
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+	    String sql = prop.getProperty("selectCommentsByOneNo"); // Assuming the SQL query is defined in oneday-mapper.xml
+	    
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, oneNo);
+	        rset = pstmt.executeQuery();
+	        
+	        while (rset.next()) {
+	            Comment comment = new Comment();
+	            comment.setUserName(rset.getString("USER_NAME"));
+	            comment.setNickName(rset.getString("NICKNAME"));
+	            comment.setComContent(rset.getString("COM_CONTENT"));
+	            comment.setScore(rset.getInt("SCORE"));
+	            comment.setCreateDate(rset.getDate("CREATE_DATE"));
+	            commentList.add(comment);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+	    return commentList;
+	}
+
+
+
 	
 }

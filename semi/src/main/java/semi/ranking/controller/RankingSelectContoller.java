@@ -32,7 +32,7 @@ public class RankingSelectContoller extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Ranking> list = new RankingService().selectTop3();
+			ArrayList<Ranking> list = new RankingService().selectTop3();
 	        request.setAttribute("list", list);
 
 	        RequestDispatcher view = request.getRequestDispatcher("views/ranking/RankingMain.jsp");

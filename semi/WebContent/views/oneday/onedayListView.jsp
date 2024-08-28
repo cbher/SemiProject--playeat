@@ -1,3 +1,4 @@
+<%@page import="semi.cooking.model.vo.Attachment"%>
 <%@page import="semi.common.PageInfo"%>
 <%@page import="semi.oneday.model.vo.Oneday"%>
 <%@page import="java.util.ArrayList"%>
@@ -18,7 +19,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>원데이클래스</title>
 <style>
 	.main-slide{
 
@@ -251,6 +252,7 @@ select{
 	                        
 	                    </div>
                     <% } %>
+	                           
                 </div>
             </div>
 	
@@ -314,8 +316,9 @@ select{
             	<button onclick="location.href='<%= contextPath %>/onedayMain.on?cpage=<%= currentPage + 1 %>'">&gt;</button>
         	<% } %>
                 </div>
-            
         </div>
+        
+        
     </section>
 </div>
 

@@ -18,7 +18,7 @@
 				     , ENT_PEOPLE
 				     , SCORE
 				     , PRICE
-				     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+				     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
 		          FROM ONEDAYCLASS O
 		          LEFT JOIN ATTECHMENT A USING(ONE_NO)
 		         WHERE ONE_STATUS = 'Y'
@@ -29,22 +29,25 @@
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="selectPopularList">
-		SELECT
-		       ONE_NO
-		     , ONE_TITLE
-		     , SCORE
-		     , PRICE
-		     , FILE_PATH || CHANGE_NAME "TITLEIMG"
-          FROM ONEDAYCLASS O
-          LEFT JOIN ATTECHMENT A USING(ONE_NO)
-         WHERE ONE_STATUS = 'Y'
-                 <![CDATA[AND ROWNUM <= 15]]>
-               ORDER
-                  BY SCORE DESC, 4
+		SELECT *
+		  FROM (
+	    SELECT 
+	           ONE_NO
+	         , ONE_TITLE
+	         , SCORE
+	         , PRICE
+	         , FILE_PATH || ORIGIN_NAME AS TITLEIMG
+	      FROM ONEDAYCLASS O
+	      LEFT JOIN ATTECHMENT A USING (ONE_NO)
+	     WHERE ONE_STATUS = 'Y'
+	     ORDER BY SCORE DESC, 3
+			 )
+		 WHERE ROWNUM &lt;= 15
 	</entry>
 	
 	<entry key="detailOneday">
 		SELECT ONE_NO
+			 , FILE_PATH || ORIGIN_NAME AS TITLEIMG
 		     , ONE_TITLE
 		     , ONE_PHONE
 		     , ONE_PLACE
@@ -52,19 +55,67 @@
 		     , PRICE
 		     , START_TIME
 		     , END_TIME
-		  FROM ONEDAYCLASS
-		 WHERE ONE_NO = ? 
+		  FROM ONEDAYCLASS O
+     LEFT JOIN ATTECHMENT A USING (ONE_NO)
+		 WHERE ONE_NO = ?
 	</entry>
 	
 	<entry key="selectAttachment">
 		 SELECT
 		        FILE_NO
 		      , ORIGIN_NAME
-		      , CHANGE_NAME
-		      , FILE_PATH
+		      , FILE_PATH || ORIGIN_NAME "TITLEIMG"
 		    FROM ONEDAYCLASS O
             LEFT JOIN ATTECHMENT A USING(ONE_NO)
 		  WHERE ONE_NO = ?
 		    AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="insertComment">
+		INSERT 
+		  INTO ONE_COMMENT 
+		     ( COM_NO
+		     , COM_CONTENT
+		     , SCORE
+		     , CREATE_DATE
+		     , USER_NO
+		     , STATUS
+		     , ONE_NO)
+		VALUES 
+		     (
+		       SEQ_COM_NO.NEXTVAL
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , ?
+		     , 'Y'
+		     , ?)
+	</entry>
+	
+	<entry key="getReviewsForDisplay">
+		SELECT 
+	            C.COM_CONTENT
+	          , C.SCORE
+	          , C.CREATE_DATE
+	          , M.USER_ID
+	          , M.NICKNAME 
+	       FROM ONE_COMMENT C 
+	       JOIN MEMBER M ON C.USER_NO = M.USER_NO 
+	      WHERE C.ONE_NO = ?
+	        AND C.STATUS = 'Y'
+	</entry>
+	
+	<entry key="commentView">
+		SELECT 
+        m.USER_NAME,
+        oc.COM_CONTENT,
+        oc.SCORE,
+        oc.CREATE_DATE,
+        m.NICKNAME
+    FROM one_comment oc
+    JOIN member m ON oc.USER_NO = m.USER_NO
+    WHERE oc.ONE_NO = ?
+      AND oc.STATUS = 'Y' -- Assuming 'Y' means active or valid comments
+    ORDER BY oc.CREATE_DATE DESC
 	</entry>
 </properties>
