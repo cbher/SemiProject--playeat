@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.cooking.model.vo.Attachment;
 import semi.oneday.model.service.OnedayService;
+import semi.oneday.model.vo.Comment;
 import semi.oneday.model.vo.Oneday;
 
 /**
@@ -38,7 +39,8 @@ public class OnedayDetailController extends HttpServlet {
 			Oneday o = oService.detailOneday(oneNo);
 			
 			//ArrayList<Attachment> list = oService.DetailAttachmentList(oneNo);
-			
+	        ArrayList<Comment> commentList = new OnedayService().getCommentsByOneNo(oneNo);
+	        request.setAttribute("c", commentList);
 			request.setAttribute("o", o);
 			//request.setAttribute("list", list);
 			

@@ -38,6 +38,7 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
         <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <style>
           footer .inner {
             display: block;
@@ -156,8 +157,8 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
 
           <div class="info">
             <div class="info2">
-              <h2><%= o.getOneTitle() %></h2>
               <div class="info-btn">
+              <h2><%= o.getOneTitle() %></h2>
                 <a href="" id="like">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -380,7 +381,10 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
 
             <!-- 모달 들어갈곳 -->
             <!-- 모달 버튼 -->
+            <% if(loginUser == null) {%>
+            <% }else { %>
             <button id="modalBtn">작성하기</button>
+            <% } %>
           </div>
           <!-- 모달 창 -->
           <div id="myModal" class="comment-modal">
@@ -400,11 +404,11 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
               </form>
             </div>
           </div>
-          <div class="comment-area">
           <%  
             for (int i = 0; i < c.size(); i++) { 
                 Comment comment = c.get(i);
           %>
+          <div class="comment-area">
             <div class="profile">
               <div id="nickname"><%= comment.getUserName() %></div>
               <div id="date"><%= comment.getCreateDate() %></div>
@@ -417,8 +421,9 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
             <div class="text-area">
               <div id="review"><%= comment.getComContent() %></div>
             </div>
-          <% } %>
           </div>
+          <% } %>
+          <button class="add-list">검색 결과 더보기</button>
         </div>
 
         <button id="top-btn">
@@ -632,6 +637,19 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
               nextEl: ".main-slide .swiper-next",
             },
           });
+
+          // 더보기 버튼
+        $(function(){
+        $(".comment .comment-area").slice(0, 4).show(); // select the first 4
+        $(".add-list").click(function(e){ // click event for load more
+        e.preventDefault();
+        $(".comment .comment-area:hidden").slice(0, 4).show(); // select next 4 hidden divs and show them
+        if($(".comment-area:hidden").length == 0){ // check if any hidden divs still exist
+            // alert("No more divs"); // alert if there are none left
+            $('.comment .add-list').hide();
+        }
+    });
+});
           
         </script>
       </body>

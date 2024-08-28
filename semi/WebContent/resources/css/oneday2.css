@@ -150,8 +150,6 @@ div.info-box {
 
 .info-btn {
   display: inline;
-  margin-left: 78%;
-  position: fixed;
 }
 
 #like {
@@ -362,9 +360,9 @@ h3 {
 /* 한줄평 */
 
 .comment {
-  /* display: block; */
+  display: block;
   width: 1100px;
-  height: 700px;
+  height: 830px;
   margin: 50px auto;
   border-radius: 20px;
   background-color: #f6f5f0;
@@ -396,8 +394,9 @@ h3 {
   height: 150px;
   margin-left: 10%;
   margin-top: 20px;
-  position: relative;
+  margin-bottom: 20px;
   border-radius: 5px;
+  display: none;
 }
 
 .comment-area .profile {
@@ -554,4 +553,17 @@ h3 {
   font-size: 13px;
   font-weight: 500;
   color: #333333;
+}
+
+.comment .add-list {
+  cursor: pointer;
+  width: 300px;
+  height: 45px;
+  margin: auto;
+  margin-bottom: 30px;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #8b7dbe;
+  background-color: #e4d4fa;
+  color: white;
 }

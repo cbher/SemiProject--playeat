@@ -179,7 +179,6 @@ public class OnedayDao {
 	    PreparedStatement pstmt = null;
 	    ResultSet rset = null;
 	    String sql = prop.getProperty("selectCommentsByOneNo"); // Assuming the SQL query is defined in oneday-mapper.xml
-	    
 	    try {
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(1, oneNo);
@@ -187,11 +186,11 @@ public class OnedayDao {
 	        
 	        while (rset.next()) {
 	            Comment comment = new Comment();
-	            comment.setUserName(rset.getString("USER_NAME"));
-	            comment.setNickName(rset.getString("NICKNAME"));
 	            comment.setComContent(rset.getString("COM_CONTENT"));
 	            comment.setScore(rset.getInt("SCORE"));
 	            comment.setCreateDate(rset.getDate("CREATE_DATE"));
+	            comment.setUserName(rset.getString("USER_NAME"));
+	            comment.setNickName(rset.getString("NICKNAME"));
 	            commentList.add(comment);
 	        }
 	    } catch (SQLException e) {

@@ -105,7 +105,7 @@
 	        AND C.STATUS = 'Y'
 	</entry>
 	
-	<entry key="commentView">
+	<entry key="selectCommentsByOneNo">
 		SELECT 
         m.USER_NAME,
         oc.COM_CONTENT,
@@ -115,7 +115,7 @@
     FROM one_comment oc
     JOIN member m ON oc.USER_NO = m.USER_NO
     WHERE oc.ONE_NO = ?
-      AND oc.STATUS = 'Y' -- Assuming 'Y' means active or valid comments
+      AND oc.STATUS = 'Y'
     ORDER BY oc.CREATE_DATE DESC
 	</entry>
 </properties>

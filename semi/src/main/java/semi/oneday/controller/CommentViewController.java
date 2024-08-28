@@ -34,15 +34,10 @@ public class CommentViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int oneNo = Integer.parseInt(request.getParameter("oneNo")); // Get the ONE_NO from the request parameter
-        
-
-
+		int oneNo = Integer.parseInt(request.getParameter("oneNo"));
         ArrayList<Comment> commentList = new OnedayService().getCommentsByOneNo(oneNo);
-        request.setAttribute("c", commentList); // Set the comment list in the request scope
-
-        // Forward to the JSP page
-        request.getRequestDispatcher("/views/oneday/onedayDetailView.jsp").forward(request, response);
+        //request.setAttribute("c", commentList);
+        //request.getRequestDispatcher("/views/oneday/onedayDetailView.jsp").forward(request, response);
 	}
 
 	/**
