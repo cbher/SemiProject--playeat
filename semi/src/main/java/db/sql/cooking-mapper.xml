@@ -22,6 +22,20 @@
 		     )
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="selectCookingSlideList">
+		SELECT
+		               C.C_NO
+		             , C_TITLE
+		             , COUNT
+		             , FILE_PATH || CHANGE_NAME "TITLEIMG"
+		             , C_STAR
+		          FROM COOK_BOARD C
+		          JOIN ATTECHMENT A ON (C.C_NO = A.C_NO)
+		         WHERE C.STATUS = 'Y'
+		           AND FILE_LEVEL = 1
+		         ORDER
+		            BY C.C_NO DESC
+	</entry>
 	<entry key="selectListCount">
 		SELECT
 			   COUNT(*) "COUNT"

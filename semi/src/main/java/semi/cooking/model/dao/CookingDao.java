@@ -27,6 +27,33 @@ public class CookingDao {
 		}
 	}
 	
+	public ArrayList<CookingBoard> selectCookingSlideList(Connection conn){
+		ArrayList<CookingBoard> list = new ArrayList<CookingBoard>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectCookingSlideList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new CookingBoard(rset.getInt("c_no"),
+						                  rset.getString("c_title"),
+						                  rset.getInt("count"),
+						                  rset.getString("titleimg"),
+						                  rset.getInt("c_star")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	public ArrayList<CookingBoard> selectCookingList(Connection conn, PageInfo pi){
 		ArrayList<CookingBoard> list = new ArrayList<CookingBoard>();
 		ResultSet rset = null;
