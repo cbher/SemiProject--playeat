@@ -236,8 +236,6 @@ header .menubar::before{
     transform: translateX(45px);  
 }
 
-/* 리뷰작성 */
-
 .review-form{   
     display: block;
     width:1100px;
@@ -337,4 +335,35 @@ header .menubar::before{
 .footer .inner .info3 .copyright{
     display: flex;
     align-items: center;
+}
+
+.score {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.score #star1{
+    width: 10px;
+    margin-right:50px;
+}
+
+.score #star2{
+    width: 10px;
+    margin-right:50px;
+}
+
+.score #star3{
+    width: 10px;
+    margin-right:50px;
+}
+
+.score #star4{
+    width: 10px;
+    margin-right:50px;
+}
+
+.score #star5{
+    width: 10px;
+    margin-right:50px;
 }

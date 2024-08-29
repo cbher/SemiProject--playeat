@@ -11,6 +11,7 @@ import java.util.Properties;
 
 import static semi.common.JDBCtemplate.*;
 
+import semi.Review.model.vo.Review;
 import semi.cooking.model.vo.Attachment;
 import semi.play.model.vo.Play;
 import semi.play.model.vo.PlayReply;
@@ -280,5 +281,32 @@ public class PlayDao {
 		}
 		return result;
 
+	}
+
+	public ArrayList<Play> recentRestaurant(Connection conn, int placeNo) {
+		ArrayList<Play> recentRestaurant = new ArrayList<>();
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+	    String sql = prop.getProperty("recentRestaurant"); 
+	    try {
+	    	pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, placeNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Play p = new Play();
+				p.setPlaceNo(rset.getInt("p_no"));
+				p.setPlaceTitle(rset.getString("p_title"));
+				p.setTitleImg(rset.getString("titleimg"));
+	        	
+	        	recentRestaurant.add(p);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+	    return recentRestaurant;
 	}
 }

@@ -272,6 +272,7 @@ public class RestaurantDao {
 				r.setPlaceScore(rset.getDouble("P_SCORE"));
 				r.setBusinessTime(rset.getString("BUSINESSTIME"));
 				r.setTemaCategory(rset.getInt("tem_cate_no"));
+				
 	            
 	        }
 	    } catch (SQLException e) {

@@ -118,4 +118,17 @@
 		 WHERE USER_NO = ?
 		   AND PLAY_NO = ?
 	</entry>
+	
+	<entry key="recentRestaurant">
+		SELECT
+			   P_NO
+			 , P_TITLE
+			 , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE
+		  LEFT JOIN ATTECHMENT ON (PLACE_NO = P_NO)
+		 WHERE P_STATUS = 'Y'
+		   AND P_SELECT_NUM = 1
+		   AND FILE_LEVEL = 1
+		   AND P_NO != ?
+	</entry>
 </properties>

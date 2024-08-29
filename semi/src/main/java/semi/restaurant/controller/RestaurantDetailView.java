@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.Review.model.service.ReviewService;
+import semi.Review.model.vo.Review;
 import semi.cooking.model.vo.Attachment;
+import semi.oneday.model.service.OnedayService;
 import semi.play.model.service.PlayService;
 import semi.play.model.vo.Play;
 import semi.restaurant.model.service.RestaurantService;
@@ -39,13 +42,17 @@ public class RestaurantDetailView extends HttpServlet {
         RestaurantService service = new RestaurantService();
         Restaurant restaurant = service.selectRestaurant(placeNo);
         Play p = new PlayService().selectDetailPlay(placeNo);
+        
+        ArrayList<Review> r = new ReviewService().ReviewList(placeNo);
 		ArrayList<Attachment> list = new PlayService().selectAttachmentList(placeNo);
-		ArrayList<Play> similarList = new PlayService().selectPlaySimilarList(p.getTemaCategory(), placeNo);
+		ArrayList<Play> recentRestaurant = new ReviewService().recentRestaurant(placeNo);
+		
 		if(p != null) {
 			request.setAttribute("p", p);
 			request.setAttribute("list", list);
-			request.setAttribute("sList", similarList);
+			request.setAttribute("recentRestaurant", recentRestaurant);
 			request.setAttribute("restaurant", restaurant);
+			request.setAttribute("r", r);
 			request.getRequestDispatcher("/views/restaurant/restaurantDetailView.jsp").forward(request, response);
 		}
         

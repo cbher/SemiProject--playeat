@@ -1,3 +1,4 @@
+<%@page import="semi.Review.model.vo.Review"%>
 <%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
 <%@page import="java.util.ArrayList"%>
@@ -10,8 +11,9 @@ pageEncoding="UTF-8"%>
 	// 글번호, 글제목, 주소, 전화번호, 별점, 운영시간, 테마카테고리
 	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
 	// 파일번호, 원본명, 수정명, 파일경로
-	ArrayList<Play> sList = (ArrayList<Play>)request.getAttribute("sList");
 	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
+	ArrayList<Review> r = (ArrayList<Review>)request.getAttribute("r");
+	ArrayList<Play> recentRestaurant = (ArrayList<Play>)request.getAttribute("recentRestaurant");
 %>
 <!DOCTYPE html>
 <html>
@@ -126,19 +128,19 @@ pageEncoding="UTF-8"%>
       <div class="swiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="./resourse/음식.jpg" alt="" />
+            <img src="<%=p.getTitleImg() %>" alt="" />
           </div>
           <div class="swiper-slide">
-            <img src="./resourse/아이유.jpg" alt="" />
+            <img src="<%=p.getTitleImg() %>" alt="" />
           </div>
           <div class="swiper-slide">
-            <img src="./resourse/조이.jpg" alt="" />
+            <img src="<%=p.getTitleImg() %>" alt="" />
           </div>
           <div class="swiper-slide">
-            <img src="./resourse/카리나.jpg" alt="" />
+            <img src="<%=p.getTitleImg() %>" alt="" />
           </div>
           <div class="swiper-slide">
-            <img src="./resourse/방탈출.jpg" alt="" />
+            <img src="<%=p.getTitleImg() %>" alt="" />
           </div>
         </div>
       </div>
@@ -224,132 +226,17 @@ pageEncoding="UTF-8"%>
           <div class="title">최신 음식</div>
           <div class="swiper-container">
             <div class="swiper-wrapper">
+            <% for(Play rp : recentRestaurant){ %>
               <div class="swiper-slide">
-                <a href="">
+                <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= rp.getPlaceNo()  %>">
                   <img
-                    src="./resourse/AdobeStock_600875580-1024x683.jpg"
+                    src="<%= rp.getTitleImg() %>"
                     alt=""
                   />
                 </a>
-                <p>플레이잇1</p>
+                <p><%= rp.getPlaceTitle() %></p>
               </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img
-                    src="./resourse/shutterstock_2006673803-scaled.jpg"
-                    alt=""
-                  />
-                </a>
-                <p>플레이잇2</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇3</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇4</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇5</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇6</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/덮밥.jpg" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                </a>
-                <p>플레이잇7</p>
-              </div>
-              <div class="swiper-slide">
-                <a href="">
-                  <img src="./resourse/play&eat.png" alt="" />
-                  <p>플레이잇7</p>
-                </a>
-              </div>
+              <% } %>
             </div>
           </div>
 
@@ -368,18 +255,24 @@ pageEncoding="UTF-8"%>
     <div class="review">
       <div class="r-btn">
         <h2>리뷰</h2>
+        <% if(loginUser == null) {%>
+            <% }else { %>
         <div>
           <input type="submit" value="리뷰작성" id="review-btn" />
         </div>
+        <% } %>
       </div>
-
+		  <%  
+            for (int i = 0; i < r.size(); i++) { 
+                Review review = r.get(i);
+          %>	
       <table align="center" class="review-content">
         <tr>
           <th rowspan="2" style="width: 200px" id="profile">
             <div id="profile-img"><img src="./resourse/조이.jpg" alt="" /></div>
-            <div id="profile-id">닉네임 자리</div>
-            <div id="profile-score">별점 자리</div>
-            <div id="profile-date">작성일 자리</div>
+            <div id="profile-id"><%= r.get(i).getNickName() %></div>
+            <div id="profile-score"><%= r.get(i).getScore() %></div>
+            <div id="profile-date"><%= r.get(i).getrDate() %></div>
             <div id="profile-update">
               <a href="">수정</a>
               <a href="">삭제</a>
@@ -387,141 +280,17 @@ pageEncoding="UTF-8"%>
             <input type="submit" value="리뷰신고" id="report-btn" />
           </th>
           <td colspan="2" rowspan="2" style="width: 500px" id="review-img">
-            <img src="./resourse/덮밥.jpg" alt="" />
+            <img src="<%= r.get(i).getTitleImg() %>" alt="" />
           </td>
         </tr>
         <tr></tr>
         <tr>
           <td colspan="2" style="height: 300px">
-            <p style="width: 95%; height: 290px">내용 들어갈 자리</p>
+            <p style="width: 95%; height: 290px"><%= r.get(i).getrContent() %></p>
           </td>
         </tr>
       </table>
-
-      <table align="center" class="review-content">
-        <tr>
-          <th rowspan="2" style="width: 200px" id="profile">
-            <div id="profile-img"><img src="./resourse/조이.jpg" alt="" /></div>
-            <div id="profile-id">닉네임 자리</div>
-            <div id="profile-score">별점 자리</div>
-            <div id="profile-date">작성일 자리</div>
-            <div id="profile-update">
-              <a href="">수정</a>
-              <a href="">삭제</a>
-            </div>
-            <input type="submit" value="리뷰신고" id="report-btn" />
-          </th>
-          <td colspan="2" rowspan="2" style="width: 500px" id="review-img">
-            <img src="./resourse/덮밥.jpg" alt="" />
-          </td>
-        </tr>
-        <tr></tr>
-        <tr>
-          <td colspan="2" style="height: 300px">
-            <p style="width: 95%; height: 290px">내용 들어갈 자리</p>
-          </td>
-        </tr>
-      </table>
-
-      <table align="center" class="review-content">
-        <tr>
-          <th rowspan="2" style="width: 200px" id="profile">
-            <div id="profile-img"><img src="./resourse/조이.jpg" alt="" /></div>
-            <div id="profile-id">닉네임 자리</div>
-            <div id="profile-score">별점 자리</div>
-            <div id="profile-date">작성일 자리</div>
-            <div id="profile-update">
-              <a href="">수정</a>
-              <a href="">삭제</a>
-            </div>
-            <input type="submit" value="리뷰신고" id="report-btn" />
-          </th>
-          <td colspan="2" rowspan="2" style="width: 500px" id="review-img">
-            <img src="./resourse/덮밥.jpg" alt="" />
-          </td>
-        </tr>
-        <tr></tr>
-        <tr>
-          <td colspan="2" style="height: 300px">
-            <p style="width: 95%; height: 290px">내용 들어갈 자리</p>
-          </td>
-        </tr>
-      </table>
-
-      <table align="center" class="review-content">
-        <tr>
-          <th rowspan="2" style="width: 200px" id="profile">
-            <div id="profile-img"><img src="./resourse/조이.jpg" alt="" /></div>
-            <div id="profile-id">닉네임 자리</div>
-            <div id="profile-score">별점 자리</div>
-            <div id="profile-date">작성일 자리</div>
-            <div id="profile-update">
-              <a href="">수정</a>
-              <a href="">삭제</a>
-            </div>
-            <input type="submit" value="리뷰신고" id="report-btn" />
-          </th>
-          <td colspan="2" rowspan="2" style="width: 500px" id="review-img">
-            <img src="./resourse/덮밥.jpg" alt="" />
-          </td>
-        </tr>
-        <tr></tr>
-        <tr>
-          <td colspan="2" style="height: 300px">
-            <p style="width: 95%; height: 290px">내용 들어갈 자리</p>
-          </td>
-        </tr>
-      </table>
-
-      <table align="center" class="review-content">
-        <tr>
-          <th rowspan="2" style="width: 200px" id="profile">
-            <div id="profile-img"><img src="./resourse/조이.jpg" alt="" /></div>
-            <div id="profile-id">닉네임 자리</div>
-            <div id="profile-score">별점 자리</div>
-            <div id="profile-date">작성일 자리</div>
-            <div id="profile-update">
-              <a href="">수정</a>
-              <a href="">삭제</a>
-            </div>
-            <input type="submit" value="리뷰신고" id="report-btn" />
-          </th>
-          <td colspan="2" rowspan="2" style="width: 500px" id="review-img">
-            <img src="./resourse/덮밥.jpg" alt="" />
-          </td>
-        </tr>
-        <tr></tr>
-        <tr>
-          <td colspan="2" style="height: 300px">
-            <p style="width: 95%; height: 290px">내용 들어갈 자리</p>
-          </td>
-        </tr>
-      </table>
-
-      <table align="center" class="review-content">
-        <tr>
-          <th rowspan="2" style="width: 200px" id="profile">
-            <div id="profile-img"><img src="./resourse/조이.jpg" alt="" /></div>
-            <div id="profile-id">닉네임 자리</div>
-            <div id="profile-score">별점 자리</div>
-            <div id="profile-date">작성일 자리</div>
-            <div id="profile-update">
-              <a href="">수정</a>
-              <a href="">삭제</a>
-            </div>
-            <input type="submit" value="리뷰신고" id="report-btn" />
-          </th>
-          <td colspan="2" rowspan="2" style="width: 500px" id="review-img">
-            <img src="./resourse/덮밥.jpg" alt="" />
-          </td>
-        </tr>
-        <tr></tr>
-        <tr>
-          <td colspan="2" style="height: 300px">
-            <p style="width: 95%; height: 290px">내용 들어갈 자리</p>
-          </td>
-        </tr>
-      </table>
+		<% } %>
 
       <button class="add-list">검색 결과 더보기</button>
     </div>

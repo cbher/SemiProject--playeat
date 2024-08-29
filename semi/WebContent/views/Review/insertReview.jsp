@@ -92,13 +92,31 @@
             <h2 align="center">리뷰 작성하기</h2>
             <br>
     
-            <form action="" id="enroll-form" method="post" enctype="multipart/form-data">
+            <form action="insertReview.pl" id="enroll-form" method="post" enctype="multipart/form-data">
             
             <table align="center" class="review-area">
+                <tr>
+                    <th>제목</th>
+                    <td colspan="3">
+                        <textarea name="title" rows="5" style="resize: none; height: 30px;" required></textarea>
+                    </td>
+                </tr>
                 <tr>
                     <th>내용</th>
                     <td colspan="3">
                         <textarea name="content" rows="5" style="resize: none; height: 300px;" required></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th>별점</th>
+                    <td colspan="3">
+                        <div class="score">
+                          	1<input type="radio" id="star1" name="score" value="1" checked />
+                            2<input type="radio" id="star2" name="score" value="2" /> 
+                            3<input type="radio" id="star3" name="score" value="3"/>
+                            4<input type="radio" id="star4" name="score" value="4"/> 
+                            5<input type="radio" id="star5" name="score" value="5"/>
+                        </div>
                     </td>
                 </tr>
                 <tr>

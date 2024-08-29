@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="insertReview">
+		INSERT 
+          INTO REVIEW 
+             ( REVIEW_NO 
+             , R_TITLE
+             , R_CONTENT
+             , R_DATE
+             , SCORE
+             , USER_NO
+             , STATUS
+             , PLAY_NO
+             )
+        VALUES 
+             ( SEQ_REVIEW.NEXTVAL
+             , ?
+             , ?
+             , SYSDATE
+             , ?
+             , DEFAULT
+             , ?
+             )
+	</entry>
+	
+	<entry key="insertAttachment">
+		INSERT
+		  INTO ATTECHMENT
+		  (
+		    FILE_NO
+		  , ORIGIN_NAME
+		  , CHANGE_NAME
+		  , FILE_PATH
+		  , FILE_LEVEL
+		  , PLACE_NO
+		  )
+		  	VALUES
+		  (
+		    SEQ_ATTACHMENT.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , 1
+		  , PLAY_NO_SEQ.CURRVAL
+		  )
+	</entry>
+	
+	<entry key="Review">
+		SELECT
+                  R_TITLE
+                , R_CONTENT
+                , R_DATE
+                , SCORE
+                , USER_NAME
+                , NICKNAME
+                , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+             FROM REVIEW R
+             JOIN MEMBER M ON R.USER_NO = M.USER_NO
+             JOIN ATTECHMENT A ON R.PLAY_NO = A.PLACE_NO
+            WHERE PLAY_NO = ?
+         ORDER BY R.R_DATE DESC
+	</entry>
+	
+	
+</properties>
