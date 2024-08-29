@@ -1,3 +1,5 @@
+<%@page import="semi.play.model.service.PlayService"%>
+<%@page import="semi.play.model.vo.Play"%>
 <%@page import="semi.ranking.model.service.RankingService"%>
 <%@page import="semi.ranking.model.vo.Ranking"%>
 <%@page import="semi.restaurant.model.dao.RestaurantDao"%>
@@ -10,16 +12,16 @@
     
 <%
 
-RestaurantService restService = new RestaurantService();
-ArrayList<Restaurant> list = restService.mainPageSelectRestaurnt();
-
-
-
-RankingService ranService = new RankingService();
-ArrayList<Ranking> rankList = ranService.selectTop3();
-Ranking rank1 = rankList.get(0); // 첫 번째 항목
-Ranking rank2 = rankList.get(1); // 두 번째 항목
-Ranking rank3 = rankList.get(2); // 세 번째 항목
+	RestaurantService restService = new RestaurantService();
+	ArrayList<Restaurant> list = restService.mainPageSelectRestaurnt();
+	
+	ArrayList<Play> playList = new PlayService().selectPlayList();
+	
+	RankingService ranService = new RankingService();
+	ArrayList<Ranking> rankList = ranService.selectTop3();
+	Ranking rank1 = rankList.get(0); // 첫 번째 항목
+	Ranking rank2 = rankList.get(1); // 두 번째 항목
+	Ranking rank3 = rankList.get(2); // 세 번째 항목
 
 
 %>
@@ -419,114 +421,14 @@ Ranking rank3 = rankList.get(2); // 세 번째 항목
           <div class="title" align="center">놀거리</div>
           <div class="swiper-container">
               <div class="swiper-wrapper">
+              	<% for(Play p : playList){ %>
                   <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/AdobeStock_600875580-1024x683.jpg" alt="">
+                      <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
+                          <img src="<%= p.getTitleImg() %>" alt="">
                       </a>
-                      <p>플레이잇1</p>
+                      <p><%= p.getPlaceTitle() %></p>
                   </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/shutterstock_2006673803-scaled.jpg" alt="">
-                      </a>
-                      <p>플레이잇2</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇3</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇4</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇5</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇6</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/덮밥.jpg" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                          <p>플레이잇7</p>
-                      </a>
-                  </div>
+                <% } %>
               </div>
           </div>
 
@@ -640,7 +542,7 @@ Ranking rank3 = rankList.get(2); // 세 번째 항목
           slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
           spaceBetween: 10, // 슬라이드 사이 여백
           // 1번 슬라이드가 가운데 보이기
-          loop:true,
+          loop:false,
           // autoplay: {
           //     delay : 5000,
           // },
@@ -660,7 +562,7 @@ Ranking rank3 = rankList.get(2); // 세 번째 항목
           slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
           spaceBetween: 10, // 슬라이드 사이 여백
           // 1번 슬라이드가 가운데 보이기
-          loop:true,
+          loop:false,
           // autoplay: {
           //     delay : 5000,
           // },

@@ -299,7 +299,7 @@ header .menubar::before{
                 <img src="resources/backGroundImg/play_eat-removebg-preview.png" alt="">
             </a>
             <div class="search">
-                <form action="test.do">
+                <form action="<%= contextPath %>/searchMain.sc">
                     
                         <input type="text" name="search" placeholder="검색어를 입력하세요">
                         <button class="material-icons" type="submit" >search</button>

@@ -1014,6 +1014,11 @@ footer .inner .info .copyright{
 	    var marker = new naver.maps.Marker({
 	      position: new naver.maps.LatLng(lat, lng),
 	      map: map,
+	      icon:{
+	    	  content:"<div style='border: 3px solid #8b7dbe;min-width:150px;height:35px; color:#333; text-align:center; border-radius:25px; background:#e4d4fa;padding:3px;line-height:35px;' >"+ '<%= p.getPlaceTitle() %>' +"<div style='border: 1px solid #8b7dbe;width: .1px;height: 45px;margin:auto;background:#8b7dbe'></div></div>",
+			  size: new naver.maps.Size(160, 65),
+	      }
+
 	      
 	    });
 	    
