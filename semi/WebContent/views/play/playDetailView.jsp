@@ -461,7 +461,7 @@
 
 .comment-area #edit{
     display: inline;
-    margin-left: 55%;
+    margin-left: 70%;
     
 }
 
@@ -845,7 +845,7 @@ footer .inner .info .copyright{
             				+  result[i].userId + 
             				"</div><div id='date'>" 
             				+  result[i].createDate +
-            				"</div><div id='edit'><a href=''>수정</a> / <a href=''>삭제</a></div><div id='score'><div class='material-icons score'>star</div> " 
+            				"</div><div id='edit'><a href=''>신고</a> </div><div id='score'><div class='material-icons score'>star</div> " 
             				+ result[i].score + 
             				"</div></div><div class='text-area'><div id='review'>" 
             				+ result[i].comment + 
@@ -998,7 +998,6 @@ footer .inner .info .copyright{
         // 네이버 지도
         
         function initMap(lat, lng) {
-        	console.log(lat)
     	var mapOptions = {
 	      center: new naver.maps.LatLng(lat, lng), // Center the map on the user's location
 	      zoom: 17, // Zoom level
@@ -1015,7 +1014,9 @@ footer .inner .info .copyright{
 	    var marker = new naver.maps.Marker({
 	      position: new naver.maps.LatLng(lat, lng),
 	      map: map,
+	      
 	    });
+	    
 	  	}
 	
 	  // Function to get the user's current location

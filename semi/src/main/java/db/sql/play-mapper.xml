@@ -44,8 +44,9 @@
 			 , FILE_PATH || ORIGIN_NAME "TITLEIMG"
 		  FROM PLACE
 		  LEFT JOIN ATTECHMENT ON (PLACE_NO = P_NO)
-		 WHERE STATUS = 'Y'
+		 WHERE P_STATUS = 'Y'
 		   AND TEM_CATE_NO = ?
+		   AND FILE_LEVEL = 1
 		   AND P_NO != ?
 	</entry>
 	<entry key="selectPlayReply">

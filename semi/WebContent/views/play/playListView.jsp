@@ -118,7 +118,7 @@
     background-color: #e4d4fa;
     cursor: pointer;
     border: 1px solid #8b7dbe;
-    width: 150px;
+    width: 160px;
     border-radius: 25px;
     font-size: 18px;
     color: #333;
@@ -477,7 +477,7 @@ footer .inner .info .copyright{
 		    <section class="random">
         <div class="inner">
             <div class="title">
-                <h1 align="center">오늘 뭐먹지?</h1>
+                <h1 align="center">오늘 뭐하지?</h1>
             </div>
             <div class="container">
                 <div id="menu-display">
@@ -487,7 +487,7 @@ footer .inner .info .copyright{
             </div>
             <div class="name">
                 <p id="menu-name"></p>
-                <button id="recommend-button">메뉴 추천하기</button>
+                <button id="recommend-button">놀거리 추천하기</button>
             </div>
         </div>
     </section>
@@ -902,23 +902,24 @@ footer .inner .info .copyright{
     document.addEventListener('DOMContentLoaded', function() {
         // 메뉴 데이터
         const menus = [
-            { name: "", image: "resources/randomMenuImg/" },
-            { name: "", image: "resources/randomMenuImg/" },
-            { name: "", image: "resources/randomMenuImg/" },
-            { name: "", image: "resources/randomMenuImg/" },
-            { name: "", image: "resources/randomMenuImg/" },
-            { name: "", image: "resources/randomMenuImg/" },
-            { name: "", image: "resources/randomMenuImg/" },
-            { name: "", image:"resources/randomMenuImg/"},
-            { name: "", image: "resources/randomMenuImg/"},
-            { name: "", image:"resources/randomMenuImg/"},
-            { name: "", image:"resources/randomMenuImg/"},
-            { name: "", image:"resources/randomMenuImg/"},
-            { name: "", image:"resources/randomMenuImg/"},
-            { name: "", image:"resources/randomMenuImg/"},
-            { name: "", image:"resources/randomMenuImg/"},
-            { name: "", image:"resources/randomMenuImg/"},
-            { name: "", image:"resources/randomMenuImg/"},
+            { name: "영화보기", image: "resources/randomMenuImg/영화.jpg" },
+            { name: "방탈출", image: "resources/randomMenuImg/방탈출.jpg" },
+            { name: "볼링", image: "resources/randomMenuImg/볼링.png" },
+            { name: "노래방", image: "resources/randomMenuImg/노래방.jpg" },
+            { name: "놀이동산", image: "resources/randomMenuImg/놀이동산.jfif" },
+            { name: "쇼핑", image: "resources/randomMenuImg/쇼핑몰.webp" },
+            { name: "낚시카페", image: "resources/randomMenuImg/낚시카페.jpg" },
+            { name: "보드게임", image:"resources/randomMenuImg/보드게임.jfif"},
+            { name: "북카페", image: "resources/randomMenuImg/만화카페.png"},
+            { name: "뮤지컬", image:"resources/randomMenuImg/뮤지컬.jpg"},
+            { name: "원데이클래스", image:"resources/randomMenuImg/원데이클래스.jfif"},
+            { name: "피시방", image:"resources/randomMenuImg/피시방.jpg"},
+            { name: "집", image:"resources/randomMenuImg/집.jpg"},
+            { name: "동물카페", image:"resources/randomMenuImg/동물카페.jpg"},
+            { name: "공원", image:"resources/randomMenuImg/공원.jfif"},
+            { name: "클라이밍", image:"resources/randomMenuImg/클라이밍.jpg"},
+            { name: "찜질방", image:"resources/randomMenuImg/찜질방.jpg"},
+            { name: "바다", image:"resources/randomMenuImg/바다.jpg"},
         ];
 
         const menuImage = document.getElementById('menu-image');
