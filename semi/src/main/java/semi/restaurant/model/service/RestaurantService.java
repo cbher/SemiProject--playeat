@@ -24,10 +24,10 @@ public class RestaurantService {
 	public ArrayList<Restaurant> mainPageSelectRestaurnt(){
 		
 		Connection conn = getConnection();
-		ArrayList<Restaurant> list = new RestaurantDao().mainPageSelectRestaurnt(conn);
+		ArrayList<Restaurant> rlist = new RestaurantDao().mainPageSelectRestaurnt(conn);
 		
 		close(conn);
-		return list;
+		return rlist;
 	}
 	 
 	

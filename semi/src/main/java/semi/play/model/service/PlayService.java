@@ -59,4 +59,15 @@ public class PlayService {
 		close(conn);
 		return result;
 	}
+	
+	public ArrayList<Play> mainPageSelectPlay(){
+		Connection conn = getConnection();
+		ArrayList<Play> plist = new PlayDao().mainPageSelectPlay(conn);
+		
+		close(conn);
+		return plist;
+		
+	}
+	
+	
 }

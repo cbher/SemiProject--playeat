@@ -1,3 +1,5 @@
+<%@page import="semi.play.model.vo.Play"%>
+<%@page import="semi.play.model.service.PlayService"%>
 <%@page import="semi.ranking.model.service.RankingService"%>
 <%@page import="semi.ranking.model.vo.Ranking"%>
 <%@page import="semi.restaurant.model.dao.RestaurantDao"%>
@@ -9,12 +11,15 @@
     pageEncoding="UTF-8"%>
     
 <%
-
+// 음식점 swiper
 RestaurantService restService = new RestaurantService();
-ArrayList<Restaurant> list = restService.mainPageSelectRestaurnt();
+ArrayList<Restaurant> rlist = restService.mainPageSelectRestaurnt();
 
+// 놀거리 swiper
+PlayService playService = new PlayService();
+ArrayList<Play> pList = playService.mainPageSelectPlay();
 
-
+// 명예의전당
 RankingService ranService = new RankingService();
 ArrayList<Ranking> rankList = ranService.selectTop3();
 Ranking rank1 = rankList.get(0); // 첫 번째 항목
@@ -56,7 +61,9 @@ Ranking rank3 = rankList.get(2); // 세 번째 항목
 
 <style>
 
-
+body{
+	height:2600px;
+}
 
 .main-slide{
     margin-top: 220px;
@@ -351,12 +358,80 @@ Ranking rank3 = rankList.get(2); // 세 번째 항목
 }
 
 
+ footer .inner {
+      display: block;
+      color: #8b7dbe;
+      height: 100px;
+      font-size: 15px;
+      padding: 20px 0 20px 0;
+      top: 1200px;
+      width: 100%;
+      height: 80px;
+      margin:auto;
+    }
+
+    footer .menu {
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    footer .menu li {
+      position: relative;
+    }
+
+    footer .menu li::before {
+      content: "";
+      width: 3px;
+      height: 3px;
+      background-color: #555;
+      position: absolute; /*position의 값을 부여하면 block요소가 됨.*/
+      top: 0;
+      bottom: 0;
+      right: -1px;
+      margin: auto;
+    }
+    footer .menu li:last-child::before {
+      display: none;
+    }
+
+    footer .menu li a {
+      font-size: 12px;
+      padding: 5px 15px;
+      display: block;
+    }
+
+    footer .inner .info {
+      list-style-type: none;
+      padding: 0;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    footer .info span {
+      margin-right: 20px;
+      font-size: 12px;
+    }
+
+    footer .info span:last-child {
+      margin-right: 0;
+    }
+
+    footer .inner .info .copyright {
+      display: flex;
+      align-items: center;
+    }
+
+
 </style>
 
 
 </head>
+
 <body>
-   <%@ include file="views/common/menubar.jsp" %>
+ <%@ include file="views/common/menubar.jsp" %>
    <%@ include file="views/common/badge.jsp" %>
    
    
@@ -408,125 +483,19 @@ Ranking rank3 = rankList.get(2); // 세 번째 항목
      
   </section>
 
-
-
-
-
-
-
     <section class="play-slide">
       <div class="inner">
           <div class="title" align="center">놀거리</div>
           <div class="swiper-container">
               <div class="swiper-wrapper">
+              <%for(Play p : pList){%>
                   <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/AdobeStock_600875580-1024x683.jpg" alt="">
+                      <a href="<%=contextPath %>/detail.pl?bno="+<%=p.getPlaceNo() %>>
+                          <img src="<%=p.getTitleImg() %>" alt="">
                       </a>
-                      <p>플레이잇1</p>
+                      <p><%=p.getPlaceTitle() %></p>
                   </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/shutterstock_2006673803-scaled.jpg" alt="">
-                      </a>
-                      <p>플레이잇2</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇3</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇4</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇5</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇6</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div>
-                  <div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/덮밥.jpg" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                      </a>
-                      <p>플레이잇7</p>
-                  </div><div class="swiper-slide">
-                      <a href="">
-                          <img src="./resourse/play&eat.png" alt="">
-                          <p>플레이잇7</p>
-                      </a>
-                  </div>
+                  <%} %>
               </div>
           </div>
 
@@ -544,10 +513,10 @@ Ranking rank3 = rankList.get(2); // 세 번째 항목
     <!--food-->
     <section class="food-slide">
       <div class="inner">
-          <div class="title" align="center">먹거리</div>
+          <div class="title" align="center">음식점</div>
           <div class="swiper-container">
               <div class="swiper-wrapper">
-              <% for(Restaurant restaurant : list) { %>
+              <% for(Restaurant restaurant : rlist) { %>
 				    <div class="swiper-slide">
 				        <a href="">
 				            <img src="<%= restaurant.getTitleImg()%>" alt="">
@@ -622,6 +591,35 @@ Ranking rank3 = rankList.get(2); // 세 번째 항목
     	
     <%} %>
  </div>
+ 
+ 
+  <footer>
+      <div class="inner">
+        <ul class="menu">
+          <li><a href="">개인정보처리방침</a></li>
+          <li><a href=""> 이용약관 </a></li>
+          <li><a href="">위치정보이용약관</a></li>
+          <li><a href="">원클래스약관</a></li>
+        </ul>
+
+        <div class="info">
+          <span>kh H반 4조</span>
+          <span>semi4jyo@gmail.com</span>
+          <span>개인정보 책임자 4조</span>
+
+          <p class="copyright">
+            &copy; <span id="this-year"></span> kh정보교육원 H반 4조
+            세미프로젝트
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // footer this-year (현재년도 표시)
+      const thisYear = document.querySelector("#this-year");
+      thisYear.textContent = new Date().getFullYear();
+    </script>
    
    
    
@@ -700,16 +698,10 @@ Ranking rank3 = rankList.get(2); // 세 번째 항목
       });
    
    </script>
-   
+	 
+      <%@ include file="views/common/top.jsp" %>
 
-<script>
-  
-</script>
-   
-   
-   
-   
-   <%@ include file="views/common/footer.jsp" %>
-   <%@ include file="views/common/top.jsp" %>
+
 </body>
+
 </html>

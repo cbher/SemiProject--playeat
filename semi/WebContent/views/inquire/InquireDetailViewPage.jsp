@@ -59,7 +59,7 @@
         		<%} %>
         		 <tr>
                 <th>첨부파일</th>
-                <td colspan="3">
+                <td colspan="5">
                    	 <!-- case 1. 첨부파일이 없을 경우 -->
                      <%if(at == null){ %>
                    		첨부파일 없습니다. 

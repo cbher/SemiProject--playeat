@@ -191,4 +191,36 @@ public class PlayDao {
 		}
 		return result;
 	}
+
+	/**
+	 * 메인페이지용 select문
+	 * return 
+	 * 
+	 */
+	public ArrayList<Play> mainPageSelectPlay(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Play> plist = new ArrayList<Play>();
+		String sql = prop.getProperty("mainPageSelectPlay");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				plist.add(new Play(rset.getInt("P_NO")
+								, rset.getString("P_TITLE")
+								, rset.getString("TITLEIMG")));  
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return plist;
+	}
 }

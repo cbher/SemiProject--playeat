@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,6 +12,38 @@
 	// 파일번호, 원본명, 수정명, 파일경로
 	ArrayList<Play> sList = (ArrayList<Play>)request.getAttribute("sList");
 	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
+	
+	
+	
+
+    // 예시로 사용자가 방문한 장소 정보를 세션에 저장
+    String placeTitle = p.getPlaceTitle();
+    String titleImg = p.getTitleImg();
+    int placeNo =  p.getPlaceNo();
+    
+    // 새로운 Place 객체 생성
+    Play play = new Play(placeNo, placeTitle, titleImg );
+    
+    // 세션에서 최근 방문한 장소 리스트 가져오기
+    List<Play> recentPlaces = (List<Play>) session.getAttribute("recentPlaces");
+    
+    if (recentPlaces == null) {
+        recentPlaces = new ArrayList<>();
+    }
+    
+    // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
+    if (recentPlaces.size() >= 3) {
+        recentPlaces.remove(0);
+    }
+    
+    // 새로운 장소를 리스트에 추가
+    recentPlaces.add(play);
+    
+    // 리스트를 세션에 저장
+    session.setAttribute("recentPlaces", recentPlaces);
+
+
+	
 %>
 <!DOCTYPE html>
 <html>

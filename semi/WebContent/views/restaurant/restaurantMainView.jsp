@@ -14,8 +14,14 @@
 	ArrayList<Restaurant> listJulla = list.get(5);
 	ArrayList<Restaurant> listGyungsang = list.get(6);
 	ArrayList<Restaurant> listJeju = list.get(7);
+	
+	
 
 %>
+
+
+  
+
 <!DOCTYPE html>
 <html>
 <head>
