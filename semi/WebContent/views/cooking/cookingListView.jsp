@@ -7,7 +7,7 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<CookingBoard> list = (ArrayList<CookingBoard>)request.getAttribute("list");
 	// 글번호, 글 제목, 글 내용, 대표이미지 (파일 경로 + 수정명), 추천수
-	
+	ArrayList<CookingBoard> slideList = (ArrayList<CookingBoard>)request.getAttribute("slideList");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
@@ -284,12 +284,12 @@ footer .inner .info .copyright{
                 <div class="title">최신 게시글</div>
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        <% for (int i = 0 ; i<list.size();i++){ %>
+                        <% for (int i = 0 ; i<slideList.size();i++){ %>
 	                         <div class="swiper-slide">
-	                            <a href="<%= contextPath %>/detail.co?bno=<%= list.get(i).getcBoardNo()%>">
-	                                <img src="<%= list.get(i).getTitleImg() %>" alt="">
+	                            <a href="<%= contextPath %>/detail.co?bno=<%= slideList.get(i).getcBoardNo()%>">
+	                                <img src="<%= slideList.get(i).getTitleImg() %>" alt="">
 	                            </a>
-	                            <p><%= list.get(i).getcBoardTitle() %></p>
+	                            <p><%= slideList.get(i).getcBoardTitle() %></p>
 	                        </div>
                         <% } %>
                     </div>
@@ -315,7 +315,7 @@ footer .inner .info .copyright{
 				    slidesPerView: 4, // 한번에 보여줄 슬라이드 개수
 				    spaceBetween: 10, // 슬라이드 사이 여백
 				     // 1번 슬라이드가 가운데 보이기
-				    loop:true,
+				    loop:false,
 				    // autoplay: {
 				    //     delay : 5000,
 				    // },

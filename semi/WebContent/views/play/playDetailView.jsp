@@ -22,6 +22,7 @@
     <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v"></script>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID&submodules=geocoder"></script>
 <style>
 
 /* BADGE */
@@ -200,7 +201,8 @@
 .detail-info .inner .main-box .info .material-icons.star{
     cursor: default;
     position: relative;
-    top:10px;
+    top:6px;
+    margin-right:5px;
 }
 
 .detail-info .inner .main-box .info button{
@@ -459,7 +461,7 @@
 
 .comment-area #edit{
     display: inline;
-    margin-left: 55%;
+    margin-left: 70%;
     
 }
 
@@ -574,6 +576,8 @@
 
 .score{
 	color:yellow;
+	position:relative;
+	top:6px;
 }
 
 #modalBtn{
@@ -680,12 +684,12 @@ footer .inner .info .copyright{
                     <div class="detail">
                         <div class="info">
                             <h2><%= p.getPlaceTitle() %></h2>
-                            <div class="material-icons like">thumb_up</div>
+                            <div class="material-icons like" onclick="insertLikeList()">thumb_up</div>
                             <div class="material-icons share">share</div>
                             <table>
                                 <tr>
                                     <th>별점</th>
-                                    <td><div class="material-icons star">star</div> <%= p.getScore() %></td>
+                                    <td style="display:flex"><div class="material-icons star">star</div> <div><%= p.getScore() %></div></td>
                                 </tr>
                                 <tr>
                                     <th>위치</th>
@@ -777,6 +781,9 @@ footer .inner .info .copyright{
             
             $(function(){
             	selectReply();
+            	selectScore();
+            	likeStatus();
+            	setInterval(selectReply,100000);
             })
             
             $(function(){
@@ -789,7 +796,41 @@ footer .inner .info .copyright{
                     }
                 })
             })
-	           
+	        
+            function likeStatus(){
+            	$.ajax({
+            		url:"likeStatus.pl",
+            		data:{
+            			bno:"<%= p.getPlaceNo() %>",
+            			userNo:$("input[type=hidden]").val(),
+            		},
+            		success:function(result){
+            			if(result > 0){
+            				$(".like").css("color", "#8b7dbe");
+            			}else{
+            				$(".like").css("color", "#e4d4fa");
+            			}
+            		},
+            		error:function(){
+            			console.log("실패")
+            		}
+            	})
+            }
+            
+            function selectScore(){
+            	$.ajax({
+            		url:"ajaxScore.as",
+            		data:{bno:"<%= p.getPlaceNo() %>"},
+            		success:function(result){
+            			if(result !== null){
+            				$(".info table tbody tr:first-child td *").eq(1).text(result)
+            			}
+            		},
+            		error:function(){
+            			
+            		},
+            	})
+            }
 	            
             function selectReply(){
             	$.ajax({
@@ -804,7 +845,7 @@ footer .inner .info .copyright{
             				+  result[i].userId + 
             				"</div><div id='date'>" 
             				+  result[i].createDate +
-            				"</div><div id='edit'><a href=''>수정</a> / <a href=''>삭제</a></div><div id='score'><div class='material-icons score'>star</div>" 
+            				"</div><div id='edit'><a href=''>신고</a> </div><div id='score'><div class='material-icons score'>star</div> " 
             				+ result[i].score + 
             				"</div></div><div class='text-area'><div id='review'>" 
             				+ result[i].comment + 
@@ -832,6 +873,7 @@ footer .inner .info .copyright{
 	            			if(result > 0){
 	            				var modal = document.getElementById("myModal");
 	            				selectReply();
+	            				selectScore();
 	            				alert("댓글 등록이 완료되었습니다.");
 	            				modal.classList.toggle("show");
 	            				$(".star-content").val("");
@@ -843,6 +885,20 @@ footer .inner .info .copyright{
 	            	})
 	            }
             
+	            function insertLikeList(){
+	            	$.ajax({
+	            		 url : "changeLike.pl",
+	                     data:{bno:<%= p.getPlaceNo() %>,
+	                     	  userNo : $("input[type=hidden]").val()},
+	                     success:function(){
+		     					$(".like").css("color","#8b7dbe");
+		     					likeStatus();                		 
+	                     },
+	                     error:function(){
+	                     	console.log("통신 실패");
+	                     },
+	            	})
+	            }
         
             
             document.addEventListener("DOMContentLoaded", function () {
@@ -944,7 +1000,7 @@ footer .inner .info .copyright{
         function initMap(lat, lng) {
     	var mapOptions = {
 	      center: new naver.maps.LatLng(lat, lng), // Center the map on the user's location
-	      zoom: 15, // Zoom level
+	      zoom: 17, // Zoom level
 	      minZoom: 10, // Minimum zoom level
 	      zoomControl: false, // Display zoom control
 	      mapTypeControl: false // Display map type control
@@ -952,30 +1008,43 @@ footer .inner .info .copyright{
     
 	    // Create the map
 	    var map = new naver.maps.Map('map', mapOptions);
-	
+		
+
 	    // Add a marker at the user's location
 	    var marker = new naver.maps.Marker({
 	      position: new naver.maps.LatLng(lat, lng),
-	      map: map
+	      map: map,
+	      
 	    });
+	    
 	  	}
 	
 	  // Function to get the user's current location
 	  function showCurrentLocation() {
 	    if (navigator.geolocation) {
 	      // Get the current position
-	      navigator.geolocation.getCurrentPosition(function(position) {
-	        var lat = position.coords.latitude; // User's latitude
-	        var lng = position.coords.longitude; // User's longitude
+	      	    naver.maps.Service.geocode({
+	        query: '<%= p.getAddress() %>'
+	    }, function(status, response) {
+	        if (status !== naver.maps.Service.Status.OK) {
+	            return alert('Something wrong!');
+	        }
+
+	        var result = response.v2, // 검색 결과의 컨테이너
+	            items = result.addresses; // 검색 결과의 배열
+
+	        // do Something
+	        var lat = items[0].y; // User's latitude
+	        var lng = items[0].x; // User's longitude
 	        
 	        // Initialize the map with the user's current location
 	        initMap(lat, lng);
-	      }, function(error) {
+	    }, function(error) {
 	        // Handle errors, such as location access denial
 	        console.error("Error getting location: ", error);
 	
 	        // Use a default location if the user denies location access
-	        initMap(85.3595704, 127.105399); // Default coordinates (e.g., Pangyo Techno Valley)
+	        initMap(37.3595704, 127.105399); // Default coordinates (e.g., Pangyo Techno Valley)
 	      });
 	    } else {
 	      // Geolocation is not supported by the browser
