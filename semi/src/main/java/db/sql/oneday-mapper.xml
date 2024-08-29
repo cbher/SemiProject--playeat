@@ -105,7 +105,7 @@
 	        AND C.STATUS = 'Y'
 	</entry>
 	
-	<entry key="selectCommentsByOneNo">
+	<entry key="commentView">
 		SELECT 
         m.USER_NAME,
         oc.COM_CONTENT,
@@ -117,5 +117,23 @@
     WHERE oc.ONE_NO = ?
       AND oc.STATUS = 'Y'
     ORDER BY oc.CREATE_DATE DESC
+	</entry>
+	
+	<entry key="insertComment">
+			INSERT INTO 
+       one_comment (COM_NO
+                 , COM_CONTENT
+                 , SCORE
+                 , CREATE_DATE
+                 , USER_NO
+                 , STATUS
+                 , ONE_NO) 
+            VALUES (COM_NO_SEQ.NEXTVAL
+                 , ?
+                 , ?
+                 , SYSDATE
+                 , ?
+                 , 'Y'
+                 , ?)
 	</entry>
 </properties>

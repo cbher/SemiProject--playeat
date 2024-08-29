@@ -174,11 +174,11 @@ public class OnedayDao {
 		return list;
 	}
 
-	public ArrayList<Comment> selectCommentsByOneNo(Connection conn, int oneNo) {
+	public ArrayList<Comment> commentView(Connection conn, int oneNo) {
 	    ArrayList<Comment> commentList = new ArrayList<>();
 	    PreparedStatement pstmt = null;
 	    ResultSet rset = null;
-	    String sql = prop.getProperty("selectCommentsByOneNo"); // Assuming the SQL query is defined in oneday-mapper.xml
+	    String sql = prop.getProperty("commentView"); // Assuming the SQL query is defined in oneday-mapper.xml
 	    try {
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setInt(1, oneNo);
@@ -200,6 +200,27 @@ public class OnedayDao {
 	        close(pstmt);
 	    }
 	    return commentList;
+	}
+
+	public int insertComment(Connection conn, Comment com) {
+		int result = 0;
+        PreparedStatement pstmt = null;
+        String sql = prop.getProperty("insertComment"); 
+
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, com.getComContent());
+            pstmt.setInt(2, com.getScore());
+            pstmt.setInt(3, com.getUserNo());
+            pstmt.setInt(4, com.getOneNo());
+
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+        return result;
 	}
 
 

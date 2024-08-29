@@ -5,6 +5,7 @@ import="semi.oneday.model.vo.Oneday"%> <%@page import="java.util.ArrayList"%>
 pageEncoding="UTF-8"%> 
 <% 
 Oneday o = (Oneday)request.getAttribute("o");
+Comment com = (Comment)request.getAttribute("com");
 ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list"); 
 ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
 %>
@@ -205,7 +206,7 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
             <table>
               <tr>
                 <th>별점</th>
-                <td><%= o.getScore() %></td>
+                <td><div class="material-icons">star</div><%= o.getScore() %></td>
               </tr>
               <tr>
                 <th>위치</th>
@@ -390,7 +391,7 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
           <div id="myModal" class="comment-modal">
             <div class="modal-content">
               <span class="close" id="closeBtn">&times;</span>
-              <form>
+              <form action="commentInsert.on" method="post">
                 <p class="star">
                   별점 1<input type="radio" id="star1" name="score" value="1" checked />
                   	  2<input type="radio" id="star2" name="score" value="2" /> 
@@ -398,9 +399,11 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
                   	  4<input type="radio" id="star4" name="score" value="4"/> 
                   	  5<input type="radio" id="star5" name="score" value="5"/>
                 </p>
-                <input type="submit" value="등록" class="star-btn" />
                 <br />
-                <textarea id="reviewContent" class="star-content" style="resize: none" placeholder="입력하세요."></textarea>
+                <textarea name="comContent" id="reviewContent" class="star-content" style="resize: none" placeholder="입력하세요."></textarea>
+              	<input type="hidden" name="oneNo" value="<%= o.getOneNo() %>">
+	            <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
+                <input type="submit" value="등록" class="star-btn">
               </form>
             </div>
           </div>
@@ -416,14 +419,14 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
                 <a href="">수정</a> /
                 <a href="">삭제</a>
               </div>
-              <div id="score"><%= comment.getScore() %></div>
+              <div id="score"><div class="material-icons">star</div><div><%= comment.getScore() %></div></div>
             </div>
             <div class="text-area">
               <div id="review"><%= comment.getComContent() %></div>
             </div>
           </div>
           <% } %>
-          <button class="add-list">검색 결과 더보기</button>
+          <button class="add-list">더보기</button>
         </div>
 
         <button id="top-btn">
@@ -601,6 +604,8 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
             $(".ModalPopup").show();
             $(".ModalPopup").center();
           }
+          
+          // 한줄평 작성
 
           // 탑버튼
           $(document).ready(function () {

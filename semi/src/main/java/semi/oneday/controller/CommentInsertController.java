@@ -1,30 +1,28 @@
 package semi.oneday.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.cooking.model.vo.Attachment;
+import com.google.gson.Gson;
+
 import semi.oneday.model.service.OnedayService;
 import semi.oneday.model.vo.Comment;
-import semi.oneday.model.vo.Oneday;
 
 /**
- * Servlet implementation class OnedayDetailController
+ * Servlet implementation class AjaxCommentInsertController
  */
-@WebServlet("/onedayDetail.on")
-public class OnedayDetailController extends HttpServlet {
+@WebServlet("/commentInsert.on")
+public class CommentInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public OnedayDetailController() {
+    public CommentInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,17 +31,27 @@ public class OnedayDetailController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			int oneNo = Integer.parseInt(request.getParameter("oneNo"));
-			
-			Oneday o = new OnedayService().detailOneday(oneNo);
-			
-			//ArrayList<Attachment> list = oService.DetailAttachmentList(oneNo);
-	        ArrayList<Comment> commentList = new OnedayService().commentView(oneNo);
-	        request.setAttribute("c", commentList);
-			request.setAttribute("o", o);
-			//request.setAttribute("list", list);
-			
-			request.getRequestDispatcher("views/oneday/onedayDetailView.jsp").forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+		
+		int oneNo = Integer.parseInt(request.getParameter("oneNo"));
+        int userNo = Integer.parseInt(request.getParameter("userNo"));
+        int score = Integer.parseInt(request.getParameter("score")); 
+        String comContent = request.getParameter("comContent");
+
+        // Create a Comment object
+        Comment com = new Comment();
+        com.setOneNo(oneNo);
+        com.setUserNo(userNo);
+        com.setScore(score);
+        com.setComContent(comContent);
+
+        int result = new OnedayService().insertComment(com);
+
+        if (result > 0) {
+            response.sendRedirect("onedayDetail.on?oneNo=" + oneNo);
+        } 
 	}
 
 	/**

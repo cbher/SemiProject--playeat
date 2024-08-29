@@ -52,12 +52,27 @@ public class OnedayService {
 		return list;
 	}
 
-	public ArrayList<Comment> getCommentsByOneNo(int oneNo) {
+	public ArrayList<Comment> commentView(int oneNo) {
 	    Connection conn = getConnection();
-	    ArrayList<Comment> commentList = new OnedayDao().selectCommentsByOneNo(conn, oneNo);
+	    ArrayList<Comment> commentList = new OnedayDao().commentView(conn, oneNo);
 	    close(conn);
 	    return commentList;
 	}
+
+	public int insertComment(Comment com) {
+		Connection conn = getConnection();
+        int result = new OnedayDao().insertComment(conn, com);
+
+        if (result > 0) {
+            commit(conn);
+        } else {
+            rollback(conn);
+        }
+
+        close(conn);
+        return result;
+	}
+
 
 	
 }
