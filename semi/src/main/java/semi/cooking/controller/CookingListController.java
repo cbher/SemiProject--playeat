@@ -63,8 +63,10 @@ public class CookingListController extends HttpServlet {
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		ArrayList<CookingBoard> list = new CookingService().selectCookingList(pi);
+		ArrayList<CookingBoard> slideList = new CookingService().selectCookingSlideList();
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
+		request.setAttribute("slideList", slideList);
 		request.getRequestDispatcher("views/cooking/cookingListView.jsp").forward(request, response);
 	}
 

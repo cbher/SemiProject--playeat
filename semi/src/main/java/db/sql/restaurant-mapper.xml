@@ -15,4 +15,34 @@
 		   AND P_SELECT_NUM = 1
 		   AND LOCATION_NO IN (?,?,?,?,?)
 	</entry>
+	
+	<entry key="mainPageSelectRestaurnt">
+		SELECT 
+			   P_NO
+			 , P_TITLE
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE 
+		  JOIN ATTECHMENT ON (P_NO = PLACE_NO)
+		 WHERE P_SELECT_NUM = 1
+		   AND LOCATION_NO = 1
+			
+	</entry>
+	
+	<entry key="selectRestaurant">
+		SELECT
+			   P_NO
+			 , P_TITLE
+			 , ADDRESS
+			 , P_CALL
+			 , P_SCORE
+			 , BUSINESSTIME
+			 , TEM_CATE_NO
+		  FROM PLACE
+		 WHERE P_STATUS = 'Y'
+		   AND P_NO = ?
+	</entry>
+	
+	
+	
+	
 </properties>

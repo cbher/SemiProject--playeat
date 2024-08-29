@@ -16,7 +16,8 @@
 
 <div class="insertInq-area" align="center">
 	<h3 align="center">문의사항 작성</h3>
-    <form action="<%=contextPath %>/insertInq.inq" method="post">
+    <form action="<%=contextPath %>/insertInq.inq" method="post" enctype="multipart/form-data">
+       <input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>" >
         <table align="center" id="insertTable">
             <thead>
                 <tr>
@@ -27,14 +28,21 @@
             </thead>
             <tbody>
             <tr>
-            	<th colspan="2" align="center">문의내용</th>
+            	<th colspan="3" align="center">문의내용</th>
             	
             </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <textarea name="content" id="" required></textarea>
                     </td>
                 </tr>
+                <tr>
+                	<td>첨부파일 :</td>
+                    <td colspan="2">
+                       <input type="file" name="upfile" >
+                    </td>
+                </tr>
+                
             </tbody>
         </table>
         <div class="btn-center">

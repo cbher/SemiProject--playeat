@@ -70,7 +70,7 @@ div{
 header{
     width: 100%;
     top: 0;
-    z-index: 30;
+    z-index: 15;
     position: fixed;
     background-color: #f6f5f0
 }
@@ -331,11 +331,11 @@ header .menubar::before{
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/noticeList.no?cpage=1">공지사항</a></li>
                             <li><a href="<%=contextPath%>/iqList.ip?cpage=1">문의사항</a></li>
-                            <li><a href="">자주묻는질문</a></li>
+                            <li><a href="<%=contextPath %>/frequently.inq">자주묻는질문</a></li>
                         </ul>   
                     </li>
                     <li>
-                        <a href="">놀거리</a>
+                        <a href="<%= contextPath %>/playList.pl">놀거리</a>
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/searchMain.sc">놀거리 찾기</a></li>
                             <li><a href="<%= contextPath %>/onedayMain.on?cpage=1">원데이클래스</a></li>

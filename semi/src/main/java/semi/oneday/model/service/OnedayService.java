@@ -73,6 +73,37 @@ public class OnedayService {
         return result;
 	}
 
+	public int selectLike(int oneNo, int userNo) {
+		Connection conn = getConnection();
+		int likeCount = new OnedayDao().selectLike(conn, oneNo, userNo);
+		close(conn);
+		return likeCount;
+	}
+
+	public int insertLike(int oneNo, int userNo) {
+		Connection conn = getConnection();
+		int result = new OnedayDao().insertLike(conn, oneNo, userNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int deleteLike(int oneNo, int userNo) {
+		Connection conn = getConnection();
+		int result = new OnedayDao().deleteLike(conn, oneNo, userNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 
 	
 }

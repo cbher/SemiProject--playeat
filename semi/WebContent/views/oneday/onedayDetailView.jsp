@@ -35,7 +35,8 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
         />
-
+		
+		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v&submodules=geocoder"></script>
         <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -155,12 +156,13 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
             <div class="swiper-button-next"></div>
             <div class="swiper-scrollbar"></div>
           </div>
-
+		<div class="total-area">
           <div class="info">
             <div class="info2">
-              <div class="info-btn">
+              <div class="info-title">
               <h2><%= o.getOneTitle() %></h2>
-                <a href="" id="like">
+              <div class="info-btn">
+                <a onclick="insertLike()" id="like">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="30"
@@ -202,6 +204,7 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
                   <button type="button" class="close_btn">닫기</button>
                 </div>
               </div>
+              </div>
             </div>
             <table>
               <tr>
@@ -226,6 +229,9 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
               </tr>
             </table>
           </div>
+          <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v"></script>
+			<div id="map" style="width:380px;height:322px; margin-top: 60px;"></div>
+		</div>
         </div>
 
         <!-- 비슷한 클래스 -->
@@ -402,7 +408,11 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
                 <br />
                 <textarea name="comContent" id="reviewContent" class="star-content" style="resize: none" placeholder="입력하세요."></textarea>
               	<input type="hidden" name="oneNo" value="<%= o.getOneNo() %>">
+              	<% if(loginUser != null){ %>
 	            <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
+	            <%}else{ %>
+	            <input type="hidden" name="userNo" value="">
+	            <% } %>
                 <input type="submit" value="등록" class="star-btn">
               </form>
             </div>
@@ -652,10 +662,107 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
         if($(".comment-area:hidden").length == 0){ // check if any hidden divs still exist
             // alert("No more divs"); // alert if there are none left
             $('.comment .add-list').hide();
-        }
-    });
-});
+		        }
+		    });
+		});
           
+          
+        function like(){
+        	$.ajax({
+        		url:"onedayLike.on",
+        		data:{
+        			bno:"<%= o.getOneNo() %>",
+        			userNo: $("input[type='hidden'][name='userNo']").val(),
+        		},
+        		success:function(result){
+        			if(result > 0){
+        				$("#like").css("color", "#8b7dbe");
+        			}else{
+        				$("#like").css("color", "#e4d4fa");
+        			}
+        		},
+        		error:function(){
+        			console.log("실패")
+        		}
+        	})
+        }
+        
+        function insertLike(){
+        	$.ajax({
+        		 url : "likeManagement.on",
+                 data:{bno:<%= o.getOneNo() %>,
+                 	  userNo : $("input[type='hidden'][name='userNo']").val()},
+                 success:function(){
+     					$("#like").css("color","#8b7dbe");
+     					like();                		 
+                 },
+                 error:function(){
+                 	console.log("통신 실패");
+                 },
+        	})
+        }
+     // 네이버 지도
+      function initMap(lat, lng) {
+       var mapOptions = {
+         center: new naver.maps.LatLng(lat, lng), // Center the map on the user's location
+         zoom: 17, // Zoom level
+         minZoom: 10, // Minimum zoom level
+         zoomControl: false, // Display zoom control
+         mapTypeControl: false // Display map type control
+       };
+    
+       // Create the map
+       var map = new naver.maps.Map('map', mapOptions);
+      
+
+       // Add a marker at the user's location
+       var marker = new naver.maps.Marker({
+         position: new naver.maps.LatLng(lat, lng),
+         map: map,
+
+         
+       });
+       
+        }
+   
+     // Function to get the user's current location
+     function showCurrentLocation() {
+       if (navigator.geolocation) {
+         // Get the current position
+                naver.maps.Service.geocode({
+           query: '<%= o.getAddress() %>'
+       }, function(status, response) {
+           if (status !== naver.maps.Service.Status.OK) {
+               return alert('Something wrong!');
+           }
+
+           var result = response.v2, // 검색 결과의 컨테이너
+               items = result.addresses; // 검색 결과의 배열
+
+           // do Something
+           var lat = items[0].y; // User's latitude
+           var lng = items[0].x; // User's longitude
+           
+           // Initialize the map with the user's current location
+           initMap(lat, lng);
+       }, function(error) {
+           // Handle errors, such as location access denial
+           console.error("Error getting location: ", error);
+   
+           // Use a default location if the user denies location access
+           initMap(37.3595704, 127.105399); // Default coordinates (e.g., Pangyo Techno Valley)
+         });
+       } else {
+         // Geolocation is not supported by the browser
+         alert("Geolocation is not supported by your browser.");
+         // Initialize the map with a default location
+         initMap(37.3595704, 127.105399);
+       }
+     }
+   
+     // Call the function to show the user's current location when the page loads
+     showCurrentLocation();
+       
         </script>
       </body>
     </html></Attachment

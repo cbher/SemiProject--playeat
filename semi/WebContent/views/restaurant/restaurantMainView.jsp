@@ -1,11 +1,12 @@
+<%@page import="semi.play.model.vo.Play"%>
 <%@page import="semi.restaurant.model.vo.Restaurant"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	ArrayList<ArrayList> list = (ArrayList<ArrayList>)request.getAttribute("list");
-	
 	ArrayList<Restaurant> listSeoul = list.get(0);
+	// 글번호, 글제목, 주소, 전화번호, 별점, 대표이미지경로
 	ArrayList<Restaurant> listGyunggi = list.get(1);
 	ArrayList<Restaurant> listIncheon = list.get(2);
 	ArrayList<Restaurant> listKangwon = list.get(3);
@@ -511,7 +512,7 @@ footer .inner .info .copyright{
                 <div class="swiper-wrapper">
                 <% for(int i = 0; i<listSeoul.size();i++){ %>
                     <div class="swiper-slide">
-                        <a href="">
+                        <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= listSeoul.get(i).getPlaceNo() %>">
                             <img src="<%= listSeoul.get(i).getTitleImg() %>" alt="">
                         </a>
                         <p><%= listSeoul.get(i).getPlaceTitle() %></p>

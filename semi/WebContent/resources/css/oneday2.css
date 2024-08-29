@@ -119,15 +119,15 @@ div.info-box {
   border: 1px solid #e4d4fa;
   width: 600px;
   height: 320px;
-  margin-left: 50px;
   margin-top: 60px;
   border-radius: 1%;
   color: black;
 }
 
 .info h2 {
-  margin-left: 50px;
-  width: 200px;
+  margin-left: 20px;
+  margin-bottom: 0;
+  width: auto;
   color: #8b7dbe;
 }
 
@@ -148,13 +148,19 @@ div.info-box {
   margin-bottom: 25px;
 }
 
+.info-title {
+  display: flex;
+  justify-content: space-between;
+}
+
 .info-btn {
   display: inline;
+  margin-right: 10px;
 }
 
 #like {
-  padding: 10px 20px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 svg:hover {
@@ -575,4 +581,10 @@ h3 {
 .info .material-icons {
   color: #e4d4fa;
   margin-right: 5px;
+}
+
+.total-area {
+  display: flex;
+  height: 322px;
+  justify-content: space-evenly;
 }

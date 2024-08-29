@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import semi.common.PageInfo;
 import semi.inquire.model.dao.InquireDao;
 import semi.inquire.model.vo.Inquire;
+import semi.notice.model.vo.Attechment;
 
 
 public class InquireService {
@@ -37,17 +38,22 @@ public class InquireService {
 	
 	}
 
-	public int insertInquire(Inquire inq) {
+	public int insertInquire(Inquire inq, Attechment at) {
 		Connection conn = getConnection();
-		int result = new InquireDao().insertInquire(conn, inq);
+		int result1 = new InquireDao().insertInquire(conn, inq);
+		int result2 = 1;
 		
-		if(result > 0) {
+		if(at != null) {
+			result2 = new InquireDao().insertAttachment(conn, at);
+		}
+		
+		if(result1 > 0 && result2 > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
 		close(conn);
-		return result;
+		return result1 * result2;
 	}
 
 	public Inquire detailViewInq(int inquireNo) {
@@ -71,6 +77,25 @@ public class InquireService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public Attechment selectAttechment(int inquireNo) {
+		Connection conn = getConnection();
+		Attechment at = new InquireDao().selectAttechment(conn,inquireNo );
+		
+		close(conn);
+		
+		
+		return at;
+	}
+
+	public Inquire checkEmail(int inquireNo) {
+		Connection conn = getConnection();
+		Inquire inq = new InquireDao().checkEmail(conn, inquireNo);
+		
+		close(conn);
+		
+		return inq;
 	}
 
 	

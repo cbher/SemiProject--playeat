@@ -13,6 +13,8 @@ import semi.cooking.model.vo.Attachment;
 import semi.oneday.model.service.OnedayService;
 import semi.oneday.model.vo.Comment;
 import semi.oneday.model.vo.Oneday;
+import semi.restaurant.model.service.RestaurantService;
+import semi.restaurant.model.vo.Restaurant;
 
 /**
  * Servlet implementation class OnedayDetailController
@@ -36,7 +38,6 @@ public class OnedayDetailController extends HttpServlet {
 			int oneNo = Integer.parseInt(request.getParameter("oneNo"));
 			
 			Oneday o = new OnedayService().detailOneday(oneNo);
-			
 			//ArrayList<Attachment> list = oService.DetailAttachmentList(oneNo);
 	        ArrayList<Comment> commentList = new OnedayService().commentView(oneNo);
 	        request.setAttribute("c", commentList);

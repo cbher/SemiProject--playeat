@@ -74,14 +74,16 @@
     </table>
     
     
-    <script type="text/javascript">
+   <script type="text/javascript">
 		$(function(){
 			$(".notice-view>tbody>tr").click(function(){
 				const num = $(this).children().eq(0).text();
 				location.href='<%=contextPath%>/detail.no?num='+num;
+			
 			})
 		})	
 	</script>
+
     
     <br>
 	<br>

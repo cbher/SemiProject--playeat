@@ -136,4 +136,34 @@
                  , 'Y'
                  , ?)
 	</entry>
+	
+	<entry key="selectLike">
+		SELECT
+		       COUNT(*) "COUNT"
+		  FROM LIKE_LIST
+		 WHERE USER_NO = ?
+		   AND ONE_NO = ?
+	</entry>
+	
+	<entry key="insertLike">
+		INSERT
+		  INTO	LIKE_LIST
+		  (
+		    LIKE_NO
+		  , USER_NO
+		  , ONE_NO 
+		  )
+		  VALUES
+		  (
+		    LIKE_LIST_SEQ.NEXTVAL
+		  , ?
+		  , ?
+		  )
+	</entry>
+	<entry key="deleteLike">
+		DELETE
+		  FROM LIKE_LIST
+		 WHERE USER_NO = ?
+		   AND ONE_NO = ?
+	</entry>
 </properties>
