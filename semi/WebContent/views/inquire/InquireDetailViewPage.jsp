@@ -24,6 +24,10 @@
 <%@include file="../common/menubar.jsp" %>
 
 <div class="detail"  align="center">
+
+
+
+
         <h2>문의사항</h2>
         <table class="detail-area" border="1">
                 <tr>

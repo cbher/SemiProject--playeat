@@ -6,6 +6,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import semi.inquire.model.service.InquireService;
+import semi.inquire.model.vo.Inquire;
+import semi.member.model.vo.Member;
 
 /**
  * Servlet implementation class checkEmailInquire
@@ -26,8 +31,20 @@ public class checkEmailInquire extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		 HttpSession session = request.getSession();
+	        Member loginUser = (Member) session.getAttribute("loginUser");
+		int inquireNo =   Integer.parseInt(request.getParameter("inquireNo"));
+		String email = request.getParameter("email");
+		
+		Inquire inq = new InquireService().checkEmail(inquireNo);
+		
+		if (loginUser != null && loginUser.getEmail().equals(inq.getEmail()) 
+	            && loginUser.getEmail().equals(email)) {
+	            response.getWriter().write("success");
+	        } else {
+	            response.getWriter().write("fail");
+	        }
+		
 	}
 
 	/**

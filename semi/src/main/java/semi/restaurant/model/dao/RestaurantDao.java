@@ -214,4 +214,39 @@ public class RestaurantDao {
 		
 		
 	}
+
+	/** 
+	 * 
+	 * @param conn
+	 * @return 메인페이지에 쓰이는 레스토랑 리스트 이승헌 만듬
+	 */
+	public ArrayList<Restaurant> mainPageSelectRestaurnt(Connection conn) {
+		
+		ArrayList<Restaurant> list = new ArrayList<Restaurant>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("mainPageSelectRestaurnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Restaurant(rset.getInt("P_NO")
+						              , rset.getString("P_TITLE")
+						              , rset.getString("TITLEIMG")));  
+						               
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+			return list;
+	}
 }

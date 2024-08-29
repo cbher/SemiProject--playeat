@@ -29,8 +29,12 @@ public class Restaurant {
 		this.titleImg = titleImg;
 	}
 	
-	
-	
+	public Restaurant(int placeNo, String placeTitle, String titleImg) {
+		super();
+		this.placeNo = placeNo;
+		this.placeTitle = placeTitle;
+		this.titleImg = titleImg;
+	}
 
 	public Restaurant(int placeNo, String placeTitle, String address, String placeCall, double placeScore,
 			String titleImg) {

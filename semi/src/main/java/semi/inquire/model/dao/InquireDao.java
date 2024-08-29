@@ -223,6 +223,35 @@ public class InquireDao {
 		}
 		return at;
 	}
+
+	public Inquire checkEmail(Connection conn, int inquireNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Inquire inq = null;
+		String sql = prop.getProperty("checkEmail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inquireNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				inq =  new Inquire();
+				inq.setEmail(rset.getString("email"));
+				inq.setInquireNo(rset.getInt("INQUIRE_NO"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return inq;
+	}
 	
 	
 

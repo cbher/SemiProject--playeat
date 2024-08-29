@@ -1,8 +1,9 @@
-<%@page import="semi.inquire.model.vo.Inquire"%> <%@page
-import="java.util.ArrayList"%> <%@page import="semi.common.PageInfo"%> <%@ page
-language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%> <%
-ArrayList<Inquire>
-  list = (ArrayList<Inquire>)request.getAttribute("list"); // 공지번호, 공지제목, userId(1번), 조회수,
+<%@page import="semi.inquire.model.vo.Inquire"%>
+ <%@page import="java.util.ArrayList"%> 
+<%@page import="semi.common.PageInfo"%> 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%
+  ArrayList<Inquire>list = (ArrayList<Inquire>)request.getAttribute("list"); // 공지번호, 공지제목, userId(1번), 조회수,
   PageInfo pi = (PageInfo)request.getAttribute("pi"); 
   int currentPage = pi.getCurrentPage(); 
   int startPage = pi.getStartPage(); 
@@ -10,34 +11,52 @@ ArrayList<Inquire>
   int maxPage = pi.getMaxPage();
   %>
 
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="UTF-8" />
-        <title>Insert title here</title>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
 
-        <script
-          src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.min.js"
-          integrity="sha512-/HL24m2nmyI2+ccX+dSHphAHqLw60Oj5sK8jf59VWtFWZi9vx7jzoxbZmcBeeTeCUc7z1mTs3LfyXGuBU32t+w=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer"
-        ></script>
-        <link rel="stylesheet" href="/semi/resources/css/inquListView.css" />
-      </head>
-      <body>
-        <%@include file="../common/menubar.jsp" %>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-        <div class="inquire-area">
-          <h2 align="center">문의사항</h2>
-          <br />
-          <%if(loginUser != null ) {%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
-          <a class="button" href="<%=contextPath %>/inquireEnterPage.inq"
-            >작성하기</a
-          >
+<link rel="stylesheet" href="/semi/resources/css/inquListView.css">
+</head>
+<body>
+  <%@include file="../common/menubar.jsp" %>
+  
+  
+           <div class="inquire-area">
+         
+                 <br />
+               <h2 align="center">문의사항</h2>
+           <%if(loginUser != null){%>
+   
+           <a class="button" href="<%=contextPath %>/inquireEnterPage.inq">작성하기</a>
           <br />
-          <%} %>
+         
           <br />
+          
+            
+           <div id="emailModal" class="modal" style="display:none;">
+			  <div class="modal-content">
+			    <span class="close">&times;</span>
+			    <h2>이메일 확인</h2>
+			    <form id="emailForm">
+			      <label for="userEmail">이메일:</label>
+			      <input type="email" id="email" name="email" required>
+			      <input type="hidden" id="inquireNo" name="inquireNo">
+			      <button type="submit">확인</button>
+			    </form>
+			  </div>
+			</div>
+			
+          
+           <%} %>
           <table class="inquire-view" align="center">
             <thead>
               <tr align="center">
@@ -54,7 +73,7 @@ ArrayList<Inquire>
                 <td colspan="4">문의사항 글이 없습니다</td>
               </tr>
               <%}else {%> 
-              <%for(Inquire i :list){%>
+              <%for(Inquire i : list){%>
               <tr>
                 <td><%= i.getInquireNo() %></td>
                 <td class="content"><%=i.getInquireTitle()%></td>
@@ -72,36 +91,66 @@ ArrayList<Inquire>
           </table>
 
           <script type="text/javascript">
-            $(function () {
+           $(function () {
               $(".inquire-view>tbody>tr").click(function () {
-                const num = $(this).children().eq(0).text();
-                location.href = "<%= contextPath %>/iqdetail.inq?num=" + num;
-              });
-            });
+            	  const num = $(this).children().eq(0).text();
+            	    $('#inquireNo').val(num);  // 모달창에 문의사항 번호 설정
+            	    
+            	    $('#email').val('');
+            	    
+            	    $('#emailModal').show();  // 모달창 열기
+            	  });
+
+            	  $('.close').click(function () {
+            	    $('#emailModal').hide();  // 모달창 닫기
+            	  });
+
+            	  $('#emailForm').submit(function (event) {
+            	    event.preventDefault(); // 폼 제출 막기
+            	    const formData = $(this).serialize();
+
+            	    // AJAX 요청으로 이메일과 비밀번호를 비교
+            	    $.ajax({
+            	      url: "<%= contextPath %>/checkEmail.inq",
+            	      type: "POST",
+            	      data: formData,
+            	      success: function (response) {
+            	        if (response === "success") {
+            	          const num = $('#inquireNo').val();
+            	          location.href = "<%= contextPath %>/iqdetail.inq?num=" + num;
+            	        } else {
+            	          alert("접근 권한이 없습니다.");
+            	          $('#emailModal').hide();  // 모달창 닫기
+            	        }
+            	      },
+            	      error: function () {
+            	        alert("오류가 발생했습니다.");
+            	      }
+            	    });
+            	  });
+            	});
           </script>
 
           <br />
           <br />
-          <div class="paging-area" align="center">
-            <%if(currentPage != 1){ %>
-            <button
-              onclick="location.href='<%=contextPath%>/iqList.ip?cpage=<%= currentPage -1%>'">&lt;</button>
-            <%} %> 
-            <%for(int p =startPage; p <= endPage; p++) {%>
-             <%if(p ==currentPage) {%>
-            <button disabled><%=p %></button>
-            <%}else{ %>
-            <button onclick="location.href='<%=contextPath %>/iqList.ip?cpage=<%= p %>'"> <%= p %>  </button>
-             	<%} %>
-             <%} %>
-             <% if(currentPage != maxPage){ %>
-            <button onclick="location.href='<%=contextPath%>/iqList.ip?cpage=<%= currentPage + 1%>'"> &gt;</button>
-            <%} %>
-          </div>
+        <div class="paging-area" align="center">
+          <%if(currentPage != 1){ %>
+          <button onclick="location.href='<%=contextPath%>/iqList.ip?cpage=<%= currentPage -1%>'">&lt;</button>
+          <%} %> 
+          <%for(int p =startPage; p <= endPage; p++) {%>
+	           <%if(p ==currentPage) {%>
+	          		<button disabled><%=p %></button>
+	          <%}else{ %>
+	          		<button onclick="location.href='<%=contextPath %>/iqList.ip?cpage=<%= p %>'"> <%= p %>  </button>
+	          <%} %>
+           <%} %>
+           <% if(currentPage != maxPage){ %>
+          <button onclick="location.href='<%=contextPath%>/iqList.ip?cpage=<%= currentPage + 1%>'"> &gt;</button>
+          <%} %>
         </div>
+      </div>
 
-        <%@include file="../common/footer.jsp" %>
-      </body>
-    </html></Inquire
-  ></Inquire
->
+<%@include file="../common/footer.jsp" %>
+</body>
+</html>
+   
