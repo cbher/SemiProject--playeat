@@ -18,7 +18,12 @@ public class Attechment {
 	private int placeNo;
 	private int reviewNo;
 	private int noticeNo;
+	private int inquireNo;
 	
+	
+
+
+
 	public Attechment() {}
 
 	
@@ -41,6 +46,45 @@ public class Attechment {
 		this.placeNo = placeNo;
 		this.reviewNo = reviewNo;
 		this.noticeNo = noticeNo;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public Attechment(int fileNo, String originName, String changeName, String filePath, int fileLevel, int inquireNo) {
+		super();
+		this.fileNo = fileNo;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
+		this.fileLevel = fileLevel;
+		this.inquireNo = inquireNo;
+	}
+	
+	
+	public Attechment(int fileNo, String originName, String changeName, String filePath, int fileLevel) {
+		super();
+		this.fileNo = fileNo;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
+		this.fileLevel = fileLevel;
+	}
+
+
+
+	public int getInquireNo() {
+		return inquireNo;
+	}
+
+
+
+	public void setInquireNo(int inquireNo) {
+		this.inquireNo = inquireNo;
 	}
 
 

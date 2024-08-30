@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                    <th width="60">문의 제목</th>
-                   <td width="300"><input type="text" name="title" required></td>
+                   <td width="290"><input type="text" name="title" required></td>
                    
                 </tr>
             </thead>
@@ -37,11 +37,14 @@
                     </td>
                 </tr>
                 <tr>
-                	<td>첨부파일 :</td>
-                    <td colspan="2">
-                       <input type="file" name="upfile" >
+                	<td  align="center">첨부파일 :</td>
+                    <td colspan="3">
+                       <input type="file" name="upfile1" id="upfile1" >
+					   <input type="file" name="upfile2" id="upfile2" >
+                   	   <input type="file" name="upfile3" id="upfile3" >      
                     </td>
                 </tr>
+               
                 
             </tbody>
         </table>

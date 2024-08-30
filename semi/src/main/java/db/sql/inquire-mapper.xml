@@ -81,11 +81,13 @@ SELECT *
 		 , ORIGIN_NAME
 		 , CHANGE_NAME
 		 , FILE_PATH
+		 , FILE_LEVEL
 		 )
 	VALUES
 		 (
 		   SEQ_ATTACHMENT.NEXTVAL
 		 , INQUIRE_SEQ.CURRVAL
+		 , ?
 		 , ?
 		 , ?
 		 , ?

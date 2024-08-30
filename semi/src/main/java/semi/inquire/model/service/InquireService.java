@@ -38,14 +38,10 @@ public class InquireService {
 	
 	}
 
-	public int insertInquire(Inquire inq, Attechment at) {
+	public int insertInquire(Inquire inq, ArrayList<Attechment> list) {
 		Connection conn = getConnection();
 		int result1 = new InquireDao().insertInquire(conn, inq);
-		int result2 = 1;
-		
-		if(at != null) {
-			result2 = new InquireDao().insertAttachment(conn, at);
-		}
+		int result2 = new InquireDao().insertAttachment(conn, list);
 		
 		if(result1 > 0 && result2 > 0) {
 			commit(conn);
@@ -79,14 +75,14 @@ public class InquireService {
 		return result;
 	}
 
-	public Attechment selectAttechment(int inquireNo) {
+	public ArrayList<Attechment> selectAttechment(int inquireNo) {
 		Connection conn = getConnection();
-		Attechment at = new InquireDao().selectAttechment(conn,inquireNo );
+		ArrayList<Attechment> list = new InquireDao().selectAttechment(conn, inquireNo);
 		
 		close(conn);
 		
-		
-		return at;
+	
+		return list;
 	}
 
 	public Inquire checkEmail(int inquireNo) {
