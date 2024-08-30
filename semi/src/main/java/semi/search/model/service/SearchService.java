@@ -22,4 +22,18 @@ public class SearchService {
 		close(conn);
 		return list;
 	}
+	
+	public ArrayList<Play> searchRestaurant(int category){
+		Connection conn = getConnection();
+		ArrayList<Play> list = new SearchDao().searchRestaurant(conn, category);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Play> selectAllRestaurant(){
+		Connection conn = getConnection();
+		ArrayList<Play> list = new SearchDao().selectAllRestaurant(conn);
+		close(conn);
+		return list;
+	}
 }
