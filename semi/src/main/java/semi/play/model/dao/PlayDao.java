@@ -197,6 +197,7 @@ public class PlayDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectScore");
+		String updateScore = prop.getProperty("updateScore");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -205,6 +206,13 @@ public class PlayDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				score = rset.getDouble("avg");
+				
+				pstmt = conn.prepareStatement(updateScore);
+				pstmt.setDouble(1, score);
+				pstmt.setInt(2, placeNo);
+				
+				int result = pstmt.executeUpdate();
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
