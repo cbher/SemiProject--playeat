@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import semi.restaurant.model.dao.RestaurantDao;
 import semi.restaurant.model.vo.Restaurant;
+import semi.restaurant.model.vo.Restaurant;
 
 import static semi.common.JDBCtemplate.*;
 
