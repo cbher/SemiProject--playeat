@@ -116,4 +116,9 @@
 		 WHERE USER_NO = ?
 		   AND PLAY_NO = ?
 	</entry>
+	<entry key="updateScore">
+		UPDATE PLACE
+		   SET P_SCORE = ?
+		 WHERE P_NO = ?
+	</entry>
 </properties>

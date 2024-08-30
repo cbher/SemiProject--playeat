@@ -1,3 +1,5 @@
+<%@page import="semi.play.model.vo.Play"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="semi.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -5,6 +7,7 @@
    String contextPath = request.getContextPath();
    Member loginUser = (Member)session.getAttribute("loginUser");
    String alertMsg = (String)session.getAttribute("alertMsg");
+   ArrayList<Play> list = (ArrayList<Play>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -115,7 +118,7 @@
             <div class="r-category-title">
                 <h4>식당 카테고리</h4>
             </div>
-            <ul class="r-category-list">
+            <ul class="r-category-list" onchange="tt()">
                 <li><input type="radio" name="r-category-list" value="1">전체</li>
                 <li><input type="radio" name="r-category-list" value="2">밥집</li>
                 <li><input type="radio" name="r-category-list" value="3">고깃집</li>
@@ -139,7 +142,7 @@
             </div>
             <ul class="location-list">
                 <li>
-                    <select name="location" id="">
+                    <select name="location" id="" onchange="test()">
                         <option value="1">서울</option>
                         <option value="2">경기도</option>
                         <option value="3">인천</option>
@@ -161,7 +164,6 @@
                 </li>
             </ul>
         </div>
-
     </div>
     
 
@@ -172,119 +174,28 @@
 		
 		
         <br><br>
-        <div class="search-list">
-            <table>
-                <tr>
-                    <td rowspan="3" style="width: 150px; height: 150px;">
-                        <a href=""><img src="./resourse/방탈출.jpg" alt=""></a>
-                    </td>
-                    <td rowspan="3" style="width: 15px;"></td>
-                    <td colspan="2" style="height: 40px;" id="search-title"><h2>상호명 자리</h2></td>
-                </tr>
-                <tr>
-                    <td colspan="2" id="search-content">여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>
-                </tr>
-                <tr>
-                    <td style="width: 150px; height: 35px;" id="search-score">별점자리</td>
-                    <td style="height: 35px;" id="search-location">위치자리</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="search-list">
-            <table>
-                <tr>
-                    <td rowspan="3" style="width: 150px; height: 150px;">
-                        <a href=""><img src="./resourse/방탈출.jpg" alt=""></a>
-                    </td>
-                    <td rowspan="3" style="width: 15px;"></td>
-                    <td colspan="2" style="height: 40px;" id="search-title"><h2>상호명 자리</h2></td>
-                </tr>
-                <tr>
-                    <td colspan="2" id="search-content">여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>
-                </tr>
-                <tr>
-                    <td style="width: 150px; height: 35px;" id="search-score">별점자리</td>
-                    <td style="height: 35px;" id="search-location">위치자리</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="search-list">
-            <table>
-                <tr>
-                    <td rowspan="3" style="width: 150px; height: 150px;">
-                        <a href=""><img src="./resourse/방탈출.jpg" alt=""></a>
-                    </td>
-                    <td rowspan="3" style="width: 15px;"></td>
-                    <td colspan="2" style="height: 40px;" id="search-title"><h2>상호명 자리</h2></td>
-                </tr>
-                <tr>
-                    <td colspan="2" id="search-content">여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>
-                </tr>
-                <tr>
-                    <td style="width: 150px; height: 35px;" id="search-score">별점자리</td>
-                    <td style="height: 35px;" id="search-location">위치자리</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="search-list">
-            <table>
-                <tr>
-                    <td rowspan="3" style="width: 150px; height: 150px;">
-                        <a href=""><img src="./resourse/방탈출.jpg" alt=""></a>
-                    </td>
-                    <td rowspan="3" style="width: 15px;"></td>
-                    <td colspan="2" style="height: 40px;" id="search-title"><h2>상호명 자리</h2></td>
-                </tr>
-                <tr>
-                    <td colspan="2" id="search-content">여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>
-                </tr>
-                <tr>
-                    <td style="width: 150px; height: 35px;" id="search-score">별점자리</td>
-                    <td style="height: 35px;" id="search-location">위치자리</td>
-                </tr>
-            </table>
-        </div>
-        <div class="search-list">
-            <table>
-                <tr>
-                    <td rowspan="3" style="width: 150px; height: 150px;">
-                        <a href=""><img src="./resourse/방탈출.jpg" alt=""></a>
-                    </td>
-                    <td rowspan="3" style="width: 15px;"></td>
-                    <td colspan="2" style="height: 40px;" id="search-title"><h2>상호명 자리</h2></td>
-                </tr>
-                <tr>
-                    <td colspan="2" id="search-content">여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>
-                </tr>
-                <tr>
-                    <td style="width: 150px; height: 35px;" id="search-score">별점자리</td>
-                    <td style="height: 35px;" id="search-location">위치자리</td>
-                </tr>
-            </table>
-        </div>
-
-        <div class="search-list">
-            <table>
-                <tr>
-                    <td rowspan="3" style="width: 150px; height: 150px;">
-                        <a href=""><img src="./resourse/방탈출.jpg" alt=""></a>
-                    </td>
-                    <td rowspan="3" style="width: 15px;"></td>
-                    <td colspan="2" style="height: 40px;" id="search-title"><h2>상호명 자리</h2></td>
-                </tr>
-                <tr>
-                    <td colspan="2" id="search-content">여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>
-                </tr>
-                <tr>
-                    <td style="width: 150px; height: 35px;" id="search-score">별점자리</td>
-                    <td style="height: 35px;" id="search-location">위치자리</td>
-                </tr>
-            </table>
-        </div>
-
+        <div class="searchWrap">
+	        <% for(Play p :list){ %>
+		        <div class="search-list">
+		            <table>
+		                <tr>
+		                    <td rowspan="3" style="width: 150px; height: 150px;">
+		                        <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>"><img src="<%= p.getTitleImg() %>" alt=""></a>
+		                    </td>
+		                    <td rowspan="3" style="width: 15px;"></td>
+		                    <td colspan="2" style="height: 40px;" id="search-title"><h2><%= p.getPlaceTitle() %></h2></td>
+		                </tr>
+		                <tr>
+		                    <td colspan="2" id="search-content">여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>
+		                </tr>
+		                <tr>
+		                    <td style="width: 150px; height: 35px;" id="search-score"><div class="material-icons" style="position:relative;top:6px;color:#e4d4fa">star</div> <%= p.getScore() %></td>
+		                    <td style="height: 35px;" id="search-location"><%= p.getAddress() %></td>
+		                </tr>
+		            </table>
+		        </div>
+		    <% } %>
+		</div>
         <button class="add-list">검색 결과 더보기</button>
     </div>
     </div>
@@ -313,24 +224,72 @@
         </footer>
 
 		<script>
+        $(function(){
+        	showSearchList();
+        })
+		function test(){
+			$.ajax({
+				url:"searchList.sl",
+				data:{category:$("option:selected").val()},
+				success:function(result){
+					let value = "";
+					for(let i = 0; i < result.length;i++){
+						value += "<div class='search-list'>"+
+						            "<table>"+
+						                "<tr>"+
+						                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
+						                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+						                    "</td>"+
+						                    "<td rowspan='3' style='width: 15px;'></td>"+
+						                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].placeTitle+"</h2></td>"+
+						                "</tr>"+
+						                "<tr>"+
+						                    "<td colspan='2' id='search-content'>여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>"+
+						                "</tr>"+
+						                "<tr>"+
+						                    "<td style='width: 150px; height: 35px;' id='search-score'><div class='material-icons' style='position:relative;top:6px;color:#e4d4fa'>star</div> "+ result[i].score+"</td>"+
+						                    "<td style='height: 35px;' id='search-location'>"+result[i].address+"</td>"+
+						                "</tr>"+
+						            "</table>"+
+						        "</div>";
+					
+					}
+					$(".searchWrap").html(value);
+					showSearchList();
+					if($(".search-list:hidden").length == 0){
+						$(".add-list").hide();
+					}else{
+						$(".add-list").show();						
+					}
+				},
+				error:function(){
+					console.log("실패");
+				}
+			})
+		}
+		
+		function tt(){
+			console.log($("input[name=r-category-list]:checked").val());
+		}
+        
         // 네이버 지도
         function initMap(lat, lng) {
-    	var mapOptions = {
-	      center: new naver.maps.LatLng(lat, lng), // Center the map on the user's location
-	      zoom: 15, // Zoom level
-	      minZoom: 10, // Minimum zoom level
-	      zoomControl: false, // Display zoom control
-	      mapTypeControl: false // Display map type control
-	    };
-    
-	    // Create the map
-	    var map = new naver.maps.Map('map', mapOptions);
-	
-	    // Add a marker at the user's location
-	    var marker = new naver.maps.Marker({
-	      position: new naver.maps.LatLng(lat, lng),
-	      map: map
-	    });
+	    	var mapOptions = {
+		      center: new naver.maps.LatLng(lat, lng), // Center the map on the user's location
+		      zoom: 15, // Zoom level
+		      minZoom: 10, // Minimum zoom level
+		      zoomControl: false, // Display zoom control
+		      mapTypeControl: false // Display map type control
+		    };
+	    
+		    // Create the map
+		    var map = new naver.maps.Map('map', mapOptions);
+		
+		    // Add a marker at the user's location
+		    var marker = new naver.maps.Marker({
+		      position: new naver.maps.LatLng(lat, lng),
+		      map: map
+		    });
 	  	}
 	
 	  // Function to get the user's current location

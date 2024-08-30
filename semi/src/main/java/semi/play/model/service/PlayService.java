@@ -63,6 +63,7 @@ public class PlayService {
 	public double selectScore(int placeNo) {
 		Connection conn = getConnection();
 		double score = new PlayDao().selectScore(conn, placeNo);
+		commit(conn);
 		close(conn);
 		return score;
 	}

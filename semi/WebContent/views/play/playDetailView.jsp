@@ -427,6 +427,15 @@
 	left:450px;
 	width:200px;
 	height:50px;
+	border-radius:25px;
+	font-family:'TTLaundryGothicB';
+	border : 3px solid #e4d4fa;
+	cursor:pointer;
+}
+
+.comment .load:hover{
+	background:#e4d4fa;
+	color:#fff;
 }
 
 .comment #modalBtn{
@@ -441,6 +450,7 @@
     margin-top: 20px;
     position: relative;
     border-radius: 5px;
+    display:none;
 }
 
 .comment-area .profile{
@@ -772,8 +782,9 @@ footer .inner .info .copyright{
         </div>
   
   		<div class="replys">
-        
+
         </div>
+        <button class="load">더보기</button>
 	     <div class="waste"></div>
 	     </div>
 
@@ -786,16 +797,19 @@ footer .inner .info .copyright{
             	setInterval(selectReply,100000);
             })
             
-            $(function(){
-                $(".comment .comment-area").slice(0,3).show();
-                $(".load").click(function(e){
-                    e.preventDefault();
-                    $(".comment .comment-area:hidden").slice(0,3).show();
-                    if($(".comment .comment-area:hidden").length == 0){
-                        $(".load").hide();
-                    }
-                })
-            })
+            
+            	function showReply(){
+	                $(".comment .comment-area").slice(0,3).show();
+	                $(".load").click(function(e){
+	                    e.preventDefault();
+	                    $(".comment .comment-area:hidden").slice(0,3).show();
+	                    if($(".comment .comment-area:hidden").length == 0){
+	                        $(".load").hide();
+	                    }
+	                })
+            		
+            	}
+            
 	        
             function likeStatus(){
             	$.ajax({
@@ -852,6 +866,12 @@ footer .inner .info .copyright{
             				"</div></div></div>";
             			}
             			$(".replys").html(value);
+            			showReply();
+            			if($(".comment-area:hidden").length == 0){
+    						$(".load").hide();
+    					}else{
+    						$(".load").show();						
+    					}
             		},
             		error:function(){
             			console.log("통신 실패");
@@ -1015,8 +1035,8 @@ footer .inner .info .copyright{
 	      position: new naver.maps.LatLng(lat, lng),
 	      map: map,
 	      icon:{
-	    	  content:"<div style='border: 3px solid #8b7dbe;min-width:150px;height:35px; color:#333; text-align:center; border-radius:25px; background:#e4d4fa;padding:3px;line-height:35px;' >"+ '<%= p.getPlaceTitle() %>' +"<div style='border: 1px solid #8b7dbe;width: .1px;height: 45px;margin:auto;background:#8b7dbe'></div></div>",
-			  size: new naver.maps.Size(160, 65),
+	    	  content:"<div style='border: 3px solid #8b7dbe;min-width:150px;height:32px; color:#333; text-align:center; border-radius:25px; background:#e4d4fa;padding:3px;line-height:35px;' >"+ '<%= p.getPlaceTitle() %>' +"<div style='border: 1px solid #8b7dbe;width: .1px;height: 45px;margin:auto;background:#8b7dbe'></div></div>",
+			  size: new naver.maps.Size(155, 95),
 	      }
 
 	      
