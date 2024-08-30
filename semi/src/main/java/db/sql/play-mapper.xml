@@ -44,8 +44,9 @@
 			 , FILE_PATH || ORIGIN_NAME "TITLEIMG"
 		  FROM PLACE
 		  LEFT JOIN ATTECHMENT ON (PLACE_NO = P_NO)
-		 WHERE STATUS = 'Y'
+		 WHERE P_STATUS = 'Y'
 		   AND TEM_CATE_NO = ?
+		   AND FILE_LEVEL = 1
 		   AND P_NO != ?
 	</entry>
 	<entry key="selectPlayReply">
@@ -55,9 +56,10 @@
 			 , SCORE
 			 , CREATE_DATE
 			 , USER_ID
-		  FROM PLAY_COMMENT
+		  FROM PLAY_COMMENT C
 		  JOIN MEMBER USING (USER_NO)
 		 WHERE PLACE_NO = ?
+		   AND C.STATUS = 'Y'
 		 ORDER 
 		    BY COM_NO DESC
  	</entry>
@@ -80,6 +82,42 @@
  		  , ?
  		  )
  	</entry>
+ 	<entry key="selectScore">
+ 		SELECT ROUND(AVG(SCORE),1) "AVG"
+ 		  FROM PLAY_COMMENT
+ 		 WHERE PLACE_NO = ?
+ 		   AND STATUS = 'Y'
+ 	</entry>
+	<entry key="selectLikeCount">
+		SELECT
+		       COUNT(*) "COUNT"
+		  FROM LIKE_LIST
+		 WHERE USER_NO = ?
+		   AND PLAY_NO = ?
+	</entry>
+	<entry key="insertLikeList">
+		INSERT
+		  INTO	LIKE_LIST
+		  (
+		    LIKE_NO
+		  , USER_NO
+		  , PLAY_NO 
+		  )
+		  VALUES
+		  (
+		    LIKE_LIST_SEQ.NEXTVAL
+		  , ?
+		  , ?
+		  )
+	</entry>
+	<entry key="deleteLikeList">
+		DELETE
+		  FROM LIKE_LIST
+		 WHERE USER_NO = ?
+		   AND PLAY_NO = ?
+	</entry>
+
+	
  	
  	<entry key="mainPageSelectPlay">
  	SELECT 
