@@ -11,7 +11,7 @@ public class Review {
 	private String score;
 	private String userNo;
 	private String status;
-	private int pNo;
+	private String pNo;
 	private String titleImg;
 	private String userName;
 	private String nickName;
@@ -19,23 +19,7 @@ public class Review {
 	public Review() {}
 
 	public Review(String rNo, String rTitle, String rContent, Date rDate, String score, String userNo, String status,
-			int pNo, String titleImg) {
-		super();
-		this.rNo = rNo;
-		this.rTitle = rTitle;
-		this.rContent = rContent;
-		this.rDate = rDate;
-		this.score = score;
-		this.userNo = userNo;
-		this.status = status;
-		this.pNo = pNo;
-		this.titleImg = titleImg;
-	}
-	
-	
-
-	public Review(String rNo, String rTitle, String rContent, Date rDate, String score, String userNo, String status,
-			int pNo, String titleImg, String userName, String nickName) {
+			String pNo, String titleImg, String userName, String nickName) {
 		super();
 		this.rNo = rNo;
 		this.rTitle = rTitle;
@@ -48,6 +32,17 @@ public class Review {
 		this.titleImg = titleImg;
 		this.userName = userName;
 		this.nickName = nickName;
+	}
+	
+	
+
+	public Review(String rTitle, String rContent, String score, String userNo, String pNo) {
+		super();
+		this.rTitle = rTitle;
+		this.rContent = rContent;
+		this.score = score;
+		this.userNo = userNo;
+		this.pNo = pNo;
 	}
 
 	public String getrNo() {
@@ -106,11 +101,11 @@ public class Review {
 		this.status = status;
 	}
 
-	public int getpNo() {
+	public String getpNo() {
 		return pNo;
 	}
 
-	public void setpNo(int pNo) {
+	public void setpNo(String pNo) {
 		this.pNo = pNo;
 	}
 
@@ -121,8 +116,6 @@ public class Review {
 	public void setTitleImg(String titleImg) {
 		this.titleImg = titleImg;
 	}
-	
-	
 
 	public String getUserName() {
 		return userName;
@@ -146,8 +139,6 @@ public class Review {
 				+ score + ", userNo=" + userNo + ", status=" + status + ", pNo=" + pNo + ", titleImg=" + titleImg
 				+ ", userName=" + userName + ", nickName=" + nickName + "]";
 	}
-
-	
 
 	
 	

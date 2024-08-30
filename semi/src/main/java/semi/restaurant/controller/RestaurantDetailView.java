@@ -38,15 +38,14 @@ public class RestaurantDetailView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int placeNo = Integer.parseInt(request.getParameter("placeNo"));
-        
-        RestaurantService service = new RestaurantService();
-        Restaurant restaurant = service.selectRestaurant(placeNo);
+		Restaurant restaurant = new RestaurantService().selectRestaurant(placeNo);
         Play p = new PlayService().selectDetailPlay(placeNo);
-        
         ArrayList<Review> r = new ReviewService().ReviewList(placeNo);
 		ArrayList<Attachment> list = new PlayService().selectAttachmentList(placeNo);
 		ArrayList<Play> recentRestaurant = new ReviewService().recentRestaurant(placeNo);
 		
+		
+			
 		if(p != null) {
 			request.setAttribute("p", p);
 			request.setAttribute("list", list);

@@ -19,6 +19,7 @@
              , ?
              , SYSDATE
              , ?
+             , ?
              , DEFAULT
              , ?
              )
@@ -33,7 +34,7 @@
 		  , CHANGE_NAME
 		  , FILE_PATH
 		  , FILE_LEVEL
-		  , PLACE_NO
+		  , REVIEW_NO
 		  )
 		  	VALUES
 		  (
@@ -42,7 +43,7 @@
 		  , ?
 		  , ?
 		  , 1
-		  , PLAY_NO_SEQ.CURRVAL
+		  , SEQ_REVIEW.NEXTVAL
 		  )
 	</entry>
 	
@@ -58,7 +59,7 @@
              FROM REVIEW R
              JOIN MEMBER M ON R.USER_NO = M.USER_NO
              JOIN ATTECHMENT A ON R.PLAY_NO = A.PLACE_NO
-            WHERE PLAY_NO = ?
+            WHERE PLACE_NO = ?
          ORDER BY R.R_DATE DESC
 	</entry>
 	

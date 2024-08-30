@@ -14,6 +14,7 @@ pageEncoding="UTF-8"%>
 	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
 	ArrayList<Review> r = (ArrayList<Review>)request.getAttribute("r");
 	ArrayList<Play> recentRestaurant = (ArrayList<Play>)request.getAttribute("recentRestaurant");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -230,7 +231,7 @@ pageEncoding="UTF-8"%>
               <div class="swiper-slide">
                 <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= rp.getPlaceNo()  %>">
                   <img
-                    src="<%= rp.getTitleImg() %>"
+                    src=""
                     alt=""
                   />
                 </a>
@@ -257,9 +258,13 @@ pageEncoding="UTF-8"%>
         <h2>리뷰</h2>
         <% if(loginUser == null) {%>
             <% }else { %>
+        <form action="reviewEnroll.pl" method="get">
         <div>
-          <input type="submit" value="리뷰작성" id="review-btn" />
+        	<input type="hidden" name="placeNo" value="<%= p.getPlaceNo() %>">
+        	<input type="hidden" name="rTitle" value="<%= p.getPlaceTitle() %>">
+          	<input type="submit" value="리뷰작성" id="review-btn" />
         </div>
+        </form>
         <% } %>
       </div>
 		  <%  
@@ -269,8 +274,12 @@ pageEncoding="UTF-8"%>
       <table align="center" class="review-content">
         <tr>
           <th rowspan="2" style="width: 200px" id="profile">
-            <div id="profile-img"><img src="./resourse/조이.jpg" alt="" /></div>
+            <div id="profile-img"><img src="" alt="" /></div>
+            <% if(r.get(i).getNickName() != null){ %>
             <div id="profile-id"><%= r.get(i).getNickName() %></div>
+            <% }else{ %>
+            <div id="profile-id"><%= r.get(i).getUserName() %></div>
+            <% } %>
             <div id="profile-score"><%= r.get(i).getScore() %></div>
             <div id="profile-date"><%= r.get(i).getrDate() %></div>
             <div id="profile-update">
@@ -430,5 +439,10 @@ pageEncoding="UTF-8"%>
         }
       });
     });
+    
+    function insertReview(){
+        location.href = "<%= contextPath %>/reviewEnroll.pl";
+    }
+    
   </script>
 </html>

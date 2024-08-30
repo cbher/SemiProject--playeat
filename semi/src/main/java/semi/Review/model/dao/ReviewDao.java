@@ -28,21 +28,20 @@ public class ReviewDao {
 		}
 	}
 
-	public int insertReview(Connection conn, Review r) {
+	public int insertReview(Connection conn, Review review) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		
+		System.out.println(review);
 		String sql = prop.getProperty("insertReview");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, r.getrTitle());
-			pstmt.setString(2, r.getrContent());
-			pstmt.setString(3, r.getUserNo());
-			pstmt.setInt(4, r.getpNo());
+			pstmt.setString(1, review.getrTitle());
+			pstmt.setString(2, review.getrContent());
+			pstmt.setString(3, review.getScore());
+			pstmt.setString(4, review.getUserNo());
+			pstmt.setString(5, review.getpNo());
 			
 			result = pstmt.executeUpdate();
-			
-			System.out.println(result);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -52,7 +51,6 @@ public class ReviewDao {
 		}
 		return result;
 	}
-
 	public int insertAttachment(Connection conn, Attachment at) {
 		int result =0;
 		PreparedStatement pstmt = null;
@@ -89,6 +87,7 @@ public class ReviewDao {
 	        	Review review = new Review();
 	        	review.setrTitle(rset.getString("R_TITLE"));
 	        	review.setrContent(rset.getString("R_CONTENT"));
+	        	review.setScore(rset.getString("SCORE"));
 	        	review.setrDate(rset.getDate("R_DATE"));
 	        	review.setUserName(rset.getString("USER_NAME"));
 	        	review.setNickName(rset.getString("NICKNAME"));
@@ -104,5 +103,6 @@ public class ReviewDao {
 	    }
 	    return r;
 	}
+	
 
 }

@@ -15,10 +15,10 @@ import semi.play.model.vo.Play;
 
 public class ReviewService {
 
-	public int insertReview(Review r, Attachment at) {
+	public int insertReview(Review review, Attachment at) {
 		Connection conn = getConnection();
 		
-		int result1 = new ReviewDao().insertReview(conn, r);
+		int result1 = new ReviewDao().insertReview(conn, review);
 		int result2 = 1;
 		
 		if(at != null) {
@@ -49,5 +49,6 @@ public class ReviewService {
 	    close(conn);
 	    return ReviewList;
 	}
+	
 
 }

@@ -1,89 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+    String placeNo = request.getParameter("placeNo");
+	String rTitle = request.getParameter("rTitle");
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>리뷰 작성</title>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="/semi/resources/css/review_form.css">
     
-        <script src="./js/review_form.js"></script>
     </head>
     <body>
         
-        <header>
-            <div class="inner">
-                <a href="" class="logo">
-                    <img src="./resourse/play_eat-removebg-preview.png" alt="">
-                </a>
-                <div class="search">
-                    <form action="test.do">
-                        
-                            <input type="text" name="search" placeholder="검색어를 입력하세요">
-                            <button class="material-icons" type="submit" >search</button>
-                        
-                    </form>
-                </div>
-                <div class="login">
-                    <ul>
-                        <li><a href="">로그인</a></li>
-                        <li><a href="">회원가입</a></li>
-                    </ul>
-                </div>
-                
-            </div>
-            <section class="menubar">
-                <div class="menu">
-                    <ul class="inner">
-                        <li>
-                            <a href="">공지문의</a>
-                            <ul class="hide-menu">
-                                <li><a href="">공지사항</a></li>
-                                <li><a href="">문의사항</a></li>
-                                <li><a href="">자주묻는질문</a></li>
-                            </ul>   
-                        </li>
-                        <li>
-                            <a href="">놀거리</a>
-                            <ul class="hide-menu">
-                                <li><a href="">테마별</a></li>
-                                <li><a href="">지역별</a></li>
-                                <li><a href="">원데이클래스</a></li>
-                            </ul>   
-                        </li>
-                        <li>
-                            <a href="">요리</a> 
-                            <ul class="hide-menu">
-                                <li><a href="">레시피 찾기</a></li>
-                                <li><a href="">레시피 업로드</a></li>
-                                <li><a href="">이번달 명예의 전당</a></li>
-                            </ul>  
-                        </li>
-                        <li>
-                            <a href="">맛집찾기</a>
-                            <ul class="hide-menu">
-                                <li><a href="">맛집검색</a></li>
-                                <li><a href="">지역별 맛집</a></li>
-                                <li><a href="">가격별 맛집</a></li>
-                                <li><a href="">랜덤 메뉴 추천</a></li>
-        
-                            </ul>   
-                        </li>
-                        <li>
-                            <a href="">미니게임</a>
-                            <ul class="hide-menu">
-                                <li><a href="">랜덤뽑기</a></li>
-                                <li><a href="">사다리타기</a></li>
-                                <li><a href="">룰렛돌리기</a></li>
-                                <li><a href="">제비뽑기</a></li>
-                            </ul>   
-                        </li>                                  
-                    </ul>
-                </div>
-            </section>
-        </header>
+        <%@ include file="../common/menubar.jsp" %>
     
         <!-- 리뷰 폼 -->
     
@@ -93,18 +29,15 @@
             <br>
     
             <form action="insertReview.pl" id="enroll-form" method="post" enctype="multipart/form-data">
-            
+            <input type="hidden" name="placeNo" value="<%= placeNo %>">
+            <input type="hidden" name="rTitle" value="<%= rTitle %>">
+            <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
             <table align="center" class="review-area">
-                <tr>
-                    <th>제목</th>
-                    <td colspan="3">
-                        <textarea name="title" rows="5" style="resize: none; height: 30px;" required></textarea>
-                    </td>
-                </tr>
+                
                 <tr>
                     <th>내용</th>
                     <td colspan="3">
-                        <textarea name="content" rows="5" style="resize: none; height: 300px;" required></textarea>
+                        <textarea name="rContent" rows="5" style="resize: none; height: 300px;" required></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -128,9 +61,9 @@
             </table>
     
             <div id="file-area" style="display: none;"> <!-- 버튼 있지만 안보임 -->
-                <input type="file" name="file1" id="file" onchange="loadImg(this, 1)" required>
-                <input type="file" name="file2" id="file" onchange="loadImg(this, 2)">
-                <input type="file" name="file3" id="file" onchange="loadImg(this, 3)">
+                <input type="file" name="file1" id="file1" onchange="loadImg(this, 1)" required>
+                <input type="file" name="file2" id="file2" onchange="loadImg(this, 2)">
+                <input type="file" name="file3" id="file3" onchange="loadImg(this, 3)">
             </div>
             <br>
             <div align="center">
@@ -159,5 +92,45 @@
               </div>
             </div>
         </footer>
+	<script>
+	        function chooseFile(num){
+	    $("#file" + num).click();
+	}
+	
+	function loadImg(inputFile, num){
+	    // inputFile : 현재 변화가 생긴 input type="file" 요소 객체
+	    // num : 몇 번째 input 요소인지 확인 후 해당 영역에 미리보기 하기 위해 전달받는 숫자
+	
+	    // 선택된 파일이 있다면 inputFile.files[0] 에 선택된 파일이 담겨있음
+	    //                  => inputFile.files.length 또한 1이 될꺼임
+	    if(inputFile.files.length == 1){ // 파일이 선택된 경우 => 파일 읽어들여서 미리보기
+	
+	        // 파일을 읽어들일 FileReader 객체 생성
+	        const reader = new FileReader();
+	
+	        // 파일을 읽어들이는 메소드
+	        reader.readAsDataURL(inputFile.files[0]);
+	        // 해당 파일을 읽어들이는 순간 해당 이 파일만의 고유한 url 부여
+	
+	        // 파일 읽어들이기가 완료 됐을 때 실행할 함수를 정의해두기
+	        reader.onload = function(e){
+	            // e.target.result => 읽어들인 파일의 고유한 url
+	            switch(num){
+	                case 1 : $("#contentImg1").attr("src", e.target.result); break;
+	                case 2 : $("#contentImg2").attr("src", e.target.result); break;
+	                case 3 : $("#contentImg3").attr("src", e.target.result); break;
+	            }
+	        }
+	
+	
+	    }else { // 선택된 파일이 취소된 경우 => 미리보기 된 것도 사라지게
+	            switch(num){
+	                case 1 : $("#contentImg1").attr("src", null); break;
+	                case 2 : $("#contentImg2").attr("src", null); break;
+	                case 3 : $("#contentImg3").attr("src", null); break;
+	            }
+	    }
+	}
+	</script>
     </body>
     </html>
