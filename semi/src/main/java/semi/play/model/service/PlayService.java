@@ -60,6 +60,45 @@ public class PlayService {
 		return result;
 	}
 	
+	public double selectScore(int placeNo) {
+		Connection conn = getConnection();
+		double score = new PlayDao().selectScore(conn, placeNo);
+		close(conn);
+		return score;
+	}
+	
+	public int selectLikeCount(int placeNo, int userNo) {
+		Connection conn = getConnection();
+		int likeCount = new PlayDao().selectLikeCount(conn, placeNo, userNo);
+		close(conn);
+		return likeCount;
+	}
+	
+	public int insertLikeList(int placeNo, int userNo) {
+		Connection conn = getConnection();
+		int result = new PlayDao().insertLikeList(conn, placeNo, userNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+	}
+	
+	public int deleteLikeList(int placeNo, int userNo) {
+		Connection conn = getConnection();
+		int result = new PlayDao().deleteLikeList(conn, placeNo, userNo);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	public ArrayList<Play> mainPageSelectPlay(){
 		Connection conn = getConnection();
 		ArrayList<Play> plist = new PlayDao().mainPageSelectPlay(conn);

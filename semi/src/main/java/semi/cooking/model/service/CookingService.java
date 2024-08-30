@@ -12,6 +12,13 @@ import semi.cooking.model.vo.CookingBoard;
 
 public class CookingService {
 	
+	public ArrayList<CookingBoard> selectCookingSlideList(){
+		Connection conn = getConnection();
+		ArrayList<CookingBoard> list = new CookingDao().selectCookingSlideList(conn);
+		close(conn);
+		return list;
+	}
+	
 	public ArrayList<CookingBoard> selectCookingList(PageInfo pi){
 		
 		Connection conn = getConnection();
