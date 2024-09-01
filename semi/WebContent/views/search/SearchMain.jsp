@@ -346,7 +346,38 @@
 		
 		function searchOneday(){
 			$.ajax({
-				url:
+				url:"searchOneday.so",
+				data:{
+					category:$("input[name=oneday-list:checked]").val()
+				},
+				success:function (result){
+					let value = "";
+					for(let i = 0; i<result.length;i++){
+						value += "<div class='search-list'>"+
+			            "<table>"+
+			                "<tr>"+
+			                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
+			                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].oneNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+			                    "</td>"+
+			                    "<td rowspan='3' style='width: 15px;'></td>"+
+			                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].oneTitle+"</h2></td>"+
+			                "</tr>"+
+			                "<tr>"+
+			                    "<td colspan='2' id='search-content'> 매장 번호 : "+ result[i].phone +" <br><br>  가격 : "+ result[i].price +" <br> 참여인원 : "+ result.entPeople +" </td>"+
+			                "</tr>"+
+			                "<tr>"+
+			                    "<td style='width: 150px; height: 35px;' id='search-score'><div class='material-icons' style='position:relative;top:6px;color:#e4d4fa'>star</div> "+ result[i].score+"</td>"+
+			                    "<td style='height: 35px;' id='search-location'>"+result[i].address+"</td>"+
+			                "</tr>"+
+			            "</table>"+
+			        "</div>";
+					}
+					$(".searchWrap").html(value);
+					showSearchList();
+				},
+				error:function(){
+					console.log("Something Wrong!");
+				}
 			})
 		}
         
