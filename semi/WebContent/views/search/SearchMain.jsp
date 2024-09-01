@@ -360,7 +360,103 @@
 	
 	  // Call the function to show the user's current location when the page loads
 	  showCurrentLocation();
-	
+	  
+	  // 네이버 지도 마커
+	  sconst clientId = 'i61mpeml1v'; // Your Naver Client IDconst clientSecret = 'YOUR_CLIENT_SECRET'; // Your Naver Client Secret
+
+		const categoryData = {
+	    "1": ["Address 1", "Address 2", "Address 3"], // 전체
+	    "2": ["Cafe Address 1", "Cafe Address 2"],     // 카페
+	    "3": ["Date Place 1", "Date Place 2"],         // 데이트
+	    "4": ["Exhibition Address 1"],                 // 전시/관람
+	    "5": ["Activity Place 1", "Activity Place 2"], // 액티비티
+	    "6": ["Restaurant Address 1", "Restaurant Address 2"] // 음식점
+		};
+		
+		let map; let markers = []; // Array to hold map markers
+		
+		function initMap(lat, lng) {
+		    const mapOptions = {
+		        center: new naver.maps.LatLng(lat, lng),
+		        zoom: 15,
+		        minZoom: 10,
+		        zoomControl: false,
+		        mapTypeControl: false
+		    };
+		    map = new naver.maps.Map('map', mapOptions);
+		}
+		
+		async function addMarkersForCategory(category) {
+		    // Clear existing markers
+		    markers.forEach(marker => marker.setMap(null));
+		    markers = [];
+		
+		    // Fetch addresses for the selected category
+		    const addresses = categoryData[category];
+		
+		    for (const address of addresses) {
+		        const coords = await getCoordinates(address); // Fetch coordinates
+		        if (coords) {
+		            const marker = new naver.maps.Marker({
+		                position: new naver.maps.LatLng(coords.lat, coords.lng),
+		                map: map,
+		                title: address
+		            });
+		            markers.push(marker);
+		        }
+		    }
+		}
+		
+		async function getCoordinates(address) {
+		    try {
+		        const response = await fetch(`https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=${encodeURIComponent(address)}`, {
+		            method: 'GET',
+		            headers: {
+		                'X-NCP-APIGW-API-KEY-ID': lm9hxz6gtq,
+		                'X-NCP-APIGW-API-KEY': SvlPlgdU8fDQyttkl2C0MUBgygvMB3wMsQEqAjWU
+		            }
+		        });
+		        const data = await response.json();
+		        if (data.addresses && data.addresses.length > 0) {
+		            return {
+		                lat: data.addresses[0].y,
+		                lng: data.addresses[0].x
+		            };
+		        } else {
+		            console.error(`No coordinates found for address: ${address}`);
+		            return null;
+		        }
+		    } catch (error) {
+		        console.error(`Error fetching coordinates: ${error}`);
+		        return null;
+		    }
+		}
+		
+		document.querySelectorAll('input[name="subject-list"]').forEach(radio => {
+		    radio.addEventListener('change', function () {
+		        const selectedCategory = this.value; // Get selected category
+		        addMarkersForCategory(selectedCategory); // Update markers
+		    });
+		});
+		
+		function showCurrentLocation() {
+		    if (navigator.geolocation) {
+		        navigator.geolocation.getCurrentPosition(function (position) {
+		            const lat = position.coords.latitude;
+		            const lng = position.coords.longitude;
+		            initMap(lat, lng);
+		        }, function (error) {
+		            console.error("Error getting location: ", error);
+		            initMap(37.3595704, 127.105399); // Default coordinates
+		        });
+		    } else {
+		        alert("Geolocation is not supported by your browser.");
+		        initMap(37.3595704, 127.105399);
+		    }
+		}
+		
+		showCurrentLocation();
+			
 
 		</script>
 

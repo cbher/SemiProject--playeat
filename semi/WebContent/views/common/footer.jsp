@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Insert title here</title>
-  </head>
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
@@ -122,33 +117,7 @@ pageEncoding="UTF-8"%>
     }
   </style>
   <body>
-    footer .inner .info .copyright {
-      display: flex;
-      align-items: center;
-    }
-  </style>
-  <body>
     <footer>
-      <div class="inner">
-        <ul class="menu">
-          <li><a href="">개인정보처리방침</a></li>
-          <li><a href=""> 이용약관 </a></li>
-          <li><a href="">위치정보이용약관</a></li>
-          <li><a href="">원클래스약관</a></li>
-        </ul>
-
-        <div class="info">
-          <span>kh H반 4조</span>
-          <span>semi4jyo@gmail.com</span>
-          <span>개인정보 책임자 4조</span>
-
-          <p class="copyright">
-            &copy; <span id="this-year"></span> kh정보교육원 H반 4조
-            세미프로젝트
-          </p>
-        </div>
-      </div>
-    </footer>
       <div class="inner">
         <ul class="menu">
           <li><a href="">개인정보처리방침</a></li>

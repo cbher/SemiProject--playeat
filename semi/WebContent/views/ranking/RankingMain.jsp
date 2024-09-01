@@ -59,7 +59,7 @@ ArrayList<Ranking>list = (ArrayList<Ranking>)request.getAttribute("list");
             <div class="gold">
               <img src="/semi/resources/backGroundImg/gold.png" alt="" />
               <a
-                href="<%= contextPath %>/detail.co?bno=<%= list.get(0).getcNO() %>"
+                href="<%= contextPath %>/detail.co?bno=<%= list.get(0).getcNO() %>"F
                 ><img
                   src="<%= list.get(0).getTitleImg() %>"
                   class="rank-img"
@@ -138,8 +138,8 @@ ArrayList<Ranking>list = (ArrayList<Ranking>)request.getAttribute("list");
 
         <div class="rank-area2">
           <h2>아깝상</h2>
-          <% for(int i = 3; i < list.size(); i++) { Ranking ranking =
-          list.get(i); %>
+          <% for(int i = 3; i < list.size(); i++) { 
+        	  Ranking ranking = list.get(i); %>
           <div class="rank-list">
             <table>
               <tr>
@@ -168,8 +168,7 @@ ArrayList<Ranking>list = (ArrayList<Ranking>)request.getAttribute("list");
               </tr>
               <tr>
                 <td colspan="2" id="cook-content">
-                  <textarea name="" id="content">
-<%= ranking.getcContents() %></textarea
+                  <textarea name="" id="content"><%= ranking.getcContents() %></textarea
                   >
                 </td>
               </tr>
