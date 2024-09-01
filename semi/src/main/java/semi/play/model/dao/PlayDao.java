@@ -198,6 +198,7 @@ public class PlayDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectScore");
+		String updateScore = prop.getProperty("updateScore");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -206,6 +207,13 @@ public class PlayDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				score = rset.getDouble("avg");
+				
+				pstmt = conn.prepareStatement(updateScore);
+				pstmt.setDouble(1, score);
+				pstmt.setInt(2, placeNo);
+				
+				int result = pstmt.executeUpdate();
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -308,5 +316,37 @@ public class PlayDao {
 	        close(pstmt);
 	    }
 	    return recentRestaurant;
+	}
+
+	/**
+	 * 메인페이지용 select문
+	 * return 
+	 * 
+	 */
+	public ArrayList<Play> mainPageSelectPlay(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Play> plist = new ArrayList<Play>();
+		String sql = prop.getProperty("mainPageSelectPlay");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				plist.add(new Play(rset.getInt("P_NO")
+								, rset.getString("P_TITLE")
+								, rset.getString("TITLEIMG")));  
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return plist;
 	}
 }

@@ -1,6 +1,8 @@
 package semi.inquire.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,34 +56,44 @@ public class InsertInquireControll extends HttpServlet {
 			inq.setInquireContent(content);
 			inq.setInquireWriter(String.valueOf(userNo));
 		
-			Attechment at = null;
+			ArrayList<Attechment> list = new ArrayList<Attechment>();
 			
-			if(multi.getOriginalFileName("upfile") != null) {
-				at = new Attechment();
-				at.setOriginName(multi.getOriginalFileName("upfile"));
-				at.setChangeName(multi.getFilesystemName("upfile"));
-				at.setFilePath("resources/inquire_upfiles/");
+			for(int i=1; i<=3; i++) {
+				String key = "upfile" + i;
+				
+				if(multi.getOriginalFileName(key) != null) {
+					Attechment at = new Attechment();
+					at.setOriginName(multi.getOriginalFileName(key));
+					at.setChangeName(multi.getFilesystemName(key));
+					at.setFilePath("resources/inquire_upfiles/");
+					
+					if( i == 1) {
+						at.setFileLevel(1);
+					}else {
+						at.setFileLevel(2);
+					}
+					list.add(at);
+				}
+				
 			}
-				int result = new InquireService().insertInquire(inq, at);
 			
-				System.out.println(inq);
-				System.out.println(at);
+			int result = new InquireService().insertInquire(inq, list);
+			
 		
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "공지사항 작성성공");
 				response.sendRedirect(request.getContextPath()+"/iqList.ip?cpage=1");
 				
 			}else {
-				if(at != null) {
-					new File(savaPath + at.getChangeName()).delete();
-				}
+				
 				request.getSession().setAttribute("alertMsg", "작성실패");
 				response.sendRedirect(request.getContextPath()+"/iqList.ip?cpage=1");
 				
-				}
+				
 			
 			
 			}
+		}	
 	}
 
 	/**

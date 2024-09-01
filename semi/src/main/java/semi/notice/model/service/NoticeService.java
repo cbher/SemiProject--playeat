@@ -30,8 +30,7 @@ public class NoticeService {
 		Connection conn = getConnection();
 		int result1 = new NoticeDao().insertNotice(conn, n);
 		int result2 = new NoticeDao().insertAttechment(conn, list);
-		System.out.println(n);
-		System.out.println(list);
+		
 		
 		if(result1 > 0 && result2 > 0) {
 			commit(conn);

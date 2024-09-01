@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,6 +12,38 @@
 	// 파일번호, 원본명, 수정명, 파일경로
 	ArrayList<Play> sList = (ArrayList<Play>)request.getAttribute("sList");
 	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
+	
+	
+	
+
+    // 예시로 사용자가 방문한 장소 정보를 세션에 저장
+    String placeTitle = p.getPlaceTitle();
+    String titleImg = p.getTitleImg();
+    int placeNo =  p.getPlaceNo();
+    
+    // 새로운 Place 객체 생성
+    Play play = new Play(placeNo, placeTitle, titleImg );
+    
+    // 세션에서 최근 방문한 장소 리스트 가져오기
+    List<Play> recentPlaces = (List<Play>) session.getAttribute("recentPlaces");
+    
+    if (recentPlaces == null) {
+        recentPlaces = new ArrayList<>();
+    }
+    
+    // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
+    if (recentPlaces.size() >= 3) {
+        recentPlaces.remove(0);
+    }
+    
+    // 새로운 장소를 리스트에 추가
+    recentPlaces.add(play);
+    
+    // 리스트를 세션에 저장
+    session.setAttribute("recentPlaces", recentPlaces);
+
+
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -427,6 +460,15 @@
 	left:450px;
 	width:200px;
 	height:50px;
+	border-radius:25px;
+	font-family:'TTLaundryGothicB';
+	border : 3px solid #e4d4fa;
+	cursor:pointer;
+}
+
+.comment .load:hover{
+	background:#e4d4fa;
+	color:#fff;
 }
 
 .comment #modalBtn{
@@ -441,6 +483,7 @@
     margin-top: 20px;
     position: relative;
     border-radius: 5px;
+    display:none;
 }
 
 .comment-area .profile{
@@ -772,8 +815,9 @@ footer .inner .info .copyright{
         </div>
   
   		<div class="replys">
-        
+
         </div>
+        <button class="load">더보기</button>
 	     <div class="waste"></div>
 	     </div>
 
@@ -786,16 +830,19 @@ footer .inner .info .copyright{
             	setInterval(selectReply,100000);
             })
             
-            $(function(){
-                $(".comment .comment-area").slice(0,3).show();
-                $(".load").click(function(e){
-                    e.preventDefault();
-                    $(".comment .comment-area:hidden").slice(0,3).show();
-                    if($(".comment .comment-area:hidden").length == 0){
-                        $(".load").hide();
-                    }
-                })
-            })
+            
+            	function showReply(){
+	                $(".comment .comment-area").slice(0,3).show();
+	                $(".load").click(function(e){
+	                    e.preventDefault();
+	                    $(".comment .comment-area:hidden").slice(0,3).show();
+	                    if($(".comment .comment-area:hidden").length == 0){
+	                        $(".load").hide();
+	                    }
+	                })
+            		
+            	}
+            
 	        
             function likeStatus(){
             	$.ajax({
@@ -852,6 +899,12 @@ footer .inner .info .copyright{
             				"</div></div></div>";
             			}
             			$(".replys").html(value);
+            			showReply();
+            			if($(".comment-area:hidden").length == 0){
+    						$(".load").hide();
+    					}else{
+    						$(".load").show();						
+    					}
             		},
             		error:function(){
             			console.log("통신 실패");
@@ -1014,6 +1067,11 @@ footer .inner .info .copyright{
 	    var marker = new naver.maps.Marker({
 	      position: new naver.maps.LatLng(lat, lng),
 	      map: map,
+	      icon:{
+	    	  content:"<div style='border: 3px solid #8b7dbe;min-width:150px;height:32px; color:#333; text-align:center; border-radius:25px; background:#e4d4fa;padding:3px;line-height:35px;' >"+ '<%= p.getPlaceTitle() %>' +"<div style='border: 1px solid #8b7dbe;width: .1px;height: 45px;margin:auto;background:#8b7dbe'></div></div>",
+			  size: new naver.maps.Size(155, 95),
+	      }
+
 	      
 	    });
 	    

@@ -1,6 +1,8 @@
 package semi.inquire.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,19 +34,19 @@ public class InquireDetailViewControll extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int InquireNo = Integer.parseInt(request.getParameter("num"));
 		
-		
-		
 		InquireService iService = new InquireService();
 		
 	
 		if(InquireNo > 0) {
 			
 			Inquire inq = new InquireService().detailViewInq(InquireNo);
-			Attechment at = iService.selectAttechment(InquireNo);
+			ArrayList<Attechment> list = iService.selectAttechment(InquireNo);
 			
 			request.setAttribute("Inquire", inq);
-			request.setAttribute("at", at);
+			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/inquire/InquireDetailViewPage.jsp").forward(request, response);
+			
+			
 			
 		} else {
 			request.setAttribute("alertMsg", "상세페이지 접속실패");

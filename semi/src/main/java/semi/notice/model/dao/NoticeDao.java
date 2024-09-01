@@ -292,7 +292,6 @@ public class NoticeDao {
 				result = pstmt.executeUpdate();
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				close(pstmt);

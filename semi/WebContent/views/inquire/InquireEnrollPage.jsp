@@ -25,20 +25,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
 <link rel="stylesheet" href="/semi/resources/css/inquListView.css">
+
+ <%@include file="../common/menubar.jsp" %>
 </head>
 <body>
-  <%@include file="../common/menubar.jsp" %>
+ 
   
   
-           <div class="inquire-area">
+    <div class="inquire-area">
          
                  <br />
                <h2 align="center">문의사항</h2>
            <%if(loginUser != null){%>
    
-           <a class="button" href="<%=contextPath %>/inquireEnterPage.inq">작성하기</a>
-          <br />
-         
+          
+           	<div class="inputAnswer" >
+				 <a class="button" href="<%=contextPath %>/inquireEnterPage.inq">문의사항 작성하기</a>
+           </div>
           <br />
           
             
@@ -46,16 +49,20 @@
 			  <div class="modal-content">
 			    <span class="close">&times;</span>
 			    <h2>이메일 확인</h2>
+			    <br>
 			    <form id="emailForm">
-			      <label for="userEmail">이메일:</label>
-			      <input type="email" id="email" name="email" required>
+			      <input type="email" id="email" name="email" placeholder="이메일 입력해주세요" required>
 			      <input type="hidden" id="inquireNo" name="inquireNo">
-			      <button type="submit">확인</button>
+			      <button type="submit" align="center">확인</button>
 			    </form>
+			    <br>
+			    <span class="waring"> &lt; 주의 &gt; </span> <br>
+			 	<span>문의를 작성한 사람의 이메일이 <br> 아니면 문의사항을 확인 하실 수 없습니다.</span>
 			  </div>
 			</div>
-			
-          
+		 <br>
+           <br>
+	            <br>
            <%} %>
           <table class="inquire-view" align="center">
             <thead>
@@ -119,7 +126,7 @@
             	          const num = $('#inquireNo').val();
             	          location.href = "<%= contextPath %>/iqdetail.inq?num=" + num;
             	        } else {
-            	          alert("접근 권한이 없습니다.");
+            	          alert("이 글의 작성자가 아닙니다.");
             	          $('#emailModal').hide();  // 모달창 닫기
             	        }
             	      },
@@ -150,7 +157,8 @@
         </div>
       </div>
 
-<%@include file="../common/footer.jsp" %>
+
 </body>
+<%@include file="../common/footer.jsp" %>
 </html>
    

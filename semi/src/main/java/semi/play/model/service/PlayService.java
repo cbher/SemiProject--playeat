@@ -63,6 +63,7 @@ public class PlayService {
 	public double selectScore(int placeNo) {
 		Connection conn = getConnection();
 		double score = new PlayDao().selectScore(conn, placeNo);
+		commit(conn);
 		close(conn);
 		return score;
 	}
@@ -98,4 +99,15 @@ public class PlayService {
 		close(conn);
 		return result;
 	}
+	
+	public ArrayList<Play> mainPageSelectPlay(){
+		Connection conn = getConnection();
+		ArrayList<Play> plist = new PlayDao().mainPageSelectPlay(conn);
+		
+		close(conn);
+		return plist;
+		
+	}
+	
+	
 }

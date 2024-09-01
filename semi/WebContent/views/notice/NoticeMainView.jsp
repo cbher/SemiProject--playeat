@@ -28,11 +28,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/semi/resources/css/noticeMainview.css">
 
-</head>
-<body>
-
 <%@ include file="../common/menubar.jsp" %>
 <%@ include file="../common/badge.jsp" %>
+</head>
+
+<body>
+
+
+
 
 
 
@@ -108,14 +111,9 @@
 </div>
 
 
-
-
-
-
- 
-
-<%@ include file="../common/footer.jsp" %>
 <%@ include file="../common/top.jsp" %>
+<%@ include file="../common/footer.jsp" %>
 
 </body>
+
 </html>

@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="semi.notice.model.vo.Attechment"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
 <%@page import="semi.inquire.model.vo.Inquire"%>
@@ -7,7 +8,7 @@
  <%
  
  Inquire inq = (Inquire)request.getAttribute("Inquire");
- Attechment at = (Attechment)request.getAttribute("at");
+ArrayList<Attechment> list = (ArrayList<Attechment>)request.getAttribute("list");
  
  %>
 <!DOCTYPE html>
@@ -57,19 +58,34 @@
 		            </td>
         		</tr>
         		<%} %>
-        		 <tr>
-                <th>첨부파일</th>
-                <td colspan="3">
-                   	 <!-- case 1. 첨부파일이 없을 경우 -->
-                     <%if(at == null){ %>
-                   		첨부파일 없습니다. 
-                  	 <%}else{ %>
-                  	  <!-- case 2. 첨부파일이 있을 경우 -->
-                      <a download="<%=at.getOriginName() %>" href="<%=contextPath %>/<%=at.getFilePath() + at.getChangeName()%>"><%=at.getOriginName() %></a>
-                     <%} %>
-                      <!--  /jsp/폴더경로(resources/board_upfiles/) + 실제파일명 -->
-                </td>
-            </tr>
+        		 <tr >
+			        <th rowspan="4" >첨부파일</th>
+               </tr>
+              	 <!-- case 1. 첨부파일이 있을 경우 -->
+                <% if(!list.isEmpty()){ %>
+			    	 <% for(int i = 0; i < list.size(); i++){ %>
+			        	 <tr >
+			        		 <td colspan="5">
+			                    <a download="<%=list.get(i).getOriginName() %>" href="<%=contextPath %>/<%=list.get(i).getFilePath() + list.get(i).getChangeName()%>">
+			                        <%=list.get(i).getOriginName() %>
+			                    </a>
+		            		</td>
+		            	</tr>
+		                <% } %>
+		
+				<% } else { %>
+			    <!-- case 2. 첨부파일이 없을 경우 -->
+					<tr >
+			        <th>첨부파일</th>
+			        <td colspan="5">
+			            첨부파일 없습니다.
+			     	</td>
+			     	</tr>
+			<% } %>
+			   
+			  
+			
+			             	   
         </table>
         <a class="btn btn-outline-success" href="<%=contextPath %>/iqList.ip?cpage=1">목록가기</a>
         <%if(loginUser != null && loginUser.getUserId().equals(inq.getInquireWriter())){ %>

@@ -171,20 +171,22 @@ public class InquireDao {
 		return result;
 	}
 
-	public int insertAttachment(Connection conn, Attechment at) {
+	public int insertAttachment(Connection conn, ArrayList<Attechment> list) {
 		int result =0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertAttachment");
+	
 		
 		try {
+			for(Attechment at : list) {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, at.getOriginName());
 			pstmt.setString(2, at.getChangeName());
 			pstmt.setString(3, at.getFilePath());
+			pstmt.setInt(4, at.getFileLevel());
 			
-		
 			result = pstmt.executeUpdate();
-			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -193,8 +195,8 @@ public class InquireDao {
 		return result;
 	}
 
-	public Attechment selectAttechment(Connection conn, int inquireNo) {
-		Attechment at = null;
+	public ArrayList<Attechment> selectAttechment(Connection conn, int inquireNo) {
+		ArrayList<Attechment> list = new ArrayList<Attechment>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectAttechment");
@@ -205,13 +207,13 @@ public class InquireDao {
 			
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				at = new Attechment();
-				at.setFileNo(rset.getInt("file_no"));
+			while(rset.next()) {
+				Attechment at = new Attechment();
 				at.setOriginName(rset.getString("origin_name"));
 				at.setChangeName(rset.getString("change_name"));
 				at.setFilePath(rset.getString("file_path"));
 				
+				list.add(at);
 			}
 			
 		} catch (SQLException e) {
@@ -221,7 +223,7 @@ public class InquireDao {
 			close(rset);
 			close(pstmt);
 		}
-		return at;
+		return list;
 	}
 
 	public Inquire checkEmail(Connection conn, int inquireNo) {

@@ -224,7 +224,7 @@ public class RestaurantDao {
 	 */
 	public ArrayList<Restaurant> mainPageSelectRestaurnt(Connection conn) {
 		
-		ArrayList<Restaurant> list = new ArrayList<Restaurant>();
+		ArrayList<Restaurant> rlist = new ArrayList<Restaurant>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -236,7 +236,7 @@ public class RestaurantDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Restaurant(rset.getInt("P_NO")
+				rlist.add(new Restaurant(rset.getInt("P_NO")
 						              , rset.getString("P_TITLE")
 						              , rset.getString("TITLEIMG")));  
 						               
@@ -249,7 +249,7 @@ public class RestaurantDao {
 			close(rset);
 			close(pstmt);
 		}
-			return list;
+			return rlist;
 	}
 
 	public Restaurant selectRestaurant(Connection conn, int placeNo) {

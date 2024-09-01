@@ -8,12 +8,14 @@
 		     , ADDRESS
 		     , P_CALL
 		     , P_SCORE
-		     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
 		  FROM PLACE P
 		  LEFT JOIN ATTECHMENT ON (P_NO = PLACE_NO)
 		 WHERE P_STATUS = 'Y'
 		   AND P_SELECT_NUM = 1
 		   AND LOCATION_NO IN (?,?,?,?,?)
+		 ORDER
+		    BY P_NO DESC
 	</entry>
 	
 	<entry key="mainPageSelectRestaurnt">

@@ -1,0 +1,25 @@
+package semi.search.model.service;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import static semi.common.JDBCtemplate.*;
+import semi.play.model.vo.Play;
+import semi.search.model.dao.SearchDao;
+
+public class SearchService {
+
+	public ArrayList<Play> selectList(){
+		Connection conn = getConnection();
+		ArrayList<Play> list = new SearchDao().selectList(conn);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Play> selectLocationList(int category){
+		Connection conn = getConnection();
+		ArrayList<Play> list = new SearchDao().selectLocationList(conn, category);
+		close(conn);
+		return list;
+	}
+}

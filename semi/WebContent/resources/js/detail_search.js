@@ -78,7 +78,7 @@ $("input[type=radio]").click(function(){
 
 // 더보기 버튼
 
-$(function(){
+function showSearchList(){
     $(".search-area .search-list").slice(0, 4).show(); // select the first 4
     $(".add-list").click(function(e){ // click event for load more
         e.preventDefault();
@@ -88,7 +88,7 @@ $(function(){
             $('.search-area .add-list').hide();
         }
     });
-});
+};
 
 // 탑버튼
 
