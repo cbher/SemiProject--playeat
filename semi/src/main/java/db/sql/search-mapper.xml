@@ -17,7 +17,7 @@
 		   AND LOCATION_NO = ?
 	</entry>
 	<entry key="searchRestaurant">
-				SELECT
+		SELECT
 		       P_NO
 		     , P_TITLE
 		     , ADDRESS
@@ -33,7 +33,7 @@
 		   AND P_SELECT_NUM = 1
 	</entry>
 	<entry key="selectAllRestaurant">
-						SELECT
+		SELECT
 		       P_NO
 		     , P_TITLE
 		     , ADDRESS
@@ -46,5 +46,36 @@
 		 WHERE FILE_LEVEL = 1
 		   AND P_STATUS = 'Y'
            AND P_SELECT_NUM = 1
+	</entry>
+	<entry key="searchPlay">
+		SELECT
+		       P_NO
+		     , P_TITLE
+		     , ADDRESS
+		     , P_CALL
+		     , P_SCORE
+		     , BUSINESSTIME
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE
+		  JOIN ATTECHMENT ON (P_NO = PLACE_NO)
+		 WHERE FILE_LEVEL = 1
+		   AND P_STATUS = 'Y'
+           AND P_SELECT_NUM = 2
+           AND TEM_CATE_NO = ?
+	</entry>
+	<entry key="searchAllPlay">
+		SELECT
+		       P_NO
+		     , P_TITLE
+		     , ADDRESS
+		     , P_CALL
+		     , P_SCORE
+		     , BUSINESSTIME
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE
+		  JOIN ATTECHMENT ON (P_NO = PLACE_NO)
+		 WHERE FILE_LEVEL = 1
+		   AND P_STATUS = 'Y'
+           AND P_SELECT_NUM = 2
 	</entry>
 </properties>

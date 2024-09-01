@@ -36,4 +36,18 @@ public class SearchService {
 		close(conn);
 		return list;
 	}
+	
+	public ArrayList<Play> searchPlay(int category){
+		Connection conn = getConnection();
+		ArrayList<Play> list = new SearchDao().searchPlay(conn, category);
+		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Play> searchAllPlay(){
+		Connection conn = getConnection();
+		ArrayList<Play> list = new SearchDao().searchAllPlay(conn);
+		close(conn);
+		return list;
+	}
 }

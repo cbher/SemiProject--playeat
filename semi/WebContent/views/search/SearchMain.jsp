@@ -84,7 +84,7 @@
             <div class="category-title">
                 <h4>테마별</h4>
             </div>
-            <ul class="subject-list">
+            <ul class="subject-list" onchange="searchPlay();">
                 <li><input type="radio" name="subject-list" value="1">전체</li>
                 <li><input type="radio" name="subject-list" value="2">카페</li>
                 <li><input type="radio" name="subject-list" value="3">데이트</li>
@@ -100,7 +100,7 @@
             <div class="oneday-title">
                 <h4>원데이 클래스</h4>
             </div>
-            <ul class="oneday-list">
+            <ul class="oneday-list" onchange="searchOneday();">
                 <li><input type="radio" name="oneday-list" value="1">전체</li>
                 <li><input type="radio" name="oneday-list" value="2">스포츠</li>
                 <li><input type="radio" name="oneday-list" value="3">드로잉</li>
@@ -118,7 +118,7 @@
             <div class="r-category-title">
                 <h4>식당 카테고리</h4>
             </div>
-            <ul class="r-category-list" onchange="tt()">
+            <ul class="r-category-list" onchange="searchRestaurant()">
                 <li><input type="radio" name="r-category-list" value="1">전체</li>
                 <li><input type="radio" name="r-category-list" value="2">밥집</li>
                 <li><input type="radio" name="r-category-list" value="3">고깃집</li>
@@ -268,7 +268,7 @@
 			})
 		}
 		
-		function tt(){
+		function searchRestaurant(){
 			
 			$.ajax({
 				url:"selectRestaurant.sr",
@@ -305,6 +305,49 @@
 				}
 			})
 			
+		}
+		
+		function searchPlay(){
+			$.ajax({
+				url:"searchPlay.sp",
+				data:{
+					category:$("input[name=subject-list]:checked").val()
+				},
+				success:function(result){
+					let value = "";
+					for(let i = 0;i<result.length;i++){
+						value += "<div class='search-list'>"+
+			            "<table>"+
+			                "<tr>"+
+			                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
+			                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+			                    "</td>"+
+			                    "<td rowspan='3' style='width: 15px;'></td>"+
+			                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].placeTitle+"</h2></td>"+
+			                "</tr>"+
+			                "<tr>"+
+			                    "<td colspan='2' id='search-content'> 매장 번호 : "+ result[i].placeCall +" <br><br> 영업시간 : "+ result[i].businessTime +"</td>"+
+			                "</tr>"+
+			                "<tr>"+
+			                    "<td style='width: 150px; height: 35px;' id='search-score'><div class='material-icons' style='position:relative;top:6px;color:#e4d4fa'>star</div> "+ result[i].score+"</td>"+
+			                    "<td style='height: 35px;' id='search-location'>"+result[i].address+"</td>"+
+			                "</tr>"+
+			            "</table>"+
+			        "</div>";
+					}
+					$(".searchWrap").html(value);
+					showSearchList();
+				},
+				error:function(){
+					
+				},
+			})
+		}
+		
+		function searchOneday(){
+			$.ajax({
+				url:
+			})
 		}
         
         // 네이버 지도
