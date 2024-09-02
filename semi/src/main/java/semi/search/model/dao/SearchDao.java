@@ -213,6 +213,7 @@ public class SearchDao {
 				list.add(new Oneday(rset.getInt("one_no"),
 									rset.getString("one_title"),
 									rset.getString("one_place"),
+									rset.getString("one_phone"),
 									rset.getInt("ent_people"),
 									rset.getDouble("score"),
 									rset.getInt("price"),

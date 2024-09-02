@@ -83,6 +83,7 @@
 		       ONE_NO
 		     , ONE_TITLE
 		     , ONE_PLACE
+		     , ONE_PHONE
 		     , ENT_PEOPLE
 		     , SCORE
 		     , PRICE

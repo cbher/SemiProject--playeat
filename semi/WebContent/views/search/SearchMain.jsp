@@ -299,6 +299,11 @@
 					}
 					$(".searchWrap").html(value);
 					showSearchList();
+					if($(".search-list:hidden").length == 0){
+						$(".add-list").hide();
+					}else{
+						$(".add-list").show();						
+					}
 				},
 				error:function(){
 					console.log("실패")
@@ -337,6 +342,11 @@
 					}
 					$(".searchWrap").html(value);
 					showSearchList();
+					if($(".search-list:hidden").length == 0){
+						$(".add-list").hide();
+					}else{
+						$(".add-list").show();						
+					}
 				},
 				error:function(){
 					
@@ -364,7 +374,7 @@
 			                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].oneTitle+"</h2></td>"+
 			                "</tr>"+
 			                "<tr>"+
-			                    "<td colspan='2' id='search-content'> 매장 번호 : "+ result[i].phone +" <br><br>  가격 : "+ result[i].price +" <br> 참여인원 : "+ result.entPeople +" </td>"+
+			                    "<td colspan='2' id='search-content'> 매장 번호 : "+ result[i].phone +" <br><br>  가격 : "+ result[i].price +" <br> 참여인원 : "+ result[i].entPeople +" </td>"+
 			                "</tr>"+
 			                "<tr>"+
 			                    "<td style='width: 150px; height: 35px;' id='search-score'><div class='material-icons' style='position:relative;top:6px;color:#e4d4fa'>star</div> "+ result[i].score+"</td>"+
@@ -373,9 +383,13 @@
 			            "</table>"+
 			        "</div>";
 					}
-					console.log(result)
 					$(".searchWrap").html(value);
 					showSearchList();
+					if($(".search-list:hidden").length == 0){
+						$(".add-list").hide();
+					}else{
+						$(".add-list").show();						
+					}
 				},
 				error:function(){
 					console.log("Something Wrong!");
