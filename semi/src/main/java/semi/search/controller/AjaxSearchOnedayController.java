@@ -36,7 +36,7 @@ public class AjaxSearchOnedayController extends HttpServlet {
 		
 		int category = Integer.parseInt(request.getParameter("category"));
 		ArrayList<Oneday> list = null;
-		
+		System.out.println(category);
 		if(category == 1) {
 			list = new SearchService().searchAllOneday();
 		}else {

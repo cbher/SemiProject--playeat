@@ -348,9 +348,10 @@
 			$.ajax({
 				url:"searchOneday.so",
 				data:{
-					category:$("input[name=oneday-list:checked]").val()
+					category:$("input[name=oneday-list]:checked").val()
 				},
 				success:function (result){
+					console.log($("input[name=oneday-list]:checked").val())
 					let value = "";
 					for(let i = 0; i<result.length;i++){
 						value += "<div class='search-list'>"+
@@ -372,6 +373,7 @@
 			            "</table>"+
 			        "</div>";
 					}
+					console.log(result)
 					$(".searchWrap").html(value);
 					showSearchList();
 				},
