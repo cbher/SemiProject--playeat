@@ -85,7 +85,7 @@
             <div class="category-title">
                 <h4>테마별</h4>
             </div>
-            <ul class="subject-list">
+            <ul class="subject-list" onchange="searchPlay();">
                 <li><input type="radio" name="subject-list" value="1">전체</li>
                 <li><input type="radio" name="subject-list" value="2">카페</li>
                 <li><input type="radio" name="subject-list" value="3">데이트</li>
@@ -101,7 +101,7 @@
             <div class="oneday-title">
                 <h4>원데이 클래스</h4>
             </div>
-            <ul class="oneday-list">
+            <ul class="oneday-list" onchange="searchOneday();">
                 <li><input type="radio" name="oneday-list" value="1">전체</li>
                 <li><input type="radio" name="oneday-list" value="2">스포츠</li>
                 <li><input type="radio" name="oneday-list" value="3">드로잉</li>
@@ -119,7 +119,7 @@
             <div class="r-category-title">
                 <h4>식당 카테고리</h4>
             </div>
-            <ul class="r-category-list" onchange="tt()">
+            <ul class="r-category-list" onchange="searchRestaurant()">
                 <li><input type="radio" name="r-category-list" value="1">전체</li>
                 <li><input type="radio" name="r-category-list" value="2">밥집</li>
                 <li><input type="radio" name="r-category-list" value="3">고깃집</li>
@@ -143,7 +143,7 @@
             </div>
             <ul class="location-list">
                 <li>
-                    <select name="location" id="" onchange="test()">
+                    <select name="location" id="" onchange="selectLocationList()">
                         <option value="1">서울</option>
                         <option value="2">경기도</option>
                         <option value="3">인천</option>
@@ -187,7 +187,7 @@
 		                    <td colspan="2" style="height: 40px;" id="search-title"><h2><%= p.getPlaceTitle() %></h2></td>
 		                </tr>
 		                <tr>
-		                    <td colspan="2" id="search-content">여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>
+		                    <td colspan="2" id="search-content">매장 번호 : <%= p.getPlaceCall() %><br><br>영업시간 : <%= p.getBusinessTime() %></td>
 		                </tr>
 		                <tr>
 		                    <td style="width: 150px; height: 35px;" id="search-score"><div class="material-icons" style="position:relative;top:6px;color:#e4d4fa">star</div> <%= p.getScore() %></td>
@@ -228,7 +228,7 @@
         $(function(){
         	showSearchList();
         })
-		function test(){
+		function selectLocationList(){
 			$.ajax({
 				url:"searchList.sl",
 				data:{category:$("option:selected").val()},
@@ -245,7 +245,7 @@
 						                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].placeTitle+"</h2></td>"+
 						                "</tr>"+
 						                "<tr>"+
-						                    "<td colspan='2' id='search-content'>여기는 내용자리입니다. 지금은 자리를 채우기 위해 텍스트를 써보는주입니다. 안녕하세요 저는 정민ㅅ깅비니다 반가워요 나이스투미츄</td>"+
+						                    "<td colspan='2' id='search-content'> 매장 번호 : "+ result[i].placeCall +" <br><br> 영업시간 : "+ result[i].businessTime +"</td>"+
 						                "</tr>"+
 						                "<tr>"+
 						                    "<td style='width: 150px; height: 35px;' id='search-score'><div class='material-icons' style='position:relative;top:6px;color:#e4d4fa'>star</div> "+ result[i].score+"</td>"+
@@ -269,8 +269,133 @@
 			})
 		}
 		
-		function tt(){
-			console.log($("input[name=r-category-list]:checked").val());
+		function searchRestaurant(){
+			
+			$.ajax({
+				url:"selectRestaurant.sr",
+				data:{
+					category:$("input[name=r-category-list]:checked").val()
+				},
+				success:function(result){
+					let value = "";
+					for(let i = 0; i < result.length;i++){
+						value += "<div class='search-list'>"+
+						            "<table>"+
+						                "<tr>"+
+						                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
+						                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+						                    "</td>"+
+						                    "<td rowspan='3' style='width: 15px;'></td>"+
+						                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].placeTitle+"</h2></td>"+
+						                "</tr>"+
+						                "<tr>"+
+						                    "<td colspan='2' id='search-content'> 매장 번호 : "+ result[i].placeCall +" <br><br> 영업시간 : "+ result[i].businessTime +"</td>"+
+						                "</tr>"+
+						                "<tr>"+
+						                    "<td style='width: 150px; height: 35px;' id='search-score'><div class='material-icons' style='position:relative;top:6px;color:#e4d4fa'>star</div> "+ result[i].score+"</td>"+
+						                    "<td style='height: 35px;' id='search-location'>"+result[i].address+"</td>"+
+						                "</tr>"+
+						            "</table>"+
+						        "</div>";
+					}
+					$(".searchWrap").html(value);
+					showSearchList();
+					if($(".search-list:hidden").length == 0){
+						$(".add-list").hide();
+					}else{
+						$(".add-list").show();						
+					}
+				},
+				error:function(){
+					console.log("실패")
+				}
+			})
+			
+		}
+		
+		function searchPlay(){
+			$.ajax({
+				url:"searchPlay.sp",
+				data:{
+					category:$("input[name=subject-list]:checked").val()
+				},
+				success:function(result){
+					let value = "";
+					for(let i = 0;i<result.length;i++){
+						value += "<div class='search-list'>"+
+			            "<table>"+
+			                "<tr>"+
+			                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
+			                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+			                    "</td>"+
+			                    "<td rowspan='3' style='width: 15px;'></td>"+
+			                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].placeTitle+"</h2></td>"+
+			                "</tr>"+
+			                "<tr>"+
+			                    "<td colspan='2' id='search-content'> 매장 번호 : "+ result[i].placeCall +" <br><br> 영업시간 : "+ result[i].businessTime +"</td>"+
+			                "</tr>"+
+			                "<tr>"+
+			                    "<td style='width: 150px; height: 35px;' id='search-score'><div class='material-icons' style='position:relative;top:6px;color:#e4d4fa'>star</div> "+ result[i].score+"</td>"+
+			                    "<td style='height: 35px;' id='search-location'>"+result[i].address+"</td>"+
+			                "</tr>"+
+			            "</table>"+
+			        "</div>";
+					}
+					$(".searchWrap").html(value);
+					showSearchList();
+					if($(".search-list:hidden").length == 0){
+						$(".add-list").hide();
+					}else{
+						$(".add-list").show();						
+					}
+				},
+				error:function(){
+					
+				},
+			})
+		}
+		
+		function searchOneday(){
+			$.ajax({
+				url:"searchOneday.so",
+				data:{
+					category:$("input[name=oneday-list]:checked").val()
+				},
+				success:function (result){
+					console.log($("input[name=oneday-list]:checked").val())
+					let value = "";
+					for(let i = 0; i<result.length;i++){
+						value += "<div class='search-list'>"+
+			            "<table>"+
+			                "<tr>"+
+			                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
+			                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].oneNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+			                    "</td>"+
+			                    "<td rowspan='3' style='width: 15px;'></td>"+
+			                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].oneTitle+"</h2></td>"+
+			                "</tr>"+
+			                "<tr>"+
+			                    "<td colspan='2' id='search-content'> 매장 번호 : "+ result[i].phone +" <br><br>  가격 : "+ result[i].price +" <br> 참여인원 : "+ result[i].entPeople +" </td>"+
+			                "</tr>"+
+			                "<tr>"+
+			                    "<td style='width: 150px; height: 35px;' id='search-score'><div class='material-icons' style='position:relative;top:6px;color:#e4d4fa'>star</div> "+ result[i].score+"</td>"+
+			                    "<td style='height: 35px;' id='search-location'>"+result[i].address+"</td>"+
+			                "</tr>"+
+			            "</table>"+
+			        "</div>";
+					}
+					$(".searchWrap").html(value);
+					showSearchList();
+					if($(".search-list:hidden").length == 0){
+						$(".add-list").hide();
+					}else{
+						$(".add-list").show();						
+					}
+				},
+				error:function(){
+					console.log("Something Wrong!");
+				}
+			})
 		}
         
         // 네이버 지도

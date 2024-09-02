@@ -47,6 +47,18 @@ public class Play {
 	
 	
 
+	public Play(int placeNo, String placeTitle, String address, String placeCall, double score, String businessTime,
+			String titleImg) {
+		super();
+		this.placeNo = placeNo;
+		this.placeTitle = placeTitle;
+		this.address = address;
+		this.placeCall = placeCall;
+		this.score = score;
+		this.businessTime = businessTime;
+		this.titleImg = titleImg;
+	}
+
 	public Play(int placeNo, String placeTitle, String titleImg) {
 		super();
 		this.placeNo = placeNo;

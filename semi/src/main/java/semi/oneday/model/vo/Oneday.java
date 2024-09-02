@@ -54,6 +54,21 @@ public class Oneday {
 	}
 	
 	
+	
+	
+
+	public Oneday(int oneNo, String oneTitle, String address, String phone, int entPeople, double score, int price,
+			String titleImg) {
+		super();
+		this.oneNo = oneNo;
+		this.oneTitle = oneTitle;
+		this.phone = phone;
+		this.address = address;
+		this.entPeople = entPeople;
+		this.score = score;
+		this.price = price;
+		this.titleImg = titleImg;
+	}
 
 	public Oneday(int oneNo, String oneTitle, double score, int price, String titleImg) {
 		super();
