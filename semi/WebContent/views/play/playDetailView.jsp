@@ -878,6 +878,10 @@ footer .inner .info .copyright{
             		},
             	})
             }
+            
+            function test(){
+            	confirm("정말로 신고하시겠습니까?");
+            }
 	            
             function selectReply(){
             	$.ajax({
@@ -892,7 +896,7 @@ footer .inner .info .copyright{
             				+  result[i].userId + 
             				"</div><div id='date'>" 
             				+  result[i].createDate +
-            				"</div><div id='edit'><a href=''>신고</a> </div><div id='score'><div class='material-icons score'>star</div> " 
+            				"</div><div id='edit'><span onclick='test();'>신고</span> </div><div id='score'><div class='material-icons score'>star</div> " 
             				+ result[i].score + 
             				"</div></div><div class='text-area'><div id='review'>" 
             				+ result[i].comment + 

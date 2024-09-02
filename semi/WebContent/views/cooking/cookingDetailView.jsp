@@ -130,6 +130,7 @@ button{
 
 button:hover{
     background-color: #8b7dbe;
+    color:#fff;
 }
 
 .back a{
@@ -178,9 +179,7 @@ button:hover{
 				<% } %>
             </div>
             <div class="explanation">
-                <textarea readonly>
-                   <%= cBoard.getcBoardContent() %>
-                </textarea>
+                <textarea readonly><%= cBoard.getcBoardContent() %></textarea>
                 
                 <div class="back" align="center"><a  href="<%= contextPath %>/clist.co?cpage=1">목록으로</a></div>
             </div>
