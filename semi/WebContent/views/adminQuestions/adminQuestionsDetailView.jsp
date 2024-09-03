@@ -1,7 +1,12 @@
+<%@page import="db.com.semi.Questions.model.vo.Attatment"%>
+<%@page import="java.util.ArrayList"%>
+
 <%@page import="db.com.semi.Questions.model.vo.Questions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <% Questions view = (Questions)request.getAttribute("detailview"); %>
+   <% Questions view = (Questions)request.getAttribute("detailview");
+   ArrayList<Attatment> at = (ArrayList<Attatment>)request.getAttribute("at");
+   %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +48,7 @@ button:hover{
 <input type="hidden" name="qno" value=<%=view.getInquireNo() %>>
     <table>
         <tr>
-            <th width="90" height="30">문의번호</th>
+            <th width="220" height="30">문의번호</th>
             <td width="110"> <%=view.getInquireNo() %></td>
             <th width="90">작성자</th>
             <td width="500"> <%=view.getInquireWirther() %></td>
@@ -67,8 +72,48 @@ button:hover{
         </tr>
         <tr>
             <th height="300">내용</th>
-            <td colspan="3"  style="vertical-align: top;" > <%=view.getInquireContent() %></td>
+            <td colspan="3"  style="vertical-align: top;" ><%=view.getInquireContent() %></td>
         </tr>
+        <tr>
+        	<th>메인 사진</th>
+        	<td width="700px" colspan="3">
+        	<%if(at == null || at.size()<1) {%>
+        	사진 파일이 없습니다
+        	<%}else {%>
+        		<div>
+        		<img alt="" src="<%=contextPath%>/<%=at.get(0).getFilePath()+ at.get(0).getChangeName()%> " height="150px">
+        		</div>
+        		<%} %>
+        	</td>
+        </tr>
+        <tr>
+        <th>서브사진</th>
+        	<td width="700px" colspan="3"  ">
+        	<div style=" display: flex;">
+        	<%if(at.size()>1){ %>
+        	<div>
+        		<img alt="" src="<%=contextPath%>/<%=at.get(1).getFilePath()+ at.get(1).getChangeName()%> " height="150px">
+        	</div>
+        	<%}  if(at.size()>2){ %>
+        	<div>
+        		<img alt="" src="<%=contextPath%>/<%=at.get(2).getFilePath()+ at.get(2).getChangeName()%> " height="150px">
+        	</div>
+        	<%} if(at.size()>3){ %>
+        	<div>
+        		<img alt="" src="<%=contextPath%>/<%=at.get(3).getFilePath()+ at.get(3).getChangeName()%> " height="150px">
+        	</div>
+        	<%} if(at.size()<2){%>
+        	<div style="width: 700px; height: 100%;">
+        	사진 파일이 없습니다
+        	</div>
+        	<%} %>
+        	</div>
+        	</td>
+        
+        </tr>
+        
+        <tr></tr>
+        
         <tr>
             <th height="300">답변내용</th>
             <td height="300px" colspan="5" >

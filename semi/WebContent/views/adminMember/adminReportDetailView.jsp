@@ -100,6 +100,8 @@ table *{
         <input type="hidden" name="Rno" value="<%= Rno %>">
         <input type="hidden" name="userNo" value="<%= list.getUserNo() %>">
         <input type="hidden" name="userName" value="<%= list.getUserName() %>">
+        <input type="hidden" name="reportNo" value="<%= list.getReportNo() %>">
+      
  
         <tr>
             <th>정지일</th>
@@ -143,7 +145,7 @@ table *{
             <th width="140" height="30">신고번호</th>
             <td width="250">&nbsp; <%=list.getReportNo() %></td>
             <th width ="140">신고 제제 상황</th>
-            <td width ="450" >&nbsp; <%if(list.getReprotStatus().equals("Y")){ %>제제완료<%}else{ %>대기중<%} %></td>
+            <td width ="450" >&nbsp; <%if(list.getReprotStatus().equals("Y")){ %>대기중<%}else{ %>제제완료<%} %></td>
         </tr>
         <tr>
             <th  height="30">게시판명</th>

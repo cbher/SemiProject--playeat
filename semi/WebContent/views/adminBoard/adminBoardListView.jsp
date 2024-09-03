@@ -85,7 +85,7 @@ table td{text-align: center;}
 <br>
 <br>
 
-<div class="Nolist" align="center">
+<div class="adBoardlist" align="center">
 	<table>
 	<thead>
 	<tr>
@@ -109,9 +109,10 @@ table td{text-align: center;}
 	<tr>
 		<td width="70" height="30"><%= list.get(a).getcNo() %></td>
 		<td width="350"><%= list.get(a).getcTitle() %></td>
-		<td width="90"><%=list.get(a).getUserNo() %></td>
+		<td width="90"><%=list.get(a).getUserName() %></td>
 		<td width="90"><%=list.get(a).getcDate() %></td>
-		<td width="90"><%=list.get(a).getcCategory() %></td>
+		<td width="90"><%if(list.get(a).getcCategory()==1){ %>요리게시판
+			<%}else{ %>명예의전당<%} %> </td>
 		<td width="90"><%=list.get(a).getCount() %></td>
 		
 		<%if("Y".equals(list.get(a).getStatus())){%>
@@ -160,11 +161,12 @@ table td{text-align: center;}
 	</div>
 </div>
 <script>
-	$(function(){
-		$(".qelist tbody>tr").click(function(){
-			location.href =  '<%=request.getContextPath()%>/Detail.qo?qno='+ $(this).children().eq(0).text();
-		})
+$(function(){
+	$(".adBoardlist tbody>tr").click(function(){
+		location.href =  '<%=request.getContextPath()%>/Detailbo.bo?bno='+ $(this).children().eq(0).text();
 	})
+})
+
 </script>
 	
 	

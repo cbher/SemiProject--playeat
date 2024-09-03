@@ -94,13 +94,13 @@ public class AdBoardListController extends HttpServlet {
 		 //만들어진 애들 페이징바 처리
 		 pi =  new PageInfo(listCount, currentPage, pageLimit, boardLimit,maxPage, startPage,endPage);
 		
-		
+	
 		
 		 HttpSession session = request.getSession();
 		 session.setAttribute("AdNoticepi", pi);
 		 session.setAttribute("adBoardlistView", select);
-		 
 		request.setAttribute("list", list);
+	
 		request.getRequestDispatcher("views/adminBoard/adminBoardListView.jsp").forward(request, response);;
 	}
 

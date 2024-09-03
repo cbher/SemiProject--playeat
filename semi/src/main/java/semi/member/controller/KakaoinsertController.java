@@ -38,8 +38,7 @@ public class KakaoinsertController extends HttpServlet {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");;
 		
-		System.out.println("nickname: " + nickname);
-		System.out.println("phone: " + phone);
+	
 		
 		Member m = new Member(memId, memPwd, memName, nickname, phone, email);
 		
@@ -49,7 +48,7 @@ public class KakaoinsertController extends HttpServlet {
 			Member loginUser = new MemberService().kakaoLoginMember(memId);
 			
 			if(loginUser == null) {
-				request.getSession().setAttribute("alertMsg", "카카오 로그인 실패");
+				request.getSession().setAttribute("alertMsg", "移댁뭅�삤 濡쒓렇�씤 �떎�뙣");
 				response.sendRedirect(request.getContextPath());
 				
 			} else {

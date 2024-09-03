@@ -1,6 +1,6 @@
 package db.com.semi.Questions.model.dao;
 
-import java.awt.datatransfer.Clipboard;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import db.com.semi.Questions.model.vo.Attatment;
 import db.com.semi.Questions.model.vo.Questions;
+
 
 import static semi.common.JDBCtemplate.*;
 
@@ -179,5 +181,35 @@ public class QuestionsDao {
 		} 
 		return result;
 		
+	}
+	
+	public ArrayList<Attatment> QuestionAt(Connection conn, int qno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("QuestionAt");
+		ArrayList<Attatment> list = new ArrayList<Attatment>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, qno);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+			
+				list.add(new Attatment(rset.getInt("file_no"),
+									 rset.getString("origin_name"),
+									 rset.getString("change_name"),
+									 rset.getString("file_path"),
+									 rset.getInt("inquire_no")));
+				
+				
+			
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}return list;
 	}
 }

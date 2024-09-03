@@ -43,9 +43,9 @@ public class QuestionsUpdate extends HttpServlet {
 	 ArrayList<Questions> list =  new QuestionsService().QuestionsList();
 	 request.setAttribute("list", list);
 	if(result>0) {
-		request.getRequestDispatcher("views/adminQuestions/adminQuestionsMainMenu.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/adminQuestions/adminQuestionsMainMenu.jsp").forward(request, response);
 		}else{
-		System.out.println("오류냤어 업데이트쪽임");
+	
 		}
 	
 	}

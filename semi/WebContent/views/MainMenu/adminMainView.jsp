@@ -13,6 +13,10 @@
   if(session.getAttribute("reportlistcount") != null){
 	  reportlistcount = (int)session.getAttribute("reportlistcount");
   }
+  int oneclasscount = 0;
+  if(session.getAttribute("oneclasscount") != null){
+	  oneclasscount = (int)session.getAttribute("oneclasscount");
+  }
     %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +25,7 @@
 <title>Insert title here</title>
 <style>
 	.adminMain{
-		background-color: yellow;
+		background-color: ;
 		width: 1000px;
         height: 600px;
 		margin: auto;
@@ -31,31 +35,31 @@
 		align-items: center; 
 	}
 	.adminMaintable{
-		background-color: yellow;
+		background-color: #e4d4fa;
 		width: 99%;
 		height: 99%;
-		border: 1px solid black;
+	
 		box-sizing: border-box;
 		border-spacing: 20px;
 	}
 	.adminMaintable th{
-		border: 1px solid black;
+		
 		background-color: white;
 		border-radius: 100px;
 		width: 50%;
 
 	} 
 	.adminMaintable hr{
-		background-color: yellow;
+		background-color: ;
 		
 	}
 	.adminMaintable .maintitle{
-		border: 1px solid black;
+	
 		height: 10%;
 	
 	}
 	.adminMaintable .count{
-		border: 1px solid black;
+
 		height: 80%;
 		display: flex;
 		justify-content: center;
@@ -73,8 +77,8 @@
 		<table class="adminMaintable">
 		<tr>
 			<th>
-				<div class="maintitle">신규 원데이클레스 신청</div>
-				<div class="count" id="count1">123</div>
+				<div class="maintitle"> 원데이클레스 강좌 수</div>
+				<div class="count" id="count1"><%=oneclasscount %></div>
 
 			</th>
 			<th>	

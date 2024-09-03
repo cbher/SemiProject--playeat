@@ -35,7 +35,7 @@ public class adMemberlistDetail extends HttpServlet {
 		AdMember list = new AdMemberService().adMemberDetail(Mno);
 		
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/adminMember/adminMemberDetailView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/adminMember/adminMemberDetailView.jsp").forward(request, response);
 	}
 
 	/**

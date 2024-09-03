@@ -14,10 +14,11 @@ public class AdBoard {
 	private String status;
 	private int cStar;
 	private int count;
-	private String userNo;
+	private int userNo;
 	private int cCategory;
+	private String userName;
 	public AdBoard(int cNo, String cTitle, String cContents, Date cDate, String status, int cStar, int count,
-			String userNo, int cCategory) {
+			int userNo, int cCategory, String userName) {
 		super();
 		this.cNo = cNo;
 		this.cTitle = cTitle;
@@ -28,6 +29,26 @@ public class AdBoard {
 		this.count = count;
 		this.userNo = userNo;
 		this.cCategory = cCategory;
+		this.userName = userName;
+	}
+	public AdBoard(int cNo, String cTitle, String cContents, Date cDate, String status, int cStar, int count,
+			String userName, int cCategory) {
+		super();
+		this.cNo = cNo;
+		this.cTitle = cTitle;
+		this.cContents = cContents;
+		this.cDate = cDate;
+		this.status = status;
+		this.cStar = cStar;
+		this.count = count;
+		this.userName = userName;
+		this.cCategory = cCategory;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	public int getcNo() {
 		return cNo;
@@ -71,10 +92,10 @@ public class AdBoard {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public String getUserNo() {
+	public int getUserNo() {
 		return userNo;
 	}
-	public void setUserNo(String userNo) {
+	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
 	public int getcCategory() {
@@ -85,9 +106,9 @@ public class AdBoard {
 	}
 	@Override
 	public String toString() {
-		return "AdNotice [cNo=" + cNo + ", cTitle=" + cTitle + ", cContents=" + cContents + ", cDate=" + cDate
+		return "AdBoard [cNo=" + cNo + ", cTitle=" + cTitle + ", cContents=" + cContents + ", cDate=" + cDate
 				+ ", status=" + status + ", cStar=" + cStar + ", count=" + count + ", userNo=" + userNo + ", cCategory="
-				+ cCategory + "]";
+				+ cCategory + ", userName=" + userName + "]";
 	}
 	
 	

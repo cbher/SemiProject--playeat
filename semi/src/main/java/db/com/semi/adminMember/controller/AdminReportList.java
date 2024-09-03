@@ -50,7 +50,7 @@ public class AdminReportList extends HttpServlet {
 				 break;
 			 case "ready" :
 				 list = new AdMemberService().adReportReadyList();
-				 reportlistcount = list.size();
+				
 				 break;
 			 case "clear" :
 				 list = new AdMemberService().adReportClearList();
@@ -60,6 +60,8 @@ public class AdminReportList extends HttpServlet {
 		
 		
 		 }
+		 ArrayList<AdReport>  reportlist = new AdMemberService().adReportReadyList();
+		 reportlistcount = reportlist.size();
 			int currentPage  ;
 		
 		int listCount = list.size(); 		 // 현재 총 게시글의 개수  //사이즈 받아오면 그게 LIST카우늩임

@@ -35,9 +35,11 @@ public class AdminReportTimeDetailController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		String userName = (request.getParameter("userName"));
-		String userId = (request.getParameter("userId"));
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int reportNo = Integer.parseInt((request.getParameter("reportNo")));
+	
 		HttpSession session = request.getSession();
-		if(userId.equals("admin")) {
+		if(userNo == 1) {
 			session.setAttribute("adAlertMsg", "관리자의 정지는 불가능합니다");
 
 		}else {
@@ -60,11 +62,10 @@ public class AdminReportTimeDetailController extends HttpServlet {
 		int bentime = (int)(((penaltyday*24)+ penaltytime) *3600000);
 		
 		//일단 벤부터 하고오기
-		int Mno = Integer.parseInt(request.getParameter("Mno")) ;
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int Rno = Integer.parseInt(request.getParameter("Rno")) ;
+	
 	
 		int result1 = new AdMemberService().adMemberbeen(userNo);
-		System.out.println(result1);
 		 Timer timer = new Timer();
 		
 		 TimerTask task = new TimerTask() {
@@ -76,7 +77,9 @@ public class AdminReportTimeDetailController extends HttpServlet {
 			}
 		};
 		
-	  
+			if(result1 == 1) {
+				int result3 = new AdMemberService().adMemberreportbeen(reportNo);
+			}
         timer.schedule(task, bentime); // 3600000 밀리초 = 1시간
 		
 		
@@ -87,7 +90,7 @@ public class AdminReportTimeDetailController extends HttpServlet {
 			session.setAttribute("adAlertMsg", userName+"님의 정지가 해제되었습니다");
 		}
 		}
-		response.sendRedirect(request.getContextPath()+"/adMemberlist.ml?cpage=1");
+		response.sendRedirect(request.getContextPath()+"/adReportList.rl?cpage=1");
 
 	}
 

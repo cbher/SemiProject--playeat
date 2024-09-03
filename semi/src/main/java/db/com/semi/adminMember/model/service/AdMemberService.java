@@ -92,6 +92,15 @@ public class AdMemberService {
 		 close(conn);
 		 return list;
 	}
+	
+	public int adMemberreportbeen(int reportNo) {
+		Connection conn = getConnection();
+		int result = new AdMemberDao().adMemberreportbeen( reportNo, conn);
+		
+		close(conn);
+		return result;
+		
+	}
 
 	
 	

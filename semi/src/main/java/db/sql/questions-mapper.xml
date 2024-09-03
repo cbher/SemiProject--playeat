@@ -43,6 +43,21 @@ where inquire_no=?
 
 </entry>
 
+<entry key="QuestionAt"> 
+	select 
+		file_no, 
+		origin_name, 
+		change_name,
+		file_path,
+		inquire_no
+	from 
+		attechment
+	where 
+		inquire_no = ?
+
+
+</entry>
+
 
 
 </properties>

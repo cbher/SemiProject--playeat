@@ -101,7 +101,7 @@ public class adMemberlistcontroller extends HttpServlet {
 		session.setAttribute("select", select);
 		session.setAttribute("adMemberlistCount", list.size());
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/adminMember/adminMemberListView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/adminMember/adminMemberListView.jsp").forward(request, response);
 		
 		
 	}

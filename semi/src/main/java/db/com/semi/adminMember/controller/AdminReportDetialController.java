@@ -36,7 +36,7 @@ public class AdminReportDetialController extends HttpServlet {
 	AdReport list = new AdMemberService().adReportDetail(Rno);
 		
 	request.setAttribute("list", list);
-	request.getRequestDispatcher("views/adminMember/adminReportDetailView.jsp").forward(request, response);;
+	request.getRequestDispatcher("/views/adminMember/adminReportDetailView.jsp").forward(request, response);;
 	
 	}
 

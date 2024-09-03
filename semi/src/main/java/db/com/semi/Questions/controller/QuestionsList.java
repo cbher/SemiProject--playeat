@@ -129,7 +129,7 @@ public class QuestionsList extends HttpServlet {
 	
 			break;
 		default: 
-			System.out.println("오류페이지 확인하고오자일단 문의사항리스트뷰임");
+	
 			break;
 		}//switch문 종료
 		
@@ -155,7 +155,7 @@ public class QuestionsList extends HttpServlet {
 		
 		session.setAttribute("Readylistcount", Readylist.size());
 		//호출로 세팅해둔거 넘겨주기
-		request.getRequestDispatcher("views/adminQuestions/adminQuestionsMainMenu.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/adminQuestions/adminQuestionsMainMenu.jsp").forward(request, response);
 		
 		
 	}

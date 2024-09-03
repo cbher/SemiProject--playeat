@@ -48,6 +48,10 @@
     table td {
         text-align: center;
     }
+    .insert>button:hover{
+        background-color: #E4D4FA;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
@@ -102,14 +106,20 @@
                             <tr>
                                 <td height="40"><%= list.get(a).getpNo() %></td>
                                 <td><%= list.get(a).getpTitle() %></td>
-                                <td><%= list.get(a).getpStatus() %></td>
-                                <td><%= list.get(a).getAddress() %></td>
+                                
+                                <td><%if(list.get(a).getpStatus().equals("Y")){%>
+                              영업중 <%}else{ %>폐업<%} %></td>
+                              
+                              <td><%= list.get(a).getAddress() %></td>
+                                
                                 <td><%= list.get(a).getpCall() %></td>
-                                <% if (list.get(a).getpSelectNum() == 100) { %>
+                                <% if (list.get(a).getpSelectNum() == 1) { %>
                                     <td>식당</td>
-                                <% } else if (list.get(a).getpSelectNum() == 200) { %>
+                                <% } else if (list.get(a).getpSelectNum() == 2) { %>
                                     <td>놀거리</td>
-                                <% } %>
+                                <% }else{ %>
+                                   <td>잘못된 코드</td>
+                                <%} %>
                                 <td><%= list.get(a).getpScore() %></td>
                             </tr>
                         <% } %>
@@ -117,6 +127,10 @@
                 </tbody>
             </table>
             <br><br>
+            		<a class="insert" href="adPlaceenroll.ap">
+            		<button style="width: 200px; height: 50px; border-radius: 20px; ">추가하기</button>
+            		</a>
+                <br><br>
             <div class="paging" align="center">
                 <% if (pi.getCurrentPage() != 1) { %>
                     <button onclick="location.href='<%=contextPath%>/adPlace.pl?cpage=<%=pi.getCurrentPage() - 1 %>&select=<%=select%>&Pname=<%=search%>'">&lt;</button>
@@ -139,8 +153,8 @@
     </div>
     <script>
         $(function() {
-            $(".qelist tbody>tr").click(function() {
-                location.href = '<%=request.getContextPath()%>/Detail.qo?qno=' + $(this).children().eq(0).text();
+            $(".adPlacelist tbody>tr").click(function() {
+                location.href = '<%=request.getContextPath()%>/Detail.apo?pno=' + $(this).children().eq(0).text();
             });
         });
     </script>

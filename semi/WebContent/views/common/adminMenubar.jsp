@@ -256,7 +256,7 @@ header .inner .search button:hover{
                 <img src="./resourse/play_eat-removebg-preview.png" alt="">
             </a>
             <div class="search">
-                <form action="http://localhost:8002/semi/">
+                <form action="admain.ad">
                 <div style=" width: 400px; height: 100px; margin-top: 10px;      " >
                     <button style="height: 100%; width: 100%; font-size: 40px; font-weight: 900; border: 0; "> 관리자페이지</button>
                    
@@ -266,8 +266,8 @@ header .inner .search button:hover{
             </div>
             <div class="login">
                 <ul>
-                    <li><a href="">로그아웃</a></li>
-                    <li><a href="">마이페이지</a></li>
+                    
+                    <li><a href="<%=contextPath%>">메인화면으로</a></li>
                 </ul>
             </div>
             
@@ -289,7 +289,7 @@ header .inner .search button:hover{
                   
                     </li>
                          <li>
-                        <a href="">원클래스 매니저</a>
+                        <a href="adoneclass.ac">원클래스 매니저</a>
                   
                     </li>
                     <li>

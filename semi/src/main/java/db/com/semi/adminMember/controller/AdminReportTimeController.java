@@ -64,7 +64,6 @@ public class AdminReportTimeController extends HttpServlet {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 	
 		int result1 = new AdMemberService().adMemberbeen(userNo);
-		System.out.println(result1);
 		 Timer timer = new Timer();
 		
 		 TimerTask task = new TimerTask() {

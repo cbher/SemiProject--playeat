@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import db.com.semi.Questions.model.dao.QuestionsDao;
+import db.com.semi.Questions.model.vo.Attatment;
 import db.com.semi.Questions.model.vo.Questions;
+import semi.cooking.model.vo.Attachment;
 
 import static semi.common.JDBCtemplate.*;
 
@@ -56,5 +58,12 @@ public class QuestionsService {
 		}
 		close(conn);
 		return result; 
+	}
+	
+	public ArrayList<Attatment> QuestionAt(int qno) {
+		Connection conn = getConnection();
+		ArrayList<Attatment> at = new QuestionsDao().QuestionAt(conn, qno);
+		close(conn);
+		return at;
 	}
 }
