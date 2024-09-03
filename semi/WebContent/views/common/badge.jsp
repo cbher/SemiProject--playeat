@@ -119,7 +119,7 @@
 	    </c:forEach>
 	    
     </div>
-	
+
 	<script>
 	let quickMenu = $('.badge');
 	const DURATION = 900; // 이동 애니메이션 시간
@@ -131,7 +131,7 @@
 	    // 화면의 중앙 위치를 계산
 	    let point = ($(window).scrollTop() + (windowHeight / 2)) - (quickMenuHeight / 2);
 
-	    point -= 100;
+	    point -= 30;
 
 	    quickMenu.stop().animate({ top: point }, DURATION);
 	}

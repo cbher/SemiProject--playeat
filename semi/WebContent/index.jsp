@@ -295,7 +295,7 @@ body{
     justify-content: center;
     align-items: center;
     width: 1100px;
-    background-image: url(./resources/backGroundImg/명전_뒷배경\ \(1\).png);
+    background-image: url=(./resources/backGroundImg/명전_뒷배경 (1).png);
     height: 800px;
     border-radius: 12px;
 }
@@ -591,7 +591,7 @@ body{
     	
     <%} %>
  </div>
- 
+
  
   <footer>
       <div class="inner">
