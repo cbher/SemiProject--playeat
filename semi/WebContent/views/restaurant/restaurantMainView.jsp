@@ -34,6 +34,8 @@
     	
 /* random slot */
 
+
+
 .random{
     position: absolute;
     top: 250px;
