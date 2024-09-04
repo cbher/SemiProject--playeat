@@ -508,9 +508,10 @@
     
 }
 
-.comment-area #edit a{
+.comment-area #edit span{
     color: black;
     text-decoration: none;
+    cursor:pointer;
 }
 
 .comment-area #score{
@@ -878,10 +879,19 @@ footer .inner .info .copyright{
             		},
             	})
             }
+            <% if(loginUser != null){ %>
+	            function test(){
+	            	if(confirm("정말로 신고하시겠습니까?")){
+	            		
+	            	}
+		            		            		
+	            }
+            <% }else{ %>
+            	function test(){
+            		alert("로그인 후 이용가능합니다.")
+            	}
+            <% } %>
             
-            function test(){
-            	confirm("정말로 신고하시겠습니까?");
-            }
 	            
             function selectReply(){
             	$.ajax({
