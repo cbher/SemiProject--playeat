@@ -36,6 +36,7 @@ public class AjaxReplyListController extends HttpServlet {
 		
 		int placeNo = Integer.parseInt(request.getParameter("placeNo"));
 		ArrayList<PlayReply> list = new PlayService().selectPlayReply(placeNo);
+		request.setAttribute("replyList", list);
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(list,response.getWriter());
 		

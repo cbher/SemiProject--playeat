@@ -241,7 +241,7 @@
 						            "<table>"+
 						                "<tr>"+
 						                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
-						                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+						                        "<a href='"+"<%= contextPath %>"+"/restaurantDetail.pl?placeNo=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
 						                    "</td>"+
 						                    "<td rowspan='3' style='width: 15px;'></td>"+
 						                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].placeTitle+"</h2></td>"+
@@ -285,7 +285,7 @@
 						            "<table>"+
 						                "<tr>"+
 						                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
-						                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+						                        "<a href='"+"<%= contextPath %>"+"/restaurantDetail.pl?placeNo=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
 						                    "</td>"+
 						                    "<td rowspan='3' style='width: 15px;'></td>"+
 						                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].placeTitle+"</h2></td>"+
@@ -370,7 +370,7 @@
 			            "<table>"+
 			                "<tr>"+
 			                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
-			                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].oneNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+			                        "<a href='"+"<%= contextPath %>"+"/onedayDetail.on?oneNo=" + result[i].oneNo+ "'><img src='"+result[i].titleImg+"'></a>"+
 			                    "</td>"+
 			                    "<td rowspan='3' style='width: 15px;'></td>"+
 			                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].oneTitle+"</h2></td>"+

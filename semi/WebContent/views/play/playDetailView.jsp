@@ -56,6 +56,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v"></script>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=YOUR_CLIENT_ID&submodules=geocoder"></script>
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+		integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+		crossorigin="anonymous"></script>
+	<script>
+		Kakao.init('380af2edeb82dfbf591425877a112ec6'); // 사용하려는 앱의 JavaScript 키 입력
+	</script>
+
 <style>
 
 /* BADGE */
@@ -214,6 +221,96 @@
     color: #8b7dbe;
 }
 
+h2 {
+  text-align: center;
+  display: inline;
+}
+.info .modal_btn {
+  background-color: #f6f5f0;
+  border: none;
+  border-radius: 5px;
+  color: #8b7dbe;
+  cursor: pointer;
+}
+
+/*모달 팝업 영역 스타일링*/
+.info .modal {
+  /*팝업 배경*/
+  display: none; /*평소에는 보이지 않도록*/
+  /* position: absolute;
+    top:0;
+    left: 0; */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.info .modal .modal_popup {
+  /*팝업*/
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: absolute;
+  text-align: center;
+  width: 200px;
+  height: 150px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background: #f6f5f0;
+  border-radius: 20px;
+  z-index: 11;
+}
+.info .modal .modal_popup .close_btn {
+  display: block;
+  padding: 10px 20px;
+  background-color: #e4d4fa;
+  border: none;
+  border-radius: 5px;
+  color: #8b7dbe;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  position: relative;
+  top: 30px;
+}
+
+.info .modal.on {
+  display: block;
+}
+
+h3 {
+  margin: 10px 0 10px 0;
+  color: #8b7dbe;
+}
+
+.info .modal .modal_popup img {
+  width: 30px;
+  height: 30px;
+}
+
+.info .modal .modal_popup a {
+  width: 30px;
+  position: relative;
+  margin: 10px;
+}
+
+.info .modal .modal_popup .share {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height:50px;
+}
+
+
 .detail-info .inner .main-box .info table{
     width: 500px;
     height: 250px;
@@ -238,21 +335,10 @@
     margin-right:5px;
 }
 
-.detail-info .inner .main-box .info button{
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    width: 100px;
-    height: 35px;
-    background-color: #e4d4fa;
-    border-radius: 15px;
-    border: 0;
-    color: #656565;
-    cursor: pointer;
-}
 
 .detail-info .inner .main-box .info button:hover{
     background-color: #8b7dbe;
+    color:white;
 }
 
  
@@ -729,8 +815,86 @@ footer .inner .info .copyright{
                         <div class="info">
                             <h2><%= p.getPlaceTitle() %></h2>
                             <div class="material-icons like" onclick="insertLikeList()">thumb_up</div>
-                            <div class="material-icons share">share</div>
-                            <table>
+                            <div class="material-icons share modal_btn">share</div>
+
+							<div class="modal">
+					            <div class="modal_popup">
+					              <h3>공유하기</h3>
+					              <div class="share">
+					                <span>
+										<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
+										<script type="text/javascript">
+										new ShareNaver.makeButton({"type": "d"});
+										</script>
+									</span> 
+									<a id="kakaotalk-sharing-btn" href="javascript:;"> <img
+										src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+										alt="카카오톡 공유 보내기 버튼" />
+									</a>
+								 </div>
+					              <button type="button" class="close_btn">닫기</button>
+            					</div>
+          					</div>
+          					
+          					<script>
+	          				    // MODAL
+	          				    const modal = document.querySelector(".modal");
+	          				    const modalOpen = document.querySelector(".modal_btn");
+	          				    const modalClose = document.querySelector(".close_btn");
+	
+	          				    //열기 버튼을 눌렀을 때 모달팝업이 열림
+	          				    modalOpen.addEventListener("click", function () {
+	          				      //'on' class 추가
+	          				      modal.classList.add("on");
+	          				    });
+	          				    //닫기 버튼을 눌렀을 때 모달팝업이 닫힘
+	          				    modalClose.addEventListener("click", function () {
+	          				      //'on' class 제거
+	          				      modal.classList.remove("on");
+	          				    });
+	          				    
+	          				  // 카카오 공유
+	          				    Kakao.Share.createDefaultButton({
+	          				    container: '#kakaotalk-sharing-btn',
+	          				    objectType: 'feed',
+	          				    content: {
+	          				      title: '<%= p.getPlaceTitle() %>',
+	          				      description: '<%= p.getAddress() %>',
+	          				      imageUrl:
+	          				        '<%= p.getTitleImg() %>',
+	          				      link: {
+	          				        // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+	          				        mobileWebUrl: 'http://localhost:8002',
+	          				        webUrl: 'http://localhost:8002',
+	          				      },
+	          				    },
+	          				    social: {
+	          				      likeCount: 286,
+	          				      commentCount: 45,
+	          				      sharedCount: 845,
+	          				    },
+	          				    buttons: [
+	          				      {
+	          				        title: '웹으로 보기',
+	          				        link: {
+	          				          mobileWebUrl: 'https://developers.kakao.com',
+	          				          webUrl: 'https://developers.kakao.com',
+	          				        },
+	          				      },
+	          				      {
+	          				        title: '앱으로 보기',
+	          				        link: {
+	          				          mobileWebUrl: 'https://developers.kakao.com',
+	          				          webUrl: 'https://developers.kakao.com',
+	          				        },
+	          				      },
+	          				    ],
+	          				  });
+	          				    
+	          				    
+          					</script>
+
+							<table>
                                 <tr>
                                     <th>별점</th>
                                     <td style="display:flex"><div class="material-icons star">star</div> <div><%= p.getScore() %></div></td>
@@ -794,7 +958,7 @@ footer .inner .info .copyright{
         <!-- 모달 버튼 -->
         <% if(loginUser != null){ %> 
         	<button id="modalBtn">작성하기</button>
-        	<input type="hidden" value="<%= loginUser.getUserNo() %>">
+        	<input type="hidden" id="userNo" value="<%= loginUser.getUserNo() %>">
         <% } %>
         </div>  
         <!-- 모달 창 -->
@@ -824,6 +988,8 @@ footer .inner .info .copyright{
 
             <script>
             
+
+            
             $(function(){
             	selectReply();
             	selectScore();
@@ -850,7 +1016,7 @@ footer .inner .info .copyright{
             		url:"likeStatus.pl",
             		data:{
             			bno:"<%= p.getPlaceNo() %>",
-            			userNo:$("input[type=hidden]").val(),
+            			userNo:$("#userId").val(),
             		},
             		success:function(result){
             			if(result > 0){
@@ -882,7 +1048,14 @@ footer .inner .info .copyright{
             <% if(loginUser != null){ %>
 	            function test(){
 	            	if(confirm("정말로 신고하시겠습니까?")){
-	            		
+	            		console.log($("span"));
+	            		$.ajax({
+	            			url:"AjaxReportComment.rc",
+	            			data:{
+	            				bno:"<%= p.getPlaceNo() %>",
+	            				comNo:$(".comment-area #edit input[type=hidden]").val(),
+	            			}
+	            		})
 	            	}
 		            		            		
 	            }
@@ -906,7 +1079,7 @@ footer .inner .info .copyright{
             				+  result[i].userId + 
             				"</div><div id='date'>" 
             				+  result[i].createDate +
-            				"</div><div id='edit'><span onclick='test();'>신고</span> </div><div id='score'><div class='material-icons score'>star</div> " 
+            				"</div><div id='edit'><span onclick='test();'>신고</span><input type='hidden' value='"+result[i].commentNo+"'> </div><div id='score'><div class='material-icons score'>star</div> " 
             				+ result[i].score + 
             				"</div></div><div class='text-area'><div id='review'>" 
             				+ result[i].comment + 
@@ -1128,7 +1301,12 @@ footer .inner .info .copyright{
 	
 	  // Call the function to show the user's current location when the page loads
 	  showCurrentLocation();
+	  
+	  
+
 	
+	  
+	   
 
 		</script>
 </body>
