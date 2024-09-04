@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import db.com.semi.adMainmenu.model.service.adMainService;
+import db.com.semi.adMainmenu.model.vo.adMainlistnum;
 
 /**
  * Servlet implementation class admainmenu
@@ -26,6 +30,10 @@ public class admainmenu extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		int onelist = new adMainService().adoneList().getMainlistnum();
+		System.out.println(onelist);
+
 		
 		
 		request.getRequestDispatcher("/views/MainMenu/adminMainView.jsp").forward(request, response);

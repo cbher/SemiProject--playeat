@@ -52,6 +52,8 @@
         background-color: #E4D4FA;
         cursor: pointer;
     }
+    .insert>button{
+    background-color: white;}
 </style>
 </head>
 <body>
