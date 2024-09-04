@@ -24,24 +24,33 @@
     // 새로운 Place 객체 생성
     Play play = new Play(placeNo, placeTitle, titleImg );
     
-    // 세션에서 최근 방문한 장소 리스트 가져오기
     List<Play> recentPlaces = (List<Play>) session.getAttribute("recentPlaces");
-    
+
     if (recentPlaces == null) {
         recentPlaces = new ArrayList<>();
     }
-    
-    // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
-    if (recentPlaces.size() >= 3) {
-        recentPlaces.remove(0);
+
+    // 리스트에 동일한 이름을 가진 장소가 있는지 확인
+    boolean alreadyExists = false;
+    for (Play existingPlay : recentPlaces) {
+        if (existingPlay.getPlaceTitle().equals(play.getPlaceTitle())) {
+            alreadyExists = true;
+            break;
+        }
     }
-    
-    // 새로운 장소를 리스트에 추가
-    recentPlaces.add(play);
-    
+
+    // 동일한 이름의 장소가 없다면 추가
+    if (!alreadyExists) {
+        // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
+        if (recentPlaces.size() >= 3) {
+            recentPlaces.remove(0);
+        }
+
+        recentPlaces.add(play);
+    }
+
     // 리스트를 세션에 저장
     session.setAttribute("recentPlaces", recentPlaces);
-
 
 	
 %>
@@ -700,6 +709,7 @@ footer .inner .info .copyright{
 
 	<%@ include file="../common/menubar.jsp" %>
 	<%@ include file="../common/top.jsp" %>
+	<%@include file="../common/badge.jsp" %>
     <section class="detail-info">
         <div class="inner">
             <div class="main-box">

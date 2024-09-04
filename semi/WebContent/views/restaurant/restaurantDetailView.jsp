@@ -15,6 +15,57 @@ pageEncoding="UTF-8"%>
 	ArrayList<Review> r = (ArrayList<Review>)request.getAttribute("r");
 	ArrayList<Play> recentRestaurant = (ArrayList<Play>)request.getAttribute("recentRestaurant");
 	
+	
+	String placeTitle = p.getPlaceTitle();
+    String titleImg = p.getTitleImg();
+    int placeNo =  p.getPlaceNo();
+    
+    // 새로운 Place 객체 생성
+    Play play = new Play(placeNo, placeTitle, titleImg );
+    
+    List<Play> recentPlaces = (List<Play>) session.getAttribute("recentPlaces");
+
+    if (recentPlaces == null) {
+        recentPlaces = new ArrayList<>();
+    }
+
+    // 리스트에 동일한 이름을 가진 장소가 있는지 확인
+    boolean alreadyExists = false;
+    for (Play existingPlay : recentPlaces) {
+        if (existingPlay.getPlaceTitle().equals(play.getPlaceTitle())) {
+            alreadyExists = true;
+            break;
+        }
+    }
+
+    // 동일한 이름의 장소가 없다면 추가
+    if (!alreadyExists) {
+        // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
+        if (recentPlaces.size() >= 3) {
+            recentPlaces.remove(0);
+        }
+
+        recentPlaces.add(play);
+    }
+
+    // 리스트를 세션에 저장
+    session.setAttribute("recentPlaces", recentPlaces);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -108,28 +159,7 @@ pageEncoding="UTF-8"%>
 </head>
   <body>
     <%@ include file="../common/menubar.jsp" %>
-
-    <div class="badge">
-      <div class="text">최근 본 장소</div>
-      <a href="javascript:void(0)" class="place">
-        <img src="./resourse/음식.jpg" alt="" />
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-      <a href="javascript:void(0)" class="place">
-        <img src="./resourse/음식2.jpg" alt="" />
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-      <a href="javascript:void(0)" class="place">
-        <img src="./resourse/음식2.jpg" alt="" />
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-    </div>
+    <%@include file="../common/badge.jsp" %>
 
     <!-- 상세 -->
     <div class="info-box">

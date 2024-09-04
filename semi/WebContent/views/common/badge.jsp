@@ -67,6 +67,7 @@
     margin: auto;
     width: 140px;
     height: 130px;
+    color: inherit;
 }
 
 .badge img{
