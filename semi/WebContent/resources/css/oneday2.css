@@ -247,8 +247,15 @@ h3 {
 }
 
 .info .modal .modal_popup a {
+  width: 30px;
   position: relative;
   margin: 10px;
+}
+
+.info .modal .modal_popup .share {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 /* 비슷한 클래스 */

@@ -9,6 +9,7 @@ Oneday o = (Oneday)request.getAttribute("o");
 Comment com = (Comment)request.getAttribute("com");
 ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list"); 
 ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
+ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
 %>
     <!DOCTYPE html>
     <html>
@@ -42,6 +43,13 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+        <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+			integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+			crossorigin="anonymous"></script>
+		<script>
+			Kakao.init('380af2edeb82dfbf591425877a112ec6'); // 사용하려는 앱의 JavaScript 키 입력
+		</script>
         <style>
           footer .inner {
             display: block;
@@ -196,12 +204,18 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
               <div class="modal">
                 <div class="modal_popup">
                   <h3>공유하기</h3>
-                  <div>
-                    <a href=""><img src="./resourse/네이버.png" alt="" /></a>
-                    <a href=""
-                      ><img src="./resourse/kakao-talk_3991999.png" alt=""
-                    /></a>
-                  </div>
+                  <div class="share">
+	                <span>
+						<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
+						<script type="text/javascript">
+						new ShareNaver.makeButton({"type": "d"});
+						</script>
+					</span> 
+					<a id="kakaotalk-sharing-btn" href="javascript:;"> <img
+						src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+						alt="카카오톡 공유 보내기 버튼" />
+					</a>
+			 	</div>
                   <button type="button" class="close_btn">닫기</button>
                 </div>
               </div>
@@ -240,18 +254,20 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
         <div class="recommend">
           <section class="main-slide">
             <div class="inner">
-              <div class="title">최신 음식</div>
+              <div class="title">다른 클래스</div>
               <div class="swiper-container">
                 <div class="swiper-wrapper">
+                <% for(Oneday one : aList){ %>
                   <div class="swiper-slide">
-                    <a href="">
+                    <a href="<%= contextPath %>/onedayDetail.on?oneNo=<%= one.getOneNo() %>">
                       <img
-                        src="./resourse/AdobeStock_600875580-1024x683.jpg"
+                        src="<%= one.getTitleImg() %>"
                         alt=""
                       />
                     </a>
-                    <p></p>
+                    <p><%= one.getOneTitle() %></p>
                   </div>
+                  <% } %>
                 </div>
               </div>
 
@@ -600,9 +616,13 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
       
 
        // Add a marker at the user's location
-       var marker = new naver.maps.Marker({
+        var marker = new naver.maps.Marker({
          position: new naver.maps.LatLng(lat, lng),
          map: map,
+         icon:{
+            content:"<div style='border: 3px solid #8b7dbe;min-width:150px;height:32px; color:#333; text-align:center; border-radius:25px; background:#e4d4fa;padding:3px;line-height:35px;' >"+ '<%= o.getOneTitle() %>' +"<div style='border: 1px solid #8b7dbe;width: .1px;height: 45px;margin:auto;background:#8b7dbe'></div></div>",
+           size: new naver.maps.Size(155, 95),
+         }
 
          
        });
@@ -646,6 +666,44 @@ ArrayList<Comment> c = (ArrayList<Comment>)request.getAttribute("c");
    
      // Call the function to show the user's current location when the page loads
      showCurrentLocation();
+     
+  // 카카오 공유
+     Kakao.Share.createDefaultButton({
+     container: '#kakaotalk-sharing-btn',
+     objectType: 'feed',
+     content: {
+       title: '<%= o.getOneTitle() %>',
+       description: '<%= o.getAddress() %>',
+       imageUrl:
+         '<%= o.getTitleImg() %>',
+       link: {
+         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+         mobileWebUrl: 'http://localhost:8002',
+         webUrl: 'http://localhost:8002',
+       },
+     },
+     social: {
+       likeCount: 286,
+       commentCount: 45,
+       sharedCount: 845,
+     },
+     buttons: [
+       {
+         title: '웹으로 보기',
+         link: {
+           mobileWebUrl: 'https://developers.kakao.com',
+           webUrl: 'https://developers.kakao.com',
+         },
+       },
+       {
+         title: '앱으로 보기',
+         link: {
+           mobileWebUrl: 'https://developers.kakao.com',
+           webUrl: 'https://developers.kakao.com',
+         },
+       },
+     ],
+   });
        
         </script>
       </body>

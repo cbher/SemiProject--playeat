@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import semi.play.model.service.PlayService;
 import semi.play.model.vo.Play;
 import semi.search.model.service.SearchService;
 
@@ -32,8 +33,8 @@ public class SearchMainController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		ArrayList<Play> list = new SearchService().selectList();
+		
 		request.setAttribute("list", list);
 		RequestDispatcher view = request.getRequestDispatcher("views/search/SearchMain.jsp");
 		view.forward(request, response);

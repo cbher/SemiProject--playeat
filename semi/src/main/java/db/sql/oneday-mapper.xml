@@ -166,4 +166,16 @@
 		 WHERE USER_NO = ?
 		   AND ONE_NO = ?
 	</entry>
+	
+	<entry key="selectAnotherList">
+		SELECT
+			    ONE_NO
+			 , ONE_TITLE
+			 , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM ONEDAYCLASS
+		  LEFT JOIN ATTECHMENT USING (ONE_NO)
+		 WHERE ONE_STATUS = 'Y'
+		   AND FILE_LEVEL = 1
+		   AND ONE_NO != ?
+	</entry>
 </properties>

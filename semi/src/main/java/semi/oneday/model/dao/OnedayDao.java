@@ -18,6 +18,7 @@ import semi.common.PageInfo;
 import semi.cooking.model.vo.Attachment;
 import semi.oneday.model.vo.Comment;
 import semi.oneday.model.vo.Oneday;
+import semi.play.model.vo.Play;
 
 public class OnedayDao {
 	private Properties prop = new Properties();
@@ -284,6 +285,35 @@ public class OnedayDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList<Oneday> anotherList(Connection conn, int oneNo) {
+		ArrayList<Oneday> list = new ArrayList<Oneday>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAnotherList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, oneNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Oneday o = new Oneday();
+				o.setOneNo(rset.getInt("ONE_NO"));
+				o.setOneTitle(rset.getString("ONE_TITLE"));
+				o.setTitleImg(rset.getString("TITLEIMG"));
+				
+				list.add(o);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 

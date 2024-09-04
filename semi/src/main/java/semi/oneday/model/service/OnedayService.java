@@ -104,6 +104,12 @@ public class OnedayService {
 		return result;
 	}
 
+	public ArrayList<Oneday> anotherList(int oneNo) {
+		Connection conn = getConnection();
+		ArrayList<Oneday> list = new OnedayDao().anotherList(conn, oneNo);
+		return list;
+	}
+
 
 	
 }

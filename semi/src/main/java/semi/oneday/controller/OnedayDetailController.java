@@ -40,11 +40,11 @@ public class OnedayDetailController extends HttpServlet {
 			int oneNo = Integer.parseInt(request.getParameter("oneNo"));
 			
 			Oneday o = new OnedayService().detailOneday(oneNo);
-			//ArrayList<Attachment> list = oService.DetailAttachmentList(oneNo);
 	        ArrayList<Comment> commentList = new OnedayService().commentView(oneNo);
+	        ArrayList<Oneday> anotherList = new OnedayService().anotherList(oneNo);
 	        request.setAttribute("c", commentList);
 			request.setAttribute("o", o);
-			//request.setAttribute("list", list);
+			request.setAttribute("aList", anotherList);
 			
 			request.getRequestDispatcher("views/oneday/onedayDetailView.jsp").forward(request, response);
 	}

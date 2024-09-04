@@ -86,7 +86,7 @@ pageEncoding="UTF-8"%>
       }
     </style>
 
-    <link rel="stylesheet" href="/semi/resources/css/restaurant.css">
+    <link rel="stylesheet" href="/semi/resources/css/restaurant.css?after">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -97,8 +97,15 @@ pageEncoding="UTF-8"%>
     <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+		integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+		crossorigin="anonymous"></script>
+	<script>
+		Kakao.init('380af2edeb82dfbf591425877a112ec6'); // 사용하려는 앱의 JavaScript 키 입력
+	</script>
 
-  </head>
+</head>
   <body>
     <%@ include file="../common/menubar.jsp" %>
 
@@ -128,22 +135,12 @@ pageEncoding="UTF-8"%>
     <div class="info-box">
       <div class="swiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="<%=p.getTitleImg() %>" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="<%=p.getTitleImg() %>" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="<%=p.getTitleImg() %>" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="<%=p.getTitleImg() %>" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="<%=p.getTitleImg() %>" alt="" />
-          </div>
-        </div>
+		<%for (Attachment at : list) {%>
+		<div class="swiper-slide">
+			<img src="<%=at.getFilePath() + at.getOriginName()%>" alt="">
+		</div>
+		<% } %>
+	</div>
       </div>
       <!-- <div class="swiper-pagination"></div>     -->
 	<div class="total-area">	
@@ -185,12 +182,18 @@ pageEncoding="UTF-8"%>
           <div class="modal">
             <div class="modal_popup">
               <h3>공유하기</h3>
-              <div>
-                <a href=""><img src="./resourse/네이버.png" alt="" /></a>
-                <a href=""
-                  ><img src="./resourse/kakao-talk_3991999.png" alt=""
-                /></a>
-              </div>
+              <div class="share">
+                <span>
+					<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
+					<script type="text/javascript">
+					new ShareNaver.makeButton({"type": "d"});
+					</script>
+				</span> 
+				<a id="kakaotalk-sharing-btn" href="javascript:;"> <img
+					src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+					alt="카카오톡 공유 보내기 버튼" />
+				</a>
+			 </div>
               <button type="button" class="close_btn">닫기</button>
             </div>
           </div>
@@ -229,11 +232,8 @@ pageEncoding="UTF-8"%>
             <div class="swiper-wrapper">
             <% for(Play rp : recentRestaurant){ %>
               <div class="swiper-slide">
-                <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= rp.getPlaceNo()  %>">
-                  <img
-                    src=""
-                    alt=""
-                  />
+                <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= rp.getPlaceNo() %>">
+                   <img src="<%= rp.getTitleImg() %>" alt="">
                 </a>
                 <p><%= rp.getPlaceTitle() %></p>
               </div>
@@ -444,5 +444,109 @@ pageEncoding="UTF-8"%>
         location.href = "<%= contextPath %>/reviewEnroll.pl";
     }
     
+    // 카카오 공유
+    Kakao.Share.createDefaultButton({
+    container: '#kakaotalk-sharing-btn',
+    objectType: 'feed',
+    content: {
+      title: '<%= p.getPlaceTitle() %>',
+      description: '<%= p.getAddress() %>',
+      imageUrl:
+        '<%= p.getTitleImg() %>',
+      link: {
+        // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+        mobileWebUrl: 'http://localhost:8002',
+        webUrl: 'http://localhost:8002',
+      },
+    },
+    social: {
+      likeCount: 286,
+      commentCount: 45,
+      sharedCount: 845,
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+      {
+        title: '앱으로 보기',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+          webUrl: 'https://developers.kakao.com',
+        },
+      },
+    ],
+  });
+    
+    
+ // 네이버 지도
+    function initMap(lat, lng) {
+     var mapOptions = {
+       center: new naver.maps.LatLng(lat, lng), // Center the map on the user's location
+       zoom: 17, // Zoom level
+       minZoom: 10, // Minimum zoom level
+       zoomControl: false, // Display zoom control
+       mapTypeControl: false // Display map type control
+     };
+  
+     // Create the map
+     var map = new naver.maps.Map('map', mapOptions);
+    
+
+     // Add a marker at the user's location
+      var marker = new naver.maps.Marker({
+         position: new naver.maps.LatLng(lat, lng),
+         map: map,
+         icon:{
+            content:"<div style='border: 3px solid #8b7dbe;min-width:150px;height:32px; color:#333; text-align:center; border-radius:25px; background:#e4d4fa;padding:3px;line-height:35px;' >"+ '<%= p.getPlaceTitle() %>' +"<div style='border: 1px solid #8b7dbe;width: .1px;height: 45px;margin:auto;background:#8b7dbe'></div></div>",
+           size: new naver.maps.Size(155, 95),
+         }
+
+       
+     });
+     
+      }
+ 
+   // Function to get the user's current location
+   function showCurrentLocation() {
+     if (navigator.geolocation) {
+       // Get the current position
+              naver.maps.Service.geocode({
+         query: '<%= p.getAddress() %>'
+     }, function(status, response) {
+         if (status !== naver.maps.Service.Status.OK) {
+             return alert('Something wrong!');
+         }
+
+         var result = response.v2, // 검색 결과의 컨테이너
+             items = result.addresses; // 검색 결과의 배열
+
+         // do Something
+         var lat = items[0].y; // User's latitude
+         var lng = items[0].x; // User's longitude
+         
+         // Initialize the map with the user's current location
+         initMap(lat, lng);
+     }, function(error) {
+         // Handle errors, such as location access denial
+         console.error("Error getting location: ", error);
+ 
+         // Use a default location if the user denies location access
+         initMap(37.3595704, 127.105399); // Default coordinates (e.g., Pangyo Techno Valley)
+       });
+     } else {
+       // Geolocation is not supported by the browser
+       alert("Geolocation is not supported by your browser.");
+       // Initialize the map with a default location
+       initMap(37.3595704, 127.105399);
+     }
+   }
+ 
+   // Call the function to show the user's current location when the page loads
+   showCurrentLocation();
   </script>
 </html>
