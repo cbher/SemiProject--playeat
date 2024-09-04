@@ -52,6 +52,7 @@
             box-sizing: border-box;
             font-size: 16px;
             outline: #333;
+            font-family:'TTLaundryGothicB';
         }
 
         #imgs{
@@ -69,6 +70,11 @@
             font-size: 18px;
             color: #333;
             font-weight: 700;
+            font-family:'TTLaundryGothicB';
+        }
+        button:hover{
+        	background-color:#8b7dbe;
+        	color:#fff
         }
     </style>
 </head>
@@ -102,20 +108,20 @@
                     <tr>
                         <th>대표이미지 <br> (*필수)</th>
                         <td colspan="3" align="center">
-                            <img id="titleImg" src="<%= list.get(0).getFilePath() +'/' + list.get(0).getChangeName() %>" width="250" height="170" onclick="chooseFile(1)">
+                            <img id="titleImg" src="<%= list.get(0).getFilePath() +'/' + list.get(0).getChangeName() %>" width="250" height="170" onclick="">
                         </td>
                     </tr>
                     <tr>
                         <th height="250">상세이미지 <br> ( 선택 / 최대 8장 )</th>
                         <td id="imgs">
-                            <img id="contentImg1" width="150" height="120" onclick="chooseFile(2)">
-                            <img id="contentImg2" width="150" height="120" onclick="chooseFile(3)">
-                            <img id="contentImg3" width="150" height="120" onclick="chooseFile(4)">
-                            <img id="contentImg4" width="150" height="120" onclick="chooseFile(5)">
-                            <img id="contentImg5" width="150" height="120" onclick="chooseFile(6)">
-                            <img id="contentImg6" width="150" height="120" onclick="chooseFile(7)">
-                            <img id="contentImg7" width="150" height="120" onclick="chooseFile(8)">
-                            <img id="contentImg8" width="150" height="120" onclick="chooseFile(9)">
+                            <img id="contentImg1" width="150" height="120" onclick="">
+                            <img id="contentImg2" width="150" height="120" onclick="">
+                            <img id="contentImg3" width="150" height="120" onclick="">
+                            <img id="contentImg4" width="150" height="120" onclick="">
+                            <img id="contentImg5" width="150" height="120" onclick="">
+                            <img id="contentImg6" width="150" height="120" onclick="">
+                            <img id="contentImg7" width="150" height="120" onclick="">
+                            <img id="contentImg8" width="150" height="120" onclick="">
                             
                         </td>
                         <!-- <td><img id="contentImg4" width="150" height="120" onclick="chooseFile(5)"></td> -->
