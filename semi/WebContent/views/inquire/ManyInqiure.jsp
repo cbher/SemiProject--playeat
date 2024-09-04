@@ -124,12 +124,12 @@ pageEncoding="UTF-8"%>
       <div class="manyAsked">
         <h2>자주하는 질문</h2>
         <div class="faq">
-          <div class="question" onclick="toggleAnswer(1)">1: 질문입니다?</div>
-          <div class="answer" id="answer1">답변입니다.</div>
+          <div class="question" onclick="toggleAnswer(1)">문의사항 확인은 어떻게 하나요?</div>
+          <div class="answer" id="answer1">문의사항 확인하는 방법은 로그인 후 공지/문의 메뉴에서 문의사항 클릭, 본인이 작성한 문의사항을 이메일로 인증하고 확인할수 있습니다. </div>
         </div>
         <div class="faq">
-          <div class="question" onclick="toggleAnswer(2)">2: 질문입니다?</div>
-          <div class="answer" id="answer2">답변입니다</div>
+          <div class="question" onclick="toggleAnswer(2)">놀거리, 먹거리 메인페이지는 어떻게들어가나요?</div>
+          <div class="answer" id="answer2">메뉴에서 놀거리, 먹거리를 누르면 들어가실수 있습니다.</div>
         </div>
         <div class="faq">
           <div class="question" onclick="toggleAnswer(3)">3: 질문입니다?</div>
