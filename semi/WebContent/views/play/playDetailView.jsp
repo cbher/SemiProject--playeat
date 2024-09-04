@@ -508,9 +508,10 @@
     
 }
 
-.comment-area #edit a{
+.comment-area #edit span{
     color: black;
     text-decoration: none;
+    cursor:pointer;
 }
 
 .comment-area #score{
@@ -878,6 +879,19 @@ footer .inner .info .copyright{
             		},
             	})
             }
+            <% if(loginUser != null){ %>
+	            function test(){
+	            	if(confirm("정말로 신고하시겠습니까?")){
+	            		
+	            	}
+		            		            		
+	            }
+            <% }else{ %>
+            	function test(){
+            		alert("로그인 후 이용가능합니다.")
+            	}
+            <% } %>
+            
 	            
             function selectReply(){
             	$.ajax({
@@ -892,7 +906,7 @@ footer .inner .info .copyright{
             				+  result[i].userId + 
             				"</div><div id='date'>" 
             				+  result[i].createDate +
-            				"</div><div id='edit'><a href=''>신고</a> </div><div id='score'><div class='material-icons score'>star</div> " 
+            				"</div><div id='edit'><span onclick='test();'>신고</span> </div><div id='score'><div class='material-icons score'>star</div> " 
             				+ result[i].score + 
             				"</div></div><div class='text-area'><div id='review'>" 
             				+ result[i].comment + 
