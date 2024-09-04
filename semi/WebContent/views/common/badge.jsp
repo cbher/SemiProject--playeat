@@ -111,7 +111,6 @@
 	       <c:forEach var="play" items="${sessionScope.recentPlaces}">
 	        <a href="/semi/detail.pl?bno=${play.placeNo}" class="place">
 	          <img src="${pageContext.request.contextPath}/${play.titleImg}" alt="${play.placeTitle} 이미지">
-			
 	            <div class="badge-title">
 	                <h4>${play.placeTitle}</h4>
 	            </div>

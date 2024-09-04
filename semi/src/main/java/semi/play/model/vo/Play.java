@@ -43,6 +43,14 @@ public class Play {
 		this.score = score;
 		this.titleImg = titleImg;
 	}
+
+	public Play(int placeNo, String placeTitle, int placeSelectNo, String titleImg) {
+		super();
+		this.placeNo = placeNo;
+		this.placeTitle = placeTitle;
+		this.placeSelectNo = placeSelectNo;
+		this.titleImg = titleImg;
+	}
 	
 	
 	
