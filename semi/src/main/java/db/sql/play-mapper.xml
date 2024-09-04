@@ -128,5 +128,6 @@
 	  JOIN ATTECHMENT ON (P_NO = PLACE_NO)
 	 WHERE P_SELECT_NUM = 2
 	   AND LOCATION_NO = 1
+	   AND P_STATUS = 'Y'
  	</entry>
 </properties>

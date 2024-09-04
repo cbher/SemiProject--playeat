@@ -490,7 +490,7 @@ body{
               <div class="swiper-wrapper">
               <%for(Play p : pList){%>
                   <div class="swiper-slide">
-                      <a href="<%=contextPath %>/detail.pl?bno="+<%=p.getPlaceNo() %>>
+                      <a href="<%=contextPath %>/detail.pl?bno=<%=p.getPlaceNo() %>">
                           <img src="<%=p.getTitleImg() %>" alt="">
                       </a>
                       <p><%=p.getPlaceTitle() %></p>

@@ -31,13 +31,24 @@
         recentPlaces = new ArrayList<>();
     }
     
-    // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
-    if (recentPlaces.size() >= 3) {
-        recentPlaces.remove(0);
+    boolean alreadyExists = false;
+    for(Play existingPlay : recentPlaces){
+    	if(existingPlay.getPlaceTitle().equals(play.getPlaceTitle())){
+    		alreadyExists = true;
+    		break;
+    	}
     }
     
-    // 새로운 장소를 리스트에 추가
-    recentPlaces.add(play);
+    if(!alreadyExists){
+	    // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
+	    if (recentPlaces.size() >= 3) {
+	        recentPlaces.remove(0);
+    	}
+	 	// 새로운 장소를 리스트에 추가
+	    recentPlaces.add(play);
+    }
+    
+    
     
     // 리스트를 세션에 저장
     session.setAttribute("recentPlaces", recentPlaces);
