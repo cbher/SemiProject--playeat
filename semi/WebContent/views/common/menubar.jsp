@@ -326,7 +326,7 @@ header .menubar::before{
             <div class="menu">
                 <ul class="inner">
                     <li>
-                        <a href="">공지문의</a>
+                        <a href="<%= contextPath %>/noticeList.no?cpage=1">공지문의</a>
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/noticeList.no?cpage=1">공지사항</a></li>
                             <li><a href="<%=contextPath%>/iqList.ip?cpage=1">문의사항</a></li>
@@ -352,8 +352,6 @@ header .menubar::before{
                         <a href="<%= contextPath %>/restaurantMain.pl">맛집</a>
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/searchMain.sc">맛집찾기</a></li>
-                            <li><a href="">랜덤 메뉴 추천</a></li>
-    
                         </ul>   
                     </li>
                     <li>
