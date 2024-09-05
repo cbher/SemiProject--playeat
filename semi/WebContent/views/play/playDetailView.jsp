@@ -805,6 +805,7 @@ footer .inner .info .copyright{
 <body>
 
 	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="../common/badge.jsp" %>
 	<%@ include file="../common/top.jsp" %>
     <section class="detail-info">
         <div class="inner">

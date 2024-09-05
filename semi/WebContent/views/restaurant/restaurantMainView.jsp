@@ -544,7 +544,7 @@ footer .inner .info .copyright{
                 <div class="swiper-wrapper">
                 <% for(int i = 0; i < listGyunggi.size();i++ ){ %>
                     <div class="swiper-slide">
-                        <a href="">
+                        <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= listGyunggi.get(i).getPlaceNo() %>">
                             <img src="<%= listGyunggi.get(i).getTitleImg() %>" alt="">
                         </a>
                         <p><%= listGyunggi.get(i).getPlaceTitle() %></p>
@@ -571,7 +571,7 @@ footer .inner .info .copyright{
                 <div class="swiper-wrapper">
                     <% for(int i = 0; i < listIncheon.size();i++ ){ %>
                     <div class="swiper-slide">
-                        <a href="">
+                        <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= listIncheon.get(i).getPlaceNo() %>">
                             <img src="<%= listIncheon.get(i).getTitleImg() %>" alt="">
                         </a>
                         <p><%= listIncheon.get(i).getPlaceTitle() %></p>
@@ -596,7 +596,7 @@ footer .inner .info .copyright{
                 <div class="swiper-wrapper">
                     <% for(int i = 0; i < listKangwon.size();i++ ){ %>
                     <div class="swiper-slide">
-                        <a href="">
+                        <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= listKangwon.get(i).getPlaceNo() %>">
                             <img src="<%= listKangwon.get(i).getTitleImg() %>" alt="">
                         </a>
                         <p><%= listKangwon.get(i).getPlaceTitle() %></p>
@@ -621,7 +621,7 @@ footer .inner .info .copyright{
                 <div class="swiper-wrapper">
                     <% for(int i = 0; i < listChoongchung.size();i++ ){ %>
                     <div class="swiper-slide">
-                        <a href="">
+                        <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= listChoongchung.get(i).getPlaceNo() %>">
                             <img src="<%= listChoongchung.get(i).getTitleImg() %>" alt="">
                         </a>
                         <p><%= listChoongchung.get(i).getPlaceTitle() %></p>
@@ -646,7 +646,7 @@ footer .inner .info .copyright{
                 <div class="swiper-wrapper">
                     <% for(int i = 0; i < listJulla.size();i++ ){ %>
                     <div class="swiper-slide">
-                        <a href="">
+                        <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= listJulla.get(i).getPlaceNo() %>">
                             <img src="<%= listJulla.get(i).getTitleImg() %>" alt="">
                         </a>
                         <p><%= listJulla.get(i).getPlaceTitle() %></p>
@@ -671,7 +671,7 @@ footer .inner .info .copyright{
                 <div class="swiper-wrapper">
                     <% for(int i = 0; i < listGyungsang.size();i++ ){ %>
                     <div class="swiper-slide">
-                        <a href="">
+                        <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= listGyungsang.get(i).getPlaceNo() %>">
                             <img src="<%= listGyungsang.get(i).getTitleImg() %>" alt="">
                         </a>
                         <p><%= listGyungsang.get(i).getPlaceTitle() %></p>
@@ -696,7 +696,7 @@ footer .inner .info .copyright{
                 <div class="swiper-wrapper">
                     <% for(int i = 0; i < listJeju.size();i++ ){ %>
                     <div class="swiper-slide">
-                        <a href="">
+                        <a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= listJeju.get(i).getPlaceNo() %>">
                             <img src="<%= listJeju.get(i).getTitleImg() %>" alt="">
                         </a>
                         <p><%= listJeju.get(i).getPlaceTitle() %></p>

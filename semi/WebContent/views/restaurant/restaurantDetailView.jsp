@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="semi.Review.model.vo.Review"%>
 <%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
@@ -14,6 +15,34 @@ pageEncoding="UTF-8"%>
 	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
 	ArrayList<Review> r = (ArrayList<Review>)request.getAttribute("r");
 	ArrayList<Play> recentRestaurant = (ArrayList<Play>)request.getAttribute("recentRestaurant");
+	
+	String placeTitle = p.getPlaceTitle();
+    String titleImg = list.get(0).getFilePath() + list.get(0).getOriginName();
+    int placeNo =  p.getPlaceNo();
+    
+    // 새로운 Place 객체 생성
+    Play play = new Play(placeNo, placeTitle, titleImg );
+    
+    // 세션에서 최근 방문한 장소 리스트 가져오기
+    List<Play> recentPlaces = (List<Play>) session.getAttribute("recentPlaces");
+    
+    if (recentPlaces == null) {
+        recentPlaces = new ArrayList<>();
+    }
+    
+    // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
+    if (recentPlaces.size() >= 3) {
+        recentPlaces.remove(0);
+    }
+    
+    // 새로운 장소를 리스트에 추가
+    recentPlaces.add(play);
+    
+    // 리스트를 세션에 저장
+    session.setAttribute("recentPlaces", recentPlaces);
+
+	
+	
 	
 %>
 <!DOCTYPE html>
@@ -108,28 +137,8 @@ pageEncoding="UTF-8"%>
 </head>
   <body>
     <%@ include file="../common/menubar.jsp" %>
-
-    <div class="badge">
-      <div class="text">최근 본 장소</div>
-      <a href="javascript:void(0)" class="place">
-        <img src="./resourse/음식.jpg" alt="" />
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-      <a href="javascript:void(0)" class="place">
-        <img src="./resourse/음식2.jpg" alt="" />
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-      <a href="javascript:void(0)" class="place">
-        <img src="./resourse/음식2.jpg" alt="" />
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-    </div>
+	<%@ include file="../common/badge.jsp" %>
+    
 
     <!-- 상세 -->
     <div class="info-box">
@@ -311,18 +320,7 @@ pageEncoding="UTF-8"%>
   </body>
 
   <script>
-    let box = $("body");
-    let boxHeight = box.height();
-    let boxOffsetTop = box.offset().top;
-    let quickMenu = $(".badge");
-    let quickMenuHeight = quickMenu.height();
-    const DURATION = 900;
-
-    $(window).resize(function () {
-      boxHeight = box.height();
-      boxOffsetTop = box.offset().top;
-      quickMenuHeight = quickMenu.height();
-    });
+   
 
     $(window).scroll(function () {
       let scrollTop = $(this).scrollTop();
