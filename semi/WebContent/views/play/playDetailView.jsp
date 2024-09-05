@@ -569,6 +569,7 @@ h3 {
     margin-top: 20px;
     position: relative;
     border-radius: 5px;
+    display:none;
 }
 
 .comment-area .profile{
@@ -593,9 +594,14 @@ h3 {
     
 }
 
-.comment-area #edit a{
+.comment-area #edit span{
     color: black;
     text-decoration: none;
+    cursor:pointer;
+}
+
+.comment-area #edit span:hover{
+	color:#fff;
 }
 
 .comment-area #score{
@@ -617,7 +623,19 @@ h3 {
     line-height: 3;
 }
 
+.load{
+	background-color:#e4d4fa;
+	border:none;
+	color:#333;
+	border-radius:15px;
+	font-family:'TTLaundryGothicB';
+	cursor:pointer;
+}
 
+.load:hover{
+	background-color:#8b7dbe;
+	color:#fff;
+}
 
 /* * {
     box-sizing: border-box;
@@ -993,6 +1011,7 @@ footer .inner .info .copyright{
   		<div class="replys">
         
         </div>
+        <button class='load'>더보기</button>
 	     <div class="waste"></div>
 	     </div>
 
@@ -1017,23 +1036,25 @@ footer .inner .info .copyright{
             	setInterval(selectReply,100000);
             })
             
-            $(function(){
+            function showReply(){
                 $(".comment .comment-area").slice(0,3).show();
                 $(".load").click(function(e){
                     e.preventDefault();
                     $(".comment .comment-area:hidden").slice(0,3).show();
                     if($(".comment .comment-area:hidden").length == 0){
                         $(".load").hide();
+                    }else{
+                        $(".load").show();
                     }
                 })
-            })
+            }
 	        
             function likeStatus(){
             	$.ajax({
             		url:"likeStatus.pl",
             		data:{
             			bno:"<%= p.getPlaceNo() %>",
-            			userNo:$("#userId").val(),
+            			userNo:$("#userNo").val(),
             		},
             		success:function(result){
             			if(result > 0){
@@ -1104,7 +1125,7 @@ footer .inner .info .copyright{
             			let value = "";
             			for(let i = 0; i<result.length;i++){
             				value += "<div class='comment-area'><div class='profile'><div id='nickname'>"
-            				+  result[i].userName + 
+            				+  result[i].userId + 
             				"</div><div id='date'>" 
             				+  result[i].createDate +
             				"</div><div id='edit'><span onclick='test(this);'>신고</span><input type='hidden' value='"+result[i].commentNo+"'> </div><div id='score'><div class='material-icons score'>star</div> " 
@@ -1114,6 +1135,12 @@ footer .inner .info .copyright{
             				"</div></div></div>";
             			}
             			$(".replys").html(value);
+            			showReply();
+            			 if($(".comment .comment-area:hidden").length == 0){
+                             $(".load").hide();
+                         }else{
+                             $(".load").show();
+                         }
             		},
             		error:function(){
             			console.log("통신 실패");
@@ -1276,6 +1303,10 @@ footer .inner .info .copyright{
 	    var marker = new naver.maps.Marker({
 	      position: new naver.maps.LatLng(lat, lng),
 	      map: map,
+	      icon:{
+	            content:"<div style='border: 3px solid #8b7dbe;min-width:150px;height:32px; color:#333; text-align:center; border-radius:25px; background:#e4d4fa;padding:3px;line-height:35px;' >"+ '<%= p.getPlaceTitle() %>' +"<div style='border: 1px solid #8b7dbe;width: .1px;height: 45px;margin:auto;background:#8b7dbe'></div></div>",
+	           size: new naver.maps.Size(155, 95),
+	         }
 	      
 	    });
 	    

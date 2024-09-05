@@ -161,7 +161,7 @@ public class PlayDao {
 									   rset.getString("com_content"),
 									   rset.getInt("score"),
 									   rset.getDate("create_date"),
-									   rset.getString("user_name")));
+									   rset.getString("user_id")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -181,7 +181,7 @@ public class PlayDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pr.getComment());
 			pstmt.setInt(2, pr.getScore());
-			pstmt.setString(3, pr.getUserName());
+			pstmt.setString(3, pr.getUserId());
 			pstmt.setInt(4, pr.getPlaceNo());
 			
 			result = pstmt.executeUpdate();

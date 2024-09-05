@@ -35,7 +35,7 @@ public class AjaxReplyInsertController extends HttpServlet {
 		int placeNo = Integer.parseInt(request.getParameter("placeNo"));
 		
 		PlayReply pr = new PlayReply();
-		pr.setUserName(userNo+"");
+		pr.setUserId(userNo+"");
 		pr.setScore(star);
 		pr.setComment(content);
 		pr.setPlaceNo(placeNo);

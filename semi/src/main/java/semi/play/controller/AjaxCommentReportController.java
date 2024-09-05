@@ -36,8 +36,7 @@ public class AjaxCommentReportController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		
 		int result = new PlayService().reportReply(placeNo, comNo, userId);
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(result,response.getWriter());
+		response.getWriter().print(result);
 		
 	}
 

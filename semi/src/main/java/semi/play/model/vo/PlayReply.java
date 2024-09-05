@@ -8,33 +8,33 @@ public class PlayReply {
 	private String comment;
 	private int score;
 	private Date createDate;
-	private String userName;
+	private String userId;
 	private String status;
 	private int placeNo;
 	
 	public PlayReply() {}
 
-	public PlayReply(int commentNo, String comment, int score, Date createDate, String userName, String status,
+	public PlayReply(int commentNo, String comment, int score, Date createDate, String userId, String status,
 			int placeNo) {
 		super();
 		this.commentNo = commentNo;
 		this.comment = comment;
 		this.score = score;
 		this.createDate = createDate;
-		this.userName = userName;
+		this.userId = userId;
 		this.status = status;
 		this.placeNo = placeNo;
 	}
 	
 	
 
-	public PlayReply(int commentNo, String comment, int score, Date createDate, String userName) {
+	public PlayReply(int commentNo, String comment, int score, Date createDate, String userId) {
 		super();
 		this.commentNo = commentNo;
 		this.comment = comment;
 		this.score = score;
 		this.createDate = createDate;
-		this.userName = userName;
+		this.userId = userId;
 	}
 
 	public int getCommentNo() {
@@ -69,12 +69,12 @@ public class PlayReply {
 		this.createDate = createDate;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getStatus() {
@@ -96,7 +96,7 @@ public class PlayReply {
 	@Override
 	public String toString() {
 		return "PlayReply [commentNo=" + commentNo + ", comment=" + comment + ", score=" + score + ", createDate="
-				+ createDate + ", userName=" + userName + ", status=" + status + ", placeNo=" + placeNo + "]";
+				+ createDate + ", userId=" + userId + ", status=" + status + ", placeNo=" + placeNo + "]";
 	}
 	
 	
