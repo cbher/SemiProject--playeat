@@ -55,7 +55,7 @@
 			 , COM_CONTENT
 			 , SCORE
 			 , CREATE_DATE
-			 , USER_ID
+			 , USER_NAME
 		  FROM PLAY_COMMENT C
 		  JOIN MEMBER USING (USER_NO)
 		 WHERE PLACE_NO = ?
@@ -123,18 +123,47 @@
 	</entry>
 	
 	<entry key="recentRestaurant">
-      SELECT
-            P_NO
-          , P_TITLE
-          , FILE_PATH || ORIGIN_NAME "TITLEIMG"
-        FROM PLACE
-        LEFT JOIN ATTECHMENT ON (PLACE_NO = P_NO)
-       WHERE P_STATUS = 'Y'
-         AND P_SELECT_NUM = 1
-         AND FILE_LEVEL = 1
-         AND P_NO != ?
-   </entry>
-
+		SELECT
+			   P_NO
+			 , P_TITLE
+			 , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE
+		  LEFT JOIN ATTECHMENT ON (PLACE_NO = P_NO)
+		 WHERE P_STATUS = 'Y'
+		   AND P_SELECT_NUM = 1
+		   AND FILE_LEVEL = 1
+		   AND P_NO != ?
+	</entry>
+	
+	<entry key="updateScore">
+		UPDATE PLACE
+		   SET P_SCORE = ?
+		 WHERE P_NO = ?
+	</entry>
+	
+	<entry key="reportReply">
+		INSERT
+		  INTO REPORT
+		  (
+		    REPORT_NO
+		  , P_NO
+		  , PCOM_NO
+		  , USER_NO
+		  )
+		  VALUES
+		  (
+		    REPORT_SEQ.NEXTVAL
+		  , 1
+		  , 1
+		  , ?
+		  )
+	</entry>
+	<entry key="selectUserNo">
+		SELECT
+			   USER_NO
+		  FROM MEMBER
+		 WHERE USER_ID = ?
+	</entry>
 	
  	
  	<entry key="mainPageSelectPlay">
