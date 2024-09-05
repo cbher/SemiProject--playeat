@@ -474,7 +474,7 @@ footer .inner .info .copyright{
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	<%@include file="../common/badge.jsp" %>
+	<%@ include file="../common/badge.jsp" %>
 		    <section class="random">
         <div class="inner">
             <div class="title">

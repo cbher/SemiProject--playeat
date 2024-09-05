@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="semi.Review.model.vo.Review"%>
 <%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
@@ -341,18 +342,7 @@ pageEncoding="UTF-8"%>
   </body>
 
   <script>
-    let box = $("body");
-    let boxHeight = box.height();
-    let boxOffsetTop = box.offset().top;
-    let quickMenu = $(".badge");
-    let quickMenuHeight = quickMenu.height();
-    const DURATION = 900;
-
-    $(window).resize(function () {
-      boxHeight = box.height();
-      boxOffsetTop = box.offset().top;
-      quickMenuHeight = quickMenu.height();
-    });
+   
 
     $(window).scroll(function () {
       let scrollTop = $(this).scrollTop();
