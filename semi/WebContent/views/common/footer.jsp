@@ -144,12 +144,6 @@ pageEncoding="UTF-8"%>
       const thisYear = document.querySelector("#this-year");
       thisYear.textContent = new Date().getFullYear();
     </script>
-  </body>
-    <script>
-      // footer this-year (현재년도 표시)
-      const thisYear = document.querySelector("#this-year");
-      thisYear.textContent = new Date().getFullYear();
-    </script>
-  </body>
+
 </html>
 

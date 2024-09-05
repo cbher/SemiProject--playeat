@@ -54,7 +54,7 @@
         </div>
     </header>
 
-<%@include file="../common/badge.jsp" %>
+	<%@ include file="../common/badge.jsp" %>
 
     <div class="main-content">
 
@@ -181,8 +181,8 @@
     </div>
     
     <%@include file="../common/top.jsp" %>
-
-    <%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
+    
 
 		<script>
 		
