@@ -109,5 +109,18 @@ public class PlayService {
 		
 	}
 	
+	public int reportReply(int placeNo, int comNo, String userId) {
+		Connection conn = getConnection();
+		int result = new PlayDao().reportReply(conn, placeNo, comNo, userId);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+	
 	
 }

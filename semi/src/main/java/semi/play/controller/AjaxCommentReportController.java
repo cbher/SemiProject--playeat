@@ -7,20 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import semi.play.model.service.PlayService;
-import semi.play.model.vo.PlayReply;
 
 /**
- * Servlet implementation class AjaxReplyInsertController
+ * Servlet implementation class AjaxCommentReportController
  */
-@WebServlet("/insertReply.ar")
-public class AjaxReplyInsertController extends HttpServlet {
+@WebServlet("/reportComment.rc")
+public class AjaxCommentReportController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxReplyInsertController() {
+    public AjaxCommentReportController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,19 +30,15 @@ public class AjaxReplyInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		int star = Integer.parseInt(request.getParameter("star"));
-		String content = request.getParameter("content");
-		int placeNo = Integer.parseInt(request.getParameter("placeNo"));
 		
-		PlayReply pr = new PlayReply();
-		pr.setUserName(userNo+"");
-		pr.setScore(star);
-		pr.setComment(content);
-		pr.setPlaceNo(placeNo);
-		int result = new PlayService().insertReply(pr);
+		int placeNo = Integer.parseInt(request.getParameter("bno"));
+		int comNo = Integer.parseInt(request.getParameter("comNo"));
+		String userId = request.getParameter("userId");
 		
-		response.getWriter().print(result);
+		int result = new PlayService().reportReply(placeNo, comNo, userId);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(result,response.getWriter());
+		
 	}
 
 	/**

@@ -18,7 +18,7 @@
 
     // 예시로 사용자가 방문한 장소 정보를 세션에 저장
     String placeTitle = p.getPlaceTitle();
-    String titleImg = p.getTitleImg();
+    String titleImg = list.get(0).getFilePath() + list.get(0).getOriginName();
     int placeNo =  p.getPlaceNo();
     
     // 새로운 Place 객체 생성
@@ -695,6 +695,15 @@ h3 {
     font-family:'TTLaundryGothicB';
 }
 
+.textLimit{
+	text-align:right;
+}
+
+.textCount, .textTotal{
+	display:inline;
+	margin: 2px auto;
+}
+
 .comment-modal .modal-content .star{
     width: 250px;
     display: inline;
@@ -975,7 +984,10 @@ footer .inner .info .copyright{
             </p>
             	<input type="button" value="등록" class="star-btn" onclick="insertReply()">
             <br>
-            <textarea name="replyContent" id="" class="star-content" style="resize: none;" placeholder="입력하세요." required></textarea>
+            <textarea name="replyContent" id="" class="star-content" style="resize: none;" placeholder="입력하세요." required maxlength='35'></textarea>
+            <div class="textLimit">
+            <p class="textCount">0자</p> / <p class="textTotal">35자</p>
+            </div>
           </div>
         </div>
   
@@ -987,6 +999,16 @@ footer .inner .info .copyright{
 	     </div>
 
             <script>
+            
+            $('.star-content').keyup(function(e){
+            	let content = $(this).val();
+            	
+            	if(content.length === 0 || content === ""){
+            		$(".textCount").text("0자");
+            	}else{
+            		$(".textCount").text(content.length + "자");
+            	}
+            })
             
 
             
@@ -1046,22 +1068,33 @@ footer .inner .info .copyright{
             	})
             }
             <% if(loginUser != null){ %>
-	            function test(){
+	            function test(event){
 	            	if(confirm("정말로 신고하시겠습니까?")){
-	            		console.log($("span"));
 	            		$.ajax({
-	            			url:"AjaxReportComment.rc",
+	            			url:"reportComment.rc",
 	            			data:{
 	            				bno:"<%= p.getPlaceNo() %>",
-	            				comNo:$(".comment-area #edit input[type=hidden]").val(),
-	            			}
+	            				comNo:$(event).next().val(),
+	            				userId:$(event).parent().prev().prev().text(),
+	            				
+	            			},
+	            			success:function(result){
+	            				if(result > 0){
+	            					alert("신고가 접수되었습니다.");
+	            				}else{
+	            					alert("신고에 실패하였습니다. 다시 시도해주세요.");
+	            				}
+	            			},
+	            			error:function(){
+	            				console.log("실패");
+	            			},
 	            		})
 	            	}
 		            		            		
 	            }
             <% }else{ %>
             	function test(){
-            		alert("로그인 후 이용가능합니다.")
+            		alert("로그인 후 이용가능합니다.");
             	}
             <% } %>
             
@@ -1076,10 +1109,10 @@ footer .inner .info .copyright{
             			let value = "";
             			for(let i = 0; i<result.length;i++){
             				value += "<div class='comment-area'><div class='profile'><div id='nickname'>"
-            				+  result[i].userId + 
+            				+  result[i].userName + 
             				"</div><div id='date'>" 
             				+  result[i].createDate +
-            				"</div><div id='edit'><span onclick='test();'>신고</span><input type='hidden' value='"+result[i].commentNo+"'> </div><div id='score'><div class='material-icons score'>star</div> " 
+            				"</div><div id='edit'><span onclick='test(this);'>신고</span><input type='hidden' value='"+result[i].commentNo+"'> </div><div id='score'><div class='material-icons score'>star</div> " 
             				+ result[i].score + 
             				"</div></div><div class='text-area'><div id='review'>" 
             				+ result[i].comment + 

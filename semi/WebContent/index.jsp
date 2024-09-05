@@ -528,7 +528,7 @@ footer .inner .info .copyright {
 				<div class="swiper-wrapper">
 					<% for(Restaurant restaurant : rlist) { %>
 					<div class="swiper-slide">
-						<a href=""> <img src="<%= restaurant.getTitleImg()%>" alt="" />
+						<a href="<%= contextPath %>/restaurantDetail.pl?placeNo=<%= restaurant.getPlaceNo() %>"> <img src="<%= restaurant.getTitleImg()%>" alt="" />
 						</a>
 						<p><%= restaurant.getPlaceTitle()%></p>
 					</div>

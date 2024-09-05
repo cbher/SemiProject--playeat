@@ -161,7 +161,7 @@ public class PlayDao {
 									   rset.getString("com_content"),
 									   rset.getInt("score"),
 									   rset.getDate("create_date"),
-									   rset.getString("user_id")));
+									   rset.getString("user_name")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -181,7 +181,7 @@ public class PlayDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pr.getComment());
 			pstmt.setInt(2, pr.getScore());
-			pstmt.setString(3, pr.getUserId());
+			pstmt.setString(3, pr.getUserName());
 			pstmt.setInt(4, pr.getPlaceNo());
 			
 			result = pstmt.executeUpdate();
@@ -348,5 +348,35 @@ public class PlayDao {
 			close(pstmt);
 		}
 		return plist;
+	}
+	
+	public int reportReply(Connection conn, int placeNo, int comNo, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String user = prop.getProperty("selectUserNo");
+		String sql = prop.getProperty("reportReply");
+		
+		try {
+			pstmt = conn.prepareStatement(user);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				int userNo = rset.getInt("user_no");
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, userNo);
+				
+				result = pstmt.executeUpdate();
+				
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
 	}
 }
