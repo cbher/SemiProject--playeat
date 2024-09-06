@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import db.com.semi.adminMember.model.dao.AdMemberDao;
 import db.com.semi.adminMember.model.vo.AdMember;
 import db.com.semi.adminMember.model.vo.AdReport;
+import db.com.semi.adminMember.model.vo.Attechment;
 
 public class AdMemberService {
 	
@@ -35,6 +36,13 @@ public class AdMemberService {
 	 
 	 close(conn);
 	 return list;
+	}
+	public Attechment adMemberDetailat(int Mno) {
+		Connection conn = 	getConnection();
+		Attechment at = new AdMemberDao().adMemberDetailat(conn, Mno);
+		
+		close(conn);
+		return at;
 	}
 	
 	public ArrayList<AdReport> adReportList() {
@@ -82,7 +90,9 @@ public class AdMemberService {
 			commit(conn);
 		}else {
 			rollback(conn);
-		}return result;
+		}
+		close(conn);
+		return result;
 		
 	}
 	public AdReport adReportDetail(int Rno){
@@ -97,6 +107,19 @@ public class AdMemberService {
 		Connection conn = getConnection();
 		int result = new AdMemberDao().adMemberreportbeen( reportNo, conn);
 		
+		close(conn);
+		return result;
+		
+	}
+	public int adNoreport( int rnro) {
+		Connection conn = getConnection();
+		
+		int result = new AdMemberDao().adNoreport( conn,  rnro);
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		close(conn);
 		return result;
 		

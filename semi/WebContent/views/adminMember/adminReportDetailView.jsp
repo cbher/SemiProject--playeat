@@ -32,9 +32,13 @@ table{
     border-collapse: separate; /* 기본값이 separate이지만, 명시적으로 설정 */
     border-spacing: 15px;
 }
-.adlistbutton a{
-    margin: 20px;
+.adlistbutton{
+    display: flex; /* 버튼들을 가로로 나열 */
+    gap: 10px;
+    text-align: center;
+      margin-left: 250px;
 }
+
 .adlistbutton button{
 font-size: 25px;
 
@@ -112,6 +116,7 @@ table *{
     <br>
     <div align="center" name="test">
     <button onclick="alltime()" type="button">영구정지</button>&nbsp;
+
     <button type="submit">회원 제제</button> &nbsp;
     <button onclick="closepenalty()" class="toggleButton" type="button">취소</button>
     </div>
@@ -183,6 +188,12 @@ table *{
    <br><br>
    <div align="center" class="adlistbutton">
    <button onclick="penalty();" class="toggleButton" >회원제제</button>
+   &nbsp;
+   <form action="noreport.ad">
+   <input type="hidden" name="nrno" value="<%=list.getReportNo()%>">
+   <button  type="submit">제제없음</button>&nbsp;
+   </form>
+   &nbsp;
     <a href="adReportList.rl"> <button >목록으로</button></a>
 
     <script>

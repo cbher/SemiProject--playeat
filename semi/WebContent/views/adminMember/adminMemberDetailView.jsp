@@ -1,9 +1,11 @@
+<%@page import="db.com.semi.adminMember.model.vo.Attechment"%>
 <%@page import="javax.print.attribute.UnmodifiableSetException"%>
 <%@page import="db.com.semi.adminMember.model.vo.AdMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     <% AdMember list = (AdMember)request.getAttribute("list");  
+    Attechment at = (Attechment)request.getAttribute("at");  
     String mno = request.getParameter("Mno");
     %>
 <!DOCTYPE html>
@@ -142,7 +144,9 @@ table *{
             <th width="100" height="30">회원번호</th>
             <td width="250">&nbsp; <%=list.getUserNo() %></td>
             <th width ="100">아이디</th>
-            <td width ="450" >&nbsp; <%=list.getUserId() %></td>
+            <td width ="275" >&nbsp; <%=list.getUserId() %></td>
+            <td width="175" rowspan="4"><%if(at==null){%>프로필 사진이 없습니다 <%}else{%> <img style="max-width: 175px;" alt="" src="<%=contextPath+at.getFilePath()+at.getChangeName() %>">
+            <%} %></td>
         </tr>
         <tr>
             <th  height="30">회원명</th>
@@ -166,7 +170,7 @@ table *{
             <th  height="50">이메일</th>
             <td>&nbsp; <%=list.getEmail()%></td>
             <th rowspan="2"  height="100">자기소개</th>
-            <td rowspan="2"><%=list.getIntroduce() %></td>
+            <td rowspan="2" colspan="2"><%=list.getIntroduce() %></td>
         </tr>
         <tr>
             <th  height="50">탈퇴여부</th>

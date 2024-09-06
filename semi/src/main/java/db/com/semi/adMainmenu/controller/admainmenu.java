@@ -32,7 +32,13 @@ public class admainmenu extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int onelist = new adMainService().adoneList().getMainlistnum();
-		System.out.println(onelist);
+		session.setAttribute("oneclasscount", onelist);
+		int memberList = new adMainService().admemberList().getMainlistnum();
+		session.setAttribute("adMemberlistCount", memberList);
+		int reportList = new adMainService().adreportList().getMainlistnum();
+		session.setAttribute("reportlistcount", reportList);
+		int questionsList = new adMainService().adquestionsList().getMainlistnum();
+		session.setAttribute("Readylistcount", questionsList);
 
 		
 		

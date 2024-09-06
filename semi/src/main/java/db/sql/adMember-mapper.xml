@@ -81,6 +81,20 @@ order by report_count desc ,  user_no
 		user_no = ?
 		
 </entry>
+<entry key="adMemberDetailat">
+
+select
+   file_no,
+   origin_name, 
+   change_name,
+   file_path, 
+   file_level
+from 
+   attechment
+where 
+   user_no= ?
+		
+</entry>
 
 <entry key="adReportList">
 	select 
@@ -205,6 +219,15 @@ update report
 set  report_status ='N'
 where report_no = ?
 
+
+</entry>
+
+
+
+
+<entry key="adNoreport">
+
+update report set report_status = 'N' where report_no= ?
 
 </entry>
 

@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import db.com.semi.adminMember.model.vo.AdMember;
 import db.com.semi.adminMember.model.vo.AdReport;
+import db.com.semi.adminMember.model.vo.Attechment;
 
 import static semi.common.JDBCtemplate.*;
 
@@ -159,6 +160,38 @@ public class AdMemberDao {
 									rset.getString("introduce"),
 									rset.getInt("report_count")
 									);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}return list;
+		
+		
+	}
+	public Attechment adMemberDetailat(Connection conn , int Mno) {
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adMemberDetailat");
+		ResultSet rset = null;
+		Attechment list = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Mno);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list = new Attechment(rset.getInt("file_no"),
+									  rset.getString("origin_name"),
+									  rset.getString("change_name"),
+									  rset.getString("file_path"),
+									  rset.getInt("file_level"))
+						;
 			}
 			
 			
@@ -377,6 +410,27 @@ public class AdMemberDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reportNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+		
+	}
+	public int adNoreport(Connection conn, int rnro) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("adNoreport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, rnro);
 			
 			result = pstmt.executeUpdate();
 			
