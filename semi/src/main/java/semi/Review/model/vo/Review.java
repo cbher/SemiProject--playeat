@@ -33,13 +33,24 @@ public class Review {
 		this.userName = userName;
 		this.nickName = nickName;
 	}
-	
-	
 
 	public Review(String rTitle, String rContent, String score, String userNo, String pNo) {
 		super();
 		this.rTitle = rTitle;
 		this.rContent = rContent;
+		this.score = score;
+		this.userNo = userNo;
+		this.pNo = pNo;
+	}
+	
+	
+
+	public Review(String rNo, String rTitle, String rContent, Date rDate, String score, String userNo, String pNo) {
+		super();
+		this.rNo = rNo;
+		this.rTitle = rTitle;
+		this.rContent = rContent;
+		this.rDate = rDate;
 		this.score = score;
 		this.userNo = userNo;
 		this.pNo = pNo;

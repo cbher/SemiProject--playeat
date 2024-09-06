@@ -349,6 +349,7 @@ public class PlayDao {
 		}
 		return plist;
 	}
+<<<<<<< HEAD
 	
 	public int reportReply(Connection conn, int placeNo, int comNo, String userId) {
 		int result = 0;
@@ -369,6 +370,29 @@ public class PlayDao {
 				
 				result = pstmt.executeUpdate();
 				
+=======
+
+	public double scoreAvg(Connection conn, int placeNo) {
+		double score = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("scoreAvg");
+		String updateScore = prop.getProperty("updateScore");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, placeNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				score = rset.getDouble("avg");
+				
+				pstmt = conn.prepareStatement(updateScore);
+				pstmt.setDouble(1, score);
+				pstmt.setInt(2, placeNo);
+				
+				int result = pstmt.executeUpdate();
+>>>>>>> jms
 				
 			}
 		} catch (SQLException e) {
@@ -377,6 +401,10 @@ public class PlayDao {
 			close(rset);
 			close(pstmt);
 		}
+<<<<<<< HEAD
 		return result;
+=======
+		return score;
+>>>>>>> jms
 	}
 }

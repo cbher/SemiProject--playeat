@@ -120,5 +120,40 @@
          SET USER_PWD = ? 
        WHERE USER_ID = ?
    </entry>
+   
+   <entry key="incrementReportCount">
+   		 UPDATE MEMBER 
+            SET REPORT_COUNT = REPORT_COUNT + 1 
+          WHERE USER_NO = ?
+   </entry>
+   
+   <entry key="insertReport">
+   		INSERT
+      INTO REPORT
+         ( REPORT_NO
+         , REPORT_CONTENT
+         , REPORT_STATUS
+         , REVIEW_NO
+         , P_NO
+         , PCOM_NO
+         , ONE_NO
+         , OCOM_NO
+         , C_NO
+         , USER_NO
+         , CREATE_REPORT
+         )
+    VALUES 
+         ( REPORT_SEQ.NEXTVAL
+         , DEFAULT
+         , DEFAULT
+         , DEFAULT
+         , DEFAULT
+         , DEFAULT
+         , DEFAULT
+         , ?
+         , DEFAULT
+         , ?
+         , SYSDATE)
+   </entry>
 
 </properties>

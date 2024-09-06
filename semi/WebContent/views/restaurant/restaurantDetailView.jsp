@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <%@page import="java.util.List"%>
+=======
+<%@page import="semi.Review.model.vo.Attachment2"%>
+>>>>>>> jms
 <%@page import="semi.Review.model.vo.Review"%>
 <%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
@@ -11,10 +15,12 @@ pageEncoding="UTF-8"%>
 	Play p = (Play)request.getAttribute("p");
 	// 글번호, 글제목, 주소, 전화번호, 별점, 운영시간, 테마카테고리
 	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("list");
+	
 	// 파일번호, 원본명, 수정명, 파일경로
 	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
 	ArrayList<Review> r = (ArrayList<Review>)request.getAttribute("r");
 	ArrayList<Play> recentRestaurant = (ArrayList<Play>)request.getAttribute("recentRestaurant");
+<<<<<<< HEAD
 	
 	
 	 String placeTitle = p.getPlaceTitle();
@@ -67,6 +73,8 @@ pageEncoding="UTF-8"%>
 	
 	
 	
+=======
+>>>>>>> jms
 %>
 <!DOCTYPE html>
 <html>
@@ -147,8 +155,9 @@ pageEncoding="UTF-8"%>
 
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v&submodules=geocoder"></script>
     <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	
 	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
 		integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
@@ -160,7 +169,32 @@ pageEncoding="UTF-8"%>
 </head>
   <body>
     <%@ include file="../common/menubar.jsp" %>
+<<<<<<< HEAD
     <%@include file="../common/badge.jsp" %>
+=======
+
+    <div class="badge">
+      <div class="text">최근 본 장소</div>
+      <a href="javascript:void(0)" class="place">
+        <img src="" alt="" />
+        <div class="badge-title">
+          <h2>여긴어디야</h2>
+        </div>
+      </a>
+      <a href="javascript:void(0)" class="place">
+        <img src="" alt="" />
+        <div class="badge-title">
+          <h2>여긴어디야</h2>
+        </div>
+      </a>
+      <a href="javascript:void(0)" class="place">
+        <img src="" alt="" />
+        <div class="badge-title">
+          <h2>여긴어디야</h2>
+        </div>
+      </a>
+    </div>
+>>>>>>> jms
 
     <!-- 상세 -->
     <div class="info-box">
@@ -233,7 +267,7 @@ pageEncoding="UTF-8"%>
         <table>
           <tr>
             <th>별점</th>
-            <td><div><%= p.getScore() %></td>
+            <td><div class="material-icons score">star</div><div class="Rscore"><%= p.getScore() %></div></td>
           </tr>
           <tr>
             <th>위치</th>
@@ -307,20 +341,25 @@ pageEncoding="UTF-8"%>
           <th rowspan="2" style="width: 200px" id="profile">
             <div id="profile-img"><img src="" alt="" /></div>
             <% if(r.get(i).getNickName() != null){ %>
-            <div id="profile-id"><%= r.get(i).getNickName() %></div>
+            	<div id="profile-id"><%= r.get(i).getNickName() %></div>
             <% }else{ %>
-            <div id="profile-id"><%= r.get(i).getUserName() %></div>
+            	<div id="profile-id"><%= r.get(i).getUserName() %></div>
             <% } %>
-            <div id="profile-score"><%= r.get(i).getScore() %></div>
-            <div id="profile-date"><%= r.get(i).getrDate() %></div>
+	            <div id="profile-score"><div class="material-icons score">star </div><%= r.get(i).getScore() %></div>
+	            <div id="profile-date"><%= r.get(i).getrDate() %></div>
+            
+            <form action="updateForm.re" style="border: none;">
+            <% if (loginUser != null && String.valueOf(loginUser.getUserNo()).equals(String.valueOf(r.get(i).getUserNo()))) { %>
             <div id="profile-update">
-              <a href="">수정</a>
-              <a href="">삭제</a>
+              <a href="<%= contextPath %>/updateForm.re?rNo=<%= r.get(i).getrNo() %>&placeNo=<%= p.getPlaceNo() %>">수정 </a>/
+              <a href="<%= contextPath %>/deleteReview.re?rNo=<%= r.get(i).getrNo() %>&placeNo=<%= p.getPlaceNo() %>">삭제</a>
             </div>
-            <input type="submit" value="리뷰신고" id="report-btn" />
+            <% } %>
+            </form>
+            <input type="submit" onclick='report(<%= r.get(i).getUserNo() %>, <%= r.get(i).getrNo() %>);' value="리뷰신고" id="report-btn" />
           </th>
           <td colspan="2" rowspan="2" style="width: 500px" id="review-img">
-            <img src="<%= r.get(i).getTitleImg() %>" alt="" />
+            <img src="<%= contextPath %><%= r.get(i).getTitleImg() %>" alt="" />
           </td>
         </tr>
         <tr></tr>
@@ -342,7 +381,27 @@ pageEncoding="UTF-8"%>
   </body>
 
   <script>
+<<<<<<< HEAD
    
+=======
+  
+  $(function(){
+	  scoreAvg();
+  })
+  
+    let box = $("body");
+    let boxHeight = box.height();
+    let boxOffsetTop = box.offset().top;
+    let quickMenu = $(".badge");
+    let quickMenuHeight = quickMenu.height();
+    const DURATION = 900;
+
+    $(window).resize(function () {
+      boxHeight = box.height();
+      boxOffsetTop = box.offset().top;
+      quickMenuHeight = quickMenu.height();
+    });
+>>>>>>> jms
 
     $(window).scroll(function () {
       let scrollTop = $(this).scrollTop();
@@ -568,5 +627,48 @@ pageEncoding="UTF-8"%>
  
    // Call the function to show the user's current location when the page loads
    showCurrentLocation();
+   
+   function scoreAvg(){
+   	$.ajax({
+   		url:"ajaxScore.re",
+   		data:{placeNo:"<%= p.getPlaceNo() %>"},
+   		success:function(result){
+   			console.log(result);
+   			if(result !== null){
+   				$(".Rscore").text(result);
+   			}
+   		},
+   		error:function(){
+   			
+   		},
+   	})
+   }
+   
+   <% if(loginUser != null){ %>
+    function report(reviewerUserNo, reviewNo) {
+        if (confirm("정말로 신고하시겠습니까?")) {
+            $.ajax({
+                url: "report.re",
+                type: "POST",
+                data: { userNo: reviewerUserNo,
+                		reviewNo: reviewNo},
+                success: function(response) {
+                    if (response.trim() === "success") {
+                        alert("신고가 접수되었습니다.");
+                    } else {
+                        alert("신고 접수에 실패했습니다. 다시 시도해주세요.");
+                    }
+                },
+                error: function() {
+                    alert("오류가 발생했습니다. 다시 시도해주세요.");
+                }
+            });
+        }
+	    }
+	<% } else { %>
+	    function report() {
+	        alert("로그인 후 이용 가능합니다.");
+	    }
+	<% } %>
   </script>
 </html>

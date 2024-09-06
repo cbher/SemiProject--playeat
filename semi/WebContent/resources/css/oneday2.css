@@ -447,6 +447,10 @@ h3 {
   line-height: 2;
 }
 
+.comment-area #score .material-icons {
+	color: e4d4fa;
+}
+
 .comment-area #review {
   margin-top: 5%;
   width: 90%;

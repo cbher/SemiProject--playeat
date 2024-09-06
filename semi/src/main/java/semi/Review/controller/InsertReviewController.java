@@ -56,7 +56,7 @@ public class InsertReviewController extends HttpServlet {
 	         String userNo = multiRequest.getParameter("userNo");
 	         String placeNo = multiRequest.getParameter("placeNo");
 	         
-	         // System.out.println(rContent + " / " + score + " / " + userNo + " / " + rTitle + " / " + placeNo);
+	         System.out.println(rNo + "/" + rContent + " / " + score + " / " + userNo + " / " + rTitle + " / " + placeNo);
 	         
 	         Review review = new Review();
 	         review.setrTitle(rTitle);
@@ -66,19 +66,15 @@ public class InsertReviewController extends HttpServlet {
 	         review.setpNo(placeNo);
 	         review.setrNo(rNo);
 	         
-	         System.out.println(review);
-	         
 			Attachment at = null; // 처음에는 null로 초기화, 넘어온 첨부파일이 있다면 생성
-			if(multiRequest.getOriginalFileName("upfile") != null) {
+			if(multiRequest.getOriginalFileName("file1") != null) {
 				
 				at = new Attachment();
-				at.setOriginName(multiRequest.getOriginalFileName("upfile"));
-				at.setChangeName(multiRequest.getFilesystemName("upfile"));
-				at.setFilePath("resources/review_upfiles/");
+				at.setOriginName(multiRequest.getOriginalFileName("file1"));
+				at.setChangeName(multiRequest.getFilesystemName("file1"));
+				at.setFilePath("/resources/review_upfiles/");
 			}
-			
 			int result = new ReviewService().insertReview(review, at);
-			
 			if(result > 0) {
 				 request.getSession().setAttribute("alertMsg", "리뷰 등록 성공");
 				 request.getSession().setAttribute("rNo", rNo);

@@ -2,7 +2,7 @@ package semi.Review.model.vo;
 
 import java.sql.Date;
 
-public class Attachment {
+public class Attachment2 {
 	
 	private int fileNo;
 	private String originName;
@@ -13,11 +13,12 @@ public class Attachment {
 	private int fileLevel;
 	private int placeNo;
 	private int reviewNo;
+	private int userNo;
 	
-	public Attachment() {}
+	public Attachment2() {}
 
-	public Attachment(int fileNo, String originName, String changeName, String filePath, Date uploadDate, String status,
-			int fileLevel, int placeNo, int reviewNo) {
+	public Attachment2(int fileNo, String originName, String changeName, String filePath, Date uploadDate, String status,
+			int fileLevel, int placeNo, int reviewNo, int userNo) {
 		super();
 		this.fileNo = fileNo;
 		this.originName = originName;
@@ -28,6 +29,16 @@ public class Attachment {
 		this.fileLevel = fileLevel;
 		this.placeNo = placeNo;
 		this.reviewNo = reviewNo;
+		this.userNo = userNo;
+	}
+
+	public Attachment2(int fileNo, String originName, String changeName, String filePath, int userNo) {
+		super();
+		this.fileNo = fileNo;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
+		this.userNo = userNo;
 	}
 
 	public int getFileNo() {
@@ -101,13 +112,23 @@ public class Attachment {
 	public void setReviewNo(int reviewNo) {
 		this.reviewNo = reviewNo;
 	}
+	
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
 
 	@Override
 	public String toString() {
 		return "Attachment [fileNo=" + fileNo + ", originName=" + originName + ", changeName=" + changeName
 				+ ", filePath=" + filePath + ", uploadDate=" + uploadDate + ", status=" + status + ", fileLevel="
-				+ fileLevel + ", placeNo=" + placeNo + ", reviewNo=" + reviewNo + "]";
+				+ fileLevel + ", placeNo=" + placeNo + ", reviewNo=" + reviewNo + ", userNo=" + userNo + "]";
 	}
+
+	
 	
 	
 
