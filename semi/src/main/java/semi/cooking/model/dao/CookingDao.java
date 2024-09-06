@@ -374,6 +374,39 @@ public class CookingDao {
 		}
 		return result;
 	}
+	
+	public int reportBoard(Connection conn, int cookNo, String userId) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String getNo = prop.getProperty("selectUserNo");
+		String sql = prop.getProperty("reportBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(getNo);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				int userNo = rset.getInt("user_no");
+				
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, cookNo);
+				pstmt.setInt(2, userNo);
+				
+				result = pstmt.executeUpdate();
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+		
+	}
 
 	
 	

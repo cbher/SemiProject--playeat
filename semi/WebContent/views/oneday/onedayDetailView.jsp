@@ -38,7 +38,7 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
           rel="stylesheet"
         />
 		
-		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v&submodules=geocoder"></script>
+		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq&submodules=geocoder"></script>
         <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -51,6 +51,15 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
 			Kakao.init('380af2edeb82dfbf591425877a112ec6'); // 사용하려는 앱의 JavaScript 키 입력
 		</script>
         <style>
+        
+        .textLimit{
+			text-align:right;
+		}
+		
+		.textCount, .textTotal{
+			display:inline;
+			margin: 2px auto;
+		}
           footer .inner {
             display: block;
             height: 100px;
@@ -117,28 +126,8 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
       </head>
       <body>
         <%@ include file="../common/menubar.jsp" %>
-
-        <div class="badge">
-          <div class="text">최근 본 장소</div>
-          <a href="javascript:void(0)" class="place">
-            <img src="./resourse/음식.jpg" alt="" />
-            <div class="badge-title">
-              <h2>여긴어디야</h2>
-            </div>
-          </a>
-          <a href="javascript:void(0)" class="place">
-            <img src="./resourse/음식2.jpg" alt="" />
-            <div class="badge-title">
-              <h2>여긴어디야</h2>
-            </div>
-          </a>
-          <a href="javascript:void(0)" class="place">
-            <img src="./resourse/음식2.jpg" alt="" />
-            <div class="badge-title">
-              <h2>여긴어디야</h2>
-            </div>
-          </a>
-        </div>
+		<%@ include file="../common/badge.jsp" %>
+        
 
         <!-- 원데이클래스 상세 -->
         <div class="info-box">
@@ -244,7 +233,7 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
               </tr>
             </table>
           </div>
-          <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v"></script>
+          <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq"></script>
 			<div id="map" style="width:380px;height:322px; margin-top: 60px;"></div>
 		</div>
         </div>
@@ -307,6 +296,9 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
                 </p>
                 <br />
                 <textarea name="comContent" id="reviewContent" class="star-content" style="resize: none" placeholder="입력하세요."></textarea>
+              	<div class="textLimit">
+	            	<p class="textCount">0자</p> / <p class="textTotal">35자</p>
+	            </div>
               	<input type="hidden" name="oneNo" value="<%= o.getOneNo() %>">
               	<% if(loginUser != null){ %>
 	            <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
@@ -370,33 +362,18 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
           const thisYear = document.querySelector("#this-year");
           thisYear.textContent = new Date().getFullYear();
 
-          let quickMenu = $(".badge");
-          const DURATION = 900; // 이동 애니메이션 시간
-
-          function positionQuickMenu() {
-            let windowHeight = $(window).height();
-            let quickMenuHeight = quickMenu.height();
-
-            // 화면의 중앙 위치를 계산
-            let point =
-              $(window).scrollTop() + windowHeight / 2 - quickMenuHeight / 2;
-
-            point -= 50;
-
-            quickMenu.stop().animate({ top: point }, DURATION);
-          }
-
-          $(window).scroll(function () {
-            positionQuickMenu(); // 스크롤할 때마다 중앙에 맞춰 이동
-          });
-
-          $(window).resize(function () {
-            positionQuickMenu(); // 창 크기가 변경될 때도 중앙에 재배치
-          });
-
-          $(document).ready(function () {
-            positionQuickMenu(); // 페이지 로드 시 중앙에 배치
-          });
+         
+          
+          $('.star-content').keyup(function(e){
+          	let content = $(this).val();
+          	
+          	if(content.length === 0 || content === ""){
+          		$(".textCount").text("0자");
+          	}else{
+          		$(".textCount").text(content.length + "자");
+          	}
+          })
+          
 
           const swiper = new Swiper(".swiper", {
             // Optional parameters

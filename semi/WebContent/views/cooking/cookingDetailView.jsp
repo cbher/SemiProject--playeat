@@ -137,6 +137,15 @@ button:hover{
 	color:#8b7dbe;
 }
 
+.infomation td span{
+	cursor:pointer;
+}
+
+.infomation td span:hover{
+	color:#8d7bde
+}
+
+
 </style>
 </head>
 <body>
@@ -156,7 +165,8 @@ button:hover{
             <table class="infomation" align="center">
                 <tr>
                     <td width="200"><%= cBoard.getUserNo() %></td>
-                    <td width="400"><%= cBoard.getCreateDate() %></td>
+                    <td width="300"><%= cBoard.getCreateDate() %></td>
+                    <td width="80"><span onclick='report();'>신고</span></td>
                     <td width="100">추천수 : <%= cBoard.getScore()%></td>
                     <% if(cBoard.getCookCategory() == 1){ %>
                     	<td width="100">일반게시판</td>
@@ -187,6 +197,31 @@ button:hover{
     </div>
     
     <script>
+    	
+    	<% if(loginUser != null) { %>
+    		function report(){
+    			if(confirm("정말로 신고하시겠습니까?")){
+    				$.ajax({
+    					url:"reportCook.rc",
+    					data:{
+    						bno:"<%= cBoard.getcBoardNo() %>",
+    						userId:"<%= cBoard.getUserNo() %>"
+    					},
+    					success:function(result){
+    						
+    						if(result > 0){
+    							alert("신고가 성공적으로 접수되었습니다.");
+    						}else{
+    							alert("신고에 실패하였습니다. 다시 시도해주세요.");
+    						}
+    					}
+    				})
+    			}
+    		}
+    	<% } %>
+    	
+    
+    
     	function update(){
             if(confirm("게시물을 수정하시겠습니까?")){
                 location.href = "<%= contextPath %>/updateEnrollForm.co?bno=<%= cBoard.getcBoardNo()%>";
@@ -214,7 +249,7 @@ button:hover{
                 data:{bno:<%= cBoard.getcBoardNo() %>,
                 	  userNo : $("#userNo").val()},
                 success:function(result){
-                	$(".inner .infomation tr td").eq(2).text("추천수 : " + result.score); 
+                	$(".inner .infomation tr td").eq(3).text("추천수 : " + result.score); 
 					$(".like").css("color","#8b7dbe");
 					likeStatus();
                 },

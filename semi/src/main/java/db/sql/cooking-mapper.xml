@@ -163,5 +163,26 @@
 		 WHERE USER_NO = ?
 		   AND C_NO = ?
 	</entry>
+	<entry key="reportBoard">
+		INSERT
+		  INTO REPORT
+		  (
+		    REPORT_NO
+		  , C_NO
+		  , USER_NO
+		  )
+		  VALUES
+		  (
+		    REPORT_SEQ.NEXTVAL
+		  , ?
+		  , ?
+		  )
+	</entry>
+	<entry key="selectUserNo">
+		SELECT
+			   USER_NO
+		  FROM MEMBER
+		 WHERE USER_ID = ?
+	</entry>
 	
 </properties>
