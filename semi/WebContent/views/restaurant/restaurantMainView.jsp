@@ -1,8 +1,8 @@
 <%@page import="semi.play.model.vo.Play"%>
 <%@page import="semi.restaurant.model.vo.Restaurant"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%
 	ArrayList<ArrayList> list = (ArrayList<ArrayList>)request.getAttribute("list");
 	ArrayList<Restaurant> listSeoul = list.get(0);

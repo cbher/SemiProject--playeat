@@ -34,6 +34,7 @@ public class RestaurantMainListViewController extends HttpServlet {
 		ArrayList<ArrayList> list = new RestaurantService().selectRestaurantList();
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/restaurant/restaurantMainView.jsp").forward(request, response);
+		System.out.println(list);
 	}
 
 	/**
