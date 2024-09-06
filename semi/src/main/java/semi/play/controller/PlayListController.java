@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.play.model.service.PlayService;
 import semi.play.model.vo.Play;
+import semi.restaurant.model.service.RestaurantService;
 
 /**
  * Servlet implementation class PlayListController
@@ -32,14 +33,9 @@ public class PlayListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Play> list = new PlayService().selectPlayList();
-		
-		if(list != null) {
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/play/playListView.jsp").forward(request, response);
-		}else {
-			request.getRequestDispatcher("views/common/erroePage.jsp").forward(request, response);
-		}
+		ArrayList<ArrayList> list = new PlayService().selectPlayList();
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/play/playListView.jsp").forward(request, response);
 	}
 
 	/**

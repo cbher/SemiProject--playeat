@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+<%@page import="java.util.List"%>
+=======
 <%@page import="semi.Review.model.vo.Attachment2"%>
+>>>>>>> jms
 <%@page import="semi.Review.model.vo.Review"%>
 <%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
@@ -16,6 +20,61 @@ pageEncoding="UTF-8"%>
 	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
 	ArrayList<Review> r = (ArrayList<Review>)request.getAttribute("r");
 	ArrayList<Play> recentRestaurant = (ArrayList<Play>)request.getAttribute("recentRestaurant");
+<<<<<<< HEAD
+	
+	
+	 String placeTitle = p.getPlaceTitle();
+	    String titleImg = list.get(0).getFilePath() + list.get(0).getOriginName();
+	    int placeNo =  p.getPlaceNo();
+	    
+	    // 새로운 Place 객체 생성
+	    Play play = new Play(placeNo, placeTitle, titleImg );
+	    
+	    List<Play> recentPlaces = (List<Play>) session.getAttribute("recentPlaces");
+
+	    if (recentPlaces == null) {
+	        recentPlaces = new ArrayList<>();
+	    }
+
+	    // 리스트에 동일한 이름을 가진 장소가 있는지 확인
+	    boolean alreadyExists = false;
+	    for (Play existingPlay : recentPlaces) {
+	        if (existingPlay.getPlaceTitle().equals(play.getPlaceTitle())) {
+	            alreadyExists = true;
+	            break;
+	        }
+	    }
+
+	    // 동일한 이름의 장소가 없다면 추가
+	    if (!alreadyExists) {
+	        // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
+	        if (recentPlaces.size() >= 3) {
+	            recentPlaces.remove(0);
+	        }
+
+	        recentPlaces.add(play);
+	    }
+
+	    // 리스트를 세션에 저장
+	    session.setAttribute("recentPlaces", recentPlaces);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+=======
+>>>>>>> jms
 %>
 <!DOCTYPE html>
 <html>
@@ -110,6 +169,9 @@ pageEncoding="UTF-8"%>
 </head>
   <body>
     <%@ include file="../common/menubar.jsp" %>
+<<<<<<< HEAD
+    <%@include file="../common/badge.jsp" %>
+=======
 
     <div class="badge">
       <div class="text">최근 본 장소</div>
@@ -132,6 +194,7 @@ pageEncoding="UTF-8"%>
         </div>
       </a>
     </div>
+>>>>>>> jms
 
     <!-- 상세 -->
     <div class="info-box">
@@ -319,6 +382,9 @@ pageEncoding="UTF-8"%>
   </body>
 
   <script>
+<<<<<<< HEAD
+   
+=======
   
   $(function(){
 	  scoreAvg();
@@ -336,6 +402,7 @@ pageEncoding="UTF-8"%>
       boxOffsetTop = box.offset().top;
       quickMenuHeight = quickMenu.height();
     });
+>>>>>>> jms
 
     $(window).scroll(function () {
       let scrollTop = $(this).scrollTop();

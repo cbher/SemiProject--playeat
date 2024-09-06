@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="AdBoardList">
+
+	select 
+		C_NO, 
+		C_TITLE, 
+		C_CONTENTS, 
+		C_DATE, 
+		a.StaTUS, 
+		C_STAR, 
+		COUNT, 
+		b.USER_Name, 
+		C_CATEGORY
+	from 
+		cook_board a
+	join 
+		member b on 
+			(a.user_no = b.user_no)
+	    where C_CATEGORY = 
+</entry>
+
+<entry key="adBoardDetail">
+	
+	select 
+		c_no, 
+		c_title, 
+		c_contents,
+		c_date,
+		a.status,
+		c_star,
+		count ,
+		a.user_no,
+		c_category,
+		b.user_name
+	from 
+		Cook_board a  
+	join 
+		member b on a.user_no = b.user_no
+	where 
+		c_no = ?
+
+</entry>
+
+<entry key="adBoardDetailat">
+
+	select 
+		file_no, 
+		origin_name, 
+		change_name, 
+		file_path,  
+		file_level, 
+		c_no
+	from 
+		attechment	
+	where 
+		c_no = ?
+
+</entry>
+
+<entry key="adboarddelete"> 
+
+	update 
+		cook_board 
+	set 
+		status='N'
+	where 
+		c_no = ?
+
+
+</entry>
+
+</properties>

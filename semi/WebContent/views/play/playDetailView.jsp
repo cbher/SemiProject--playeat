@@ -18,30 +18,39 @@
 
     // 예시로 사용자가 방문한 장소 정보를 세션에 저장
     String placeTitle = p.getPlaceTitle();
-    String titleImg = p.getTitleImg();
+    String titleImg = list.get(0).getFilePath() + list.get(0).getOriginName();
     int placeNo =  p.getPlaceNo();
     
     // 새로운 Place 객체 생성
     Play play = new Play(placeNo, placeTitle, titleImg );
     
-    // 세션에서 최근 방문한 장소 리스트 가져오기
     List<Play> recentPlaces = (List<Play>) session.getAttribute("recentPlaces");
-    
+
     if (recentPlaces == null) {
         recentPlaces = new ArrayList<>();
     }
-    
-    // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
-    if (recentPlaces.size() >= 3) {
-        recentPlaces.remove(0);
+
+    // 리스트에 동일한 이름을 가진 장소가 있는지 확인
+    boolean alreadyExists = false;
+    for (Play existingPlay : recentPlaces) {
+        if (existingPlay.getPlaceTitle().equals(play.getPlaceTitle())) {
+            alreadyExists = true;
+            break;
+        }
     }
-    
-    // 새로운 장소를 리스트에 추가
-    recentPlaces.add(play);
-    
+
+    // 동일한 이름의 장소가 없다면 추가
+    if (!alreadyExists) {
+        // 리스트 크기가 3개 이상이면, 가장 오래된 항목을 제거
+        if (recentPlaces.size() >= 3) {
+            recentPlaces.remove(0);
+        }
+
+        recentPlaces.add(play);
+    }
+
     // 리스트를 세션에 저장
     session.setAttribute("recentPlaces", recentPlaces);
-
 
 	
 %>
@@ -56,6 +65,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq"></script>
 	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq&submodules=geocoder"></script>
+	<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+		integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+		crossorigin="anonymous"></script>
+	<script>
+		Kakao.init('380af2edeb82dfbf591425877a112ec6'); // 사용하려는 앱의 JavaScript 키 입력
+	</script>
+
 <style>
 
 /* BADGE */
@@ -214,6 +230,96 @@
     color: #8b7dbe;
 }
 
+h2 {
+  text-align: center;
+  display: inline;
+}
+.info .modal_btn {
+  background-color: #f6f5f0;
+  border: none;
+  border-radius: 5px;
+  color: #8b7dbe;
+  cursor: pointer;
+}
+
+/*모달 팝업 영역 스타일링*/
+.info .modal {
+  /*팝업 배경*/
+  display: none; /*평소에는 보이지 않도록*/
+  /* position: absolute;
+    top:0;
+    left: 0; */
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.info .modal .modal_popup {
+  /*팝업*/
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: absolute;
+  text-align: center;
+  width: 200px;
+  height: 150px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background: #f6f5f0;
+  border-radius: 20px;
+  z-index: 11;
+}
+.info .modal .modal_popup .close_btn {
+  display: block;
+  padding: 10px 20px;
+  background-color: #e4d4fa;
+  border: none;
+  border-radius: 5px;
+  color: #8b7dbe;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  position: relative;
+  top: 30px;
+}
+
+.info .modal.on {
+  display: block;
+}
+
+h3 {
+  margin: 10px 0 10px 0;
+  color: #8b7dbe;
+}
+
+.info .modal .modal_popup img {
+  width: 30px;
+  height: 30px;
+}
+
+.info .modal .modal_popup a {
+  width: 30px;
+  position: relative;
+  margin: 10px;
+}
+
+.info .modal .modal_popup .share {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height:50px;
+}
+
+
 .detail-info .inner .main-box .info table{
     width: 500px;
     height: 250px;
@@ -238,21 +344,10 @@
     margin-right:5px;
 }
 
-.detail-info .inner .main-box .info button{
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    width: 100px;
-    height: 35px;
-    background-color: #e4d4fa;
-    border-radius: 15px;
-    border: 0;
-    color: #656565;
-    cursor: pointer;
-}
 
 .detail-info .inner .main-box .info button:hover{
     background-color: #8b7dbe;
+    color:white;
 }
 
  
@@ -460,15 +555,6 @@
 	left:450px;
 	width:200px;
 	height:50px;
-	border-radius:25px;
-	font-family:'TTLaundryGothicB';
-	border : 3px solid #e4d4fa;
-	cursor:pointer;
-}
-
-.comment .load:hover{
-	background:#e4d4fa;
-	color:#fff;
 }
 
 .comment #modalBtn{
@@ -514,6 +600,10 @@
     cursor:pointer;
 }
 
+.comment-area #edit span:hover{
+	color:#fff;
+}
+
 .comment-area #score{
     margin-left: 20px;
 }
@@ -533,7 +623,19 @@
     line-height: 3;
 }
 
+.load{
+	background-color:#e4d4fa;
+	border:none;
+	color:#333;
+	border-radius:15px;
+	font-family:'TTLaundryGothicB';
+	cursor:pointer;
+}
 
+.load:hover{
+	background-color:#8b7dbe;
+	color:#fff;
+}
 
 /* * {
     box-sizing: border-box;
@@ -607,6 +709,15 @@
     margin-top: 10px;
     font-size:18px;
     font-family:'TTLaundryGothicB';
+}
+
+.textLimit{
+	text-align:right;
+}
+
+.textCount, .textTotal{
+	display:inline;
+	margin: 2px auto;
 }
 
 .comment-modal .modal-content .star{
@@ -710,6 +821,7 @@ footer .inner .info .copyright{
 <body>
 
 	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="../common/badge.jsp" %>
 	<%@ include file="../common/top.jsp" %>
     <section class="detail-info">
         <div class="inner">
@@ -729,8 +841,86 @@ footer .inner .info .copyright{
                         <div class="info">
                             <h2><%= p.getPlaceTitle() %></h2>
                             <div class="material-icons like" onclick="insertLikeList()">thumb_up</div>
-                            <div class="material-icons share">share</div>
-                            <table>
+                            <div class="material-icons share modal_btn">share</div>
+
+							<div class="modal">
+					            <div class="modal_popup">
+					              <h3>공유하기</h3>
+					              <div class="share">
+					                <span>
+										<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
+										<script type="text/javascript">
+										new ShareNaver.makeButton({"type": "d"});
+										</script>
+									</span> 
+									<a id="kakaotalk-sharing-btn" href="javascript:;"> <img
+										src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png"
+										alt="카카오톡 공유 보내기 버튼" />
+									</a>
+								 </div>
+					              <button type="button" class="close_btn">닫기</button>
+            					</div>
+          					</div>
+          					
+          					<script>
+	          				    // MODAL
+	          				    const modal = document.querySelector(".modal");
+	          				    const modalOpen = document.querySelector(".modal_btn");
+	          				    const modalClose = document.querySelector(".close_btn");
+	
+	          				    //열기 버튼을 눌렀을 때 모달팝업이 열림
+	          				    modalOpen.addEventListener("click", function () {
+	          				      //'on' class 추가
+	          				      modal.classList.add("on");
+	          				    });
+	          				    //닫기 버튼을 눌렀을 때 모달팝업이 닫힘
+	          				    modalClose.addEventListener("click", function () {
+	          				      //'on' class 제거
+	          				      modal.classList.remove("on");
+	          				    });
+	          				    
+	          				  // 카카오 공유
+	          				    Kakao.Share.createDefaultButton({
+	          				    container: '#kakaotalk-sharing-btn',
+	          				    objectType: 'feed',
+	          				    content: {
+	          				      title: '<%= p.getPlaceTitle() %>',
+	          				      description: '<%= p.getAddress() %>',
+	          				      imageUrl:
+	          				        '<%= p.getTitleImg() %>',
+	          				      link: {
+	          				        // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+	          				        mobileWebUrl: 'http://localhost:8002',
+	          				        webUrl: 'http://localhost:8002',
+	          				      },
+	          				    },
+	          				    social: {
+	          				      likeCount: 286,
+	          				      commentCount: 45,
+	          				      sharedCount: 845,
+	          				    },
+	          				    buttons: [
+	          				      {
+	          				        title: '웹으로 보기',
+	          				        link: {
+	          				          mobileWebUrl: 'https://developers.kakao.com',
+	          				          webUrl: 'https://developers.kakao.com',
+	          				        },
+	          				      },
+	          				      {
+	          				        title: '앱으로 보기',
+	          				        link: {
+	          				          mobileWebUrl: 'https://developers.kakao.com',
+	          				          webUrl: 'https://developers.kakao.com',
+	          				        },
+	          				      },
+	          				    ],
+	          				  });
+	          				    
+	          				    
+          					</script>
+
+							<table>
                                 <tr>
                                     <th>별점</th>
                                     <td style="display:flex"><div class="material-icons star">star</div> <div><%= p.getScore() %></div></td>
@@ -794,7 +984,7 @@ footer .inner .info .copyright{
         <!-- 모달 버튼 -->
         <% if(loginUser != null){ %> 
         	<button id="modalBtn">작성하기</button>
-        	<input type="hidden" value="<%= loginUser.getUserNo() %>">
+        	<input type="hidden" id="userNo" value="<%= loginUser.getUserNo() %>">
         <% } %>
         </div>  
         <!-- 모달 창 -->
@@ -811,18 +1001,33 @@ footer .inner .info .copyright{
             </p>
             	<input type="button" value="등록" class="star-btn" onclick="insertReply()">
             <br>
-            <textarea name="replyContent" id="" class="star-content" style="resize: none;" placeholder="입력하세요." required></textarea>
+            <textarea name="replyContent" id="" class="star-content" style="resize: none;" placeholder="입력하세요." required maxlength='35'></textarea>
+            <div class="textLimit">
+            <p class="textCount">0자</p> / <p class="textTotal">35자</p>
+            </div>
           </div>
         </div>
   
   		<div class="replys">
-
+        
         </div>
-        <button class="load">더보기</button>
+        <button class='load'>더보기</button>
 	     <div class="waste"></div>
 	     </div>
 
             <script>
+            
+            $('.star-content').keyup(function(e){
+            	let content = $(this).val();
+            	
+            	if(content.length === 0 || content === ""){
+            		$(".textCount").text("0자");
+            	}else{
+            		$(".textCount").text(content.length + "자");
+            	}
+            })
+            
+
             
             $(function(){
             	selectReply();
@@ -831,26 +1036,25 @@ footer .inner .info .copyright{
             	setInterval(selectReply,100000);
             })
             
-            
-            	function showReply(){
-	                $(".comment .comment-area").slice(0,3).show();
-	                $(".load").click(function(e){
-	                    e.preventDefault();
-	                    $(".comment .comment-area:hidden").slice(0,3).show();
-	                    if($(".comment .comment-area:hidden").length == 0){
-	                        $(".load").hide();
-	                    }
-	                })
-            		
-            	}
-            
+            function showReply(){
+                $(".comment .comment-area").slice(0,3).show();
+                $(".load").click(function(e){
+                    e.preventDefault();
+                    $(".comment .comment-area:hidden").slice(0,3).show();
+                    if($(".comment .comment-area:hidden").length == 0){
+                        $(".load").hide();
+                    }else{
+                        $(".load").show();
+                    }
+                })
+            }
 	        
             function likeStatus(){
             	$.ajax({
             		url:"likeStatus.pl",
             		data:{
             			bno:"<%= p.getPlaceNo() %>",
-            			userNo:$("input[type=hidden]").val(),
+            			userNo:$("#userNo").val(),
             		},
             		success:function(result){
             			if(result > 0){
@@ -880,15 +1084,33 @@ footer .inner .info .copyright{
             	})
             }
             <% if(loginUser != null){ %>
-	            function test(){
+	            function test(event){
 	            	if(confirm("정말로 신고하시겠습니까?")){
-	            		
+	            		$.ajax({
+	            			url:"reportComment.rc",
+	            			data:{
+	            				bno:"<%= p.getPlaceNo() %>",
+	            				comNo:$(event).next().val(),
+	            				userId:$(event).parent().prev().prev().text(),
+	            				
+	            			},
+	            			success:function(result){
+	            				if(result > 0){
+	            					alert("신고가 접수되었습니다.");
+	            				}else{
+	            					alert("신고에 실패하였습니다. 다시 시도해주세요.");
+	            				}
+	            			},
+	            			error:function(){
+	            				console.log("실패");
+	            			},
+	            		})
 	            	}
 		            		            		
 	            }
             <% }else{ %>
             	function test(){
-            		alert("로그인 후 이용가능합니다.")
+            		alert("로그인 후 이용가능합니다.");
             	}
             <% } %>
             
@@ -906,7 +1128,7 @@ footer .inner .info .copyright{
             				+  result[i].userId + 
             				"</div><div id='date'>" 
             				+  result[i].createDate +
-            				"</div><div id='edit'><span onclick='test();'>신고</span> </div><div id='score'><div class='material-icons score'>star</div> " 
+            				"</div><div id='edit'><span onclick='test(this);'>신고</span><input type='hidden' value='"+result[i].commentNo+"'> </div><div id='score'><div class='material-icons score'>star</div> " 
             				+ result[i].score + 
             				"</div></div><div class='text-area'><div id='review'>" 
             				+ result[i].comment + 
@@ -914,11 +1136,11 @@ footer .inner .info .copyright{
             			}
             			$(".replys").html(value);
             			showReply();
-            			if($(".comment-area:hidden").length == 0){
-    						$(".load").hide();
-    					}else{
-    						$(".load").show();						
-    					}
+            			 if($(".comment .comment-area:hidden").length == 0){
+                             $(".load").hide();
+                         }else{
+                             $(".load").show();
+                         }
             		},
             		error:function(){
             			console.log("통신 실패");
@@ -1082,10 +1304,9 @@ footer .inner .info .copyright{
 	      position: new naver.maps.LatLng(lat, lng),
 	      map: map,
 	      icon:{
-	    	  content:"<div style='border: 3px solid #8b7dbe;min-width:150px;height:32px; color:#333; text-align:center; border-radius:25px; background:#e4d4fa;padding:3px;line-height:35px;' >"+ '<%= p.getPlaceTitle() %>' +"<div style='border: 1px solid #8b7dbe;width: .1px;height: 45px;margin:auto;background:#8b7dbe'></div></div>",
-			  size: new naver.maps.Size(155, 95),
-	      }
-
+	            content:"<div style='border: 3px solid #8b7dbe;min-width:150px;height:32px; color:#333; text-align:center; border-radius:25px; background:#e4d4fa;padding:3px;line-height:35px;' >"+ '<%= p.getPlaceTitle() %>' +"<div style='border: 1px solid #8b7dbe;width: .1px;height: 45px;margin:auto;background:#8b7dbe'></div></div>",
+	           size: new naver.maps.Size(155, 95),
+	         }
 	      
 	    });
 	    
@@ -1128,8 +1349,13 @@ footer .inner .info .copyright{
 	
 	  // Call the function to show the user's current location when the page loads
 	  showCurrentLocation();
+	  
+	  
+
 	
+	  
+	   
 
 		</script>
 </body>
-</html>
+</html> 

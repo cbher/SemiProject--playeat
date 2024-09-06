@@ -67,6 +67,7 @@
     margin: auto;
     width: 140px;
     height: 130px;
+    color: inherit;
 }
 
 .badge img{
@@ -111,7 +112,6 @@
 	       <c:forEach var="play" items="${sessionScope.recentPlaces}">
 	        <a href="/semi/detail.pl?bno=${play.placeNo}" class="place">
 	          <img src="${pageContext.request.contextPath}/${play.titleImg}" alt="${play.placeTitle} 이미지">
-			
 	            <div class="badge-title">
 	                <h4>${play.placeTitle}</h4>
 	            </div>
@@ -119,7 +119,7 @@
 	    </c:forEach>
 	    
     </div>
-	
+
 	<script>
 	let quickMenu = $('.badge');
 	const DURATION = 900; // 이동 애니메이션 시간
@@ -131,7 +131,7 @@
 	    // 화면의 중앙 위치를 계산
 	    let point = ($(window).scrollTop() + (windowHeight / 2)) - (quickMenuHeight / 2);
 
-	    point -= 100;
+	    point -= 30;
 
 	    quickMenu.stop().animate({ top: point }, DURATION);
 	}

@@ -27,8 +27,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>PLAEAT</title>
 
+<link rel="icon" href="./favicon.png">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet" />
 
@@ -528,7 +529,8 @@ footer .inner .info .copyright {
 				<div class="swiper-wrapper">
 					<% for(Restaurant restaurant : rlist) { %>
 					<div class="swiper-slide">
-						<a href=""> <img src="<%= restaurant.getTitleImg()%>" alt="" />
+						<a href="<%=contextPath %>/restaurantDetail.pl?placeNo=<%=restaurant.getPlaceNo() %>"> 
+							<img src="<%= restaurant.getTitleImg()%>" alt="" />
 						</a>
 						<p><%= restaurant.getPlaceTitle()%></p>
 					</div>

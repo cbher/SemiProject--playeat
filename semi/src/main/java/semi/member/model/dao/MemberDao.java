@@ -35,7 +35,7 @@ private Properties prop = new Properties();
 				String sql = prop.getProperty("insertMember");
 				
 				try {
-					pstmt = conn.prepareStatement(sql); // 미완성된 쿼리
+					pstmt = conn.prepareStatement(sql); // 誘몄셿�꽦�맂 荑쇰━
 					
 					pstmt.setString(1, m.getUserId());
 					pstmt.setString(2, m.getUserPwd());
@@ -56,7 +56,7 @@ private Properties prop = new Properties();
 	}
 	
 	public int idCheck(Connection conn, String checkId) {
-		// select문 => ResultSet (한개 숫자) => int
+		// select臾� => ResultSet (�븳媛� �닽�옄) => int
 		int count = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -110,7 +110,7 @@ private Properties prop = new Properties();
 
 
 	public Member loginMember(Connection conn, String userId, String userPwd) {
-		// select문 => ResultSet 객체 (한행) => Member 객체
+		// select臾� => ResultSet 媛앹껜 (�븳�뻾) => Member 媛앹껜
 		Member m = null;
 		
 		PreparedStatement pstmt = null;
@@ -118,12 +118,12 @@ private Properties prop = new Properties();
 		
 		String sql = prop.getProperty("loginMember");
 		try {
-			pstmt = conn.prepareStatement(sql); // 미완성된 sql문
+			pstmt = conn.prepareStatement(sql); // 誘몄셿�꽦�맂 sql臾�
 			
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPwd);
 			
-			rset = pstmt.executeQuery(); // 조회된 결과가 있다면 한행 | 조회돈 결과가 없다면 아무것도 안담김
+			rset = pstmt.executeQuery(); // 議고쉶�맂 寃곌낵媛� �엳�떎硫� �븳�뻾 | 議고쉶�룉 寃곌낵媛� �뾾�떎硫� �븘臾닿쾬�룄 �븞�떞源�
 			
 			if(rset.next()) {
 				m = new Member(rset.getInt("user_no"),
@@ -288,7 +288,6 @@ int result = 0;
 					       rset.getInt("report_count"));
 			}
 			
-			//System.out.println(m);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -300,8 +299,7 @@ int result = 0;
 	}
 
 	public int changePwd(Connection conn, String userId, String userPwd) {
-		//System.out.println(userPwd);
-		//System.out.println(userId);
+		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -313,7 +311,7 @@ int result = 0;
 			pstmt.setString(2, userId);
 			
 			result = pstmt.executeUpdate();
-			System.out.println(result);
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

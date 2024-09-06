@@ -54,28 +54,7 @@
         </div>
     </header>
 
-<div class="badge">
-
-        <div class="text">최근 본 장소</div>
-        <a href="javascript:void(0)" class="place">
-          <img src="./resourse/음식.jpg" alt="">
-          <div class="badge-title">
-            <h2>여긴어디야</h2>
-          </div>
-        </a>
-        <a href="javascript:void(0)" class="place">
-          <img src="./resourse/음식2.jpg" alt="">
-          <div class="badge-title">
-            <h2>여긴어디야</h2>
-          </div>
-        </a>
-        <a href="javascript:void(0)" class="place">
-          <img src="./resourse/음식2.jpg" alt="">
-          <div class="badge-title">
-            <h2>여긴어디야</h2>
-          </div>
-        </a>
-    </div>
+	<%@ include file="../common/badge.jsp" %>
 
     <div class="main-content">
 
@@ -170,7 +149,7 @@
 
     <div class="search-area">
 
-        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v"></script>
+        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq"></script>
 		<div id="map" style="width:90%;height:400px; margin: 20px auto;"></div>
 		
 		
@@ -201,28 +180,9 @@
     </div>
     </div>
     
-    <button id="top-btn"> ▲ <br/> TOP </button >
-
-        <footer class="footer">
-            <div class="inner">
-              <ul class="menu">
-                <li><a href="">개인정보처리방침</a></li>
-                <li><a href=""> 이용약관 </a></li>
-                <li><a href="">위치정보이용약관</a></li>
-                <li><a href="">원클래스약관</a></li>            
-              </ul>
-          
-              <div class="info3">
-                <span>kh H반 4조</span>
-                <span>semi4jyo@gmail.com</span>
-                <span>개인정보 책임자 4조</span>
-                    
-                <p class="copyright">
-                  &copy; <span id="this-year"></span> kh정보교육원 H반 4조 세미프로젝트
-                </p>
-              </div>
-            </div>
-        </footer>
+    <%@include file="../common/top.jsp" %>
+	<%@ include file="../common/footer.jsp" %>
+    
 
 		<script>
 		
@@ -241,7 +201,7 @@
 						            "<table>"+
 						                "<tr>"+
 						                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
-						                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+						                        "<a href='"+"<%= contextPath %>"+"/restaurantDetail.pl?placeNo=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
 						                    "</td>"+
 						                    "<td rowspan='3' style='width: 15px;'></td>"+
 						                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].placeTitle+"</h2></td>"+
@@ -285,7 +245,7 @@
 						            "<table>"+
 						                "<tr>"+
 						                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
-						                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+						                        "<a href='"+"<%= contextPath %>"+"/restaurantDetail.pl?placeNo=" + result[i].placeNo+ "'><img src='"+result[i].titleImg+"'></a>"+
 						                    "</td>"+
 						                    "<td rowspan='3' style='width: 15px;'></td>"+
 						                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].placeTitle+"</h2></td>"+
@@ -311,7 +271,7 @@
 				error:function(){
 					console.log("실패")
 				}
-			})
+			});
 			
 		}
 		
@@ -370,7 +330,7 @@
 			            "<table>"+
 			                "<tr>"+
 			                    "<td rowspan='3' style='width: 150px; height: 150px;'>"+
-			                        "<a href='"+"<%= contextPath %>"+"/detail.pl?bno=" + result[i].oneNo+ "'><img src='"+result[i].titleImg+"'></a>"+
+			                        "<a href='"+"<%= contextPath %>"+"/onedayDetail.on?oneNo=" + result[i].oneNo+ "'><img src='"+result[i].titleImg+"'></a>"+
 			                    "</td>"+
 			                    "<td rowspan='3' style='width: 15px;'></td>"+
 			                    "<td colspan='2' style='height: 40px;' id='search-title'><h2>"+result[i].oneTitle+"</h2></td>"+
@@ -754,6 +714,8 @@
 	        showCurrentLocation();
 	    });
 			
+
+
 
 		</script>
 

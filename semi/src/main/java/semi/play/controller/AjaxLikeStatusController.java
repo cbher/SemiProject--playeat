@@ -30,13 +30,11 @@ public class AjaxLikeStatusController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(request.getParameter("userNo") != null) {
-			
 			int placeNo = Integer.parseInt(request.getParameter("bno"));
 			int userNo = Integer.parseInt(request.getParameter("userNo"));
 			
 			int likeCount = new PlayService().selectLikeCount(placeNo, userNo);
 			response.getWriter().print(likeCount);
-			
 		}else {
 			response.getWriter().print(0);
 		}

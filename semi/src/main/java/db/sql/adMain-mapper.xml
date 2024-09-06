@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="adoneList">
+select count(1) as count
+from onedayclass
+where one_status = 'Y'
+
+	</entry>
+	
+	<entry key="admemberList">
+select count(1) as count
+from Member
+where status = 'Y'
+
+	</entry>
+	
+	<entry key="adreportList">
+select count(1) as count
+from report
+where report_status = 'Y'
+
+	</entry>
+	
+	<entry key="adquestionsList">
+select count(1) as count
+from inquire
+where status = 'Y'
+
+	</entry>
+</properties>

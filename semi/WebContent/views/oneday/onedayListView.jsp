@@ -238,6 +238,7 @@ select{
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="../common/badge.jsp" %>
     <section class="main-slide">
         <div class="inner">
             <div class="title">인기있는 클래스</div>

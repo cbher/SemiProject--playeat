@@ -43,7 +43,9 @@
 	<h2 align="center">공지사항</h2>
 	 <br>
 	 <%if(loginUser != null && loginUser.getUserId().equals("admin")) {%>
+	 <div class="inputNotice">
     <a  class="button" href="<%=contextPath %>/createIN.no">작성하기</a>
+    </div>
     <br>
     <%} %>
     <table class="notice-view" align="center" >

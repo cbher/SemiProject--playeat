@@ -66,6 +66,15 @@
     border-bottom: 1px solid  #8b7dbe;
     cursor: pointer;
 }
+.inner .notice-area .inputNotice {
+	display:block;
+}
+.notice-area .inputNotice .button{
+	position: absolute;
+    right: 560px;
+    top: 250px;
+}
+
 
 
 

@@ -3,7 +3,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	ArrayList<Play> list = (ArrayList<Play>)request.getAttribute("list");
+	ArrayList<ArrayList> list = (ArrayList<ArrayList>)request.getAttribute("list");
+	ArrayList<Play> listSeoul = list.get(0);
+	// 글번호, 글제목, 주소, 전화번호, 별점, 대표이미지경로
+	ArrayList<Play> listGyunggi = list.get(1);
+	ArrayList<Play> listIncheon = list.get(2);
+	ArrayList<Play> listKangwon = list.get(3);
+	ArrayList<Play> listChoongchung = list.get(4);
+	ArrayList<Play> listJulla = list.get(5);
+	ArrayList<Play> listGyungsang = list.get(6);
+	ArrayList<Play> listJeju = list.get(7);
 %>
 <!DOCTYPE html>
 <html>
@@ -474,6 +483,7 @@ footer .inner .info .copyright{
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
+	<%@ include file="../common/badge.jsp" %>
 		    <section class="random">
         <div class="inner">
             <div class="title">
@@ -497,7 +507,7 @@ footer .inner .info .copyright{
             <div class="title">서울 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                <% for(Play p : list){ %>
+                <% for(Play p : listSeoul){ %>
                     <div class="swiper-slide">
                         <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
                             <img src="<%= p.getTitleImg() %>" alt="">
@@ -524,12 +534,12 @@ footer .inner .info .copyright{
             <div class="title">경기도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                <% for(int i = 0; i < list.size();i++ ){ %>
+                <% for(Play p : listGyunggi ){ %>
                     <div class="swiper-slide">
-                        <a href="">
-                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
+                        <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
+                            <img src="<%= p.getTitleImg() %>" alt="">
                         </a>
-                        <p><%= list.get(i).getPlaceTitle() %></p>
+                        <p><%= p.getPlaceTitle() %></p>
                     </div>
                 <% } %>
                     
@@ -551,12 +561,12 @@ footer .inner .info .copyright{
             <div class="title">인천 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                <% for(int i = 0; i < list.size();i++ ){ %>
+                <% for(Play p: listIncheon ){ %>
                     <div class="swiper-slide">
-                        <a href="">
-                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
+                        <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
+                            <img src="<%= p.getTitleImg() %>" alt="">
                         </a>
-                        <p><%= list.get(i).getPlaceTitle() %></p>
+                        <p><%= p.getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -576,12 +586,12 @@ footer .inner .info .copyright{
             <div class="title">강원도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                <% for(int i = 0; i < list.size();i++ ){ %>
+                <% for(Play p : listKangwon){ %>
                     <div class="swiper-slide">
-                        <a href="">
-                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
+                        <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
+                            <img src="<%= p.getTitleImg() %>" alt="">
                         </a>
-                        <p><%= list.get(i).getPlaceTitle() %></p>
+                        <p><%= p.getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -601,12 +611,12 @@ footer .inner .info .copyright{
             <div class="title">충청도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                <% for(int i = 0; i < list.size();i++ ){ %>
+                <% for(Play p :listChoongchung ){ %>
                     <div class="swiper-slide">
-                        <a href="">
-                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
+                        <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
+                            <img src="<%= p.getTitleImg() %>" alt="">
                         </a>
-                        <p><%= list.get(i).getPlaceTitle() %></p>
+                        <p><%= p.getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -626,12 +636,12 @@ footer .inner .info .copyright{
             <div class="title">전라도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                <% for(int i = 0; i < list.size();i++ ){ %>
+                <% for(Play p: listJulla ){ %>
                     <div class="swiper-slide">
-                        <a href="">
-                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
+                        <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
+                            <img src="<%= p.getTitleImg() %>" alt="">
                         </a>
-                        <p><%= list.get(i).getPlaceTitle() %></p>
+                        <p><%= p.getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -651,12 +661,12 @@ footer .inner .info .copyright{
             <div class="title">경상도 놀거리</div>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                <% for(int i = 0; i < list.size();i++ ){ %>
+                <% for(Play p :listGyungsang ){ %>
                     <div class="swiper-slide">
-                        <a href="">
-                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
+                        <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
+                            <img src="<%= p.getTitleImg() %>" alt="">
                         </a>
-                        <p><%= list.get(i).getPlaceTitle() %></p>
+                        <p><%= p.getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -676,12 +686,12 @@ footer .inner .info .copyright{
             <div class="title">제주도 놀거리</div>
             <div class="swiper-container">
                <div class="swiper-wrapper">
-                <% for(int i = 0; i < list.size();i++ ){ %>
+                <% for(Play p :listJeju ){ %>
                     <div class="swiper-slide">
-                        <a href="">
-                            <img src="<%= list.get(i).getTitleImg() %>" alt="">
+                        <a href="<%= contextPath %>/detail.pl?bno=<%= p.getPlaceNo() %>">
+                            <img src="<%= p.getTitleImg() %>" alt="">
                         </a>
-                        <p><%= list.get(i).getPlaceTitle() %></p>
+                        <p><%= p.getPlaceTitle() %></p>
                     </div>
                 <% } %>
                 </div>
@@ -697,35 +707,29 @@ footer .inner .info .copyright{
         </div>
     </section>
     
-     <footer>
-        <div class="inner">
-          <ul class="menu">
-            <li><a href="">개인정보처리방침</a></li>
-            <li><a href=""> 이용약관 </a></li>
-            <li><a href="">위치정보이용약관</a></li>
-            <li><a href="">원클래스약관</a></li>
-          
-          </ul>
-      
-          <div class="info">
-            <span>kh H반 4조</span>
-            <span>semi4jyo@gmail.com</span>
-            <span>개인정보 책임자 4조</span>
-      
-      
-            <p class="copyright">
-              &copy; <span id="this-year"></span> kh정보교육원 H반 4조 세미프로젝트
-            </p>
-          </div>
-        </div>
-      </footer>
-      
+<footer>
+      <div class="inner">
+        <ul class="menu">
+          <li><a href="">개인정보처리방침</a></li>
+          <li><a href=""> 이용약관 </a></li>
+          <li><a href="">위치정보이용약관</a></li>
+          <li><a href="">원클래스약관</a></li>
+        </ul>
 
-      <script>
-        // footer this-year (현재년도 표시)
-        const thisYear = document.querySelector("#this-year");
-        thisYear.textContent = new Date().getFullYear();
-      </script>
+        <div class="info">
+          <span>kh H반 4조</span>
+          <span>semi4jyo@gmail.com</span>
+          <span>개인정보 책임자 4조</span>
+
+          <p class="copyright">
+            &copy; <span id="this-year"></span> kh정보교육원 H반 4조
+            세미프로젝트
+          </p>
+        </div>
+      </div>
+    </footer>
+      <%@ include file="../common/top.jsp" %>
+
     
     <script defer>
 
@@ -971,5 +975,16 @@ footer .inner .info .copyright{
     </script>
 	
 	
+
+    <script>
+      // footer this-year (현재년도 표시)
+      const thisYear = document.querySelector("#this-year");
+      thisYear.textContent = new Date().getFullYear();
+    </script>
+	
+	
+	
+	
 </body>
+
 </html>

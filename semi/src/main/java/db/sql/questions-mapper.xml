@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="QuestionsList"> 
+select 
+inquire_no,inquire_title,inquire_content,USER_ID,create_date,a.status
+from inquire a
+join MEMBER on (inquire_Writer  = user_no)
+order by 1 desc
+
+
+</entry>
+<entry key="QuestionsReadyList"> 
+select 
+inquire_no,inquire_title,inquire_content,USER_ID,create_date,a.status
+from inquire a
+join MEMBER on (inquire_Writer  = user_no)
+where a.status = 'Y'
+order by 1 desc
+
+</entry>
+<entry key="QuestionsClearList"> 
+select 
+inquire_no,inquire_title,inquire_content,USER_ID,create_date,a.status
+from inquire a
+join MEMBER on (inquire_Writer  = user_no)
+where a.status = 'N'
+order by 1 desc
+</entry>
+<entry key="QuestionDetail"> 
+select
+inquire_no,inquire_title,inquire_content,USER_ID,create_date,a.status,answer
+from inquire  a
+join MEMBER on (inquire_Writer  = user_no)
+where INQUIRE_NO = ?
+
+</entry>
+<entry key="QuestionsUpdate"> 
+update inquire
+SET STATUS = 'N',ANSWER=?
+where inquire_no=?
+
+</entry>
+
+<entry key="QuestionAt"> 
+	select 
+		file_no, 
+		origin_name, 
+		change_name,
+		file_path,
+		inquire_no
+	from 
+		attechment
+	where 
+		inquire_no = ?
+
+
+</entry>
+
+
+
+</properties>

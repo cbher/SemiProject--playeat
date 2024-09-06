@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+
+<entry key="adPlaceList"> 
+
+select
+	 p_no,
+	 p_title,
+	 address,
+	 p_call,
+	 p_status,
+	 tem_cate_no,
+	 p_score,
+	 location_no,
+	 p_select_num,
+	 rcategory_no
+from place
+
+</entry>
+
+
+<entry key="adPlaceRestList"> 
+
+select
+	 p_no,
+	 p_title,
+	 address,
+	 p_call,
+	 p_status,
+	 tem_cate_no,
+	 p_score,
+	 location_no,
+	 p_select_num,
+	 rcategory_no
+from place
+where p_select_num = 1
+
+</entry>
+
+
+<entry key="adPlacePlayList"> 
+
+select
+	 p_no,
+	 p_title,
+	 address,
+	 p_call,
+	 p_status,
+	 tem_cate_no,
+	 p_score,
+	 location_no,
+	 p_select_num,
+	 rcategory_no
+from place
+where p_select_num = 2
+
+</entry>
+
+<entry key="adplaceDetial"> 
+
+	select 
+		p_no, 
+		p_title,
+		address,
+		p_call,
+		p_status,
+		tem_cate_name,
+		p_score,
+		location_name,
+		p_select_num,
+        businesstime,
+        rcategory_name,
+        a.tem_cate_no,
+        a.location_no,
+        a.rcategory_no
+	from 
+		place a
+	join 
+		thema_category b on a.tem_cate_no = b.tem_cate_no
+	join 
+		area_category c on a.location_no = c.location_no
+    left join r_category d on a.rcategory_no = d.rcategory_no
+	where	p_no = ?
+</entry>
+
+
+<entry key="insertPlace"> 
+
+	insert into 
+		place(
+				p_no,
+				p_title,
+				address,
+				p_call,
+				tem_cate_no,
+				location_no,
+				p_select_num,
+				rcategory_no,
+				businesstime
+			) 
+			values 
+			(
+				SEQ_PLACE.nextval,
+				?,
+				?,
+				?,
+				?,
+				?,
+				?,
+				?,
+				?)
+
+</entry>
+
+<entry key="insertPlaceat"> 
+
+	insert 
+		into attechment 
+		(
+			file_no, 
+			origin_name, 
+			change_name, 
+			file_path, 
+			file_level, 
+			place_no
+		) 
+		values 
+		(
+			seq_attachment.nextval, 
+			?,
+			?,
+			?,
+			?,
+			SEQ_PLACE.currval)
+
+</entry>
+
+<entry key="adplaceDetialat"> 
+
+	select 
+	file_no,
+		origin_name, 
+		change_name, 
+		file_path, 
+		file_level
+	from 
+		attechment
+	where 
+		place_no = ?
+
+</entry>
+
+<entry key="adPlaceDelete"> 
+
+delete from place where p_no=?
+
+
+</entry>
+<entry key="adPlaceStop"> 
+
+update place set p_status ='N' where p_no= ?
+
+</entry>
+
+
+<entry key="updatePlace"> 
+
+	update 
+		place
+	set			
+			p_title = ?,
+			address = ?,
+			p_call = ?,
+			tem_cate_no = ?,
+			location_no = ?,
+			p_select_num = ?,
+			rcategory_no = ?,
+			businesstime = ?
+		 
+		where p_no = ?
+
+</entry>
+
+<entry key="updatePlaceat"> 
+
+insert into 
+	 attechment(File_no,origin_name,change_name,file_path,file_level,PLACE_NO) values(seq_attachment.NEXTVAL,?,?,?,?,?)
+    
+
+
+</entry>
+
+
+<entry key="updatedeleteat"> 
+
+delete from attechment where place_no = ?
+
+
+</entry>
+
+
+
+
+
+
+
+
+</properties>
