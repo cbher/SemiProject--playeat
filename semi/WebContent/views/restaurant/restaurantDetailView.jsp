@@ -94,7 +94,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v&submodules=geocoder"></script>
+	<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq&submodules=geocoder"></script>
     <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -220,7 +220,7 @@ pageEncoding="UTF-8"%>
           </tr>
         </table>
       </div>
-      <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v"></script>
+      <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq"></script>
 	  <div id="map" style="width:380px;height:322px; margin-top: 60px;"></div>
     </div>
 	</div>
@@ -307,8 +307,9 @@ pageEncoding="UTF-8"%>
         </tr>
       </table>
 		<% } %>
-
-      <button class="add-list">검색 결과 더보기</button>
+      <% if (!r.isEmpty()) { %>
+       <button class="add-list">검색 결과 더보기</button>
+   	  <% } %>
     </div>
 
     <button id="top-btn">
@@ -438,13 +439,14 @@ pageEncoding="UTF-8"%>
       },
     });
 
+    // 더보기 버튼
     $(function () {
       $(".review .review-content").slice(0, 4).show(); // select the first 4
       $(".add-list").click(function (e) {
         // click event for load more
         e.preventDefault();
         $(".review .review-content:hidden").slice(0, 4).show(); // select next 4 hidden divs and show them
-        if ($(".review-content:hidden").length == 0) {
+        if ($(".review .review-content:hidden").length == 0) {
           // check if any hidden divs still exist
           // alert("No more divs"); // alert if there are none left
           $(".add-list").hide();
