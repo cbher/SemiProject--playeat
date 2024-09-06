@@ -192,6 +192,8 @@ public class OnedayDao {
 	            comment.setCreateDate(rset.getDate("CREATE_DATE"));
 	            comment.setUserName(rset.getString("USER_NAME"));
 	            comment.setNickName(rset.getString("NICKNAME"));
+	            comment.setUserNo(rset.getInt("USER_NO"));
+	            comment.setComNo(rset.getInt("COM_NO"));
 	            commentList.add(comment);
 	        }
 	    } catch (SQLException e) {

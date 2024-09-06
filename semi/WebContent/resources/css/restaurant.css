@@ -142,6 +142,7 @@ div.info-box {
   display: flex;
   padding-bottom: 20px;
   padding-left: 20px;
+  align-items: center;
 }
 
 .info table th {
@@ -463,6 +464,15 @@ h3 {
 
 .review #profile-score {
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review #profile-score .material-icons,.score {
+  color: #e4d4fa;
+  border: none;
+  margin: 0 5px;
 }
 
 .review #profile-date {

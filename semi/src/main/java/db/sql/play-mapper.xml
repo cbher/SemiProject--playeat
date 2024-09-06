@@ -152,4 +152,11 @@
 	   AND P_STATUS = 'Y'
 	   AND FILE_LEVEL = 1
  	</entry>
+ 	
+ 	<entry key="scoreAvg">
+ 		SELECT ROUND(AVG(SCORE),1) "AVG"
+ 		  FROM REVIEW
+ 		 WHERE PLAY_NO = ?
+ 		   AND STATUS = 'Y'
+ 	</entry>
 </properties>

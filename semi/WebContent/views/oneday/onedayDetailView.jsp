@@ -326,8 +326,7 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
               <div id="nickname"><%= comment.getUserName() %></div>
               <div id="date"><%= comment.getCreateDate() %></div>
               <div id="edit">
-                <a href="">수정</a> /
-                <a href="">삭제</a>
+                <input type="submit" onclick='report(<%= c.get(i).getUserNo() %>, <%= c.get(i).getComNo() %>);' value="리뷰신고" id="report-btn" />
               </div>
               <div id="score"><div class="material-icons">star</div><div><%= comment.getScore() %></div></div>
             </div>
@@ -704,6 +703,33 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
        },
      ],
    });
+  
+     <% if(loginUser != null){ %>
+     function report(reviewerUserNo, commentNo) {
+         if (confirm("정말로 신고하시겠습니까?")) {
+             $.ajax({
+                 url: "reportComment.on",
+                 type: "POST",
+                 data: { userNo: reviewerUserNo,
+                	 	 comNo: commentNo},
+                 success: function(response) {
+                     if (response.trim() === "success") {
+                         alert("신고가 접수되었습니다.");
+                     } else {
+                         alert("신고 접수에 실패했습니다. 다시 시도해주세요.");
+                     }
+                 },
+                 error: function() {
+                     alert("오류가 발생했습니다. 다시 시도해주세요.");
+                 }
+             });
+         }
+ 	    }
+ 	<% } else { %>
+ 	    function report() {
+ 	        alert("로그인 후 이용 가능합니다.");
+ 	    }
+ 	<% } %>
        
         </script>
       </body>

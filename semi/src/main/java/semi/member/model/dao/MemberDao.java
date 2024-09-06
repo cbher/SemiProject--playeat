@@ -324,4 +324,64 @@ int result = 0;
 		return result;
 	}
 
+	public int incrementReportCount(Connection conn, int userNo) {
+		int result = 0;
+	    PreparedStatement pstmt = null;
+	    String sql = prop.getProperty("incrementReportCount");
+	    
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, userNo);
+	        result = pstmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(pstmt);
+	    }
+	    
+	    return result;
+	}
+
+	public int insertReport(Connection conn, int reviewNo, int userNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			pstmt.setInt(2, userNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertReport2(Connection conn, int comNo, int userNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReport");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, comNo);
+			pstmt.setInt(2, userNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+
 }

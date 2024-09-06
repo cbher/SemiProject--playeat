@@ -108,6 +108,14 @@ public class PlayService {
 		return plist;
 		
 	}
+
+	public double scoreAvg(int placeNo) {
+		Connection conn = getConnection();
+		double score = new PlayDao().scoreAvg(conn, placeNo);
+		commit(conn);
+		close(conn);
+		return score;
+	}
 	
 	
 }

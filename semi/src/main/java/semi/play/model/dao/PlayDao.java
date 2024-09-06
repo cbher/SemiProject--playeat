@@ -349,4 +349,35 @@ public class PlayDao {
 		}
 		return plist;
 	}
+
+	public double scoreAvg(Connection conn, int placeNo) {
+		double score = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("scoreAvg");
+		String updateScore = prop.getProperty("updateScore");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, placeNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				score = rset.getDouble("avg");
+				
+				pstmt = conn.prepareStatement(updateScore);
+				pstmt.setDouble(1, score);
+				pstmt.setInt(2, placeNo);
+				
+				int result = pstmt.executeUpdate();
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return score;
+	}
 }
