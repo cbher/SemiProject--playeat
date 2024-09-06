@@ -38,7 +38,7 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
           rel="stylesheet"
         />
 		
-		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v&submodules=geocoder"></script>
+		<script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq&submodules=geocoder"></script>
         <script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -233,7 +233,7 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
               </tr>
             </table>
           </div>
-          <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v"></script>
+          <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq"></script>
 			<div id="map" style="width:380px;height:322px; margin-top: 60px;"></div>
 		</div>
         </div>
