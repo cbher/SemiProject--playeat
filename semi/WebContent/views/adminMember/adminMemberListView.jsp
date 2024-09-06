@@ -110,7 +110,7 @@ table td{text-align: center;}
             <%if(list.get(a).getStatus().equals("Y")) {%>
             <td  >회원</td>
             <%}else{ %>
-             <td  >탈퇴</td>
+             <td  >정지</td>
              <%} %>
             <td   ><%=list.get(a).getReportCount() %></td>
            

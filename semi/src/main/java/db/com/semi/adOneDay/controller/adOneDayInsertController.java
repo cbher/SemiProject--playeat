@@ -17,6 +17,7 @@ import com.oreilly.servlet.MultipartRequest;
 import db.com.semi.adOneDay.model.service.adOneDayService;
 import db.com.semi.adOneDay.model.vo.Attechment;
 import db.com.semi.adOneDay.model.vo.adOneDayClass;
+import db.com.semi.adminPlace.model.service.adPlaceService;
 import semi.common.MyFileRenamePolicy;
 
 
@@ -64,7 +65,6 @@ public class adOneDayInsertController extends HttpServlet {
 				a.setPhone(multipartRequest.getParameter("phone"));
 				
 				
-			
 				ArrayList<Attechment> list = new ArrayList<Attechment>();
 				
 				
@@ -73,10 +73,10 @@ public class adOneDayInsertController extends HttpServlet {
 					
 					if(multipartRequest.getOriginalFileName(key) !=null) {
 						Attechment at = new Attechment();
-						
 						at.setOriginName(multipartRequest.getOriginalFileName(key));
 						at.setChangeName(multipartRequest.getFilesystemName(key));
-						at.setFilePath("resources/oneday_upfiles/");
+						at.setFilePath("resources/place_upfiles/");
+						
 						if(i == 1) {// 대표이미지일경우
 							at.setFileLevel(1);
 						}else {//상세이미지일경우
@@ -84,9 +84,11 @@ public class adOneDayInsertController extends HttpServlet {
 						}
 						list.add(at);
 					}
-				
 				}
 				int result = new adOneDayService().adonedayInsert(a,list);
+			
+				
+			
 				if(result>0) {
 					HttpSession session = request.getSession();
 					session.setAttribute("adAlertMsg", "성공적으로 등록되었습니다");

@@ -173,8 +173,8 @@ table *{
             <td rowspan="2" colspan="2"><%=list.getIntroduce() %></td>
         </tr>
         <tr>
-            <th  height="50">탈퇴여부</th>
-            <td>&nbsp; <%if(list.getStatus().equals("Y")){%>회원 <%}else{ %>탈퇴 <%} %></td>
+            <th  height="50">상태</th>
+            <td>&nbsp; <%if(list.getStatus().equals("Y")){%>회원 <%}else{ %>정지 <%} %></td>
          
         </tr>
 

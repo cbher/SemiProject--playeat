@@ -104,7 +104,7 @@ table td{text-align: center;}
 	<%for(int a = startRow -1  ; a < endRow ; a++){ %>
 	<tr>
 		<td width="70" height="30"><%= list.get(a).getInquireNo() %></td>
-		<td width="350"><%= list.get(a).getInquireContent() %></td>
+		<td width="350"><%= list.get(a).getInquireTitle() %></td>
 		<td width="90"><%=list.get(a).getInquireWirther() %></td>
 		<td width="90"><%=list.get(a).getCreateDate() %></td>
 		

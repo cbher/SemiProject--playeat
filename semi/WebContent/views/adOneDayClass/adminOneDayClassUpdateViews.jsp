@@ -176,7 +176,10 @@ adOneDayClass list = (adOneDayClass)request.getAttribute("list");
                   <div>
                     <img
                       height="300px"
+                      <%if(at.size()>0){ %>
                       src="<%=contextPath %>/<%=at.get(0).getFilePath()+at.get(0).getChangeName() %>"
+                      <%}else {%>src=""
+                      <%} %>
                       alt=""
                       id="titleImg"
                       onclick="chooseFile(1)"
@@ -195,7 +198,7 @@ adOneDayClass list = (adOneDayClass)request.getAttribute("list");
                       box-sizing: border-box;
                     "
                   >
-                    <%if(at.size()<1){ %>
+                    <%if(at.size()<2){ %>
                     <img
                       src=""
                       alt=""
@@ -234,85 +237,9 @@ adOneDayClass list = (adOneDayClass)request.getAttribute("list");
                     />
                     
                  
-                    <%}else if(at.size()<2){ %>
-                        <img
-             			 src="<%=contextPath %>/<%=at.get(1).getFilePath()+at.get(1).getChangeName() %>"
-
-                      alt=""
-                      style="
-                        border: 1px solid black;
-                        width: 33%;
-                        float: left;
-                        height: 100%;
-                      "
-                      id="contentImg1"
-                      onclick="chooseFile(2)"
-                    />
-                         <img
-                      src=""
-                      alt=""
-                      style="
-                        border: 1px solid black;
-                        width: 33%;
-                        float: left;
-                        height: 100%;
-                      "
-                      id="contentImg2"
-                      onclick="chooseFile(3)"
-                    />
-                         <img
-                      src=""
-                      alt=""
-                      style="
-                        border: 1px solid black;
-                        width: 33%;
-                        float: left;
-                        height: 100%;
-                      "
-                      id="contentImg3"
-                      onclick="chooseFile(4)"
-                          />
-           
-                    <%}else if(at.size()<3){ %>
-                      <img
-             			 src="<%=contextPath %>/<%=at.get(1).getFilePath()+at.get(1).getChangeName() %>"
-
-                      alt=""
-                      style="
-                        border: 1px solid black;
-                        width: 33%;
-                        float: left;
-                        height: 100%;
-                      "
-                      id="contentImg1"
-                      onclick="chooseFile(2)"
-                    />
-                         <img
-                      src="<%=contextPath %>/<%=at.get(2).getFilePath()+at.get(2).getChangeName() %>"
-                      alt=""
-                      style="
-                        border: 1px solid black;
-                        width: 33%;
-                        float: left;
-                        height: 100%;
-                      "
-                      id="contentImg2"
-                      onclick="chooseFile(3)"
-                    />
-                         <img
-                      src=""
-                      alt=""
-                      style="
-                        border: 1px solid black;
-                        width: 33%;
-                        float: left;
-                        height: 100%;
-                      "
-                      id="contentImg3"
-                      onclick="chooseFile(4)"
-                          />
-                    <%} %>
+               
                        
+                       <%} %>
                   </div>
                 </td>
               </tr>

@@ -118,7 +118,10 @@ adOneDayClass list = (adOneDayClass)request.getAttribute("list");
                   <div>
                     <img
                       height="300px"
+                          <%if(at.size()>0){ %>
                       src="<%=contextPath %>/<%=at.get(0).getFilePath()+at.get(0).getChangeName() %>"
+                      <%}else {%>src=""
+                      <%} %>
                       alt=""
                       id="titleImg"
                       onclick="chooseFile(1)"

@@ -9,6 +9,20 @@ public class Attechment {
 	private String filePath;
 	private int fileLevel;
 	private int aNo;
+	private int refNo;
+	public Attechment(int fileNo, String originName, String changeName, String filePath, int fileLevel, int aNo,
+			int refNo) {
+		super();
+		this.fileNo = fileNo;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.filePath = filePath;
+		this.fileLevel = fileLevel;
+		this.aNo = aNo;
+		this.refNo = refNo;
+	}
+
+
 	public Attechment(int fileNo, String originName, String changeName, String filePath, int fileLevel, int aNo) {
 		super();
 		this.fileNo = fileNo;
@@ -28,6 +42,7 @@ public class Attechment {
 		this.filePath = filePath;
 		this.fileLevel = fileLevel;
 	}
+
 
 
 	public int getFileNo() {
@@ -66,13 +81,38 @@ public class Attechment {
 	public void setAno(int aNo) {
 		this.aNo = aNo;
 	}
+
+
+	public int getaNo() {
+		return aNo;
+	}
+
+
+	public void setaNo(int aNo) {
+		this.aNo = aNo;
+	}
+
+
+	public int getRefNo() {
+		return refNo;
+	}
+
+
+	public void setRefNo(int refNo) {
+		this.refNo = refNo;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Attechment [fileNo=" + fileNo + ", originName=" + originName + ", changeName=" + changeName
-				+ ", filePath=" + filePath + ", fileLevel=" + fileLevel + ", aNo=" + aNo + "]";
+				+ ", filePath=" + filePath + ", fileLevel=" + fileLevel + ", aNo=" + aNo + ", refNo=" + refNo + "]";
 	}
-	
-	
+
+
+
+
+
 	
 
 
