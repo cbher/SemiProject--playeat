@@ -3,17 +3,19 @@
 <properties>
 	<entry key="selectPlayList">
 		SELECT
-			   P_NO
+		       P_NO
 		     , P_TITLE
 		     , ADDRESS
 		     , P_CALL
 		     , P_SCORE
 		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
-		 FROM PLACE
-		 LEFT JOIN ATTECHMENT ON (P_NO = PLACE_NO)
-		WHERE P_SELECT_NUM = 2  
-		  AND FILE_LEVEL = 1 
-		  AND P_STATUS = 'Y'
+		  FROM PLACE P
+		  LEFT JOIN ATTECHMENT ON (P_NO = PLACE_NO)
+		 WHERE P_STATUS = 'Y'
+		   AND P_SELECT_NUM = 2
+		   AND LOCATION_NO IN (?,?,?,?,?)
+		 ORDER
+		    BY P_NO DESC
 	</entry>
 	<entry key="selectDetailPlay">
 		SELECT
@@ -153,8 +155,8 @@
 		  VALUES
 		  (
 		    REPORT_SEQ.NEXTVAL
-		  , 1
-		  , 1
+		  , ?
+		  , ?
 		  , ?
 		  )
 	</entry>

@@ -15,6 +15,7 @@ import semi.Review.model.vo.Review;
 import semi.cooking.model.vo.Attachment;
 import semi.play.model.vo.Play;
 import semi.play.model.vo.PlayReply;
+import semi.restaurant.model.vo.Restaurant;
 
 public class PlayDao {
 	
@@ -28,24 +29,185 @@ public class PlayDao {
 		}
 	}
 	
-	public ArrayList<Play> selectPlayList(Connection conn){
-		ArrayList<Play> list = new ArrayList<Play>();
+	public ArrayList<ArrayList> selectPlayList(Connection conn){
+		ArrayList<ArrayList> list = new ArrayList<ArrayList>();
+		ArrayList<Play> listSeoul = new ArrayList<Play>();
+		ArrayList<Play> listGyunggi = new ArrayList<Play>();
+		ArrayList<Play> listIncheon = new ArrayList<Play>();
+		ArrayList<Play> listKangwon = new ArrayList<Play>();
+		ArrayList<Play> listChoongchung = new ArrayList<Play>();
+		ArrayList<Play> listGyungsang = new ArrayList<Play>();
+		ArrayList<Play> listJulla = new ArrayList<Play>();
+		ArrayList<Play> listJeju = new ArrayList<Play>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectPlayList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, 1);
+			pstmt.setInt(3, 1);
+			pstmt.setInt(4, 1);
+			pstmt.setInt(5, 1);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Play(rset.getInt("p_no"),
-								  rset.getString("p_title"),
-								  rset.getString("address"),
-								  rset.getString("p_call"),
-								  rset.getDouble("P_score"),
-								  rset.getString("titleimg")));
+				listSeoul.add(new Play(rset.getInt("p_no"),
+							  				 rset.getString("p_title"),
+							  				 rset.getString("address"),
+							  				 rset.getString("p_call"),
+							  				 rset.getDouble("p_score"),
+							  				 rset.getString("titleimg")));
 			}
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 2);
+			pstmt.setInt(2, 2);
+			pstmt.setInt(3, 2);
+			pstmt.setInt(4, 2);
+			pstmt.setInt(5, 2);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listGyunggi.add(new Play(rset.getInt("p_no"),
+							  				 rset.getString("p_title"),
+							  				 rset.getString("address"),
+							  				 rset.getString("p_call"),
+							  				 rset.getDouble("p_score"),
+							  				 rset.getString("titleimg")));
+			
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 3);
+			pstmt.setInt(2, 3);
+			pstmt.setInt(3, 3);
+			pstmt.setInt(4, 3);
+			pstmt.setInt(5, 3);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listIncheon.add(new Play(rset.getInt("p_no"),
+							  				 rset.getString("p_title"),
+							  				 rset.getString("address"),
+							  				 rset.getString("p_call"),
+							  				 rset.getDouble("p_score"),
+							  				 rset.getString("titleimg")));
+			
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 4);
+			pstmt.setInt(2, 6);
+			pstmt.setInt(3, 15);
+			pstmt.setInt(4, 16);
+			pstmt.setInt(5, 8);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listGyungsang.add(new Play(rset.getInt("p_no"),
+							  				 rset.getString("p_title"),
+							  				 rset.getString("address"),
+							  				 rset.getString("p_call"),
+							  				 rset.getDouble("p_score"),
+							  				 rset.getString("titleimg")));
+			
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 7);
+			pstmt.setInt(2, 9);
+			pstmt.setInt(3, 11);
+			pstmt.setInt(4, 12);
+			pstmt.setInt(5, 7);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listChoongchung.add(new Play(rset.getInt("p_no"),
+							  				 rset.getString("p_title"),
+							  				 rset.getString("address"),
+							  				 rset.getString("p_call"),
+							  				 rset.getDouble("p_score"),
+							  				 rset.getString("titleimg")));
+			
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 5);
+			pstmt.setInt(2, 13);
+			pstmt.setInt(3, 14);
+			pstmt.setInt(4, 13);
+			pstmt.setInt(5, 14);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listJulla.add(new Play(rset.getInt("p_no"),
+							  				 rset.getString("p_title"),
+							  				 rset.getString("address"),
+							  				 rset.getString("p_call"),
+							  				 rset.getDouble("p_score"),
+							  				 rset.getString("titleimg")));
+			
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 10);
+			pstmt.setInt(2, 10);
+			pstmt.setInt(3, 10);
+			pstmt.setInt(4, 10);
+			pstmt.setInt(5, 10);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listKangwon.add(new Play(rset.getInt("p_no"),
+							  				 rset.getString("p_title"),
+							  				 rset.getString("address"),
+							  				 rset.getString("p_call"),
+							  				 rset.getDouble("p_score"),
+							  				 rset.getString("titleimg")));
+			
+			}
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 17);
+			pstmt.setInt(2, 17);
+			pstmt.setInt(3, 17);
+			pstmt.setInt(4, 17);
+			pstmt.setInt(5, 17);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				listJeju.add(new Play(rset.getInt("p_no"),
+							  				 rset.getString("p_title"),
+							  				 rset.getString("address"),
+							  				 rset.getString("p_call"),
+							  				 rset.getDouble("p_score"),
+							  				 rset.getString("titleimg")));
+			
+			}
+			
+			list.add(listSeoul);
+			list.add(listGyunggi);
+			list.add(listIncheon);
+			list.add(listKangwon);
+			list.add(listChoongchung);
+			list.add(listJulla);
+			list.add(listGyungsang);
+			list.add(listJeju);
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -365,8 +527,9 @@ public class PlayDao {
 			if(rset.next()) {
 				int userNo = rset.getInt("user_no");
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, userNo);
-				
+				pstmt.setInt(1, placeNo);
+				pstmt.setInt(2, comNo);
+				pstmt.setInt(3, userNo);
 				result = pstmt.executeUpdate();
 				
 				

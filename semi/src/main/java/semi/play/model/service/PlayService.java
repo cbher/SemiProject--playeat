@@ -12,9 +12,9 @@ import semi.play.model.vo.PlayReply;
 
 public class PlayService {
 
-	public ArrayList<Play> selectPlayList(){
+	public ArrayList<ArrayList> selectPlayList(){
 		Connection conn = getConnection();
-		ArrayList<Play> list = new PlayDao().selectPlayList(conn);
+		ArrayList<ArrayList> list = new PlayDao().selectPlayList(conn);
 		close(conn);
 		return list;
 	}
