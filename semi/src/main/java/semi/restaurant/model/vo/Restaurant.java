@@ -10,12 +10,15 @@ public class Restaurant {
 	private int locationNo;
 	private int placeSelectNo;
 	private String businessTime;
-	
+	private int temaCategory;
 	private String titleImg;
 	public Restaurant() {}
 
+	
+	
 	public Restaurant(int placeNo, String placeTitle, String address, String placeCall, String status,
-			double placeScore, int locationNo, int placeSelectNo, String businessTime, String titleImg) {
+			double placeScore, int locationNo, int placeSelectNo, String businessTime, int temaCategory,
+			String titleImg) {
 		super();
 		this.placeNo = placeNo;
 		this.placeTitle = placeTitle;
@@ -26,12 +29,19 @@ public class Restaurant {
 		this.locationNo = locationNo;
 		this.placeSelectNo = placeSelectNo;
 		this.businessTime = businessTime;
+		this.temaCategory = temaCategory;
+		this.titleImg = titleImg;
+	}
+
+
+
+	public Restaurant(int placeNo, String placeTitle, String titleImg) {
+		super();
+		this.placeNo = placeNo;
+		this.placeTitle = placeTitle;
 		this.titleImg = titleImg;
 	}
 	
-	
-	
-
 	public Restaurant(int placeNo, String placeTitle, String address, String placeCall, double placeScore,
 			String titleImg) {
 		super();
@@ -42,6 +52,22 @@ public class Restaurant {
 		this.placeScore = placeScore;
 		this.titleImg = titleImg;
 	}
+	
+	
+
+	public Restaurant(int placeNo, String placeTitle, String address, String placeCall, double placeScore,
+			String businessTime, int temaCategory) {
+		super();
+		this.placeNo = placeNo;
+		this.placeTitle = placeTitle;
+		this.address = address;
+		this.placeCall = placeCall;
+		this.placeScore = placeScore;
+		this.businessTime = businessTime;
+		this.temaCategory = temaCategory;
+	}
+
+
 
 	public int getPlaceNo() {
 		return placeNo;
@@ -117,6 +143,14 @@ public class Restaurant {
 	
 	
 
+	public int getTemaCategory() {
+		return temaCategory;
+	}
+
+	public void setTemaCategory(int temaCategory) {
+		this.temaCategory = temaCategory;
+	}
+
 	public String getTitleImg() {
 		return titleImg;
 	}
@@ -125,12 +159,17 @@ public class Restaurant {
 		this.titleImg = titleImg;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Restaurant [placeNo=" + placeNo + ", placeTitle=" + placeTitle + ", address=" + address + ", placeCall="
 				+ placeCall + ", status=" + status + ", placeScore=" + placeScore + ", locationNo=" + locationNo
-				+ ", placeSelectNo=" + placeSelectNo + ", businessTime=" + businessTime + "]";
+				+ ", placeSelectNo=" + placeSelectNo + ", businessTime=" + businessTime + ", temaCategory="
+				+ temaCategory + ", titleImg=" + titleImg + "]";
 	}
+
+	
 	
 	
 }

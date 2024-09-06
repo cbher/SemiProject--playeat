@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import static semi.common.JDBCtemplate.*;
+
+import semi.play.model.vo.Play;
 import semi.restaurant.model.vo.Restaurant;
 
 public class RestaurantDao {
@@ -213,5 +215,72 @@ public class RestaurantDao {
 		return list;
 		
 		
+	}
+
+	/** 
+	 * 
+	 * @param conn
+	 * @return 메인페이지에 쓰이는 레스토랑 리스트 이승헌 만듬
+	 */
+	public ArrayList<Restaurant> mainPageSelectRestaurnt(Connection conn) {
+		
+		ArrayList<Restaurant> rlist = new ArrayList<Restaurant>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("mainPageSelectRestaurnt");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				rlist.add(new Restaurant(rset.getInt("P_NO")
+						              , rset.getString("P_TITLE")
+						              , rset.getString("TITLEIMG")));  
+						               
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+			return rlist;
+	}
+
+	public Restaurant selectRestaurant(Connection conn, int placeNo) {
+		Restaurant r = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rset = null;
+	    String sql = prop.getProperty("selectRestaurant"); 
+
+	    try {
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, placeNo);
+	        rset = pstmt.executeQuery();
+	        
+	        if (rset.next()) {
+	        	r = new Restaurant();
+	        	r.setPlaceNo(rset.getInt("P_NO"));
+	        	r.setPlaceTitle(rset.getString("P_TITLE"));
+	        	r.setAddress(rset.getString("ADDRESS"));
+				r.setPlaceCall(rset.getString("P_CALL"));
+				r.setPlaceScore(rset.getDouble("P_SCORE"));
+				r.setBusinessTime(rset.getString("BUSINESSTIME"));
+				r.setTemaCategory(rset.getInt("tem_cate_no"));
+				
+	            
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(rset);
+	        close(pstmt);
+	    }
+	    return r;
 	}
 }

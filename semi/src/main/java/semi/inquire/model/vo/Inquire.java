@@ -19,8 +19,28 @@ public class Inquire {
 	private Date createDate;
 	private String status;
 	private String answer;
+	private String email;
 	
 	
+	public Inquire(int inquireNo, String inquireTitle, String inquireContent, String inquireWriter, Date createDate,
+			String status, String answer, String email) {
+		super();
+		this.inquireNo = inquireNo;
+		this.inquireTitle = inquireTitle;
+		this.inquireContent = inquireContent;
+		this.inquireWriter = inquireWriter;
+		this.createDate = createDate;
+		this.status = status;
+		this.answer = answer;
+		this.email = email;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
 	public Inquire() {}
 
 
@@ -142,6 +162,15 @@ public class Inquire {
 				+ inquireContent + ", inquireWriter=" + inquireWriter + ", createDate=" + createDate + ", status="
 				+ status + ", answer=" + answer + "]";
 	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	
+
 	
 	
 

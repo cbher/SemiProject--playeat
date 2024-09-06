@@ -1,6 +1,5 @@
-<%@page import="semi.member.model.vo.Member"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page import="semi.member.model.vo.Member"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     
 <%
 
@@ -13,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>플레잇</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -70,7 +69,7 @@ div{
 header{
     width: 100%;
     top: 0;
-    z-index: 30;
+    z-index: 15;
     position: fixed;
     background-color: #f6f5f0
 }
@@ -119,6 +118,7 @@ header .inner .search input{
     left: 45px;
     padding: 20px;
     padding-right: 50px;
+    font-family:'TTLaundryGothicB';
 }
 
 header .inner .search input:hover{
@@ -298,7 +298,7 @@ header .menubar::before{
                 <img src="resources/backGroundImg/play_eat-removebg-preview.png" alt="">
             </a>
             <div class="search">
-                <form action="test.do">
+                <form action="<%= contextPath %>/searchMain.sc">
                     
                         <input type="text" name="search" placeholder="검색어를 입력하세요">
                         <button class="material-icons" type="submit" >search</button>
@@ -326,18 +326,18 @@ header .menubar::before{
             <div class="menu">
                 <ul class="inner">
                     <li>
-                        <a href="">공지문의</a>
+                        <a href="<%= contextPath %>/noticeList.no?cpage=1">공지문의</a>
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/noticeList.no?cpage=1">공지사항</a></li>
                             <li><a href="<%=contextPath%>/iqList.ip?cpage=1">문의사항</a></li>
-                            <li><a href="">자주묻는질문</a></li>
+                            <li><a href="<%=contextPath %>/frequently.inq">자주묻는질문</a></li>
                         </ul>   
                     </li>
                     <li>
-                        <a href="">놀거리</a>
+                        <a href="<%= contextPath %>/playList.pl">놀거리</a>
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/searchMain.sc">놀거리 찾기</a></li>
-                            <li><a href="">원데이클래스</a></li>
+                            <li><a href="<%= contextPath %>/onedayMain.on?cpage=1">원데이클래스</a></li>
                         </ul>   
                     </li>
                     <li>
@@ -345,22 +345,20 @@ header .menubar::before{
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/clist.co?cpage=1">레시피 찾기</a></li>
                             <li><a href="<%= contextPath %>/cookingEnrollForm.co">레시피 업로드</a></li>
-                            <li><a href="<%= contextPath %>/ranking.rk">이번달 명예의 전당</a></li>
+                            <li><a href="<%= contextPath %>/rankingSelect.rk">이번달 명예의 전당</a></li>
                         </ul>  
                     </li>
                     <li>
                         <a href="<%= contextPath %>/restaurantMain.pl">맛집</a>
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/searchMain.sc">맛집찾기</a></li>
-                            <li><a href="">랜덤 메뉴 추천</a></li>
-    
                         </ul>   
                     </li>
                     <li>
                         <a href="<%= contextPath %>/minigame.mg">미니게임</a>
                         <ul class="hide-menu">
                             <li><a href="">랜덤뽑기</a></li>
-                            <li><a href="">사다리타기</a></li>
+                            <li><a href="playladder.min">사다리타기</a></li>
                             <li><a href="">룰렛돌리기</a></li>
                             <li><a href="">제비뽑기</a></li>
                         </ul>   

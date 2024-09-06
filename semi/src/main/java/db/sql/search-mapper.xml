@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectList">
+		SELECT
+		       P_NO
+		     , P_TITLE
+		     , ADDRESS
+		     , P_CALL
+		     , P_SCORE
+		     , BUSINESSTIME
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE
+		  JOIN ATTECHMENT ON (P_NO = PLACE_NO)
+		 WHERE FILE_LEVEL = 1
+		   AND P_STATUS = 'Y'
+		   AND LOCATION_NO = ?
+	</entry>
+	<entry key="searchRestaurant">
+		SELECT
+		       P_NO
+		     , P_TITLE
+		     , ADDRESS
+		     , P_CALL
+		     , P_SCORE
+		     , BUSINESSTIME
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE
+		  JOIN ATTECHMENT ON (P_NO = PLACE_NO)
+		 WHERE FILE_LEVEL = 1
+		   AND P_STATUS = 'Y'
+		   AND RCATEGORY_NO = ?
+		   AND P_SELECT_NUM = 1
+	</entry>
+	<entry key="selectAllRestaurant">
+		SELECT
+		       P_NO
+		     , P_TITLE
+		     , ADDRESS
+		     , P_CALL
+		     , P_SCORE
+		     , BUSINESSTIME
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE
+		  JOIN ATTECHMENT ON (P_NO = PLACE_NO)
+		 WHERE FILE_LEVEL = 1
+		   AND P_STATUS = 'Y'
+           AND P_SELECT_NUM = 1
+	</entry>
+	<entry key="searchPlay">
+		SELECT
+		       P_NO
+		     , P_TITLE
+		     , ADDRESS
+		     , P_CALL
+		     , P_SCORE
+		     , BUSINESSTIME
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE
+		  JOIN ATTECHMENT ON (P_NO = PLACE_NO)
+		 WHERE FILE_LEVEL = 1
+		   AND P_STATUS = 'Y'
+           AND P_SELECT_NUM = 2
+           AND TEM_CATE_NO = ?
+	</entry>
+	<entry key="searchAllPlay">
+		SELECT
+		       P_NO
+		     , P_TITLE
+		     , ADDRESS
+		     , P_CALL
+		     , P_SCORE
+		     , BUSINESSTIME
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM PLACE
+		  JOIN ATTECHMENT ON (P_NO = PLACE_NO)
+		 WHERE FILE_LEVEL = 1
+		   AND P_STATUS = 'Y'
+           AND P_SELECT_NUM = 2
+	</entry>
+	<entry key="searchAllOneday">
+		SELECT
+		       ONE_NO
+		     , ONE_TITLE
+		     , ONE_PLACE
+		     , ONE_PHONE
+		     , ENT_PEOPLE
+		     , SCORE
+		     , PRICE
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM ONEDAYCLASS
+		  JOIN ATTECHMENT USING (ONE_NO)
+		 WHERE ONE_STATUS = 'Y'
+		   AND FILE_LEVEL = 1
+	</entry>
+	<entry key="searchOneday">
+		SELECT
+		       ONE_NO
+		     , ONE_TITLE
+		     , ONE_PLACE
+		     , ONE_PHONE
+		     , ENT_PEOPLE
+		     , SCORE
+		     , PRICE
+		     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM ONEDAYCLASS
+		  JOIN ATTECHMENT USING (ONE_NO)
+		 WHERE ONE_STATUS = 'Y'
+		   AND FILE_LEVEL = 1
+		   AND ONECATEGORY_NO = ?
+	</entry>
+</properties>

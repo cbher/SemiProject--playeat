@@ -1,5 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="semi.play.model.vo.Play"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+
+	
+	
+
+
+%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +21,7 @@
 <title>badge</title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
 
 <style>
    
@@ -52,6 +67,7 @@
     margin: auto;
     width: 140px;
     height: 130px;
+    color: inherit;
 }
 
 .badge img{
@@ -91,27 +107,17 @@
 </head>
 <body>
 
- 
-    <div class="badge">
+     <div class="badge">
         <div class="text">최근 본 장소</div>
-        <a href="javascript:void(0)" class="place">
-          <img src="./resourse/음식.jpg" alt="">
-          <div class="badge-title">
-            <h2>여긴어디야</h2>
-          </div>
-        </a>
-        <a href="javascript:void(0)" class="place">
-          <img src="./resourse/음식2.jpg" alt="">
-          <div class="badge-title">
-            <h2>여긴어디야</h2>
-          </div>
-        </a>
-        <a href="javascript:void(0)" class="place">
-          <img src="./resourse/음식2.jpg" alt="">
-          <div class="badge-title">
-            <h2>여긴어디야</h2>
-          </div>
-        </a>
+	       <c:forEach var="play" items="${sessionScope.recentPlaces}">
+	        <a href="/semi/detail.pl?bno=${play.placeNo}" class="place">
+	          <img src="${pageContext.request.contextPath}/${play.titleImg}" alt="${play.placeTitle} 이미지">
+	            <div class="badge-title">
+	                <h4>${play.placeTitle}</h4>
+	            </div>
+	        </a>
+	    </c:forEach>
+	    
     </div>
 
 	<script>
@@ -125,7 +131,7 @@
 	    // 화면의 중앙 위치를 계산
 	    let point = ($(window).scrollTop() + (windowHeight / 2)) - (quickMenuHeight / 2);
 
-	    point -= 100;
+	    point -= 30;
 
 	    quickMenu.stop().animate({ top: point }, DURATION);
 	}
@@ -142,6 +148,9 @@
 	    positionQuickMenu(); // 페이지 로드 시 중앙에 배치
 	});
 	</script>
+	
+
+	
 	
 </body>
 </html>

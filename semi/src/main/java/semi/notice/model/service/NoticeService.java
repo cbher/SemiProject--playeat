@@ -7,6 +7,7 @@ import static semi.common.JDBCtemplate.*;
 
 import semi.common.PageInfo;
 import semi.notice.model.dao.NoticeDao;
+import semi.notice.model.vo.Attechment;
 import semi.notice.model.vo.Notice;
 
 public class NoticeService {
@@ -24,19 +25,20 @@ public class NoticeService {
 		return list;
 	}
 
-	public int insertNotice(Notice n) {
+	public int insertNotice(Notice n, ArrayList<Attechment> list) {
 	
 		Connection conn = getConnection();
-		int result = new NoticeDao().insertNotice(conn, n);
+		int result1 = new NoticeDao().insertNotice(conn, n);
+		int result2 = new NoticeDao().insertAttechment(conn, list);
 		
-		if(result == 0) {
-			rollback(conn);
-		}else {
+		
+		if(result1 > 0 && result2 > 0) {
 			commit(conn);
+		}else {
+			rollback(conn);
 		}
-		
 		close(conn);
-		return result;
+		return result1 * result2;
 	}
 
 	public int increaseCount(int noticeNo) {
@@ -65,16 +67,16 @@ public class NoticeService {
 	public int updateNotice(Notice n) {
 		Connection conn = getConnection();
 		
-		int result = new NoticeDao().updateNotice(conn, n);
+		int result1 = new NoticeDao().updateNotice(conn, n);
 		
-		if(result > 0) {
+		if(result1 > 0 ) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
-		
 		close(conn);
-		return result;
+		return result1;
+		
 	}
 
 	public Notice noticeSelect(int noticeNo) {
@@ -106,6 +108,15 @@ public class NoticeService {
 		
 		close(conn);
 		return listCount;
+	}
+
+	public ArrayList<Attechment> selectAttechment(int noticeNo) {
+		Connection conn = getConnection();
+		ArrayList<Attechment> list = new NoticeDao().selectAttechment(conn, noticeNo);
+		
+		close(conn);
+		
+		return list;
 	}
 
 	

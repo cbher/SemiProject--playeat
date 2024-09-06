@@ -111,6 +111,9 @@ div{
     background-color: #fff;
     outline: none;
     resize: none;
+    background-color: #f6f5f0;
+    font-family:'TTLaundryGothicB';
+    border: 1px solid #8b7dbe;
 }
 
 button{
@@ -127,6 +130,7 @@ button{
 
 button:hover{
     background-color: #8b7dbe;
+    color:#fff;
 }
 
 .back a{
@@ -175,9 +179,7 @@ button:hover{
 				<% } %>
             </div>
             <div class="explanation">
-                <textarea readonly>
-                   <%= cBoard.getcBoardContent() %>
-                </textarea>
+                <textarea readonly><%= cBoard.getcBoardContent() %></textarea>
                 
                 <div class="back" align="center"><a  href="<%= contextPath %>/clist.co?cpage=1">목록으로</a></div>
             </div>
@@ -197,48 +199,49 @@ button:hover{
                 location.href = "<%= contextPath %>/delete.co?bno=<%= cBoard.getcBoardNo()%>";
             }
     	}
-				
-	    		$(function(){
+		
+    	<% if(loginUser != null){%>
+	    $(function(){
 	    			
-	    				likeStatus();
+	    	likeStatus();
 	    			
-	    		})
+		})
 			
         
-	        function selectLikeCount(){
-	            $.ajax({
-	                url : "increaseLike.il",
-	                data:{bno:<%= cBoard.getcBoardNo() %>,
-	                	  userNo : $("#userNo").val()},
-	                success:function(result){
-	                	$(".inner .infomation tr td").eq(2).text("추천수 : " + result.score); 
-						$(".like").css("color","#8b7dbe");
-						likeStatus();
-	                },
-	                error:function(){
-	                	console.log("통신 실패");
-	                },
-	            })
-	        }
-	        
-	        function likeStatus(){
-	        	$.ajax({
-	        		url:"like.li",
-	        		data:{
-	        			userNo : $("#userNo").val(),
-	        			bno : <%= cBoard.getcBoardNo() %>,
-	        		},
-	        		success : function(result){
-	        			if(result > 0){
-	        				$(".like").css("color", "#8b7dbe");
-	        			}else{
-	        				$(".like").css("color", "#e4d4fa");
-	        				
-	        			}
-	        		},
-	        	})
-	        };
-       
+        function selectLikeCount(){
+            $.ajax({
+                url : "increaseLike.il",
+                data:{bno:<%= cBoard.getcBoardNo() %>,
+                	  userNo : $("#userNo").val()},
+                success:function(result){
+                	$(".inner .infomation tr td").eq(2).text("추천수 : " + result.score); 
+					$(".like").css("color","#8b7dbe");
+					likeStatus();
+                },
+                error:function(){
+                	console.log("통신 실패");
+                },
+            })
+        }
+        
+        function likeStatus(){
+        	$.ajax({
+        		url:"like.li",
+        		data:{
+        			userNo : $("#userNo").val(),
+        			bno : <%= cBoard.getcBoardNo() %>,
+        		},
+        		success : function(result){
+        			if(result > 0){
+        				$(".like").css("color", "#8b7dbe");
+        			}else{
+        				$(".like").css("color", "#e4d4fa");
+        				
+        			}
+        		},
+        	})
+        };
+       <% } %>
     </script>
 </body>
 </html>

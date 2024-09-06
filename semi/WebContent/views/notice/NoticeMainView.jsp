@@ -28,11 +28,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/semi/resources/css/noticeMainview.css">
 
-</head>
-<body>
-
 <%@ include file="../common/menubar.jsp" %>
 <%@ include file="../common/badge.jsp" %>
+</head>
+
+<body>
+
+
+
 
 
 
@@ -40,7 +43,9 @@
 	<h2 align="center">공지사항</h2>
 	 <br>
 	 <%if(loginUser != null && loginUser.getUserId().equals("admin")) {%>
+	 <div class="inputNotice">
     <a  class="button" href="<%=contextPath %>/createIN.no">작성하기</a>
+    </div>
     <br>
     <%} %>
     <table class="notice-view" align="center" >
@@ -74,14 +79,16 @@
     </table>
     
     
-    <script type="text/javascript">
+   <script type="text/javascript">
 		$(function(){
 			$(".notice-view>tbody>tr").click(function(){
 				const num = $(this).children().eq(0).text();
 				location.href='<%=contextPath%>/detail.no?num='+num;
+			
 			})
 		})	
 	</script>
+
     
     <br>
 	<br>
@@ -106,14 +113,9 @@
 </div>
 
 
-
-
-
-
- 
-
-<%@ include file="../common/footer.jsp" %>
 <%@ include file="../common/top.jsp" %>
+<%@ include file="../common/footer.jsp" %>
 
 </body>
+
 </html>

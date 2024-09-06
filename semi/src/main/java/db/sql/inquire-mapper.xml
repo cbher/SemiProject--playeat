@@ -20,6 +20,7 @@ SELECT *
 		               INQUIRE_NO
 		             , INQUIRE_TITLE
 		             , USER_ID
+	   				 , USER_NO
 		             , CREATE_DATE
 		             , I.STATUS
 		          FROM INQUIRE "I"
@@ -71,7 +72,47 @@ SELECT *
 	 WHERE INQUIRE_NO = ?
 </entry>
 
-<entry key="">
+<entry key="insertAttachment">
+	INSERT 
+	  INTO ATTECHMENT
+		 (
+		   FILE_NO
+	     , INQUIRE_NO
+		 , ORIGIN_NAME
+		 , CHANGE_NAME
+		 , FILE_PATH
+		 , FILE_LEVEL
+		 )
+	VALUES
+		 (
+		   SEQ_ATTACHMENT.NEXTVAL
+		 , INQUIRE_SEQ.CURRVAL
+		 , ?
+		 , ?
+		 , ?
+		 , ?
+		 )
+</entry>
+
+<entry key="selectAttechment">
+	SELECT 
+	       FILE_NO
+	     , ORIGIN_NAME
+	     , CHANGE_NAME
+	     , FILE_PATH
+	  FROM ATTECHMENT
+	 WHERE INQUIRE_NO = ?
+	   AND STATUS = 'Y'
+</entry>
+
+<entry key="checkEmail">
+	
+	SELECT 
+		   EMAIL
+		 , INQUIRE_NO
+	  FROM INQUIRE
+	  JOIN MEMBER ON (INQUIRE_WRITER = USER_NO)
+	 WHERE INQUIRE_NO = ?
 	
 </entry>
 

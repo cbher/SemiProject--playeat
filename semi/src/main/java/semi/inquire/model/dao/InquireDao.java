@@ -14,6 +14,7 @@ import org.apache.catalina.tribes.UniqueId;
 import static semi.common.JDBCtemplate.*;
 import semi.common.PageInfo;
 import semi.inquire.model.vo.Inquire;
+import semi.notice.model.vo.Attechment;
 
 
 public class InquireDao {
@@ -106,6 +107,8 @@ public class InquireDao {
 			
 			result = pstmt.executeUpdate();
 			
+			System.out.println(result);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -166,6 +169,90 @@ public class InquireDao {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public int insertAttachment(Connection conn, ArrayList<Attechment> list) {
+		int result =0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachment");
+	
+		
+		try {
+			for(Attechment at : list) {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			pstmt.setInt(4, at.getFileLevel());
+			
+			result = pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Attechment> selectAttechment(Connection conn, int inquireNo) {
+		ArrayList<Attechment> list = new ArrayList<Attechment>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAttechment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inquireNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Attechment at = new Attechment();
+				at.setOriginName(rset.getString("origin_name"));
+				at.setChangeName(rset.getString("change_name"));
+				at.setFilePath(rset.getString("file_path"));
+				
+				list.add(at);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public Inquire checkEmail(Connection conn, int inquireNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Inquire inq = null;
+		String sql = prop.getProperty("checkEmail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, inquireNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				inq =  new Inquire();
+				inq.setEmail(rset.getString("email"));
+				inq.setInquireNo(rset.getInt("INQUIRE_NO"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return inq;
 	}
 	
 	

@@ -16,25 +16,36 @@
 
 <div class="insertInq-area" align="center">
 	<h3 align="center">문의사항 작성</h3>
-    <form action="<%=contextPath %>/insertInq.inq" method="post">
+    <form action="<%=contextPath %>/insertInq.inq" method="post" enctype="multipart/form-data">
+       <input type="hidden" name="userNo" value="<%=loginUser.getUserNo() %>" >
         <table align="center" id="insertTable">
             <thead>
                 <tr>
                    <th width="60">문의 제목</th>
-                   <td width="300"><input type="text" name="title" required></td>
+                   <td width="290"><input type="text" name="title" required></td>
                    
                 </tr>
             </thead>
             <tbody>
             <tr>
-            	<th colspan="2" align="center">문의내용</th>
+            	<th colspan="3" align="center">문의내용</th>
             	
             </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <textarea name="content" id="" required></textarea>
                     </td>
                 </tr>
+                <tr>
+                	<td  align="center">첨부파일 :</td>
+                    <td colspan="3">
+                       <input type="file" name="upfile1" id="upfile1" >
+					   <input type="file" name="upfile2" id="upfile2" >
+                   	   <input type="file" name="upfile3" id="upfile3" >      
+                    </td>
+                </tr>
+               
+                
             </tbody>
         </table>
         <div class="btn-center">

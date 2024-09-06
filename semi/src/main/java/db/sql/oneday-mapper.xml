@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectListCount">
+		SELECT COUNT(*) "COUNT"
+		  FROM ONEDAYCLASS
+		 WHERE ONE_STATUS = 'Y'
+	</entry>
+	<entry key="selectOnedayList">		 
+		SELECT *
+		  FROM(
+		    SELECT ROWNUM RNUM, D.*
+		      FROM (
+		        SELECT
+				       ONE_NO
+				     , ONE_TITLE
+				     , ONE_PLACE
+				     , ENT_PEOPLE
+				     , SCORE
+				     , PRICE
+				     , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		          FROM ONEDAYCLASS O
+		          LEFT JOIN ATTECHMENT A USING(ONE_NO)
+		         WHERE ONE_STATUS = 'Y'
+		         ORDER
+		            BY ONE_NO DESC
+		            )D
+		     )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectPopularList">
+		SELECT *
+		  FROM (
+	    SELECT 
+	           ONE_NO
+	         , ONE_TITLE
+	         , SCORE
+	         , PRICE
+	         , FILE_PATH || ORIGIN_NAME AS TITLEIMG
+	      FROM ONEDAYCLASS O
+	      LEFT JOIN ATTECHMENT A USING (ONE_NO)
+	     WHERE ONE_STATUS = 'Y'
+	     ORDER BY SCORE DESC, 3
+			 )
+		 WHERE ROWNUM &lt;= 15
+	</entry>
+	
+	<entry key="detailOneday">
+		SELECT ONE_NO
+			 , FILE_PATH || ORIGIN_NAME AS TITLEIMG
+		     , ONE_TITLE
+		     , ONE_PHONE
+		     , ONE_PLACE
+		     , SCORE
+		     , PRICE
+		     , START_TIME
+		     , END_TIME
+		  FROM ONEDAYCLASS O
+     LEFT JOIN ATTECHMENT A USING (ONE_NO)
+		 WHERE ONE_NO = ?
+	</entry>
+	
+	<entry key="selectAttachment">
+		 SELECT
+		        FILE_NO
+		      , ORIGIN_NAME
+		      , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		    FROM ONEDAYCLASS O
+            LEFT JOIN ATTECHMENT A USING(ONE_NO)
+		  WHERE ONE_NO = ?
+		    AND STATUS = 'Y'
+	</entry>
+	
+	<entry key="insertComment">
+		INSERT 
+		  INTO ONE_COMMENT 
+		     ( COM_NO
+		     , COM_CONTENT
+		     , SCORE
+		     , CREATE_DATE
+		     , USER_NO
+		     , STATUS
+		     , ONE_NO)
+		VALUES 
+		     (
+		       SEQ_COM_NO.NEXTVAL
+		     , ?
+		     , ?
+		     , SYSDATE
+		     , ?
+		     , 'Y'
+		     , ?)
+	</entry>
+	
+	<entry key="getReviewsForDisplay">
+		SELECT 
+	            C.COM_CONTENT
+	          , C.SCORE
+	          , C.CREATE_DATE
+	          , M.USER_ID
+	          , M.NICKNAME 
+	       FROM ONE_COMMENT C 
+	       JOIN MEMBER M ON C.USER_NO = M.USER_NO 
+	      WHERE C.ONE_NO = ?
+	        AND C.STATUS = 'Y'
+	</entry>
+	
+	<entry key="commentView">
+		SELECT 
+        m.USER_NAME,
+        oc.COM_CONTENT,
+        oc.SCORE,
+        oc.CREATE_DATE,
+        m.NICKNAME
+    FROM one_comment oc
+    JOIN member m ON oc.USER_NO = m.USER_NO
+    WHERE oc.ONE_NO = ?
+      AND oc.STATUS = 'Y'
+    ORDER BY oc.CREATE_DATE DESC
+	</entry>
+	
+	<entry key="insertComment">
+			INSERT INTO 
+       one_comment (COM_NO
+                 , COM_CONTENT
+                 , SCORE
+                 , CREATE_DATE
+                 , USER_NO
+                 , STATUS
+                 , ONE_NO) 
+            VALUES (COM_NO_SEQ.NEXTVAL
+                 , ?
+                 , ?
+                 , SYSDATE
+                 , ?
+                 , 'Y'
+                 , ?)
+	</entry>
+	
+	<entry key="selectLike">
+		SELECT
+		       COUNT(*) "COUNT"
+		  FROM LIKE_LIST
+		 WHERE USER_NO = ?
+		   AND ONE_NO = ?
+	</entry>
+	
+	<entry key="insertLike">
+		INSERT
+		  INTO	LIKE_LIST
+		  (
+		    LIKE_NO
+		  , USER_NO
+		  , ONE_NO 
+		  )
+		  VALUES
+		  (
+		    LIKE_LIST_SEQ.NEXTVAL
+		  , ?
+		  , ?
+		  )
+	</entry>
+	<entry key="deleteLike">
+		DELETE
+		  FROM LIKE_LIST
+		 WHERE USER_NO = ?
+		   AND ONE_NO = ?
+	</entry>
+	
+	<entry key="selectAnotherList">
+		SELECT
+			    ONE_NO
+			 , ONE_TITLE
+			 , FILE_PATH || ORIGIN_NAME "TITLEIMG"
+		  FROM ONEDAYCLASS
+		  LEFT JOIN ATTECHMENT USING (ONE_NO)
+		 WHERE ONE_STATUS = 'Y'
+		   AND FILE_LEVEL = 1
+		   AND ONE_NO != ?
+	</entry>
+</properties>

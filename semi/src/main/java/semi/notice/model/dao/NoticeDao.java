@@ -12,6 +12,8 @@ import java.util.Properties;
 import static semi.common.JDBCtemplate.*;
 
 import semi.common.PageInfo;
+import semi.cooking.model.vo.Attachment;
+import semi.notice.model.vo.Attechment;
 import semi.notice.model.vo.Notice;
 
 public class NoticeDao {
@@ -240,6 +242,111 @@ public class NoticeDao {
 		}finally {
 			close(pstmt);
 		}	
+		return result;
+	}
+
+	public ArrayList<Attechment> selectAttechment(Connection conn, int noticeNo) {
+		ArrayList<Attechment> list = new ArrayList<Attechment>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAttechment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Attechment at = new Attechment();
+				at.setChangeName(rset.getString("change_name"));
+				at.setFilePath(rset.getString("file_path"));
+				
+				list.add(at);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+	public int insertAttechment(Connection conn, ArrayList<Attechment> list) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttechment");
+		
+		
+			try {
+				for(Attechment at : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, at.getOriginName());
+				pstmt.setString(2, at.getChangeName());
+				pstmt.setString(3, at.getFilePath());
+				pstmt.setInt(4, at.getFileLevel());
+				
+				result = pstmt.executeUpdate();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+		
+		return result;
+	}
+
+	public int updateAttechment(Connection conn, Attechment at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateAttechment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			pstmt.setInt(4, at.getFileNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertNewAttechment(Connection conn, Attechment at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNewAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, at.getFileNo());
+			pstmt.setInt(2, at.getNoticeNo());
+			pstmt.setString(3, at.getOriginName());
+			pstmt.setString(4, at.getChangeName());
+			pstmt.setString(5, at.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 
