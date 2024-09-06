@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 @font-face { 
     font-family: 'TTLaundryGothicB';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2');
@@ -40,7 +39,7 @@ div{
 header{
     width: 100%;
     top: 0;
-    z-index: 30;
+    z-index: 15;
     position: fixed;
     background-color: #f6f5f0
 }
@@ -55,7 +54,7 @@ header .inner a{
 }
 
 header .inner a img{
-    height: 150%;
+    height: 100%;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -89,6 +88,7 @@ header .inner .search input{
     left: 45px;
     padding: 20px;
     padding-right: 50px;
+    font-family:'TTLaundryGothicB';
 }
 
 header .inner .search input:hover{
@@ -100,12 +100,13 @@ header .inner .search button{
     position: absolute;
     
     top: 33px;
-    right: 55px;
+    right: 65px;
     font-size: 43px;
     border-radius: 20px;
     box-sizing: border-box;
     background-color: transparent;
     border: 0;
+    width: 50px;
     cursor: pointer;
     color: #e4d4fa;
 }
@@ -243,4 +244,9 @@ header .menubar::before{
     position: absolute;
     bottom: 0;
     transform: translateX(45px);  
+}
+
+.login2{
+    margin-top: 10px;
+    font-size: 13px;
 }

@@ -26,10 +26,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     -->
    
-   
+ 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
-
 @font-face { 
     font-family: 'TTLaundryGothicB';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2403-2@1.0/TTLaundryGothicB.woff2') format('woff2');
@@ -279,7 +278,8 @@ header .menubar::before{
 .login2{
     margin-top: 10px;
     font-size: 13px;
-}
+
+
 
 
 </style>
@@ -360,7 +360,7 @@ header .menubar::before{
                         <a href="<%= contextPath %>/minigame.mg">미니게임</a>
                         <ul class="hide-menu">
                             <li><a href="">랜덤뽑기</a></li>
-                            <li><a href="playladder.min">사다리타기</a></li>
+                            <li><a href="<%=contextPath%>/playladder.min">사다리타기</a></li>
                             <li><a href="">룰렛돌리기</a></li>
                             <li><a href="">제비뽑기</a></li>
                         </ul>   
