@@ -9,6 +9,8 @@ import db.com.semi.adminMember.model.dao.AdMemberDao;
 import db.com.semi.adminMember.model.vo.AdMember;
 import db.com.semi.adminMember.model.vo.AdReport;
 import db.com.semi.adminMember.model.vo.Attechment;
+import db.com.semi.adminMember.model.vo.oneComment;
+import db.com.semi.adminMember.model.vo.review;
 
 public class AdMemberService {
 	
@@ -98,6 +100,7 @@ public class AdMemberService {
 	public AdReport adReportDetail(int Rno){
 		 Connection conn = getConnection();
 		 AdReport list = new AdMemberDao().adReportDetail( Rno, conn);
+		
 		 
 		 close(conn);
 		 return list;
@@ -126,6 +129,22 @@ public class AdMemberService {
 	}
 
 	
+	public review adreportReview(int reno){
+		Connection conn = getConnection();
+		review list = new AdMemberDao().adreportReview( reno, conn);
+		
+		close(conn);
+		return list;
+	}
+	
+	
+	public oneComment adreportoneComment(int ono){
+		Connection conn = getConnection();
+		oneComment list = new AdMemberDao().adreportoneComment(ono, conn);
+		
+		close(conn);
+		return list;
+	}
 	
 
 }

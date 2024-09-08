@@ -1,3 +1,5 @@
+<%@page import="db.com.semi.adminMember.model.vo.oneComment"%>
+<%@page import="db.com.semi.adminMember.model.vo.review"%>
 <%@page import="db.com.semi.adminMember.model.vo.AdReport"%>
 <%@page import="javax.print.attribute.UnmodifiableSetException"%>
 <%@page import="db.com.semi.adminMember.model.vo.AdMember"%>
@@ -5,6 +7,8 @@
     pageEncoding="UTF-8"%>
     
     <% AdReport list = (AdReport)request.getAttribute("list");  
+    review rlist = (review)request.getAttribute("rlist");  
+     oneComment olist = (oneComment)request.getAttribute("olist");  
     String Rno = request.getParameter("Rno");
     %>
 <!DOCTYPE html>
@@ -154,12 +158,12 @@ table *{
         </tr>
         <tr>
             <th  height="30">게시판명</th>
-            <td>&nbsp; <%if( list.getReview_no() == 1){%>리뷰 게시판
-            			<%}else if(list.getpNo()==1){%> 장소 게시판
-            			<%}else if(list.getpComNo()==1){ %>장소 한줄평 게시판
-            			<%}else if(list.getOneNo()==1){%> 원클래스 게시판
-            			<%}else if(list.getoComNo()==1){%> 장소 게시판
-            			<%}else if(list.getcNo()==1){%> 요리 게시판
+            <td>&nbsp; <%if( list.getReview_no() >= 1){%>리뷰 게시판
+            			<%}else if(list.getpNo()>=1){%> 장소 게시판
+            			<%}else if(list.getpComNo()>=1){ %>장소 한줄평 게시판
+            			<%}else if(list.getOneNo()>=1){%> 원클래스 게시판
+            			<%}else if(list.getoComNo()>=1){%> 장소 게시판
+            			<%}else if(list.getcNo()>=1){%> 요리 게시판
             			<%}else{ %>오류!
             			<%} %>
             			
@@ -179,6 +183,53 @@ table *{
             <td colspan="3">&nbsp; <%=list.getReprotContent() %></td>
          
         </tr>
+        <% if(list.getcNo()>0){ %>
+        <tr>
+        <th>신고내역 상세보기</th>
+        <td><a href="Detailbo.bo?bno=<%=list.getcNo()%>">요리게시판 신고내역 바로가기</a></td>
+        </tr>
+        <%} %>
+        
+        <%if(list.getReportNo()>0 && rlist!=null) {%>
+        <tr>
+        <th rowspan="5">신고내역</th>
+        </tr>
+          <tr>
+        <td>제목</td>
+        <td colspan="3"><%=rlist.getrTitle() %></td>
+            </tr>
+          <tr>
+        <td>내용</td>
+        <td colspan="3"><%=rlist.getrContent() %></td>
+            </tr>
+          <tr>
+        <td>작성일</td>
+        <td colspan="3"><%=rlist.getrDate() %></td>
+            </tr>
+          <tr>
+        <td >사진</td>
+            </tr>
+        <%} %>
+        
+        <%if(list.getReportNo()>0 && olist!=null) {%>
+               <tr>
+        <th rowspan="5">신고내역</th>
+        </tr>
+          <tr>
+        <td>글번호</td>
+        <td colspan="3"><%=olist.getComNo() %></td>
+            </tr>
+          <tr>
+        <td>내용</td>
+        <td colspan="3"><%=olist.getComContent() %></td>
+            </tr>
+          <tr>
+        <td>작성일</td>
+        <td colspan="3"><%=olist.getCreateDate()%></td>
+            </tr>
+        
+        
+          <%} %>
 
 
 

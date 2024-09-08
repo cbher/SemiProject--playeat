@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import db.com.semi.Questions.model.service.QuestionsService;
 import db.com.semi.Questions.model.vo.Attatment;
@@ -18,14 +17,14 @@ import semi.cooking.model.vo.Attachment;
 /**
  * Servlet implementation class QuestionsDetail
  */
-@WebServlet("/Detail.qo")
-public class QuestionsDetail extends HttpServlet {
+@WebServlet("/inquire.vo")
+public class inquireMyPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QuestionsDetail() {
+    public inquireMyPage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,7 +44,7 @@ public class QuestionsDetail extends HttpServlet {
 		request.setAttribute("at", at);
 		request.setAttribute("detailview", detailview);
 	
-		request.getRequestDispatcher("/views/adminQuestions/adminQuestionsDetailView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/adminQuestions/inquireMyPageDetailView.jsp").forward(request, response);
 
 	}
 

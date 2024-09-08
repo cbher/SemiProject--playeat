@@ -13,6 +13,8 @@ import java.util.Properties;
 import db.com.semi.adminMember.model.vo.AdMember;
 import db.com.semi.adminMember.model.vo.AdReport;
 import db.com.semi.adminMember.model.vo.Attechment;
+import db.com.semi.adminMember.model.vo.oneComment;
+import db.com.semi.adminMember.model.vo.review;
 
 import static semi.common.JDBCtemplate.*;
 
@@ -367,12 +369,14 @@ public class AdMemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("adReportDetail");
+		
 		AdReport r = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Rno);
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
+				System.out.println(rset.getInt("REPORT_NO"));
 				r = new AdReport(rset.getInt("REPORT_NO"),
 								 rset.getString("REPORT_CONTENT"),
 								 rset.getString("REPORT_STATUS"),
@@ -387,6 +391,7 @@ public class AdMemberDao {
 								 rset.getDate("create_report"));
 				
 			}
+			
 			
 			
 		} catch (SQLException e) {
@@ -442,10 +447,64 @@ public class AdMemberDao {
 			close(pstmt);
 		}return result;
 		
-	}
+	
 
 	
 	
 	
 	
+}
+	
+public review adreportReview(int reno, Connection conn){
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	String sql = prop.getProperty("adreportReview");
+	review r = null;
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, reno);
+		rset = pstmt.executeQuery();
+		while(rset.next()) {
+			r = new review(rset.getInt("review_no"), rset.getString("r_title"), rset.getString("r_content"), rset.getDate("r_date"), rset.getInt("play_no"));
+			
+		}
+		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}return r;
+	
+	
+	
+}
+public oneComment adreportoneComment(int ono, Connection conn){
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	String sql = prop.getProperty("adreportoneComment");
+	oneComment r = null;
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, ono);
+		rset = pstmt.executeQuery();
+		while(rset.next()) {
+			r = new oneComment(rset.getInt("com_no"),  rset.getString("com_content"), rset.getDate("create_date"));
+			
+		}
+		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}return r;
+	
+	
+	
+}
 }
