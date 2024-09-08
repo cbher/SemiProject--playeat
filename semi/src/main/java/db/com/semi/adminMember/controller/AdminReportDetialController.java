@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import db.com.semi.adminMember.model.service.AdMemberService;
 import db.com.semi.adminMember.model.vo.AdReport;
+import db.com.semi.adminMember.model.vo.oneComment;
+import db.com.semi.adminMember.model.vo.review;
 
 /**
  * Servlet implementation class AdminReportDetialController
@@ -33,9 +35,26 @@ public class AdminReportDetialController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	int Rno = Integer.parseInt(request.getParameter("Rno"));
+	review rlist = null;
+	oneComment olist = null;
 	AdReport list = new AdMemberService().adReportDetail(Rno);
 		
+	if(list!=null && list.getReview_no()>0) {
+			int reno = list.getReview_no();
+		 rlist = new AdMemberService().adreportReview(reno);
+			
+		}
+		
+		if(list!=null && list.getoComNo() >0) {
+			int ono = list.getoComNo();
+			 olist = new AdMemberService().adreportoneComment(ono);
+		}
+		
+
+	request.setAttribute("rlist", rlist);
+	request.setAttribute("olist", olist);
 	request.setAttribute("list", list);
+	
 	request.getRequestDispatcher("/views/adminMember/adminReportDetailView.jsp").forward(request, response);;
 	
 	}
