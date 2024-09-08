@@ -137,6 +137,14 @@ public class AdMemberService {
 		return list;
 	}
 	
+	public Attechment adreportReviewat(int reno){
+		Connection conn = getConnection();
+		Attechment at = new AdMemberDao().adreportReviewat( reno, conn);
+		
+		close(conn);
+		return at;
+	}
+	
 	
 	public oneComment adreportoneComment(int ono){
 		Connection conn = getConnection();

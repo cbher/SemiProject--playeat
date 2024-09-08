@@ -1,3 +1,4 @@
+<%@page import="db.com.semi.adminMember.model.vo.Attechment"%>
 <%@page import="db.com.semi.adminMember.model.vo.oneComment"%>
 <%@page import="db.com.semi.adminMember.model.vo.review"%>
 <%@page import="db.com.semi.adminMember.model.vo.AdReport"%>
@@ -8,6 +9,7 @@
     
     <% AdReport list = (AdReport)request.getAttribute("list");  
     review rlist = (review)request.getAttribute("rlist");  
+    Attechment at = (Attechment)request.getAttribute("at");  
      oneComment olist = (oneComment)request.getAttribute("olist");  
     String Rno = request.getParameter("Rno");
     %>
@@ -208,8 +210,15 @@ table *{
             </tr>
           <tr>
         <td >사진</td>
+        <%if(rlist != null && at != null){ %>
+        
+        <td colspan="3">
+        <img alt="" src="<%=contextPath %>/<%=at.getFilePath()+at.getChangeName() %>">
+        </td>
+        <%}else{ %>
+        <td colspan="3">사진 파일이 없습니다</td>
             </tr>
-        <%} %>
+        <%}} %>
         
         <%if(list.getReportNo()>0 && olist!=null) {%>
                <tr>
