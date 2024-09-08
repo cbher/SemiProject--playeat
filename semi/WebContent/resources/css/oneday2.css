@@ -447,6 +447,10 @@ h3 {
   line-height: 2;
 }
 
+.comment-area #score .material-icons {
+	color: e4d4fa;
+}
+
 .comment-area #review {
   margin-top: 5%;
   width: 90%;
@@ -460,6 +464,7 @@ h3 {
   margin: auto;
   border-radius: 5px;
   line-height: 3;
+
 }
 
 /* * {
@@ -491,7 +496,7 @@ h3 {
   /* 스타일 - customize */
   max-width: 500px;
   width: 100%;
-  height: 170px;
+  height: 185px;
   background-color: white;
   padding: 20px;
   border-radius: 5px;
@@ -532,6 +537,8 @@ h3 {
   width: 490px;
   height: 100px;
   margin-top: 10px;
+  font-family:'TTLaundryGothicB';
+  font-size: 18px;
 }
 
 .comment-modal .modal-content .star {

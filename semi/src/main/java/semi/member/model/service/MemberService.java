@@ -101,5 +101,33 @@ public class MemberService {
 	    return result;
 	}
 
+	public int incrementReportCount(int userNo, int reviewNo) {
+		Connection conn = getConnection();
+	    int result1 = new MemberDao().incrementReportCount(conn, userNo);
+	    int result2 = new MemberDao().insertReport(conn, reviewNo, userNo);
+	    
+	    if (result1 > 0 && result2 > 0) {
+	        commit(conn);
+	    } else {
+	        rollback(conn);
+	    }
+	    close(conn);
+	    return result1 * result2;
+	}
+
+	public int incrementReportCount2(int userNo, int comNo) {
+		Connection conn = getConnection();
+	    int result1 = new MemberDao().incrementReportCount(conn, userNo);
+	    int result2 = new MemberDao().insertReport2(conn, comNo, userNo);
+	    
+	    if (result1 > 0 && result2 > 0) {
+	        commit(conn);
+	    } else {
+	        rollback(conn);
+	    }
+	    close(conn);
+	    return result1 * result2;
+	}
+
 
 }

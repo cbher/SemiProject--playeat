@@ -111,7 +111,9 @@
         oc.COM_CONTENT,
         oc.SCORE,
         oc.CREATE_DATE,
-        m.NICKNAME
+        m.NICKNAME,
+        oc.USER_NO,
+        oc.COM_NO
     FROM one_comment oc
     JOIN member m ON oc.USER_NO = m.USER_NO
     WHERE oc.ONE_NO = ?

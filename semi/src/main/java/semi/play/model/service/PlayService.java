@@ -12,9 +12,9 @@ import semi.play.model.vo.PlayReply;
 
 public class PlayService {
 
-	public ArrayList<Play> selectPlayList(){
+	public ArrayList<ArrayList> selectPlayList(){
 		Connection conn = getConnection();
-		ArrayList<Play> list = new PlayDao().selectPlayList(conn);
+		ArrayList<ArrayList> list = new PlayDao().selectPlayList(conn);
 		close(conn);
 		return list;
 	}
@@ -107,6 +107,14 @@ public class PlayService {
 		close(conn);
 		return plist;
 		
+	}
+
+	public double scoreAvg(int placeNo) {
+		Connection conn = getConnection();
+		double score = new PlayDao().scoreAvg(conn, placeNo);
+		commit(conn);
+		close(conn);
+		return score;
 	}
 	
 	public int reportReply(int placeNo, int comNo, String userId) {

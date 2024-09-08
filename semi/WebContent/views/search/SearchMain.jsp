@@ -149,7 +149,7 @@
 
     <div class="search-area">
 
-        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=i61mpeml1v"></script>
+        <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq"></script>
 		<div id="map" style="width:90%;height:400px; margin: 20px auto;"></div>
 		
 		
