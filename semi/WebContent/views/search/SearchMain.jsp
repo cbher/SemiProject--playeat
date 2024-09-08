@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Insert title here</title>
+<title>상세 검색 페이지</title>
 	<link rel="stylesheet" href="/semi/resources/css/detail_search.css?after">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq&submodules=geocoder"></script>

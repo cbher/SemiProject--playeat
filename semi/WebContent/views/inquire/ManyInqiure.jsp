@@ -131,22 +131,6 @@ pageEncoding="UTF-8"%>
           <div class="question" onclick="toggleAnswer(2)">놀거리, 먹거리 메인페이지는 어떻게들어가나요?</div>
           <div class="answer" id="answer2">메뉴에서 놀거리, 먹거리를 누르면 들어가실수 있습니다.</div>
         </div>
-        <div class="faq">
-          <div class="question" onclick="toggleAnswer(3)">3: 질문입니다?</div>
-          <div class="answer" id="answer3">답변입니다</div>
-        </div>
-        <div class="faq">
-          <div class="question" onclick="toggleAnswer(4)">4: 질문입니다?</div>
-          <div class="answer" id="answer4">답변입니다.</div>
-        </div>
-        <div class="faq">
-          <div class="question" onclick="toggleAnswer(5)">5: 질문입니다?</div>
-          <div class="answer" id="answer5">답변입니다</div>
-        </div>
-        <div class="faq">
-          <div class="question" onclick="toggleAnswer(6)">6: 질문입니다?</div>
-          <div class="answer" id="answer6">답변입니다</div>
-        </div>
       </div>
     </div>
     <script src="script.js"></script>
