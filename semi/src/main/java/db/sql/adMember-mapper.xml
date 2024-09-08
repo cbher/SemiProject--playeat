@@ -248,6 +248,12 @@ select com_no,com_content, create_date from one_comment where com_no = ?
 
 </entry>
 
+<entry key="adreportReviewat">
+
+select file_No,origin_Name,change_name,file_path,file_Level from attechment where review_no = ?
+
+</entry>
+
 
 
 

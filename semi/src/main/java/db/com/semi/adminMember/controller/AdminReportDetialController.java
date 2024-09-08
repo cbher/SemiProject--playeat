@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import db.com.semi.adminMember.model.service.AdMemberService;
 import db.com.semi.adminMember.model.vo.AdReport;
+import db.com.semi.adminMember.model.vo.Attechment;
 import db.com.semi.adminMember.model.vo.oneComment;
 import db.com.semi.adminMember.model.vo.review;
+import semi.cooking.model.vo.Attachment;
 
 /**
  * Servlet implementation class AdminReportDetialController
@@ -37,12 +39,14 @@ public class AdminReportDetialController extends HttpServlet {
 	int Rno = Integer.parseInt(request.getParameter("Rno"));
 	review rlist = null;
 	oneComment olist = null;
+	Attechment at = null;
 	AdReport list = new AdMemberService().adReportDetail(Rno);
 		
 	if(list!=null && list.getReview_no()>0) {
 			int reno = list.getReview_no();
 		 rlist = new AdMemberService().adreportReview(reno);
-			
+		 at = new AdMemberService().adreportReviewat(reno);
+		
 		}
 		
 		if(list!=null && list.getoComNo() >0) {
@@ -52,6 +56,8 @@ public class AdminReportDetialController extends HttpServlet {
 		
 
 	request.setAttribute("rlist", rlist);
+	request.setAttribute("at", at);
+	
 	request.setAttribute("olist", olist);
 	request.setAttribute("list", list);
 	

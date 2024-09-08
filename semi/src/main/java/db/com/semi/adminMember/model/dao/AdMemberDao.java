@@ -481,6 +481,32 @@ public review adreportReview(int reno, Connection conn){
 	
 	
 }
+public Attechment adreportReviewat(int reno, Connection conn){
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	String sql = prop.getProperty("adreportReviewat");
+	Attechment at = null;
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, reno);
+		rset = pstmt.executeQuery();
+		while(rset.next()) {
+			at = new Attechment(rset.getInt("file_No"), rset.getString("origin_Name"), rset.getString("change_name"), rset.getString("file_path"), rset.getInt("file_Level"));
+			
+		}
+		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}return at;
+	
+	
+	
+}
 public oneComment adreportoneComment(int ono, Connection conn){
 	PreparedStatement pstmt = null;
 	ResultSet rset = null;
