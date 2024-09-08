@@ -318,7 +318,7 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
               <div id="nickname"><%= comment.getUserName() %></div>
               <div id="date"><%= comment.getCreateDate() %></div>
               <div id="edit">
-                <input type="submit" onclick='report(<%= c.get(i).getUserNo() %>, <%= c.get(i).getComNo() %>);' value="리뷰신고" id="report-btn" />
+                <input type="submit" onclick='report(<%= c.get(i).getUserNo() %>, <%= c.get(i).getComNo() %>);' value="신고" id="report-btn" />
               </div>
               <div id="score"><div class="material-icons">star</div><div><%= comment.getScore() %></div></div>
             </div>
@@ -493,7 +493,6 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
             $(".ModalPopup").center();
           }
           
-          // 한줄평 작성
 
           // 탑버튼
           $(document).ready(function () {
@@ -544,7 +543,7 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
 		    });
 		});
           
-          
+        // 좋아요 버튼
         function like(){
         	$.ajax({
         		url:"onedayLike.on",
@@ -579,6 +578,7 @@ ArrayList<Oneday> aList = (ArrayList<Oneday>)request.getAttribute("aList");
                  },
         	})
         }
+        
      // 네이버 지도
       function initMap(lat, lng) {
        var mapOptions = {

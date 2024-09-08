@@ -23,7 +23,7 @@ public class PlayDao {
 	
 	public PlayDao() {
 		try {
-			prop.loadFromXML(new FileInputStream(PlayDao.class.getResource("/db/sql/play-mapper.xml").getPath()));
+			prop.loadFromXML(new FileInputStream(PlayDao.class.getResougrce("/db/sql/play-mapper.xml").getPath()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

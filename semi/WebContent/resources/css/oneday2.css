@@ -602,3 +602,11 @@ h3 {
   height: 322px;
   justify-content: space-evenly;
 }
+
+#report-btn{
+	border: none;
+    background-color: #e4d4fa;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: bolder;
+}
