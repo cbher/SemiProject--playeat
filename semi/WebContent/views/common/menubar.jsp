@@ -315,6 +315,9 @@ header .menubar::before{
             <div class="login2">
             <br>
             <b><%= loginUser.getUserName() %>님</b>의 방문을 환영합니다. <br><br>
+            <%if(loginUser.getUserId().equals("admin")) {%>
+                <a href="<%= contextPath %>/admain.ad">관리자페이지</a>
+                <%} %>
                 <a href="<%= contextPath %>/myPage.me">마이페이지</a>
                 <a href="<%= contextPath %>/logout.me">로그아웃</a>
             </div>

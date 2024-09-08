@@ -18,7 +18,7 @@ select
 	introduce, 
 	report_count
 from member
-order by user_no
+order by user_no desc
 
 </entry>
 <entry key="adMemberDateList">
@@ -36,7 +36,7 @@ select
 	introduce, 
 	report_count
 from member
-order by enrolle_date , user_no
+order by enrolle_date , user_no desc
 
 </entry>
 
@@ -56,7 +56,7 @@ select
 	introduce, 
 	report_count
 from member
-order by report_count desc ,  user_no
+order by report_count desc ,  user_no desc
 
 </entry>
 
@@ -79,6 +79,7 @@ order by report_count desc ,  user_no
 		member
 	where 
 		user_no = ?
+	order by 1 desc
 		
 </entry>
 <entry key="adMemberDetailat">
@@ -93,6 +94,7 @@ from
    attechment
 where 
    user_no= ?
+   order by 1 desc
 		
 </entry>
 
@@ -134,6 +136,7 @@ where
 	from report a
 	join member m on (a.user_no = m.user_no)
 	where report_status = 'Y'
+	
 
 </entry>
 
@@ -208,7 +211,7 @@ where
 	from report a
 	join member m on (a.user_no = m.user_no)
 	where report_no = ?
-
+order by 1 desc
 
 </entry>
 
@@ -228,6 +231,26 @@ where report_no = ?
 <entry key="adNoreport">
 
 update report set report_status = 'N' where report_no= ?
+
+</entry>
+
+
+<entry key="adreportReview">
+
+select review_no,r_title,r_content, r_date,user_no, play_no from review where review_no = ?
+
+</entry>
+
+
+<entry key="adreportoneComment">
+
+select com_no,com_content, create_date from one_comment where com_no = ?
+
+</entry>
+
+<entry key="adreportReviewat">
+
+select file_No,origin_Name,change_name,file_path,file_Level from attechment where review_no = ?
 
 </entry>
 

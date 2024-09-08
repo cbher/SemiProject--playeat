@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import db.com.semi.Questions.model.service.QuestionsService;
 import db.com.semi.Questions.model.vo.Questions;
@@ -42,7 +43,10 @@ public class QuestionsUpdate extends HttpServlet {
 	int result = new QuestionsService().QuestionsUpdate(qno,answer);
 	 ArrayList<Questions> list =  new QuestionsService().QuestionsList();
 	 request.setAttribute("list", list);
+	 
 	if(result>0) {
+		HttpSession session = request.getSession();
+		session.setAttribute("adAlertMsg", "문의사항 답변완료");
 		request.getRequestDispatcher("/views/adminQuestions/adminQuestionsMainMenu.jsp").forward(request, response);
 		}else{
 	

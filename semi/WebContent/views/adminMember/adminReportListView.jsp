@@ -113,12 +113,12 @@ table td{text-align: center;}
 		<td width="90"><%=list.get(a).getCreateReport()%></td>
 		
 		<td width="90">
-		<%if(list.get(a).getReview_no() == 1 ){%>리뷰게시판
-		<%}else if(list.get(a).getpNo() == 1){  %>장소게시판
-		<%}else if(list.get(a).getpComNo() == 1){ %>장소 한줄평 게시판
-		<%}else if(list.get(a).getOneNo() == 1){ %> 원클래스 게시판
-		<%}else if(list.get(a).getoComNo() == 1){ %> 원클래스 한줄평 게시판
-		<%}else if(list.get(a).getcNo()== 1)  {%>요리게시판
+		<%if(list.get(a).getReview_no() >= 1 ){%>리뷰게시판
+		<%}else if(list.get(a).getpNo() >= 1){  %>장소게시판
+		<%}else if(list.get(a).getpComNo() >= 1){ %>장소 한줄평 게시판
+		<%}else if(list.get(a).getOneNo() >= 1){ %> 원클래스 게시판
+		<%}else if(list.get(a).getoComNo() >= 1){ %> 원클래스 한줄평 게시판
+		<%}else if(list.get(a).getcNo()>= 1)  {%>요리게시판
 		<%}else{ %>오류 오류!
 		<%} %>
 
