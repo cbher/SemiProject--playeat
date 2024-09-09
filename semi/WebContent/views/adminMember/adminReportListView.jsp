@@ -91,7 +91,7 @@ table td{text-align: center;}
 	<thead>
 	<tr>
 	<th width="70" height="30">신고번호</th>
-	<th width="300px">신고내역</th>
+
 	<th width="120">신고된 사용자</th>
 	<th width="100">신고일</th>
 	<th width="200">신고된게시판</th>
@@ -108,7 +108,7 @@ table td{text-align: center;}
 	<%for(int a = startRow -1  ; a < endRow ; a++){ %>
 	<tr>
 		<td width="70" height="30"><%= list.get(a).getReportNo() %></td>
-		<td width="300px" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis; "><%= list.get(a).getReprotContent() %></td>
+
 		<td width="90"><%=list.get(a).getUserName()%></td>
 		<td width="90"><%=list.get(a).getCreateReport()%></td>
 		
