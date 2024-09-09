@@ -180,15 +180,11 @@ table *{
             <th>피신고자 명</th>
             <td>&nbsp; <%=list.getUserName() %></td>
         </tr>
-        <tr>
-            <th height="30">신고내역</th>
-            <td colspan="3">&nbsp; <%=list.getReprotContent() %></td>
-         
-        </tr>
+    
         <% if(list.getcNo()>0){ %>
         <tr>
         <th>신고내역 상세보기</th>
-        <td><a href="Detailbo.bo?bno=<%=list.getcNo()%>">요리게시판 신고내역 바로가기</a></td>
+        <td colspan="3"><a href="Detailbo.bo?bno=<%=list.getcNo()%>" style="border: 0px">요리게시판 신고내역 바로가기</td></a></td>
         </tr>
         <%} %>
         
