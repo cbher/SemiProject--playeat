@@ -301,7 +301,7 @@
   
     <header>
         <div class="inner">
-            <a href="" class="logo">
+            <a href="<%= contextPath %>" class="logo">
                 <img src="resources/backGroundImg/play_eat-removebg-preview.png" alt="">
             </a>
             <div class="profileBox">
@@ -331,7 +331,7 @@
         <section class="menubar">
             <div class="menu">
                 <ul class="inner">
-                    <div><a href="<%= contextPath%>">마이페이지</a></div>
+                    <div><a href="<%= contextPath%>/mypage.myreview">마이페이지</a></div>
                     <div><a href="<%= contextPath%>/mylist.mo?userNo=<%=loginUser.getUserNo() %>">찜 리스트</a></div>
                     <div><a href="<%= contextPath%>/calender.co">캘린더</a></div>
                     <div><a href="<%= contextPath%>/editProfile.eo?userNo=<%=loginUser.getUserNo() %>">프로필 수정</a></div>
