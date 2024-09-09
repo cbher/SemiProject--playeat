@@ -153,7 +153,7 @@ table *{
     <thead></thead>
     <tbody>
         <tr>
-            <th width="140" height="30">신고번호</th>
+            <th width="160" height="30">신고번호</th>
             <td width="250">&nbsp; <%=list.getReportNo() %></td>
             <th width ="140">신고 제제 상황</th>
             <td width ="450" >&nbsp; <%if(list.getReprotStatus().equals("Y")){ %>대기중<%}else{ %>제제완료<%} %></td>
@@ -209,7 +209,7 @@ table *{
         <%if(rlist != null && at != null){ %>
         
         <td colspan="3">
-        <img alt="" src="<%=contextPath %>/<%=at.getFilePath()+at.getChangeName() %>">
+        <img alt=""style="max-width: 100%; max-height: 500px;"  src="<%=contextPath %>/<%=at.getFilePath()+at.getChangeName() %>">
         </td>
         <%}else{ %>
         <td colspan="3">사진 파일이 없습니다</td>
