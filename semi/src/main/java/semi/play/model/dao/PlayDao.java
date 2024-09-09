@@ -511,7 +511,6 @@ public class PlayDao {
 		}
 		return plist;
 	}
-
 	
 	public int reportReply(Connection conn, int placeNo, int comNo, String userId) {
 		int result = 0;
@@ -523,7 +522,7 @@ public class PlayDao {
 		try {
 			pstmt = conn.prepareStatement(user);
 			pstmt.setString(1, userId);
-			
+		
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				int userNo = rset.getInt("user_no");
@@ -532,9 +531,7 @@ public class PlayDao {
 				pstmt.setInt(2, comNo);
 				pstmt.setInt(3, userNo);
 				result = pstmt.executeUpdate();
-				
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -564,7 +561,6 @@ public class PlayDao {
 				pstmt.setInt(2, placeNo);
 				
 				int result = pstmt.executeUpdate();
-
 				
 			}
 		} catch (SQLException e) {

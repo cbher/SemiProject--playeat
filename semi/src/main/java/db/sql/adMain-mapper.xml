@@ -4,7 +4,7 @@
 	<entry key="adoneList">
 select count(1) as count
 from onedayclass
-where one_status = 'Y'
+where one_status = 'N'
 
 	</entry>
 	

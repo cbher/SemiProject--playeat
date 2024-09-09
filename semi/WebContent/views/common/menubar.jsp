@@ -318,7 +318,7 @@ header .menubar::before{
             <%if(loginUser.getUserId().equals("admin")) {%>
                 <a href="<%= contextPath %>/admain.ad">관리자페이지</a>
                 <%} %>
-                <a href="<%= contextPath %>/myPage.me">마이페이지</a>
+                <a href="<%= contextPath %>/mypage.myreview">마이페이지</a>
                 <a href="<%= contextPath %>/logout.me">로그아웃</a>
             </div>
         </div>

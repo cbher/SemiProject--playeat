@@ -14,10 +14,10 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Insert title here</title>
+<title>상세 검색 페이지</title>
 	<link rel="stylesheet" href="/semi/resources/css/detail_search.css?after">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script defer type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq&submodules=geocoder"></script>
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=lm9hxz6gtq&submodules=geocoder"></script>
     <script defer src="/semi/resources/js/detail_search.js?after"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -659,8 +659,6 @@
 
 	                    const infoWindowContent = "<div style='width:200px; text-align:center; padding:10px;'>" +
 	                        "<h3>" + address + "</h3>" +
-	                        "<p>매장 번호: " + getPlaceInfo(address).placeCall + "</p>" +
-	                        "<p>영업시간: " + getPlaceInfo(address).businessTime + "</p>" +
 	                        "</div>";
 
 	                    const infoWindow = new naver.maps.InfoWindow({
