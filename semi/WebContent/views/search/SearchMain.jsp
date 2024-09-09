@@ -659,8 +659,6 @@
 
 	                    const infoWindowContent = "<div style='width:200px; text-align:center; padding:10px;'>" +
 	                        "<h3>" + address + "</h3>" +
-	                        "<p>매장 번호: " + getPlaceInfo(address).placeCall + "</p>" +
-	                        "<p>영업시간: " + getPlaceInfo(address).businessTime + "</p>" +
 	                        "</div>";
 
 	                    const infoWindow = new naver.maps.InfoWindow({
