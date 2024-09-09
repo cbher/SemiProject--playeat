@@ -4,9 +4,9 @@
 ![PLAEAT로고](semi/WebContent/resources/backGroundImg/play_eat-removebg-preview.png)
 
 
+# 프로젝트 소개
 
-
-
+다양한 정보를 얻기 위해 여러사이트를 돌아다닐 필요없이 한 사이트에서 사용자들이 대부분의 정보를 얻을수 있으며 친구 또는 연인들이 즐거운 하루를 보낼수 있도록 정보를 드리는 것이 저희가 사이트를 만든 이유입니다.
 
 
 
