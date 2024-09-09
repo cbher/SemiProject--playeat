@@ -81,9 +81,9 @@ table-layout: fixed;}
         
         <option >정렬하기</option>
         <option value="all">전체</option>
-        <option value="ready">신청 대기중</option>
-        <option value="clear">신청 승인</option>
-        <option value="fail" >신청 반려</option>
+        <option value="ready">삭제된 클래스</option>
+        <option value="clear">정상 클래스</option>
+       
     
         </select>
     </form>
@@ -130,9 +130,9 @@ table-layout: fixed;}
             <td  ><%=list.get(a).getEntPeople() %></td>
             
             <%if(list.get(a).getOneStatus().equals("Y")) {%>
-           <td width="70" style="color:red; font-weight:900">X</td>
-            <%}else if(list.get(a).getOneStatus().equals("N")){ %>
            	<td width="70" style="color: greenyellow; font-weight: 900;" >O</td>
+            <%}else if(list.get(a).getOneStatus().equals("N")){ %>
+           <td width="70" style="color:red; font-weight:900">X</td>
              <%} %>
 		 
            
