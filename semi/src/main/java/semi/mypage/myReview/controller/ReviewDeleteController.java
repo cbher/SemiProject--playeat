@@ -1,4 +1,4 @@
-package semi.Review.controller;
+package semi.mypage.myReview.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,21 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import semi.Review.model.service.ReviewService;
-import semi.Review.model.vo.Attachment2;
-import semi.Review.model.vo.Review;
+import semi.mypage.myReview.model.service.MyReviewService;
 
 /**
- * Servlet implementation class ReviewUpdateController
+ * Servlet implementation class ReviewDeleteController
  */
-@WebServlet("/updateForm.re")
-public class ReviewUpdateFormController extends HttpServlet {
+@WebServlet("/ReviewDelete.ro")
+public class ReviewDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReviewUpdateFormController() {
+    public ReviewDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +28,15 @@ public class ReviewUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int rNo = Integer.parseInt(request.getParameter("rNo"));
-		ReviewService rService = new ReviewService();
 		
-		Review r = rService.selectReview(rNo);
-		Attachment2 at = rService.selectAttachment(rNo);
+		int reviewNo = Integer.parseInt(request.getParameter("rno"));
 		
-		request.setAttribute("r", r);
-		request.setAttribute("at", at);
+		int result = new MyReviewService().deleteMyReview(reviewNo);
 		
-		request.getRequestDispatcher("views/Review/updateReview.jsp").forward(request, response);
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "리뷰 삭제 완료");
+			response.sendRedirect(request.getContextPath()+"/mypage.myreview?cpage=1");
+		}
 	}
 
 	/**

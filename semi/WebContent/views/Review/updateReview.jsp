@@ -1,5 +1,5 @@
 <%@page import="java.io.Console"%>
-<%@page import="semi.Review.model.vo.Attachment"%>
+<%@page import="semi.Review.model.vo.Attachment2"%>
 <%@page import="semi.Review.model.vo.Review"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%> 
@@ -7,14 +7,14 @@ pageEncoding="UTF-8"%>
 String placeNo = request.getParameter("placeNo");
 String rTitle = request.getParameter("rTitle"); 
 Review r = (Review)request.getAttribute("r");
-Attachment at = (Attachment)request.getAttribute("at");
+Attachment2 at = (Attachment2)request.getAttribute("at");
 %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>리뷰 작성</title>
+    <title>리뷰 수정</title>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link
