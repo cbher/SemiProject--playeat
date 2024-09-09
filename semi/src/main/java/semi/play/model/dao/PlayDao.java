@@ -511,7 +511,7 @@ public class PlayDao {
 		}
 		return plist;
 	}
-<<<<<<< HEAD
+
 	
 	public int reportReply(Connection conn, int placeNo, int comNo, String userId) {
 		int result = 0;
@@ -533,8 +533,17 @@ public class PlayDao {
 				pstmt.setInt(3, userNo);
 				result = pstmt.executeUpdate();
 				
-=======
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 
+		return result;
+	}
 	public double scoreAvg(Connection conn, int placeNo) {
 		double score = 0;
 		PreparedStatement pstmt = null;
@@ -555,7 +564,7 @@ public class PlayDao {
 				pstmt.setInt(2, placeNo);
 				
 				int result = pstmt.executeUpdate();
->>>>>>> jms
+
 				
 			}
 		} catch (SQLException e) {
@@ -564,10 +573,10 @@ public class PlayDao {
 			close(rset);
 			close(pstmt);
 		}
-<<<<<<< HEAD
-		return result;
-=======
+
 		return score;
->>>>>>> jms
+
+	
+
 	}
 }
