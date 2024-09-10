@@ -170,6 +170,9 @@
   - 🔵회원가입
     [회원가입](./semi/WebContent/resources/ReadMe/정민식/회원가입.gif)
 
+  - 🔵명예의 전당
+    [명예의 전당](./semi/WebContent/resources/ReadMe/정민식/명예의전당.gif)
+
   - 🔵원데이 클래스 상세 화면
     [원데이클래스 상세](./semi/WebContent/resources/ReadMe/정민식/원데이.gif)
 
