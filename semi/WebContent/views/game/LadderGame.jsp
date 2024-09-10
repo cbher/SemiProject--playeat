@@ -17,6 +17,7 @@
 /*
 만든 사람 : 김용준
 만든 날짜 : 2008년 8월에
+https://t1.daumcdn.net/cfile/tistory/273CA73954DC589724
 */
 
 var Yl = {

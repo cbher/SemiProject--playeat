@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 <%@page import="java.util.List"%>
-=======
+
 <%@page import="semi.Review.model.vo.Attachment2"%>
->>>>>>> jms
+
 <%@page import="semi.Review.model.vo.Review"%>
 <%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
@@ -20,7 +20,7 @@ pageEncoding="UTF-8"%>
 	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
 	ArrayList<Review> r = (ArrayList<Review>)request.getAttribute("r");
 	ArrayList<Play> recentRestaurant = (ArrayList<Play>)request.getAttribute("recentRestaurant");
-<<<<<<< HEAD
+
 	
 	
 	 String placeTitle = p.getPlaceTitle();
@@ -73,8 +73,7 @@ pageEncoding="UTF-8"%>
 	
 	
 	
-=======
->>>>>>> jms
+
 %>
 <!DOCTYPE html>
 <html>
@@ -169,32 +168,8 @@ pageEncoding="UTF-8"%>
 </head>
   <body>
     <%@ include file="../common/menubar.jsp" %>
-<<<<<<< HEAD
-    <%@include file="../common/badge.jsp" %>
-=======
 
-    <div class="badge">
-      <div class="text">최근 본 장소</div>
-      <a href="javascript:void(0)" class="place">
-        <img src="" alt="" />
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-      <a href="javascript:void(0)" class="place">
-        <img src="" alt="" />
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-      <a href="javascript:void(0)" class="place">
-        <img src="" alt="" />
-        <div class="badge-title">
-          <h2>여긴어디야</h2>
-        </div>
-      </a>
-    </div>
->>>>>>> jms
+    <%@include file="../common/badge.jsp" %>
 
     <!-- 상세 -->
     <div class="info-box">
@@ -381,9 +356,7 @@ pageEncoding="UTF-8"%>
   </body>
 
   <script>
-<<<<<<< HEAD
-   
-=======
+
   
   $(function(){
 	  scoreAvg();
