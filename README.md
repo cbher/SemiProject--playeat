@@ -77,6 +77,8 @@
 # 🎮프로젝트 구현
 
 - **🔴조장 : 이준영**
+- <details>
+<summary>관리자페이지</summary>
 - - 🔴관리자 메인페이지
 
 ![관리자 메인 페이지](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EA%B4%80%EB%A6%AC%EC%9E%90%20%EB%A9%94%EC%9D%B8.gif)
@@ -108,6 +110,8 @@
    - 신고 목록![신고 목록](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%8B%A0%EA%B3%A0%EB%AA%A9%EB%A1%9D%20%ED%99%95%EC%9D%B8%ED%95%98%EB%9F%AC%EA%B0%80%EA%B8%B0.gif)
    - 신고 제제![신고 제제](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%A0%9C%EC%A0%9C%EC%84%B1%EA%B3%B5%20%EB%A6%AC%ED%8F%BF%EA%B8%B0%EC%A4%80.gif)
    - 신고 제제없음![신고 제제없음](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%A0%9C%EC%A0%9C%EC%97%86%EC%9D%8C.gif)
+  
+    </details>
 - **🟡조원 : 이승헌**
 
 ---
