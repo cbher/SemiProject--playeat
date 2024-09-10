@@ -359,6 +359,7 @@ public class adOneDayDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("adOneDayDetele");
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, ono);
@@ -370,6 +371,7 @@ public class adOneDayDao {
 		}finally {
 			close(conn);
 		}
+		System.out.println(result);
 		return result;
 	}
 	public int adOneDayinsertFile(adOneDayClass a ,Connection conn) {

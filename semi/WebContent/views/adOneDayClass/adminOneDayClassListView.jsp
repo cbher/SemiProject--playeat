@@ -130,9 +130,9 @@ table-layout: fixed;}
             <td  ><%=list.get(a).getEntPeople() %></td>
             
             <%if(list.get(a).getOneStatus().equals("Y")) {%>
-           	<td width="70" style="color: greenyellow; font-weight: 900;" >O</td>
-            <%}else if(list.get(a).getOneStatus().equals("N")){ %>
            <td width="70" style="color:red; font-weight:900">X</td>
+            <%}else if(list.get(a).getOneStatus().equals("N")){ %>
+           	<td width="70" style="color: greenyellow; font-weight: 900;" >O</td>
              <%} %>
 		 
            

@@ -96,6 +96,7 @@ public class adOneDayService {
 			rollback(conn);
 		}
 		close(conn);
+		
 		return result;
 	}
 	public int adonedayInsert(adOneDayClass a,ArrayList<Attechment> list) {
