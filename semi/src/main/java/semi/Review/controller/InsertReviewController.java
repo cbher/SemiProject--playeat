@@ -15,6 +15,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import com.oreilly.servlet.MultipartRequest;
 
 import semi.Review.model.service.ReviewService;
+import semi.Review.model.vo.Attachment2;
 import semi.Review.model.vo.Review;
 import semi.common.MyFileRenamePolicy;
 import semi.cooking.model.vo.Attachment;
@@ -66,13 +67,14 @@ public class InsertReviewController extends HttpServlet {
 	         review.setpNo(placeNo);
 	         review.setrNo(rNo);
 	         
-			Attachment at = null; // 처음에는 null로 초기화, 넘어온 첨부파일이 있다면 생성
+			Attachment2 at = null; // 처음에는 null로 초기화, 넘어온 첨부파일이 있다면 생성
 			if(multiRequest.getOriginalFileName("file1") != null) {
 				
-				at = new Attachment();
+				at = new Attachment2();
 				at.setOriginName(multiRequest.getOriginalFileName("file1"));
 				at.setChangeName(multiRequest.getFilesystemName("file1"));
 				at.setFilePath("/resources/review_upfiles/");
+				at.setUserNo(userNo);
 			}
 			int result = new ReviewService().insertReview(review, at);
 			if(result > 0) {

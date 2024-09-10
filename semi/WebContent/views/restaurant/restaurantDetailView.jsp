@@ -282,7 +282,7 @@ pageEncoding="UTF-8"%>
         <div>
         	<input type="hidden" name="placeNo" value="<%= p.getPlaceNo() %>">
         	<input type="hidden" name="rTitle" value="<%= p.getPlaceTitle() %>">
-        	<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>
+        	<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
           	<input type="submit" value="리뷰작성" id="review-btn" />
         </div>
         </form>
