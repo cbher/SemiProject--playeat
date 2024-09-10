@@ -76,7 +76,7 @@ public class CookingInsertController extends HttpServlet {
 			
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", "성공적으로 게시물이 작성되었습니다.");
-				response.sendRedirect(request.getContextPath() + "/clist.co?cpage=1");
+				response.sendRedirect(request.getContextPath() + "/clist.co");
 			}
 		}
 		

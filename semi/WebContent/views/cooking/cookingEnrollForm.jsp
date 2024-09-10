@@ -31,12 +31,7 @@
         }
 
         #enroll-form table{border: 1px solid white; width: 800px;}
-        #enroll-form table th{color: #8b7dbe;}		
-        #enroll-form #category{
-            position: relative;
-            top: -15px;
-            right: -850px;
-        }		
+        #enroll-form table th{color: #8b7dbe;}
 
         #enroll-form input, #enroll-form textarea{
             width: 90%;
@@ -65,26 +60,18 @@
 </head>
 <body>
 	<%@ include file="../common/menubar.jsp" %>
-	<%@ include file="../common/badge.jsp" %>
 	
-	<% if(loginUser == null){ %>
-		<script>
-			alert("로그인 후 이용가능합니다.");
-		</script>
-	<% } %>
-	
-	<% if(loginUser != null){ %>
 	<div class="outer">
         <div class="inner">
             <br>
             <h1 align="center" style="color: #8b7dbe;">요리게시판 작성하기</h1>
             <br> <br>
-            <form action="<%= contextPath %>/insert.co" id="enroll-form" method="post" enctype="multipart/form-data">
+            <form action="insert.co" id="enroll-form" method="post" enctype="multipart/form-data">
                 <select name="category" id="category">
                     <option value="1">요리게시판</option>
                     <option value="2">명예의 전당</option>
                 </select>
-                <input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>">
+                <input type="hidden" name="userNo" value="">
                 <table align="center">
                     <tr>
                         <th width="100" height="30">제목</th>
@@ -198,15 +185,5 @@
             </form>
         </div>
     </div>
-    <% }else{ %>
-    	<div class="outer">
-    		<div class="inner" style="text-align:center">
-    			<br><br><br>
-    			 <h1 align="center" style="color: #8b7dbe;">요리게시판 작성하기</h1>
-    			 <br>
-	    		로그인 후 이용가능합니다.
-    		</div>
-    	</div>
-    <% } %>
 </body>
 </html>

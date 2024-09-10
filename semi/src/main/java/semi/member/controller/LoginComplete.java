@@ -40,8 +40,7 @@ public class LoginComplete extends HttpServlet {
 		
 		if(loginUser == null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg", "아이디나 비밀번호를 확인해주세요.");
-			response.sendRedirect(request.getContextPath()+"/login.me");
+			session.setAttribute("alertMsg", "로그인 실패");
 			
 		}else {
 			HttpSession session = request.getSession();

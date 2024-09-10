@@ -2,45 +2,17 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectCookingList">
-   		SELECT *
-		  FROM(
-		    SELECT ROWNUM RNUM, D.*
-		      FROM (
-		        SELECT
-		               C.C_NO
-		             , C_TITLE
-		             , COUNT
-		             , FILE_PATH || CHANGE_NAME "TITLEIMG"
-		             , C_STAR
-		          FROM COOK_BOARD C
-		          JOIN ATTECHMENT A ON (C.C_NO = A.C_NO)
-		         WHERE C.STATUS = 'Y'
-		           AND FILE_LEVEL = 1
-		         ORDER
-		            BY C.C_NO DESC
-		            )D
-		     )
-		 WHERE RNUM BETWEEN ? AND ?
-	</entry>
-	<entry key="selectCookingSlideList">
 		SELECT
-		               C.C_NO
-		             , C_TITLE
-		             , COUNT
-		             , FILE_PATH || CHANGE_NAME "TITLEIMG"
-		             , C_STAR
-		          FROM COOK_BOARD C
-		          JOIN ATTECHMENT A ON (C.C_NO = A.C_NO)
-		         WHERE C.STATUS = 'Y'
-		           AND FILE_LEVEL = 1
-		         ORDER
-		            BY C.C_NO DESC
-	</entry>
-	<entry key="selectListCount">
-		SELECT
-			   COUNT(*) "COUNT"
-		  FROM COOK_BOARD
-		 WHERE STATUS = 'Y'
+		       C.C_NO
+		     , C_TITLE
+		     , C.COUNT
+		     , FILE_PATH || CHANGE_NAME "TITLEIMG"
+		  FROM COOK_BOARD C
+		  JOIN ATTECHMENT A ON (A.C_NO = C.C_NO)
+		 WHERE C.STATUS = 'Y'
+           AND FILE_LEVEL = 1
+		 ORDER
+		    BY C_DATE DESC
 	</entry>
 	<entry key="insertCookBoard">
 		INSERT
@@ -71,6 +43,7 @@
 		  , CHANGE_NAME
 		  , FILE_PATH
 		  , FILE_LEVEL
+		  , BOARD_CATEGORY
 		  , C_NO
 		  )
 		  VALUES
@@ -80,109 +53,8 @@
 		  , ?
 		  , ?
 		  , ?
+		  , ?
 		  , COOK_BOARD_SEQ.CURRVAL
 		  )
 	</entry>
-	<entry key="increaseCount">
-		UPDATE COOK_BOARD
-		   SET COUNT = COUNT + 1
-		 WHERE C_NO = ?
-		   AND STATUS = 'Y'
-	</entry>
-	<entry key="selectCookBoard">
-		SELECT
-		       C_NO
-		     , C_TITLE
-		     , C_CONTENTS
-		     , C_DATE
-		     , USER_ID
-		     , C_CATEGORY
-		     , C_STAR
-		  FROM COOK_BOARD C
-		  JOIN MEMBER USING (USER_NO)
-		 WHERE C.STATUS = 'Y'
-		   AND C.C_NO = ?
-	</entry>
-	<entry key="selectAttachment">
-	 	SELECT 
-		       FILE_NO
-		     , ORIGIN_NAME
-		     , CHANGE_NAME
-		     , FILE_PATH
-		  FROM ATTECHMENT
-		 WHERE C_NO = ?
-	</entry>
-	<entry key="updateCookBoard">
-		UPDATE COOK_BOARD
-		   SET 
-		       C_TITLE = ?
-		     , C_CONTENTS = ?
-		     , C_CATEGORY = ?
-		 WHERE C_NO = ?	
-	</entry>
-	<entry key="deleteCookBoard">
-		UPDATE COOK_BOARD
-		   SET STATUS = 'N'
-		 WHERE C_NO = ?
-	</entry>
-	<entry key="increaseLike">
-		UPDATE COOK_BOARD
-		   SET C_STAR = C_STAR + 1
-		 WHERE C_NO = ?
-	</entry>
-	<entry key="insertLikeList">
-		INSERT
-		  INTO	LIKE_LIST
-		  (
-		    LIKE_NO
-		  , USER_NO
-		  , C_NO 
-		  )
-		  VALUES
-		  (
-		    LIKE_LIST_SEQ.NEXTVAL
-		  , ?
-		  , ?
-		  )
-	</entry>
-	<entry key="selectLikeList">
-		SELECT
-		       COUNT(*) "COUNT"
-		  FROM LIKE_LIST
-		 WHERE USER_NO = ?
-		   AND C_NO = ?
-	</entry>
-	<entry key="decreaseLike">
-		UPDATE COOK_BOARD
-		   SET C_STAR = C_STAR - 1
-		 WHERE C_NO = ?
-	</entry>
-	<entry key="deleteLikeList">
-		DELETE
-		  FROM LIKE_LIST
-		 WHERE USER_NO = ?
-		   AND C_NO = ?
-	</entry>
-	<entry key="reportBoard">
-		INSERT
-		  INTO REPORT
-		  (
-		    REPORT_NO
-		  , C_NO
-		  , USER_NO
-		  )
-		  VALUES
-		  (
-		    REPORT_SEQ.NEXTVAL
-		  , ?
-		  , ?
-		  )
-	</entry>
-	<entry key="selectUserNo">
-		SELECT
-			   USER_NO
-		  FROM MEMBER
-		 WHERE USER_ID = ?
-	</entry>
-	
 </properties>

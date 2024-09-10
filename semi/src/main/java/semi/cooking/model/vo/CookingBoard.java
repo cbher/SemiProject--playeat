@@ -12,8 +12,8 @@ public class CookingBoard {
 	private int count;
 	private String userNo;
 	private int cookCategory;
+	
 	private String titleImg;
-	private String NickName;
 	
 	public CookingBoard() {}
 
@@ -31,28 +31,16 @@ public class CookingBoard {
 		this.cookCategory = cookCategory;
 	}
 	
+	
+	
 
-	public CookingBoard(int cBoardNo, String cBoardTitle, int count, String titleImg, int score) {
+	
+	public CookingBoard(int cBoardNo, String cBoardTitle, int count, String titleImg) {
 		super();
 		this.cBoardNo = cBoardNo;
 		this.cBoardTitle = cBoardTitle;
 		this.count = count;
 		this.titleImg = titleImg;
-		this.score = score;
-	}
-	
-	
-
-	public CookingBoard(int cBoardNo, String cBoardTitle, String cBoardContent, Date createDate, String userNo,
-			int cookCategory, int score) {
-		super();
-		this.cBoardNo = cBoardNo;
-		this.cBoardTitle = cBoardTitle;
-		this.cBoardContent = cBoardContent;
-		this.createDate = createDate;
-		this.userNo = userNo;
-		this.cookCategory = cookCategory;
-		this.score = score;
 	}
 
 	public int getcBoardNo() {
@@ -134,26 +122,14 @@ public class CookingBoard {
 	public void setTitleImg(String titleImg) {
 		this.titleImg = titleImg;
 	}
-	
-	
-	
 
-	public String getNickName() {
-		return NickName;
-	}
-
-	public void setNickName(String nickName) {
-		NickName = nickName;
-	}
 
 	@Override
 	public String toString() {
 		return "CookingBoard [cBoardNo=" + cBoardNo + ", cBoardTitle=" + cBoardTitle + ", cBoardContent="
 				+ cBoardContent + ", createDate=" + createDate + ", status=" + status + ", score=" + score + ", count="
-				+ count + ", userNo=" + userNo + ", cookCategory=" + cookCategory + ", titleImg=" + titleImg
-				+ ", NickName=" + NickName + "]";
+				+ count + ", userNo=" + userNo + ", cookCategory=" + cookCategory + "]";
 	}
-
 	
 	
 }

@@ -45,7 +45,7 @@ public class MemberInsertController extends HttpServlet {
 		
 		// 기본생성자로 생성 후 setter 메소드 이용해서 담기
 		// "매개변수 생성자를 이용해서 생성과 동시에 담기"
-		Member m = new Member(userId, userPwd, userName, nickname, phone, email);
+		Member m = new Member(userId, userPwd, userName, phone, email, nickname);
 		
 		// 3) [요청처리(서비스 메소드 호출 및 결과 받기)
 		int result = new MemberService().insertMember(m);

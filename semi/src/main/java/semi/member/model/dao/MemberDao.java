@@ -35,7 +35,7 @@ private Properties prop = new Properties();
 				String sql = prop.getProperty("insertMember");
 				
 				try {
-					pstmt = conn.prepareStatement(sql); // 誘몄셿�꽦�맂 荑쇰━
+					pstmt = conn.prepareStatement(sql); // 미완성된 쿼리
 					
 					pstmt.setString(1, m.getUserId());
 					pstmt.setString(2, m.getUserPwd());
@@ -56,7 +56,7 @@ private Properties prop = new Properties();
 	}
 	
 	public int idCheck(Connection conn, String checkId) {
-		// select臾� => ResultSet (�븳媛� �닽�옄) => int
+		// select문 => ResultSet (한개 숫자) => int
 		int count = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -110,7 +110,7 @@ private Properties prop = new Properties();
 
 
 	public Member loginMember(Connection conn, String userId, String userPwd) {
-		// select臾� => ResultSet 媛앹껜 (�븳�뻾) => Member 媛앹껜
+		// select문 => ResultSet 객체 (한행) => Member 객체
 		Member m = null;
 		
 		PreparedStatement pstmt = null;
@@ -118,12 +118,15 @@ private Properties prop = new Properties();
 		
 		String sql = prop.getProperty("loginMember");
 		try {
-			pstmt = conn.prepareStatement(sql); // 誘몄셿�꽦�맂 sql臾�
+			pstmt = conn.prepareStatement(sql); // 미완성된 sql문
 			
 			pstmt.setString(1, userId);
 			pstmt.setString(2, userPwd);
 			
-			rset = pstmt.executeQuery(); // 議고쉶�맂 寃곌낵媛� �엳�떎硫� �븳�뻾 | 議고쉶�룉 寃곌낵媛� �뾾�떎硫� �븘臾닿쾬�룄 �븞�떞源�
+			System.out.println("UserId: " + userId);
+			System.out.println("UserPwd: " + userPwd);
+			
+			rset = pstmt.executeQuery(); // 조회된 결과가 있다면 한행 | 조회돈 결과가 없다면 아무것도 안담김
 			
 			if(rset.next()) {
 				m = new Member(rset.getInt("user_no"),
@@ -148,238 +151,7 @@ private Properties prop = new Properties();
 		
 		return m;
 	}
-
-	public Member kakaoLoginMember(Connection conn, String userId) {
-Member m = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("kakaoLoginMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, userId);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				m = new Member(rset.getInt("user_no"),
-					       rset.getString("user_id"),
-					       rset.getString("user_pwd"),
-					       rset.getString("user_name"),
-					       rset.getString("nickname"),
-					       rset.getString("phone"),
-					       rset.getString("email"),
-					       rset.getDate("enrolle_date"),
-					       rset.getString("status"),
-					       rset.getString("introduce"),
-					       rset.getInt("report_count"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return m;
-	}
-
-	public int insertKakaoMember(Connection conn, Member m) {
-int result = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("insertMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, m.getUserId());
-			pstmt.setString(2, m.getUserPwd());
-			pstmt.setString(3, m.getUserName());
-			pstmt.setString(4, m.getNickName());
-			pstmt.setString(5, m.getPhone());
-			pstmt.setString(6, m.getEmail());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-
-	public Member searchId(Connection conn, String name, String email) {
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("searchId");
-		
-		try {
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, name);
-			pstmt.setString(2, email);
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				m = new Member(rset.getInt("user_no"),
-					       rset.getString("user_id"),
-					       rset.getString("user_pwd"),
-					       rset.getString("user_name"),
-					       rset.getString("nickname"),
-					       rset.getString("phone"),
-					       rset.getString("email"),
-					       rset.getDate("enrolle_date"),
-					       rset.getString("status"),
-					       rset.getString("introduce"),
-					       rset.getInt("report_count"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);		
-			close(pstmt);
-		}
-		return m;
-	}
-
-	public Member searchPwd(Connection conn, String userId, String name, String email) {
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("searchPwd");
-		
-		try {
-			
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, userId);
-			pstmt.setString(2, name);
-			pstmt.setString(3, email);
-         
-         rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				m = new Member(rset.getInt("user_no"),
-					       rset.getString("user_id"),
-					       rset.getString("user_pwd"),
-					       rset.getString("user_name"),
-					       rset.getString("nickname"),
-					       rset.getString("phone"),
-					       rset.getString("email"),
-					       rset.getDate("enrolle_date"),
-					       rset.getString("status"),
-					       rset.getString("introduce"),
-					       rset.getInt("report_count"));
-			}
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);		
-			close(pstmt);
-		}
-		return m;
-	}
-
-	public int changePwd(Connection conn, String userId, String userPwd) {
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("changePwd");
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, userPwd);
-			pstmt.setString(2, userId);
-			
-			result = pstmt.executeUpdate();
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-
-	public int incrementReportCount(Connection conn, int userNo) {
-		int result = 0;
-	    PreparedStatement pstmt = null;
-	    String sql = prop.getProperty("incrementReportCount");
-	    
-	    try {
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, userNo);
-	        result = pstmt.executeUpdate();
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    } finally {
-	        close(pstmt);
-	    }
-	    
-	    return result;
-	}
-
-	public int insertReport(Connection conn, int reviewNo, int userNo) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertReport");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, reviewNo);
-			pstmt.setInt(2, userNo);
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-
-	public int insertReport2(Connection conn, int comNo, int userNo) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertReport");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, comNo);
-			pstmt.setInt(2, userNo);
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
 	
 	
-
+	
 }
