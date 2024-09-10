@@ -148,6 +148,36 @@
 
 - **🟢조원 : 오명식**
 
+- 🟢나의 리뷰
+- 마이페이지 이동
+  ![마이페이지 이동](https://github.com/user-attachments/assets/464fdd39-6b71-4b51-aebb-fa13c7840a10)
+
+
+
+- 🟢나의 리뷰
+ ![리뷰](https://github.com/user-attachments/assets/fc3cb10a-7f58-4cba-8dca-798cc49591dc)
+
+- 리뷰 삭제
+  ![리뷰 삭제](https://github.com/user-attachments/assets/1268819a-e8c7-4c9d-b697-4ce64073a78a)
+
+
+- 🟢한줄평
+  ![한줄평](https://github.com/user-attachments/assets/49b3d047-856e-4d7d-ac34-0175bf6839eb)
+
+
+- 🟢프로필 수정
+ ![프로필 수정](https://github.com/user-attachments/assets/a1d76d9d-70ef-456c-ab30-fcd485323bf9)
+
+
+- 🟢내 정보 변경
+ ![회원정보 수정](https://github.com/user-attachments/assets/22ee95da-59ce-4abf-b63b-b31fe32ec605)
+
+
+- 🟢회원탈퇴
+  ![회원탈퇴](https://github.com/user-attachments/assets/04791d93-a8b8-4c99-b2f5-405e4f3139eb)
+
+  
+
 ---
 
 - **🔵조원 : 정민식**
