@@ -21,9 +21,11 @@
 
 - **조원 : 이승헌**
     - 메인 페이지 
-    - 최근 본 장소 뱃지  
-    - 홈페이지 내 미니게임 (사다리타기)
-    - 공지사항, 문의사항 및 자주묻는 질문
+    - 최근 본 목록 뱃지 (세션 사용)  
+    - 공지사항 게시판 (사진포함 등록, 삭제, 수정)
+    - 문의사항 게시판 (사진포함 등록, 삭제, 수정)
+    - 사다리타기 미니게임 (오픈소스 활용)
+
 
 - **조원 : 오명식** 
     - 마이페이지 
@@ -60,14 +62,14 @@
 
 
 # 개발환경
-- OS : Windows10
-- Developer Tools : Eclipse / VS Code / SqlDeveloper
-- Server : Apach Tomcat 9.0
-- DBMS : Oracle
-- Management : Git, GitHub
-- Front-end : HTML5 / CSS3 / JavaScript / jQuery / AJAX / JSON
-- BackEnd : Java, JSP & Servlet
-- API : 카카오 로그인 / 소셜 공유 API, 네이버 지도 API
+- **OS** : Windows10
+- **Developer Tools** : Eclipse / VS Code / SqlDeveloper
+- **Server** : Apach Tomcat 9.0
+- **DBMS** : Oracle
+- **Management** : Git, GitHub
+- **Front-end** : HTML5 / CSS3 / JavaScript / jQuery / AJAX / JSON
+- **BackEnd** : Java, JSP & Servlet
+- **API** : 카카오 로그인 / 소셜 공유 API, 네이버 지도 API
 
 # 테이블 설계
 
