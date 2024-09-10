@@ -82,7 +82,32 @@
 ![관리자 메인 페이지](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EA%B4%80%EB%A6%AC%EC%9E%90%20%EB%A9%94%EC%9D%B8.gif)
 
 ---
+- - 🔴문의사항
+  - 문의사항목록  ![문의사항 목록 ](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD%20%EB%AA%A9%EB%A1%9D.gif)
+  - 답변하기 ![문의사항 답변](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EB%AC%B8%EC%9D%98%EC%82%AC%ED%95%AD%20%EB%8B%B5%EB%B3%80%20%EC%A0%95%EC%83%81%EC%9E%91%EB%8F%99.gif)
+    
+- - 🔴장소 관리
+  - 장소 목록![장소 목록 ](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%9E%A5%EC%86%8C%EB%AA%A9%EB%A1%9D.gif)
+  - 장소 검색![장소 검색 ](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%9E%A5%EC%86%8C%EA%B2%80%EC%83%89.gif)
+  - 장소 수정![장소 수정 ](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%9E%A5%EC%86%8C%EC%88%98%EC%A0%95.gif)
+  - 장소 폐업처리![장소 폐업처리 ](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%9E%A5%EC%86%8C%20%ED%8F%90%EC%97%85%EC%B2%98%EB%A6%AC.gif)
+  - 장소 추가하기![장소 추가하기 ](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%9E%A5%EC%86%8C%20%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0.gif)
 
+- - 🔴게시판 관리
+  - 게시판 목록![게시판 목록](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EA%B2%8C%EC%8B%9C%ED%8C%90%20%EA%B4%80%EB%A6%AC.gif)
+  - 게시판 글 삭제![게시판 글 삭제](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EA%B2%8C%EC%8B%9C%ED%8C%90%20%EA%B8%80%20%EC%82%AD%EC%A0%9C.gif)
+- - 🔴원클래스 관리
+  - 원클래스 목록![원클래스 목록](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%9B%90%ED%81%B4%EB%9E%98%EC%8A%A4%20%EB%AA%A9%EB%A1%9D.gif)
+  - 원클래스 수정![원클래스 수정](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%9B%90%ED%81%B4%EB%9E%98%EC%8A%A4%20%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B0.gif)
+  - 원클래스 등록![원클래스 등록](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%9B%90%ED%81%B4%EB%93%B1%EB%A1%9D2.gif)
+  - 원클래스 삭제![원클래스 삭제](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%9B%90%ED%81%B4%20%EB%A7%A4%EB%8B%88%EC%A0%80%20%EC%82%AD%EC%A0%9C%ED%95%98%EA%B8%B0.gif)\
+ - - 🔴회원 관리
+   - 회원 목록![회원 목록](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%ED%9A%8C%EC%9B%90%EB%AA%A9%EB%A1%9D.gif)
+   - 회원 제제![회원 제제](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%ED%9A%8C%EC%9B%90%EC%A0%9C%EC%A0%9C.gif)
+ - - 🔴신고 관리
+   - 신고 목록![신고 목록](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%8B%A0%EA%B3%A0%EB%AA%A9%EB%A1%9D%20%ED%99%95%EC%9D%B8%ED%95%98%EB%9F%AC%EA%B0%80%EA%B8%B0.gif)
+   - 신고 제제![신고 제제](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%A0%9C%EC%A0%9C%EC%84%B1%EA%B3%B5%20%EB%A6%AC%ED%8F%BF%EA%B8%B0%EC%A4%80.gif)
+   - 신고 제제없음![신고 제제없음](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EC%A0%9C%EC%A0%9C%EC%97%86%EC%9D%8C.gif)
 - **🟡조원 : 이승헌**
 
 ---
