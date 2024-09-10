@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+
+<properties>
+	
+	
+	
+	<!-- 리뷰 -->
+	
+	<!--마이페이지-나의리뷰(첫페이지) -->
+	<entry key="selectList"> 
+    SELECT *
+      FROM (
+		   SELECT ROWNUM RNUM, A.*
+		 FROM( 
+			 SELECT R.REVIEW_NO, R.R_TITLE, R.R_CONTENT, R.R_DATE, P.P_TITLE, R.SCORE, A.FILE_PATH, A.CHANGE_NAME 
+				   FROM REVIEW R
+				   JOIN PLACE P ON R.PLAY_NO = P.P_NO
+				   JOIN ATTECHMENT A ON (A.PLACE_NO = R.PLAY_NO)
+				  WHERE R.USER_NO = ? AND R.STATUS ='Y'
+  
+				) A
+			)       WHERE RNUM BETWEEN ? AND ?
+   	</entry>
+   	
+   	<!-- 마이페이지 -카운트 -->
+   	<entry key="getListCount">
+		       SELECT COUNT(*) 
+   				 FROM REVIEW 
+    			WHERE USER_NO = ? AND STATUS = 'Y'
+	</entry>
+	
+   <!-- 리뷰 삭제 -->
+   	<entry key="deleteMyReview">
+	 	  UPDATE REVIEW
+	         SET STATUS ='N'
+	         WHERE REVIEW_NO = ?
+	</entry>
+   	
+   	
+
+   	
+	<!-- 한줄평 -->
+	
+	<!--마이페이지-한줄평-->
+<entry key="oneCommentList">
+    SELECT *
+    FROM (
+        SELECT ROWNUM RNUM, A.*
+        FROM (
+            SELECT COM_NO, COM_CONTENT, SCORE, CREATE_DATE, P.STATUS, P_TITLE, A.FILE_PATH, A.CHANGE_NAME
+            FROM PLAY_COMMENT P
+            JOIN PLACE ON P_NO = PLACE_NO
+            LEFT JOIN ATTECHMENT A ON A.PLACE_NO = PLACE.P_NO
+
+            UNION ALL
+
+            SELECT COM_NO, COM_CONTENT, O.SCORE, CREATE_DATE, O.STATUS, ONE_TITLE, A.FILE_PATH, A.CHANGE_NAME
+            FROM ONE_COMMENT O
+            JOIN ONEDAYCLASS OC ON (O.ONE_NO=OC.ONE_NO)
+            LEFT JOIN ATTECHMENT A ON A.ONE_NO = O.ONE_NO
+            WHERE O.USER_NO = ?
+
+        ) A
+    )
+    WHERE RNUM BETWEEN ? AND ?
+    <!-- play comment, 원데이클래스 comment를 합쳐서 리스트로 보여줘야 해서ㅓ union all을 사용한 뒤 정렬해야함 -->
+</entry>
+    
+   
+	
+	<!-- 한줄평 카운트 -->
+	<entry key="getOneCommentCount">
+	   SELECT COUNT(*)
+	   FROM (
+	       SELECT COM_NO
+	       FROM PLAY_COMMENT P
+	       LEFT JOIN ATTECHMENT A ON A.PLACE_NO = P.PLACE_NO
+	       WHERE P.USER_NO = ? 
+	
+	       UNION ALL
+	
+	       SELECT COM_NO
+	       FROM ONE_COMMENT O
+	       LEFT JOIN ATTECHMENT A ON A.ONE_NO = O.ONE_NO
+	       WHERE O.USER_NO = ?
+	   )
+	</entry>
+	
+	<!-- 한줄평 삭제 -->
+   	<entry key="deleteOneComment">
+	 	  UPDATE ONE_COMMENT
+         		SET STATUS ='N'
+         		WHERE COM_NO = ?
+	</entry>
+	
+	
+	
+	
+	<!-- 내 문의사항 -->
+	<!--문의사항, 카운트 -->
+	<entry key="getInquireCount">
+		       SELECT COUNT(*) 
+   				 FROM INQUIRE 
+    			WHERE INQUIRE_WRITER = ? 
+	</entry>
+	
+	<!--마이페이지-내 문의사항 -->
+	<entry key="inquireList"> 
+		
+	   SELECT *
+	   FROM (
+		  SELECT ROWNUM RNUM, A.*
+		  FROM(
+		        SELECT INQUIRE_NO,INQUIRE_TITLE,USER_NAME,CREATE_DATE,I.STATUS, ANSWER
+	        FROM INQUIRE I
+	        JOIN MEMBER  ON USER_NO = INQUIRE_WRITER
+	        WHERE USER_NO = ? 
+	        ORDER BY CREATE_DATE, INQUIRE_NO ) A
+				)
+				WHERE RNUM BETWEEN ? AND ?
+	
+	</entry>
+	
+	
+	
+	
+	<!-- 마이페이지 - 찜리스트 -->
+   <entry key="selectMyList">
+    SELECT *
+FROM (
+    SELECT ROWNUM RNUM, A.*
+    FROM (
+        SELECT 
+            l.LIKE_NO, 
+            COALESCE(o.ONE_TITLE, p.P_TITLE) AS ONE_TITLE, 
+            COALESCE(o.ONE_PHONE, p.P_CALL) AS ONE_PHONE, 
+            COALESCE(o.ONE_STATUS, p.P_STATUS) AS ONE_STATUS, 
+            CASE 
+                WHEN l.PLAY_NO = 0 THEN '원데이클래스'
+                ELSE r.TEM_CATE_NAME 
+            END AS TEM_CATE_NAME,
+            COALESCE(o.ONE_PLACE, p.ADDRESS) AS ONE_PLACE, 
+            COALESCE(o.SCORE, p.P_SCORE) AS SCORE
+              FROM 
+                  LIKE_LIST l
+              LEFT JOIN 
+                  ONEDAYCLASS o ON l.ONE_NO = o.ONE_NO AND l.PLAY_NO = 0 AND o.ONE_STATUS = 'Y'
+              LEFT JOIN 
+                  PLACE p ON l.PLAY_NO = p.P_NO AND l.ONE_NO = 0
+              LEFT JOIN
+                  THEMA_CATEGORY r ON p.TEM_CATE_NO = r.TEM_CATE_NO
+              WHERE 
+                  l.USER_NO = ? AND l.STATUS = 'Y'
+              ORDER BY l.LIKE_NO DESC
+    ) A
+) 
+WHERE RNUM BETWEEN ? AND ?
+   </entry>
+   
+   <!-- 찜 리스트 총 개수 -->
+  <entry key="getMyListCount">
+    SELECT COUNT(*) 
+    	FROM LIKE_LIST l 
+	    LEFT JOIN ONEDAYCLASS o ON l.ONE_NO = o.ONE_NO AND l.PLAY_NO = 0 AND o.ONE_STATUS = 'Y'
+	    LEFT JOIN PLACE p ON l.PLAY_NO = p.P_NO AND l.ONE_NO = 0
+	    LEFT JOIN THEMA_CATEGORY r ON p.TEM_CATE_NO = r.TEM_CATE_NO
+    WHERE l.USER_NO = ? AND l.STATUS = 'Y'
+	</entry>
+   
+
+   <entry key="getMyListCountByCategory">
+    SELECT COUNT(*) 
+	    FROM LIKE_LIST l 
+		    LEFT JOIN ONEDAYCLASS o ON l.ONE_NO = o.ONE_NO AND l.PLAY_NO = 0 AND o.ONE_STATUS = 'Y'
+		    LEFT JOIN PLACE p ON l.PLAY_NO = p.P_NO AND l.ONE_NO = 0
+		    LEFT JOIN THEMA_CATEGORY r ON p.TEM_CATE_NO = r.TEM_CATE_NO
+   	 WHERE l.USER_NO = ? AND l.STATUS = 'Y' AND r.TEM_CATE_NAME = ? 
+	</entry>
+
+      <!-- 찜 리스트 삭제 -->
+      <entry key="deleteMyList">
+         UPDATE LIKE_LIST
+               SET STATUS ='N'
+               WHERE LIKE_NO = ?
+   </entry>
+   
+   
+   
+
+	
+	
+	<!-- 프로필 수정 -->
+	
+	<!-- 기존 프로필 정보 불러오기 -->
+	<entry key="MyProfile">
+    SELECT M.INTRODUCE, M.NICKNAME, A.FILE_PATH, A.CHANGE_NAME
+    FROM MEMBER M
+    LEFT JOIN ATTECHMENT A ON M.USER_NO = A.USER_NO
+    WHERE M.USER_NO = ?
+	</entry>
+	
+	
+	<entry key="nickNameCheck">
+    SELECT COUNT(*) 
+    FROM MEMBER
+    WHERE NICKNAME = ?
+	</entry>
+
+
+
+    
+<!-- ATTACHMENT 테이블 정보 삽입 (테이블 이름 수정 필요) -->
+
+	
+	<!-- ATTACHMENT 테이블 정보 업데이트 -->
+	<entry key="UpdateProfileAttachment">
+	    INSERT INTO ATTECHMENT 
+	         (    
+	         	  FILE_NO,  
+	         	  ORIGIN_NAME, 
+	              CHANGE_NAME, 
+	              FILE_PATH, 
+	              USER_NO
+	              )
+		   VALUES (  
+		   		PROFILE_SEQ.NEXTVAL,
+		                  ?, 
+			              ?, 
+			              ?, 
+			              ?
+	               )
+	</entry>
+		
+		<entry key="UpdateProfile">
+    UPDATE MEMBER
+   		 SET NICKNAME = ?, 
+   		 INTRODUCE = ?
+       WHERE USER_NO = ?
+</entry>
+	
+	
+	<entry key="checkNickName">
+			 SELECT NICKNAME
+              FROM MEMBER;
+		
+	</entry>
+	
+ 
+	
+	<!-- 회원정보 수정 -->
+	
+	<!-- 회원정보 수정 -->
+	<entry key="Editinformation">
+		UPDATE MEMBER 
+			SET USER_NAME=?, 
+			USER_PWD=?, 
+			PHONE=?, 
+			EMAIL=? 
+		 WHERE USER_NO=?
+	
+	</entry>
+	
+	<!-- 회원탈퇴 -->
+	<entry key="deleteMember">
+	 	   UPDATE MEMBER
+         		SET STATUS ='N'
+         		WHERE USER_NO = ?
+                
+	</entry>
+	
+	
+
+
+</properties>

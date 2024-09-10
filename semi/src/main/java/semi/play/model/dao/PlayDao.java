@@ -541,6 +541,8 @@ public class PlayDao {
 		return result;
 	}
 
+		
+	
 	public double scoreAvg(Connection conn, int placeNo) {
 		double score = 0;
 		PreparedStatement pstmt = null;

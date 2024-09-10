@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.Review.model.service.ReviewService;
-import semi.Review.model.vo.Attachment;
+import semi.Review.model.vo.Attachment2;
 import semi.Review.model.vo.Review;
 
 /**
@@ -34,7 +34,7 @@ public class ReviewUpdateFormController extends HttpServlet {
 		ReviewService rService = new ReviewService();
 		
 		Review r = rService.selectReview(rNo);
-		Attachment at = rService.selectAttachment(rNo);
+		Attachment2 at = rService.selectAttachment(rNo);
 		
 		request.setAttribute("r", r);
 		request.setAttribute("at", at);

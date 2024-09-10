@@ -58,7 +58,7 @@
 		onedayclass a
     join thema_category b on a.tem_cate_no = b.tem_cate_no
     join one_category c on a.onecategory_no = c.onecategory_no
-    where one_agree = 1
+    where one_status = 'Y'
     
     	order by 1 desc
 
@@ -90,7 +90,7 @@
 		onedayclass a
     join thema_category b on a.tem_cate_no = b.tem_cate_no
     join one_category c on a.onecategory_no = c.onecategory_no
-    where one_agree = 2
+     where one_status = 'N'
     
     	order by 1 desc
 	

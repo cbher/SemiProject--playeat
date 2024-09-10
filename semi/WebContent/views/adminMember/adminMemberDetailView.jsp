@@ -145,20 +145,19 @@ table *{
             <td width="250">&nbsp; <%=list.getUserNo() %></td>
             <th width ="100">아이디</th>
             <td width ="275" >&nbsp; <%=list.getUserId() %></td>
-            <td width="175" rowspan="4"><%if(at==null){%>프로필 사진이 없습니다 <%}else{%> <img style="max-width: 175px;" alt="" src="<%=contextPath+at.getFilePath()+at.getChangeName() %>">
-            <%} %></td>
+         
         </tr>
         <tr>
             <th  height="30">회원명</th>
             <td>&nbsp; <%=list.getUserName() %></td>
             <th>비밀번호</th>
-            <td>&nbsp; <%=list.getUserPwd() %></td>
+            <td>&nbsp; <%if(list.getUserPwd()==null){}else{%><%=list.getUserPwd() %><%} %></td>
         </tr>
         <tr>
             <th  height="30">닉네임</th>
-            <td >&nbsp; <%=list.getNickname() %></td>
+            <td >&nbsp; <%if(list.getNickname()==null){}else{%><%=list.getNickname() %><%} %></td>
             <th>전화번호</th>
-            <td>&nbsp; <%=list.getPhone() %></td>
+            <td>&nbsp;  <%if(list.getPhone()==null){}else{%><%=list.getPhone() %><%} %></td>
         </tr>
         <tr>
             <th height="30">가입일자</th>

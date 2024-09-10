@@ -164,7 +164,7 @@ div.info-box {
   margin-right: 10px;
 }
 
-#like {
+.like {
   text-decoration: none;
   cursor: pointer;
 }
@@ -538,13 +538,24 @@ h3 {
   color: white;
 }
 
-.info .material-icons {
-  color: #e4d4fa;
-  margin-right: 5px;
-}
-
 .total-area {
   display: flex;
   height: 322px;
   justify-content: space-evenly;
+}
+
+.info-box .total-area .info .material-icons{
+    color: #e4d4fa;
+    font-size: 32px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.info-box .total-area .info .material-icons.like:hover{
+    color: #8b7dbe;
+}
+
+
+.info-box .total-area .info .material-icons.share:hover{
+    color: #8b7dbe;
 }

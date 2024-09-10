@@ -103,7 +103,7 @@ table td{text-align: center;}
             <td  height="30"><%=list.get(a).getUserNo() %></td>
             <td ><%=list.get(a).getUserId() %></td>
             <td ><%=list.get(a).getUserName() %></td>
-            <td ><%=list.get(a).getNickname() %></td>
+            <td ><%if(list.get(a).getNickname()==null){}else{%><%=list.get(a).getNickname() %><%} %></td>
             
             <td  ><%=list.get(a).getEnrollDate() %></td>
             

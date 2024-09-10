@@ -189,33 +189,9 @@ pageEncoding="UTF-8"%>
         <div class="info-title">
           <h2><%= p.getPlaceTitle() %></h2>
           <div class="info-btn">
-            <a href="" id="like">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                fill="#e4d4fa"
-                class="bi bi-hand-thumbs-up-fill"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"
-                />
-              </svg>
-            </a>
+            <div class="material-icons like" onclick="insertLikeList()">thumb_up</div>
             <button type="button" class="modal_btn">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                fill="#e4d4fa"
-                class="bi bi-share-fill"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5"
-                />
-              </svg>
+              <div class="material-icons share modal_btn">share</div>
             </button>
           </div>
 
@@ -250,7 +226,11 @@ pageEncoding="UTF-8"%>
           </tr>
           <tr>
             <th>영업시간</th>
-            <td><%= p.getBusinessTime() %></td>
+            <% if(p.getBusinessTime() == null){ %>
+            	<td>등록되지 않았습니다.</td>
+            <% }else{ %>
+            	<td><%= p.getBusinessTime() %></td>
+            <% } %>
           </tr>
           <tr>
             <th>전화번호</th>
@@ -302,6 +282,7 @@ pageEncoding="UTF-8"%>
         <div>
         	<input type="hidden" name="placeNo" value="<%= p.getPlaceNo() %>">
         	<input type="hidden" name="rTitle" value="<%= p.getPlaceTitle() %>">
+        	<input type="hidden" name="userNo" value="<%= loginUser.getUserNo() %>
           	<input type="submit" value="리뷰작성" id="review-btn" />
         </div>
         </form>
@@ -345,8 +326,9 @@ pageEncoding="UTF-8"%>
         </tr>
       </table>
 		<% } %>
-
-      <button class="add-list">검색 결과 더보기</button>
+      <% if (!r.isEmpty()) { %>
+       <button class="add-list">검색 결과 더보기</button>
+   	  <% } %>
     </div>
 
     <button id="top-btn">
@@ -356,39 +338,11 @@ pageEncoding="UTF-8"%>
   </body>
 
   <script>
-
   
   $(function(){
 	  scoreAvg();
   })
   
-    let box = $("body");
-    let boxHeight = box.height();
-    let boxOffsetTop = box.offset().top;
-    let quickMenu = $(".badge");
-    let quickMenuHeight = quickMenu.height();
-    const DURATION = 900;
-
-    $(window).resize(function () {
-      boxHeight = box.height();
-      boxOffsetTop = box.offset().top;
-      quickMenuHeight = quickMenu.height();
-    });
->>>>>>> jms
-
-    $(window).scroll(function () {
-      let scrollTop = $(this).scrollTop();
-      let point;
-      let endPoint = boxHeight - quickMenuHeight;
-      if (scrollTop < boxOffsetTop) {
-        point = 0;
-      } else if (scrollTop > endPoint) {
-        point = endPoint;
-      } else {
-        point = scrollTop - 50;
-      }
-      quickMenu.stop().animate({ top: point }, DURATION);
-    });
 
     const swiper = new Swiper(".swiper", {
       // Optional parameters
@@ -478,13 +432,14 @@ pageEncoding="UTF-8"%>
       },
     });
 
+    // 더보기 버튼
     $(function () {
       $(".review .review-content").slice(0, 4).show(); // select the first 4
       $(".add-list").click(function (e) {
         // click event for load more
         e.preventDefault();
         $(".review .review-content:hidden").slice(0, 4).show(); // select next 4 hidden divs and show them
-        if ($(".review-content:hidden").length == 0) {
+        if ($(".review .review-content:hidden").length == 0) {
           // check if any hidden divs still exist
           // alert("No more divs"); // alert if there are none left
           $(".add-list").hide();
@@ -617,6 +572,7 @@ pageEncoding="UTF-8"%>
    	})
    }
    
+   // 신고하기
    <% if(loginUser != null){ %>
     function report(reviewerUserNo, reviewNo) {
         if (confirm("정말로 신고하시겠습니까?")) {
@@ -643,5 +599,41 @@ pageEncoding="UTF-8"%>
 	        alert("로그인 후 이용 가능합니다.");
 	    }
 	<% } %>
+	
+	// 좋아요 버튼
+	function likeStatus(){
+            	$.ajax({
+            		url:"likeStatus.pl",
+            		data:{
+            			bno:"<%= p.getPlaceNo() %>",
+            			userNo:$("#userNo").val(),
+            		},
+            		success:function(result){
+            			if(result > 0){
+            				$(".like").css("color", "#8b7dbe");
+            			}else{
+            				$(".like").css("color", "#e4d4fa");
+            			}
+            		},
+            		error:function(){
+            			console.log("실패")
+            		}
+            	})
+            }
+	
+	function insertLikeList(){
+    	$.ajax({
+    		 url : "changeLike.pl",
+         data:{bno:<%= p.getPlaceNo() %>,
+             	  userNo : $("input[type=hidden]").val()},
+             success:function(){
+ 					$(".like").css("color","#8b7dbe");
+ 					likeStatus();                		 
+             },
+             error:function(){
+             	console.log("통신 실패");
+             },
+    	})
+    }
   </script>
 </html>
