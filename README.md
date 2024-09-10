@@ -153,55 +153,68 @@
 - **🔵조원 : 정민식**
   
   - 🔵로그인 화면
-    [로그인](./semi/WebContent/resources/ReadMe/정민식/로그인.gif)
+
+  ![로그인](./semi/WebContent/resources/ReadMe/정민식/로그인.gif)
 
   - 🔵아이디 저장
-    [아이디 저장](./semi/WebContent/resources/ReadMe/정민식/아이디%20저장.gif)
+
+    ![아이디 저장](./semi/WebContent/resources/ReadMe/정민식/아이디%20저장.gif)
 
   - 🔵아이디 찾기
-    [아이디 찾기](./semi/WebContent/resources/ReadMe/정민식/아이디%20찾기.gif)
+
+    ![아이디 찾기](./semi/WebContent/resources/ReadMe/정민식/아이디%20찾기.gif)
 
   - 🔵비밀번호 찾기 후 변경
-    [비밀번호 찾기 / 변경](./semi/WebContent/resources/ReadMe/정민식/비밀번호%20찾기%20및%20변경.gif)
+
+    ![비밀번호 찾기 / 변경](./semi/WebContent/resources/ReadMe/정민식/비밀번호%20찾기%20및%20변경.gif)
 
   - 🔵카카오 로그인
-    [카카오 로그인](./semi/WebContent/resources/ReadMe/정민식/카카오%20로그인.gif)
+
+    ![카카오 로그인](./semi/WebContent/resources/ReadMe/정민식/카카오%20로그인.gif)
 
   - 🔵회원가입
-    [회원가입](./semi/WebContent/resources/ReadMe/정민식/회원가입.gif)
+
+    ![회원가입](./semi/WebContent/resources/ReadMe/정민식/회원가입.gif)
 
   - 🔵명예의 전당
-    [명예의 전당](./semi/WebContent/resources/ReadMe/정민식/명예의전당.gif)
+
+    ![명예의 전당](./semi/WebContent/resources/ReadMe/정민식/명예의전당.gif)
 
   - 🔵원데이 클래스 상세 화면
-    [원데이클래스 상세](./semi/WebContent/resources/ReadMe/정민식/원데이.gif)
+
+    ![원데이클래스 상세](./semi/WebContent/resources/ReadMe/정민식/원데이.gif)
 
   - 🔵카카오, 네이버 공유하기
-    [공유하기](./semi/WebContent/resources/ReadMe/정민식/공유하기.gif)
+
+    ![공유하기](./semi/WebContent/resources/ReadMe/정민식/공유하기.gif)
 
   - 🔵한줄평 작성
-    [한줄평 작성](./semi/WebContent/resources/ReadMe/정민식/한줄평%20작성.gif)
+
+    ![한줄평 작성](./semi/WebContent/resources/ReadMe/정민식/한줄평%20작성.gif)
 
   - 🔵더보기 버튼
-    [더보기 버튼](./semi/WebContent/resources/ReadMe/정민식/더보기%20버튼.gif)
+
+    ![더보기 버튼](./semi/WebContent/resources/ReadMe/정민식/더보기%20버튼.gif)
 
   - 🔵식당 상세
-    [식당상세](./semi/WebContent/resources/ReadMe/정민식/식당상세.gif)
+
+    ![식당상세](./semi/WebContent/resources/ReadMe/정민식/식당상세.gif)
 
   - 🔵리뷰 작성
-    [리뷰 작성](./semi/WebContent/resources/ReadMe/정민식/리뷰%20작성.gif)
+  
+    ![리뷰 작성](./semi/WebContent/resources/ReadMe/정민식/리뷰%20작성.gif)
 
   - 🔵리뷰 수정
-    [리뷰 수정](./semi/WebContent/resources/ReadMe/정민식/리뷰%20수정.gif)
+
+    ![리뷰 수정](./semi/WebContent/resources/ReadMe/정민식/리뷰%20수정.gif)
 
   - 🔵리뷰 삭제
-    [리뷰 삭제](./semi/WebContent/resources/ReadMe/정민식/리뷰%20삭제.gif)
+
+    ![리뷰 삭제](./semi/WebContent/resources/ReadMe/정민식/리뷰%20삭제.gif)
 
   - 🔵네이버지도API 및 마커
-    [네이버 지도](./semi/WebContent/resources/ReadMe/정민식/지도%20마커.gif)
 
-
-
+    ![네이버 지도](./semi/WebContent/resources/ReadMe/정민식/지도%20마커.gif)
 
 ---
 
