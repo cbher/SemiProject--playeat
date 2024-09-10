@@ -106,7 +106,7 @@
                 <tbody>
                         <% for (int a = startRow - 1; a < endRow; a++) { %>
                             <tr>
-                                <td height="40"><%= list.get(a).getpNo() %></td>
+                              <td height="40"><%= list.get(a).getpNo() %></td>
                                 <td><%= list.get(a).getpTitle() %></td>
                                 
                                 <td><%if(list.get(a).getpStatus().equals("Y")){%>
