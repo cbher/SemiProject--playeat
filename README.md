@@ -77,6 +77,9 @@
 # 🎮프로젝트 구현
 
 - **🔴조장 : 이준영**
+- - 🔴관리자 메인페이지
+
+![관리자 메인 페이지](https://github.com/cbher/semi/blob/main/semi/WebContent/resources/adreadyme/ad.%EA%B4%80%EB%A6%AC%EC%9E%90%20%EB%A9%94%EC%9D%B8.gif)
 
 ---
 
