@@ -1,16 +1,16 @@
-# 세미프로젝트 4조 : 점심4조
+# 🍦세미프로젝트 4조 : 점심4조
  
  
 ![PLAEAT로고](semi/WebContent/resources/backGroundImg/play_eat-removebg-preview.png)
 
 
-# 프로젝트 소개
+# 🚩프로젝트 소개
 
 다양한 정보를 얻기 위해 여러사이트를 돌아다닐 필요없이 한 사이트에서 사용자들이 대부분의 정보를 얻을수 있으며 친구 또는 연인들이 즐거운 하루를 보낼수 있도록 정보를 드리는 것이 저희가 사이트를 만든 이유입니다.
 
 
 
-# 구성원 및 역할
+# 🙌구성원 및 역할
 
  - **조장 : 이준영** 
     - 관리자 페이지 회원 수 및 회원목록 조회
@@ -47,7 +47,7 @@
     - 요리 게시글 작성, 수정, 삭제 및 추천 기능
     - 상세 검색 페이지 카테고리 구분
 
-# 개발 기간
+# 💻개발 기간
 
 - **2024.07.09 ~ 2024.07.15 : 주제선정, 팀명, 팀장 프로젝트 주제 정하기**
 - **2024.07.15 ~ 2024.07.22 : 유사사이트 분석, 구현목표 및 기능, 요구사항 분석, UseCase Diagram**
@@ -61,7 +61,7 @@
 ![alt text](./semi/WebContent/resources/ReadMe/image.png)
 
 
-# 개발환경
+# 🔎개발환경
 - **OS** : Windows10
 - **Developer Tools** : Eclipse / VS Code / SqlDeveloper
 - **Server** : Apach Tomcat 9.0
@@ -71,7 +71,7 @@
 - **BackEnd** : Java, JSP & Servlet
 - **API** : 카카오 로그인 / 소셜 공유 API, 네이버 지도 API
 
-# 테이블 설계
+# 🔗테이블 설계
 
 [![ERD](semi/WebContent/resources/ReadMe/ERD.png)](https://www.erdcloud.com/d/SLicMH6G8kXjH2nv8)
 
@@ -79,26 +79,29 @@
 
 
 
-# 프로젝트 구현
+# 🎮프로젝트 구현
 
-- **🙂조장 : 이준영**
-
----
-
-- **😀조원 : 이승헌**
+- **🔴조장 : 이준영**
 
 ---
 
-- **😀조원 : 오명식**
+- **🟡조원 : 이승헌**
 
 ---
 
-- **😀조원 : 정민식**
+- **🟢조원 : 오명식**
 
 ---
 
-- **😀조원 : 황영찬**
+- **🔵조원 : 정민식**
 
+---
 
+- **🟣조원 : 황영찬**
+
+- - 🟣놀거리 메인페이지
+[playMain](./semi/WebContent/resources/ReadMe/놀거리.gif) 
+
+- - 놀거리 상세 페이지 
 ---
 
