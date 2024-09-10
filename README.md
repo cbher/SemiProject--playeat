@@ -56,10 +56,22 @@
 - **2024.09.01 ~ 2024.09.06 : 베타테스트 진행 및 오류수정**
 - **2024.09.07 ~ 2024.09.09 : 프로젝트 최종 발표 및 발표자료 제출**
 
-(![alt text](image.png))
+![alt text](./semi/WebContent/resources/ReadMe/image.png)
 
 
+# 개발환경
+- OS : Windows10
+- Developer Tools : Eclipse / VS Code / SqlDeveloper
+- Server : Apach Tomcat 9.0
+- DBMS : Oracle
+- Management : Git, GitHub
+- Front-end : HTML5 / CSS3 / JavaScript / jQuery / AJAX / JSON
+- BackEnd : Java, JSP & Servlet
+- API : 카카오 로그인 / 소셜 공유 API, 네이버 지도 API
 
+# 테이블 설계
+
+[![ERD](semi/WebContent/resources/ReadMe/ERD.png)](https://www.erdcloud.com/d/SLicMH6G8kXjH2nv8)
 
 
 
@@ -69,21 +81,22 @@
 
 - **🙂조장 : 이준영**
 
-<hr>
+---
 
 - **😀조원 : 이승헌**
 
-<hr>
+---
 
 - **😀조원 : 오명식**
 
-<hr>
+---
 
 - **😀조원 : 정민식**
 
-<hr>
+---
 
 - **😀조원 : 황영찬**
 
-<hr>
+
+---
 
