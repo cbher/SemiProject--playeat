@@ -17,7 +17,7 @@ select
 	 p_select_num,
 	 rcategory_no
 from place
-
+ORDER BY 1 
 </entry>
 
 
@@ -36,7 +36,7 @@ select
 	 rcategory_no
 from place
 where p_select_num = 1
-
+ORDER BY 1 
 </entry>
 
 
@@ -55,7 +55,7 @@ select
 	 rcategory_no
 from place
 where p_select_num = 2
-
+ORDER BY 1 
 </entry>
 
 <entry key="adplaceDetial"> 

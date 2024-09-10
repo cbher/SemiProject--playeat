@@ -39,7 +39,7 @@ public class AdminReportTimeDetailController extends HttpServlet {
 		int reportNo = Integer.parseInt((request.getParameter("reportNo")));
 	
 		HttpSession session = request.getSession();
-		if(userNo == 1) {
+		if(userNo == 6) {
 			session.setAttribute("adAlertMsg", "관리자의 정지는 불가능합니다");
 
 		}else {
