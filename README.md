@@ -156,7 +156,6 @@
 
 - **🟣조원 : 황영찬**
 
-<<<<<<< HEAD
     - 🟣놀거리 메인페이지
     ![playMain](./semi/WebContent/resources/ReadMe/놀거리%20메인.gif) 
 
@@ -1015,12 +1014,4 @@
 </details>
 
 # 최종 보고서
-<a href="">
-=======
-- - 🟣놀거리 메인페이지
-    [playMain](./semi/WebContent/resources/ReadMe/놀거리.gif)
 
-- - 놀거리 상세 페이지
-
----
->>>>>>> 37b6b0bde7fdf13bdf9ac7b37494315ecabe9e2d
