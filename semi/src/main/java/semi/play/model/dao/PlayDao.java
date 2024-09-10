@@ -538,9 +538,11 @@ public class PlayDao {
 			close(rset);
 			close(pstmt);
 		}
-
 		return result;
 	}
+
+		
+	
 	public double scoreAvg(Connection conn, int placeNo) {
 		double score = 0;
 		PreparedStatement pstmt = null;
@@ -569,10 +571,6 @@ public class PlayDao {
 			close(rset);
 			close(pstmt);
 		}
-
 		return score;
-
-	
-
 	}
 }

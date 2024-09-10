@@ -1,5 +1,8 @@
+
 <%@page import="java.util.List"%>
+
 <%@page import="semi.Review.model.vo.Attachment2"%>
+
 <%@page import="semi.Review.model.vo.Review"%>
 <%@page import="semi.play.model.vo.PlayReply"%>
 <%@page import="semi.cooking.model.vo.Attachment"%>
@@ -17,6 +20,8 @@ pageEncoding="UTF-8"%>
 	ArrayList<PlayReply> replyList = (ArrayList<PlayReply>)request.getAttribute("replyList");
 	ArrayList<Review> r = (ArrayList<Review>)request.getAttribute("r");
 	ArrayList<Play> recentRestaurant = (ArrayList<Play>)request.getAttribute("recentRestaurant");
+
+	
 	
 	 String placeTitle = p.getPlaceTitle();
 	    String titleImg = list.get(0).getFilePath() + list.get(0).getOriginName();
@@ -52,6 +57,23 @@ pageEncoding="UTF-8"%>
 
 	    // 리스트를 세션에 저장
 	    session.setAttribute("recentPlaces", recentPlaces);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -146,8 +168,8 @@ pageEncoding="UTF-8"%>
 </head>
   <body>
     <%@ include file="../common/menubar.jsp" %>
-    <%@include file="../common/badge.jsp" %>
 
+    <%@include file="../common/badge.jsp" %>
 
     <!-- 상세 -->
     <div class="info-box">
@@ -316,7 +338,6 @@ pageEncoding="UTF-8"%>
   </body>
 
   <script>
-   
   
   $(function(){
 	  scoreAvg();
@@ -603,7 +624,7 @@ pageEncoding="UTF-8"%>
 	function insertLikeList(){
     	$.ajax({
     		 url : "changeLike.pl",
-             data:{bno:<%= p.getPlaceNo() %>,
+         data:{bno:<%= p.getPlaceNo() %>,
              	  userNo : $("input[type=hidden]").val()},
              success:function(){
  					$(".like").css("color","#8b7dbe");

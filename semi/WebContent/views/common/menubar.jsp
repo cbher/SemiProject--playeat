@@ -278,7 +278,7 @@ header .menubar::before{
 .login2{
     margin-top: 10px;
     font-size: 13px;
-
+}
 
 
 
@@ -333,7 +333,7 @@ header .menubar::before{
                         <ul class="hide-menu">
                             <li><a href="<%= contextPath %>/noticeList.no?cpage=1">공지사항</a></li>
                             <li><a href="<%=contextPath%>/iqList.ip?cpage=1">문의사항</a></li>
-                            <li><a href="<%=contextPath %>/frequently.inq">자주묻는질문</a></li>
+                            <li><a href="<%=contextPath %>/frequently.inq">자주하는질문</a></li>
                         </ul>   
                     </li>
                     <li>
@@ -373,7 +373,6 @@ header .menubar::before{
         </section>
         
     </header>
-
 
 
 
